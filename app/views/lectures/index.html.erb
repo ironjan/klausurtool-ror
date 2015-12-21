@@ -1,0 +1,15 @@
+<%= render 'lecture_header' %>
+
+<table>
+	<tr>
+		<th>Name</th>
+	</tr>
+
+	<% @lectures.each do |lecture| %>
+	<tr>
+		<td><%= link_to lecture.name, lecture %></td>
+		<td><%= render 'lecture_controls', l: lecture  %></td>
+	</tr>
+	<% end %>
+
+</table>
