@@ -1,0 +1,34 @@
+<%= form_for @examiner do |e| %>
+
+  <% if @examiner.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@examiner.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @examiner.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table>
+  <p>
+  <%= e.label "Name:" %> <%= e.text_field :name %>
+  </p>
+  <!--
+  Alternative names are hidden until needed
+  <p>
+    <%= e.label "Alternative Names:" %><br>
+    <%= e.text_area :alternativeNames %><br>
+    Alternative names are old names or so...
+  </p>
+  -->
+
+  <p>
+    <%= e.submit %>
+  </p>
+
+<% end %>

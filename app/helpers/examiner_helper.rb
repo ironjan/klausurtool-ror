@@ -1,0 +1,2 @@
+module ExaminerHelper
+end

@@ -1,0 +1,15 @@
+<%= render 'examiner_header' %>
+
+<table>
+	<tr>
+		<th>Name</th>
+	</tr>
+
+	<% @examiners.each do |examiner| %>
+	<tr>
+		<td><%= link_to examiner.name, examiner %></td>
+		<td><%= render 'examiner_controls', e: examiner  %></td>
+	</tr>
+	<% end %>
+
+</table>
