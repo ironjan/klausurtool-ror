@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :lectures, :examiners
+  resources :lectures, :examiners, :exams
 
+  get 'admin' => 'application#admin'
+  root 'application#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
