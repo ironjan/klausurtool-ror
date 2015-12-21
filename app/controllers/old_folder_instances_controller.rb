@@ -1,0 +1,2 @@
+class OldFolderInstancesController < ApplicationController
+end

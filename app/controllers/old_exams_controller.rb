@@ -1,0 +1,2 @@
+class OldExamsController < ApplicationController
+end
