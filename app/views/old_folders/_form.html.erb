@@ -1,0 +1,40 @@
+<%= form_for @old_folder do |f| %>
+
+<% if @old_folder.errors.any? %>
+<div id="error_explanation">
+	<h2>
+		<%= pluralize(@old_folder.errors.count, "error") %> prohibited
+		this article from being saved:
+	</h2>
+	<ul>
+		<% @old_folder.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<table>
+	<tr>
+		<td><%= f.label :title %></td>
+		<td><%= f.text_field :title %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :contentType %></td>
+		<td><%= f.select(:contentType, options_for_select(OldFolder::CONTENT_TYPES)) %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :area %></td>
+		<td><%= f.select(:area, options_for_select(OldFolder::AREAS)) %></td>
+	</tr>
+	<tr>
+	<td><%= f.label :color %></td>
+		<td><%= f.select(:color, options_for_select(OldFolder::COLORS)) %></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><%= f.button :submit %>
+		</td>
+	</tr>
+</table>
+<% end %>
