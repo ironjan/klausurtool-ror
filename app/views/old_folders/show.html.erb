@@ -26,10 +26,4 @@
 		</tr>
 	</table>
 </div>
-<div>
-	<ul>
-		<% @old_folder.old_folder_instances.each do |i| %>
-		<li>Instance <%= i.barcodeId %></li>
-		<% end %>
-	</ul>
-</div>
+<%= render "old_folder_instances/instance_list", instances: @old_folder.old_folder_instances %>

@@ -1,0 +1,23 @@
+<div>
+	<!-- TODO: Display error, when trying to delete last instance from here -->
+	<table>
+		<tr>
+			<th>Folder Name</th>
+			<th>BarcodeId</th>
+			<th>Actions</th>
+		</tr>
+
+		<% instances.each do |i| %>
+		<tr>
+			<td><%= link_to i.old_folder.title, i.old_folder %></td>
+			<td><%= i.barcodeId %></td>
+			<td><%= link_to "Edit", edit_old_folder_instance_path(i) %>
+				<% if i.old_folder.old_folder_instances.count > 1 %>		, 
+				<%= link_to "Destroy", old_folder_instance_path(i), method: :delete,
+				data: { confirm: 'Are you sure?' } %>
+				<% end %>
+			</td>
+		</tr>
+		<% end %>
+	</table>
+</div>

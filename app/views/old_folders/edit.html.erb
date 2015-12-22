@@ -1,3 +1,30 @@
 <p>Edit Folder:</p>
 
-<%= render 'form' %>
+<%= form_for @old_folder do |f| %>
+<%= render 'error_header' %>
+
+<table>
+	<tr>
+		<td><%= f.label :title %></td>
+		<td><%= f.text_field :title %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :contentType %></td>
+		<td><%= f.select(:contentType, options_for_select(OldFolder::CONTENT_TYPES)) %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :area %></td>
+		<td><%= f.select(:area, options_for_select(OldFolder::AREAS)) %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :color %></td>
+		<td><%= f.select(:color, options_for_select(OldFolder::COLORS)) %></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><%= f.button :submit %>
+		</td>
+	</tr>
+</table>
+<% end %>
+<%= render "old_folder_instances/instance_list", instances: @old_folder.old_folder_instances %>
