@@ -1,6 +1,6 @@
 class OldFolder < ActiveRecord::Base
 	has_many :old_exams
-	has_many :old_folder_instances
+	has_many :old_folder_instances, dependent: :destroy
 
 	CONTENT_TYPES  = ["Klausurordner", "Klausurmappe", "Prüfungsprotokollordner", "Prüfungsprotokollmappe", "Übungsblätter", "Sonstiges"]
 	COLORS = ["schwarz", "rot", "blau", "grün"]
