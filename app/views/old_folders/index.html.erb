@@ -1,7 +1,7 @@
 <ul>
 	<li><%= link_to "New", new_old_folder_path %></li>
 </ul>
-
+<div>
 <table>
 	<tr>
 		<th>Title</th>
@@ -19,7 +19,12 @@
 		<td><%= old_folder.color %></td>
 		<td><%= link_to "Edit", edit_old_folder_path(old_folder) %>, 
 			<%= link_to "Destroy", old_folder_path(old_folder), method: :delete,
-			data: { confirm: 'Are you sure?' } %></td>
-		</tr>
-		<% end %>
-	</table>
+			data: { confirm: 'Are you sure?' } %>
+		</td>
+	</tr>
+	<% end %>
+</table>
+</div>
+<div>
+
+</div>

@@ -18,6 +18,19 @@ class OldFoldersController < ApplicationController
 
 	def create
 		@old_folder = OldFolder.new(old_folder_params)
+			
+			Rails.logger.debug("Before loop")
+
+
+		i = 1
+		numberOfFolderInstances = params[:count].gsub(/\D/, '').to_i
+		Rails.logger.debug("Loop values: #{i}, #{numberOfFolderInstances}")
+		until i > numberOfFolderInstances
+			Rails.logger.debug("Would create instance #{i}")
+		    i += 1;
+		end
+
+
 
 		if @old_folder.save
 			redirect_to @old_folder

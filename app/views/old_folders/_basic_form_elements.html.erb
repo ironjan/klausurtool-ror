@@ -1,0 +1,16 @@
+<tr>
+	<td><%= f.label :title %></td>
+	<td><%= f.text_field :title %></td>
+</tr>
+<tr>
+	<td><%= f.label :contentType %></td>
+	<td><%= f.select(:contentType, options_for_select(OldFolder::CONTENT_TYPES)) %></td>
+</tr>
+<tr>
+	<td><%= f.label :area %></td>
+	<td><%= f.select(:area, options_for_select(OldFolder::AREAS)) %></td>
+</tr>
+<tr>
+	<td><%= f.label :color %></td>
+	<td><%= f.select(:color, options_for_select(OldFolder::COLORS)) %></td>
+</tr>
