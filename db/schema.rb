@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222145549) do
+ActiveRecord::Schema.define(version: 20151222190654) do
 
   create_table "old_exams", force: :cascade do |t|
     t.string   "title"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20151222145549) do
     t.string   "barcodeId"
   end
 
+  add_index "old_folder_instances", ["barcodeId"], name: "index_old_folder_instances_on_barcodeId", unique: true
   add_index "old_folder_instances", ["old_folder_id"], name: "index_old_folder_instances_on_old_folder_id"
 
   create_table "old_folders", force: :cascade do |t|
