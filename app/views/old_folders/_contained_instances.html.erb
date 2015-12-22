@@ -1,4 +1,11 @@
 <div>
 	<h2>Exemplare</h2>
+	<ul class="nav">
+		<li>
+			<% if @old_folder.old_folder_instances.count < 9 %>
+			<b>TODO "Neues Exemplar"</b>
+			<% end %>
+		</li>
+	</ul>
 	<%= render "old_folder_instances/instance_list", instances: @old_folder.old_folder_instances %>
 </div>
