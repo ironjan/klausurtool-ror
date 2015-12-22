@@ -1,14 +1,15 @@
+<h1>Ordnergruppen</h1>
 <ul class="nav">
 	<li><%= link_to "Neue Ordnergruppe", new_old_folder_path %></li>
 </ul>
 <div>
 <table>
 	<tr>
-		<th>Title</th>
-		<th>Content-Type</th>
-		<th>Area</th>
-		<th>Color</th>
-		<th>Actions</th>
+		<th>Gruppen-Name</th>
+		<th>Inhalt</th>
+		<th>Gebiet</th>
+		<th>Farbe</th>
+		<th></th>
 	</tr>
 
 	<% @old_folders.each do |old_folder| %>
@@ -17,14 +18,9 @@
 		<td><%= old_folder.contentType %></td>
 		<td><%= old_folder.area %></td>
 		<td><%= old_folder.color %></td>
-		<td><%= link_to "Edit", edit_old_folder_path(old_folder) %>, 
-			<%= link_to "Destroy", old_folder_path(old_folder), method: :delete,
-			data: { confirm: 'Are you sure?' } %>
+		<td><%= link_to "Bearbeiten", edit_old_folder_path(old_folder) %>
 		</td>
 	</tr>
 	<% end %>
 </table>
-</div>
-<div>
-
 </div>

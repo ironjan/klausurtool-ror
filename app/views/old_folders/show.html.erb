@@ -1,29 +1,30 @@
+<h1>Ordnergruppen-Details</h1>
 <ul class="nav">
-	<li><%= link_to "All Folders", old_folders_path %></li>
-	<li><%= link_to "Edit", edit_old_folder_path %></li>
-	<li><%= link_to "Destroy", old_folder_path(@old_folder), method: :delete,
-		data: { confirm: 'Are you sure?' } %>
+	<li><%= link_to "Bearbeiten", edit_old_folder_path %></li>
+	<li><%= link_to "Löschen", old_folder_path(@old_folder), method: :delete,
+		data: { confirm: 'Dies löscht ALLE verknüpften Exemplare und Klausuren. Wirklich löschen?' } %>
 	</li>
 </ul>
 
 <div>
 	<table>
 		<tr>
-			<td>Title:</td>
+			<td>Name:</td>
 			<td><%= @old_folder.title %></td>
 		</tr>
 		<tr>
-			<td>Contenttype:</td>
+			<td>Inhalt:</td>
 			<td><%= @old_folder.contentType %></td>
 		</tr>
 		<tr>
-			<td>Area:</td>
+			<td>Gebiet:</td>
 			<td><%= @old_folder.area %></td>
 		</tr>
 		<tr>
-			<td>Color:</td>
+			<td>Farbe:</td>
 			<td><%= @old_folder.color %></td>
 		</tr>
 	</table>
 </div>
-<%= render "old_folder_instances/instance_list", instances: @old_folder.old_folder_instances %>
+
+<%= render "contained_instances" %>

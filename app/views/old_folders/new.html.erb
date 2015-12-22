@@ -1,31 +1,32 @@
-<p>New Folder:</p>
+<h1>Neue Ordnergruppe</h1>
 
 <%= form_for @old_folder do |f| %>
 <%= render 'error_header' %>
 
 <table>
 	<tr>
-		<td><%= f.label :title %></td>
+		<td><%= f.label "Name" %></td>
 		<td><%= f.text_field :title %></td>
 	</tr>
 	<tr>
-		<td><%= f.label :contentType %></td>
+		<td><%= f.label "Inhalt" %></td>
 		<td><%= f.select(:contentType, options_for_select(OldFolder::CONTENT_TYPES)) %></td>
 	</tr>
 	<tr>
-		<td><%= f.label :area %></td>
+		<td><%= f.label "Gebiet" %></td>
 		<td><%= f.select(:area, options_for_select(OldFolder::AREAS)) %></td>
 	</tr>
 	<tr>
-		<td><%= f.label :color %></td>
+		<td><%= f.label "Farbe" %></td>
 		<td><%= f.select(:color, options_for_select(OldFolder::COLORS)) %></td>
-	</tr>	<tr>
-	<td><%= f.label "Count" %></td>
+	</tr>	
+	<tr>
+	<td><%= f.label "Anzahl" %></td>
 	<td><%= number_field_tag("count", 1, min: 1, max: 9, step: 1) %></td>
 </tr>
 <tr>
 	<td></td>
-	<td><%= f.button :submit %>
+	<td><%= f.submit "Gruppe anlegen" %>
 	</td>
 </tr>
 </table>
