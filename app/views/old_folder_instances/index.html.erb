@@ -1,0 +1,27 @@
+<div>
+	<p>Note: You cannot delete the last instance of a folder here. You have to delete the folder.</p>
+	<!-- TODO: Display error, when trying to delete ast instance from here -->
+	<table>
+		<tr>
+			<th>Folder Name</th>
+			<th>BarcodeId</th>
+			<th>Actions</th>
+		</tr>
+
+		<% @old_folder_instances.each do |i| %>
+		<tr>
+			<td><%= link_to i.old_folder.title, i.old_folder %></td>
+			<td><%= i.barcodeId %></td>
+			<td><%= link_to "Edit", edit_old_folder_instance_path(i) %>
+				<% if i.old_folder.old_folder_instances.count > 1 %>		, 
+				<%= link_to "Destroy", old_folder_instance_path(i), method: :delete,
+				data: { confirm: 'Are you sure?' } %>
+				<% end %>
+			</td>
+		</tr>
+		<% end %>
+	</table>
+</div>
+<div>
+
+</div>
