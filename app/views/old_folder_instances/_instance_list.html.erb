@@ -1,4 +1,3 @@
-<!-- TODO: Display error, when trying to delete last instance from here -->
 <table>
 	<tr>
 		<th>Gruppen-Name</th>
@@ -10,9 +9,8 @@
 	<tr>
 		<td><%= link_to i.old_folder.title, i.old_folder %></td>
 		<td><%= i.barcodeId %></td>
-		<td><%= link_to "Bearbeiten", edit_old_folder_instance_path(i) %>
-			<% if i.old_folder.old_folder_instances.count > 1 %>		, 
-			<%= link_to "Löschen", old_folder_instance_path(i), method: :delete,
+		<td><% if i.old_folder.old_folder_instances.count > 1 %>
+			<%= link_to "Löschen", [i.old_folder, i], method: :delete,
 			data: { confirm: 'Ordner-Exemplar wirklich löschen?' } %>
 			<% end %>
 		</td>

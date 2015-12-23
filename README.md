@@ -5,10 +5,11 @@
 
 = Next steps
 
- * Ordner-Exemplar anlegen (ggf. aus Order-Details heraus und Number-Dropdown mit freien Nummern)
  * Prüfungen hinzufügen
  * Suche
  * Ausleihe
+ * Fix instances controller new
+ * Fix: delete folder_instance -> show folder
 
 = TODO for README
 

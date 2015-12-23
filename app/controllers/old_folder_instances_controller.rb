@@ -9,6 +9,7 @@ class OldFolderInstancesController < ApplicationController
 	end
 
 	def new
+		# FIXME? 
 		@old_folder_instance = OldFolderInstance.new
 	end
 
@@ -17,13 +18,10 @@ class OldFolderInstancesController < ApplicationController
 	end
 
 	def create
-		@old_folder_instance = OldFolderInstance.new(old_folder_instance_params)
-
-		if @old_folder_instance.save
-			redirect_to @old_folder_instance
-		else
-			render 'new'
-		end
+		@old_folder = OldFolder.find(params[:old_folder_id])
+		@old_folder_instance = @old_folder.old_folder_instances.create(old_folder_instance_params)
+		@old_folder_instance.save
+		redirect_to old_folder_path(@old_folder)
 	end
 
 	def update
@@ -37,9 +35,10 @@ class OldFolderInstancesController < ApplicationController
 	end
 
 	def destroy
-		@old_folder_instance = OldFolderInstance.find(params[:id])
-		@old_folder_instance.destroy
-		redirect_to old_folder_instances_path
+			@old_folder = OldFolder.find(params[:old_folder_id])
+			@old_folder_instance = @old_folder.old_folder_instances.find(params[:id])
+			@old_folder_instance.destroy
+			redirect_to @old_folder
 	end
 
 
