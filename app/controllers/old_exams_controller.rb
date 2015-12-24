@@ -14,26 +14,26 @@ class OldExamsController < ApplicationController
 		redirect_to @old_folder
 	end
 
-	# def index
-	# 	@old_exams = OldFolderInstance.all
-	# end
+	def index
+		@old_exams = OldExam.all
+	end
 
-	# def show
-	# 	@old_exam = OldFolderInstance.find(params[:id])
-	# end
+	def show
+		@old_exam = OldExam.find(params[:id])
+	end
 
 	# def new
 	# 	# FIXME? 
-	# 	@old_exam = OldFolderInstance.new
+	# 	@old_exam = OldExam.new
 	# end
 
 	# def edit
-	# 	@old_exam = OldFolderInstance.find(params[:id])
+	# 	@old_exam = OldExam.find(params[:id])
 	# end
 
 
 	# def update
-	# 	@old_exam = OldFolderInstance.find(params[:id])
+	# 	@old_exam = OldExam.find(params[:id])
 
 	# 	if @old_exam.update
 	# 		redirect_to @old_exam

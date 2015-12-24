@@ -1,0 +1,22 @@
+<div>
+	<h1>Alle Ordner-Exemplare</h1>
+	<table>
+		<tr>
+			<th>Veranstaltungen</th>
+			<th>Prüfer</th>
+			<th>Datum</th>
+			<th>Ordner</th>
+			<th></th>
+		</tr>
+
+		<% @old_exams.each do |e| %>
+		<tr>
+			<td><%= e.title %></td>
+			<td><%= e.examiners %></td>
+			<td><%= e.date %></td>
+			<td><%= link_to e.old_folder.title, e.old_folder %></td>
+			<td><%= link_to "Prüfung anzeigen", [e.old_folder, e] %>, TODO: Bearbeiten</td>
+		</tr>
+		<% end %>
+	</table>
+</div>

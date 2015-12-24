@@ -1,0 +1,21 @@
+<h1>Prüfungs-Details</h1>
+<ul class="nav">
+	<li>TODO: Bearbeiten</li>
+	<li><%= link_to "Löschen", [@old_exam.old_folder, @old_exam], method: :delete,
+		data: { confirm: 'Prüfung wirklich löschen?' } %>
+	</li>
+</ul>
+<table>
+	<tr>
+		<td>Veranstaltungen:</td>
+		<td><%= @old_exam.title %></td>
+	</tr>
+	<tr>
+		<td>Prüfer:</td>
+		<td><%= @old_exam.examiners %></td>
+	</tr>
+	<tr>
+		<td>Datum:</td>
+		<td><%= @old_exam.date %></td>
+	</tr>
+</table>

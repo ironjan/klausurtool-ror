@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
 
   get 'old_folder_instances' => 'old_folder_instances#index', as: :old_folder_instances
+  get 'old_exams' => 'old_exams#index', as: :old_exams
 
   root 'application#index'
 

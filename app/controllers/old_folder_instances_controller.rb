@@ -1,4 +1,4 @@
-class OldFolderInstancesController < ApplicationController
+	class OldFolderInstancesController < ApplicationController
 
 	def index
 		@old_folder_instances = OldFolderInstance.all

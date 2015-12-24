@@ -5,7 +5,7 @@
 
 = Next steps
 
- * Prüfungen hinzufügen
+ * Prüfungen bearbeiten
  * Suche
  * Ausleihe
  * Fix instances controller new
