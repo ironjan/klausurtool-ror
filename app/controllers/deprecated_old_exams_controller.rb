@@ -1,4 +1,4 @@
-class OldExamsController < ApplicationController
+class DeprecatedOldExamsController < ApplicationController
 
 	def index
 		@old_exams = OldExam.all
