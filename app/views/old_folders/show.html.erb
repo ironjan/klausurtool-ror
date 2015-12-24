@@ -28,3 +28,43 @@
 </div>
 
 <%= render "contained_instances" %>
+
+<div>
+	<h2>Prüfungen</h2>
+	
+	<table>
+		<tr>
+			<th>Veranstaltungen</th>
+			<th>Prüfer</th>
+			<th>Datum</th>
+			<th></th>
+		</tr>
+
+
+		<% @old_folder.old_exams.each do |i| %>
+		<tr>
+			<td><%= i.title %></td>
+			<td><%= i.examiners %></td>
+			<td><%= i.date %></td>
+			<td><%= link_to "Löschen", [i.old_folder, i], method: :delete,
+				data: { confirm: 'Prüfung wirklich löschen?' } %>
+			</td>
+		</tr>
+		<% end %>
+	</table>
+
+
+	<%= form_for([@old_folder, @old_folder.old_exams.build]) do |f| %>
+	<h2>Neue Prüfung</h2>
+	<p>
+		<%= f.label :title %>
+		<%= f.text_field :title %><br>
+		<%= f.label :examiners %>
+		<%= f.text_field :examiners %><br>
+		<%= f.label :date  %>
+		<%= f.date_field :date %><br> 
+		<%= f.submit "Prüfung hinzufügen" %>
+	</p>
+
+	<% end %>
+</div>
