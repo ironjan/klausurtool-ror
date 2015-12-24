@@ -1,0 +1,37 @@
+<h1>Prüfung bearbeiten</h1>
+<div>
+	<%= form_for @old_exam do |f| %>
+	<% if @old_exam.errors.any? %>
+	<div id="error_explanation">
+		<h2>
+			<%= pluralize(@old_exam.errors.count, "error") %> prohibited
+			this article from being saved:
+		</h2>
+		<ul>
+			<% @old_exam.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
+	<table>
+		<tr>
+			<td><%= f.label "Veranstaltungen" %></td>
+			<td><%= f.text_field :title %></td>
+		</tr>
+		<tr>
+			<td><%= f.label "Prüfer" %></td>
+			<td><%= f.text_field :examiners%></td>
+		</tr>
+		<tr>
+			<td><%= f.label "Datum" %></td>
+			<td><%= f.date_field :date %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><%= f.submit "Änderungen übernehmen"  %>
+			</td>
+		</tr>
+	</table>
+	<% end %>
+</div>

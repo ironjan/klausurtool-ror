@@ -27,20 +27,26 @@ class OldExamsController < ApplicationController
 	# 	@old_exam = OldExam.new
 	# end
 
-	# def edit
-	# 	@old_exam = OldExam.find(params[:id])
-	# end
+	def edit
+		@old_exam = OldExam.find(params[:id])
+	end
 
 
-	# def update
-	# 	@old_exam = OldExam.find(params[:id])
-
-	# 	if @old_exam.update
-	# 		redirect_to @old_exam
-	# 	else
-	# 		render 'edit'
-	# 	end
-	# end
+	def update
+		if params.has_key?(:old_folder_id)
+			@old_folder = OldFolder.find(params[:old_folder_id])
+			@old_exam = @old_folder.old_exams.find(params[:id])
+			@old_exam.update(old_exam_params)
+			redirect_to @old_folder
+		else
+			@old_exam = OldExam.find(params[:id])
+			if @old_exam.update(old_exam_params)
+				redirect_to @old_exam
+			else
+				render 'edit'
+			end
+		end
+	end
 
 
 	private

@@ -1,10 +1,11 @@
 <h1>Prüfungs-Details</h1>
 <ul class="nav">
-	<li>TODO: Bearbeiten</li>
+	<li><%= link_to "Bearbeiten", edit_old_folder_old_exam_path(@old_exam.old_folder, @old_exam) %></li>
 	<li><%= link_to "Löschen", [@old_exam.old_folder, @old_exam], method: :delete,
 		data: { confirm: 'Prüfung wirklich löschen?' } %>
 	</li>
 </ul>
+<p>Prüfung gehört zu Ordner <%= link_to @old_exam.old_folder.title, @old_exam.old_folder %>.</p>
 <table>
 	<tr>
 		<td>Veranstaltungen:</td>

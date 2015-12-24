@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
   
-  resources :old_folders
+  resources :old_folders, :old_exams
   
   resources :old_folders do
     resources :old_folder_instances, :old_exams
   end
 
   get 'old_folder_instances' => 'old_folder_instances#index', as: :old_folder_instances
-  get 'old_exams' => 'old_exams#index', as: :old_exams
 
   root 'application#index'
 
