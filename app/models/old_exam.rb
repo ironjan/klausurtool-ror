@@ -5,4 +5,13 @@ class OldExam < ActiveRecord::Base
 	validates :date,      presence: true
 	validates :title,     presence: true,  length: { minimum: 5 }
 	validates :examiners, presence: true,  length: { minimum: 5 }
+
+
+	def self.search(search)
+		# Replacing spaces as wild-cards
+		search = search.gsub(" ", "%")
+		# We want exact match for date but non-exact matches for other values
+		where("date = ? OR title LIKE ? OR examiners LIKE ?", 
+			"%#{search}%", "%#{search}%", "%#{search}%")
+	end
 end

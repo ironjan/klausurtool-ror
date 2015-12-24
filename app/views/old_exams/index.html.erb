@@ -1,5 +1,13 @@
 <div>
-	<h1>Alle Ordner-Exemplare</h1>
+	<h1>Alle Prüfungen</h1>
+	
+	<%= form_tag(old_exams_path, method: "get") do %>
+	<%= label_tag(:search, "Prüfung suchen:") %>
+	<%= text_field_tag(:search) %>
+	<%= submit_tag("Suche") %>
+	<% end %>
+
+	<% if @old_exams.size > 0 %>
 	<table>
 		<tr>
 			<th>Veranstaltungen</th>
@@ -19,4 +27,8 @@
 		</tr>
 		<% end %>
 	</table>
+
+	<% else %>
+	<p>Keine Prüfungen gefunden.</p>
+	<% end %>
 </div>
