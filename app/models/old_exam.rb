@@ -3,8 +3,8 @@ class OldExam < ActiveRecord::Base
 
 	validates :old_folder_id, presence: true
 	validates :date,      presence: true
-	validates :title,     presence: true,  length: { minimum: 5 }
-	validates :examiners, presence: true,  length: { minimum: 5 }
+	validates :title,     presence: true
+	validates :examiners, presence: true
 
 
 	def self.search(search)
