@@ -1,11 +1,11 @@
 class OldLendOut < ActiveRecord::Base
   has_many :old_folder_instances
 
-  validates :deposit, presence: true
   validates :student, presence: true
   validates :imt, presence: true
   validates :lender, presence: true
   validates :lendingTime, presence: true
+  validates :deposit, presence: true
 
   validate :either_both_receiving_or_none
 
