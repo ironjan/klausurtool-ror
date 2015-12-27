@@ -1,5 +1,6 @@
 class OldFolderInstance < ActiveRecord::Base
   belongs_to :old_folder
+  belongs_to :old_lend_out
 
   before_validation :set_barcodeId
 
@@ -10,6 +11,5 @@ class OldFolderInstance < ActiveRecord::Base
   def set_barcodeId
 	self.barcodeId = "#{format("%03d", self.old_folder_id)}#{self.number}"
 	Rails.logger.debug("Fixed barcodeId to #{barcodeId} before_validation")
-
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222190654) do
+ActiveRecord::Schema.define(version: 20151225182014) do
 
   create_table "old_exams", force: :cascade do |t|
     t.string   "title"
@@ -27,13 +27,15 @@ ActiveRecord::Schema.define(version: 20151222190654) do
   create_table "old_folder_instances", force: :cascade do |t|
     t.integer  "number"
     t.integer  "old_folder_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "barcodeId"
+    t.integer  "old_lendout_id"
   end
 
   add_index "old_folder_instances", ["barcodeId"], name: "index_old_folder_instances_on_barcodeId", unique: true
   add_index "old_folder_instances", ["old_folder_id"], name: "index_old_folder_instances_on_old_folder_id"
+  add_index "old_folder_instances", ["old_lendout_id"], name: "index_old_folder_instances_on_old_lendout_id"
 
   create_table "old_folders", force: :cascade do |t|
     t.string   "title"
@@ -43,5 +45,20 @@ ActiveRecord::Schema.define(version: 20151222190654) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "old_lend_outs", force: :cascade do |t|
+    t.string   "deposit"
+    t.string   "student"
+    t.string   "imt"
+    t.string   "lender"
+    t.string   "receiver"
+    t.datetime "lendingTime"
+    t.datetime "receivingTime"
+    t.integer  "old_folder_instances_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "old_lend_outs", ["old_folder_instances_id"], name: "index_old_lend_outs_on_old_folder_instances_id"
 
 end

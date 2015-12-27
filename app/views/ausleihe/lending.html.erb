@@ -1,0 +1,46 @@
+<h1>Ordner-Exemplare verleihen</h1>
+
+<%= form_for @old_lend_out do |f| %>
+<% if @old_lend_out.errors.any? %>
+<div id="error_explanation">
+	<h2>
+		<%= pluralize(@old_lend_out.errors.count, "error") %> prohibited
+		this article from being saved:
+	</h2>
+	<ul>
+		<% @old_lend_out.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+<table>
+	<tr>
+		<td><%= f.label "Student" %></td>
+		<td><%= f.text_field :student %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :imt %></td>
+		<td><%= f.text_field :imt %></td>
+	</tr>
+	<tr>
+		<td><%= f.label "Verleiher" %></td>
+		<td><%= f.text_field :lender %></td>
+	</tr>
+	<tr>
+		<td><%= f.label "Pfand" %></td>
+		<td><%= f.text_field :deposit %></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><%= f.submit "Änderungen übernehmen"  %>
+		</td>
+	</tr>
+</table>
+<% end %>
+
+<ul>
+	<% @folder_instances.each do |f| %>
+	<li><%= f.barcodeId %> - <%= f.old_folder.title %></li>
+	<% end %>
+</ul>

@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  deposit: MyString
+  student: MyString
+  imt: MyString
+  lender: MyString
+  receiver: MyString
+  lendingTime: 2015-12-25 00:18:35
+  receivingTime: 2015-12-25 00:18:35
+  old_folder_instances_id: 
+
+two:
+  deposit: MyString
+  student: MyString
+  imt: MyString
+  lender: MyString
+  receiver: MyString
+  lendingTime: 2015-12-25 00:18:35
+  receivingTime: 2015-12-25 00:18:35
+  old_folder_instances_id: 
