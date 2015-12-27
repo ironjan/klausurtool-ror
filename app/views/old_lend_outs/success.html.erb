@@ -1,0 +1,14 @@
+<h1>Ordner erfolgreich verliehen</h1>
+<%= link_to 'Zur Ausleihe', new_old_lend_out_path %>
+
+<p><%= params.inspect %></p>
+
+<p><%= @old_lend_out.inspect %></p>
+
+<p><%= @old_lend_out.errors.inspect %></p>
+
+<ul>
+	<% @old_lend_out.old_folder_instances.each do |i| %>
+	<li><%= i.inspect %></li>
+	<% end %>
+</ul>

@@ -1,0 +1,56 @@
+<h1>Ausleihe</h1>
+<ul class="nav">
+	<li>Zeige Ausgeliehene</li>
+	<li>Zeige alle Ordner</li>
+	<li>Ordnersuche</li>
+	<li>Inhaltssuche</li>
+</ul>
+
+
+<%= form_for @old_lend_out do |f| %>
+<% if @old_lend_out.errors.any? %>
+<div id="error_explanation">
+	<h2>Fehler beim Ausleihen:</h2>
+	<ul>
+		<% @old_lend_out.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+<table>
+	<tr>
+		<td><%= label_tag "Ordner:" %></td>
+		<td><%= text_area_tag(:folder_list, params[:folder_list], rows: 5, cols: 10) %></td>
+	</tr>
+	<tr>
+		<td><%= f.label "Student" %></td>
+		<td><%= f.text_field :student %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :imt %></td>
+		<td><%= f.text_field :imt %></td>
+	</tr>
+	<tr>
+		<td><%= f.label "Verleiher" %></td>
+		<td><%= f.text_field :lender %></td>
+	</tr>
+	<tr>
+		<td><%= f.label "Pfand" %></td>
+		<td><%= f.text_field :deposit %></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><%= f.submit "Änderungen übernehmen"  %>
+		</td>
+	</tr>
+</table>
+<% end %>
+
+<% if not @folder_instances.nil? %>
+<ul>
+	<% @folder_instances.each do |f| %>
+	<li><%= f.barcodeId %> - <%= f.old_folder.title %></li>
+	<% end %>
+</ul>
+<% end %>
