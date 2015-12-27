@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  get '/ausleihe' => 'ausleihe#index'
-    
-  get 'old_folder_instances' => 'old_folder_instances#index', as: :old_folder_instances
+  get '/ausleihe'            => 'old_lend_outs#new'
+
+  get 'old_folder_instances' => 'old_folder_instances#index', as: 'old_folder_instances'
   
   resources :old_folders, :old_exams, :old_lend_outs
   
