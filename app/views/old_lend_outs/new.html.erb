@@ -6,6 +6,9 @@
 	<li>Inhaltssuche</li>
 </ul>
 
+<h2 id="lend">Verleihen</h2>
+<a href="#take-back">Zurücknehmen</a>
+
 
 <%= form_for @old_lend_out do |f| %>
 <% if @old_lend_out.errors.any? %>
@@ -41,16 +44,12 @@
 	</tr>
 	<tr>
 		<td></td>
-		<td><%= f.submit "Änderungen übernehmen"  %>
+		<td><%= f.submit "Ordner verleihen"  %>
 		</td>
 	</tr>
 </table>
 <% end %>
 
-<% if not @folder_instances.nil? %>
-<ul>
-	<% @folder_instances.each do |f| %>
-	<li><%= f.barcodeId %> - <%= f.old_folder.title %></li>
-	<% end %>
-</ul>
-<% end %>
+
+<h2>Aktuell verliehen</h2>
+<%= render "old_lend_outs/currently_lent" %>

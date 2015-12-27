@@ -5,6 +5,7 @@ class OldLendOutsController < ApplicationController
 
 	def new
 		@old_lend_out = OldLendOut.new
+		@currently_lent_outs = OldLendOut.where(:receivingTime => nil)
 	end
 
 

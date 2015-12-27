@@ -19,6 +19,7 @@
  * Suche nach Ordnern
  * Fix: Show errors in embedded forms (Create exam from folder)
  * old_lend_outs_controller "# Fixme Use transaction with post validation that lending was correct"
+ * Remove student name, add weight to lendouts
 
 = TODO for README
 
@@ -40,4 +41,5 @@ Incomplete list, started to write these down in the middle of the project.
  * http://stackoverflow.com/questions/2831059/how-to-drop-columns-using-rails-migration
  * http://makandracards.com/makandra/31937-differences-between-transactions-and-locking
  * http://stackoverflow.com/questions/19690687/check-if-multi-insert-transaction-is-successful-or-not
+ * http://guides.rubyonrails.org/layouts_and_rendering.html
  * 
