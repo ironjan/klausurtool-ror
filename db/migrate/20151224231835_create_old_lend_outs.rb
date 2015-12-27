@@ -8,7 +8,6 @@ class CreateOldLendOuts < ActiveRecord::Migration
       t.string :receiver
       t.datetime :lendingTime
       t.datetime :receivingTime
-      t.references :old_folder_instances, index: true, foreign_key: true
 
       t.timestamps null: false
     end
