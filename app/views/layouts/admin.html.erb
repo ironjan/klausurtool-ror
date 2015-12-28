@@ -1,0 +1,17 @@
+<%= page_heading "Verwaltung" %>
+
+
+<%= render 'header' %>
+
+<nav>
+	<ul class="nav">
+		<li><%= link_to "Ordner-Gruppen",   old_folders_path %></li>
+		<li><%= link_to "Ordner-Exemplare", old_folder_instances_path %></li>
+		<li><%= link_to "Prüfungen",        old_exams_path %></li>
+		<li><%= link_to "Ausleihe",         old_lend_outs_path %></li>
+	</ul>
+</nav>
+
+<%= yield %>
+
+<%= render 'footer' %>

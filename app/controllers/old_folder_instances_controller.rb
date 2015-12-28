@@ -1,4 +1,5 @@
-	class OldFolderInstancesController < ApplicationController
+class OldFolderInstancesController < ApplicationController
+	layout "admin"
 
 	def index
 		@old_folder_instances = OldFolderInstance.all
@@ -35,10 +36,10 @@
 	end
 
 	def destroy
-			@old_folder = OldFolder.find(params[:old_folder_id])
-			@old_folder_instance = @old_folder.old_folder_instances.find(params[:id])
-			@old_folder_instance.destroy
-			redirect_to @old_folder
+		@old_folder = OldFolder.find(params[:old_folder_id])
+		@old_folder_instance = @old_folder.old_folder_instances.find(params[:id])
+		@old_folder_instance.destroy
+		redirect_to @old_folder
 	end
 
 

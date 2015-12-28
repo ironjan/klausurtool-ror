@@ -5,7 +5,10 @@
 
 = Next steps
 
+
  * Ausleihe: old_lendouts_controller
+ * Ausleihe zurücknehmen
+ * Remove student name, add weight to lendouts
  * Ausleihe: "Lange OrdnerIds - barcodes"
   * Follow EAN 8: 000$(folderId)$(number)$(checkValue)
   * For now only reading relevant: get substring for $(folderId)$(number)
@@ -19,8 +22,8 @@
  * Suche nach Ordnern
  * Fix: Show errors in embedded forms (Create exam from folder)
  * old_lend_outs_controller "# Fixme Use transaction with post validation that lending was correct"
- * Remove student name, add weight to lendouts
-
+ * Deckblätter u.ä. generieren
+ 
 = TODO for README
 
  * Ruby version
@@ -42,4 +45,4 @@ Incomplete list, started to write these down in the middle of the project.
  * http://makandracards.com/makandra/31937-differences-between-transactions-and-locking
  * http://stackoverflow.com/questions/19690687/check-if-multi-insert-transaction-is-successful-or-not
  * http://guides.rubyonrails.org/layouts_and_rendering.html
- * 
+ * http://stackoverflow.com/questions/185965/how-do-i-change-the-title-of-a-page-in-rails

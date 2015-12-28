@@ -1,1 +1,6 @@
-<h1>Ausgeliehene Ordner</h1>
+<%= form_tag(ausleih_action_path, :method => "post", id: "form") do %>
+<%= text_area_tag :folderList, params[:folderList], placeholder: "Ordnerliste" %>
+<%= submit_tag "Weiter" %>
+<%= submit_tag "Zurücksetzen", :id => 'reset_button', :type => "reset"  %> 
+<% end %>
+

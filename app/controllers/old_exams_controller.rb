@@ -1,4 +1,5 @@
 class OldExamsController < ApplicationController
+	layout "admin"
 
 	def create
 		@old_folder = OldFolder.find(params[:old_folder_id])

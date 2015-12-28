@@ -1,4 +1,6 @@
 class OldLendOutsController < ApplicationController
+	layout "ausleihe"
+	
 	def index
 		@old_lend_outs = OldLendOut.all
 	end
@@ -57,7 +59,11 @@ class OldLendOutsController < ApplicationController
 		render 'new'
 	end
 
-
+	def action
+		# if return, check validity and return
+		# if lending, check validity and return
+		# first if ~ first folder in list
+	end
 	private
 	def old_lend_out_params
 		params.require(:old_lend_out).permit(:imt, :lender, :deposit, :student)

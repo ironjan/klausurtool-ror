@@ -1,4 +1,5 @@
 class OldFoldersController < ApplicationController
+	layout "admin"
 
 	def index
 		@old_folders = OldFolder.all

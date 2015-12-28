@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
 
-  get '/ausleihe'            => 'old_lend_outs#new'
-
   get 'old_folder_instances' => 'old_folder_instances#index', as: 'old_folder_instances'
-  
-  resources :old_folders, :old_exams, :old_lend_outs
+  resources :old_folders, :old_exams
+  resources :old_lend_outs, :path => "ausleihe"
+  post 'ausleihe/action' => 'old_lend_outs#action', as: 'ausleih_action'
   
   resources :old_folders do
     resources :old_folder_instances, :old_exams
