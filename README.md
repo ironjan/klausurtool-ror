@@ -46,3 +46,4 @@ Incomplete list, started to write these down in the middle of the project.
  * http://stackoverflow.com/questions/19690687/check-if-multi-insert-transaction-is-successful-or-not
  * http://guides.rubyonrails.org/layouts_and_rendering.html
  * http://stackoverflow.com/questions/185965/how-do-i-change-the-title-of-a-page-in-rails
+ * http://stackoverflow.com/questions/3025784/rails-layouts-per-action
