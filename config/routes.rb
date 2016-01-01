@@ -1,11 +1,20 @@
 Rails.application.routes.draw do
 
+  # Navigateable "Ausleihe"-routes
   get  'ausleihe'                  => 'ausleihe#index',             as: 'ausleihe'
+  get  'ausleihe/list'             => 'ausleihe#list',              as: 'ausleihe_list'
+  get  'ausleihe/folders'          => 'ausleihe#folders',           as: 'ausleihe_folders'
+  # get  'ausleihe/folder_search'          => 'ausleihe#folders',           as: 'ausleihe_folders'
+  # get  'ausleihe/folders'          => 'ausleihe#folders',           as: 'ausleihe_folders'
+
+  # Routes that should not be manually navigated to in "Ausleihe"
   post 'ausleihe/switch'           => 'ausleihe#switch',            as: 'ausleihe_switch'
   get  'ausleihe/lending_form'     => 'ausleihe#lending_form',      as: 'lending_form'
   post 'ausleihe/lending_action'   => 'ausleihe#lending_action',    as: 'lending_action'
   get  'ausleihe/returning_form'   => 'ausleihe#returning_form',    as: 'returning_form'
   post 'ausleihe/returning_action' => 'ausleihe#returning_action',  as: 'returning_action'
+
+
   get  'old_folder_instances'      => 'old_folder_instances#index', as: 'old_folder_instances'
 
   resources :old_folders, :old_exams

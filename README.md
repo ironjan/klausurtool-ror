@@ -6,14 +6,12 @@
 = Next steps
 
 
- * Ausleihe: old_lendouts_controller
  * Ausleihe zurücknehmen
  * Remove student name, add weight to lendouts
- * Ausleihe: "Lange OrdnerIds - barcodes"
-  * Follow EAN 8: 000$(folderId)$(number)$(checkValue)
-  * For now only reading relevant: get substring for $(folderId)$(number)
-  * "Mixed input", e.g. 1121 00011518 -> 1121 1151
+ * Add Suchen to Ausleihe
  * Show search query in /old_exams if present as parameter, see ausleihe#index
+ * Make http://0.0.0.0:3000/ausleihe/folders and http://0.0.0.0:3000/ausleihe/list readable
+ * http://0.0.0.0:3000/ausleihe/list -> http://0.0.0.0:3000/ausleihe/lent
  * Fix instances controller new
  * Fix: delete folder_instance -> show folder
  * Fix: old_exams_controller#update error handling: what if update fails when coming from folder?

@@ -2,11 +2,12 @@
 
 <%= render 'header' %>
 
+
 <nav>
 	<ul class="nav">
-		<li>Zur Ausleihe</li>
-		<li>zeige Ausgeliehene</li>
-		<li>zeige alle Ordner</li>
+		<li><%= link_to "Zur Ausleihe", ausleihe_path %></li>
+		<li><%= link_to "zeige Ausgeliehene", ausleihe_list_path %></li>
+		<li><%= link_to "zeige alle Ordner", ausleihe_folders_path %></li>
 		<li>Ordnersuchen</li>
 		<li>Inhaltsuchen</li>
 	</ul>

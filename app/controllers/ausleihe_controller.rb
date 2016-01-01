@@ -4,6 +4,14 @@ class AusleiheController < ApplicationController
   def index
   end
 
+  def list
+    @old_lend_outs = OldLendOut.where(:receiver => nil)
+  end
+
+  def folders
+    @old_folder_instances = OldFolderInstance.all
+  end
+
   # This controller method is used to decide if we are lending or returning folders. It redirects to the corresponding
   # form.
   def switch
@@ -103,19 +111,43 @@ class AusleiheController < ApplicationController
 
   # Renders the form when returning folder_instances. The form calls returning_action on submit.
   def returning_form
-    #fixme: implement and add layout
+    instances = params[:old_folder_instances]
+                                .map { |id| OldFolderInstance.find_by_id(id) }
+    found_instances = instances.compact
+
+    if found_instances.count < instances.count
+      flash[:alert] << "Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?"
+    end
+
+    old_lend_outs = found_instances.map {|i| i.old_lend_out }.uniq
+    if old_lend_outs.count > 1
+      flash[:alert] = "Die eingegebenen Ordner gehören zu verschiedenen Ausleih-Vorgängen."
+      redirect_to ausleihe_path and return
+    end
+
+    @old_lend_out = old_lend_outs.first
   end
 
   # Takes the given folders back and returns the user to the main screen.
   def returning_action
-    #fixme: implement and add layout
+    @old_lend_out = OldLendOut.find(params[:id])
+
+    @old_lend_out.receivingTime = Time.new
+
+    if @old_lend_out.update(old_lend_out_params)
+			flash[:notice] = "Ordner erfolgreich zurückgenommen"
+      redirect_to ausleihe_path and return
+		else
+			render 'returning_form'
+		end
   end
 
 
   private
   def old_lend_out_params
-    params.require(:old_lend_out).permit(:imt, :lender, :deposit, :student, :old_folder_instances => [])
+    params.require(:old_lend_out).permit(:imt, :lender, :deposit, :student, :receiver, :recivingTime, :old_folder_instances => [])
   end
+
 
   def hasMixedContent?(old_folder_instances)
     lend_outs = old_folder_instances.map { |i| i.old_lend_out }

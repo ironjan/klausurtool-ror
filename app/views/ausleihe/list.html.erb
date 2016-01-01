@@ -1,0 +1,10 @@
+<ul>
+<% @old_lend_outs.each do |o| %>
+<li><%= o.inspect %></li>
+      <ul>
+        <% o.old_folder_instances.each do |i| %>
+        <li><%= i.inspect %></li>
+        <% end %>
+      </ul>
+<% end %>
+</ul>

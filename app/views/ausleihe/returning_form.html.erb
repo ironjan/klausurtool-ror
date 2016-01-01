@@ -1,2 +1,36 @@
 <h2 id="lend">Zurücknehmen</h2>
 
+
+<%= form_for(@old_lend_out, url: returning_action_path, method: "post") do |f| %>
+    <% if @old_lend_out.errors.any? %>
+        <div id="error_explanation">
+          <h2>Fehler beim Zurücknehmen:</h2>
+          <ul>
+            <% @old_lend_out.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <p>Ordner:</p>
+    <ul>
+      <% @old_lend_out.old_folder_instances.each do |i| %>
+          <li><%= i.barcodeId %> - <%= i.old_folder.title %></li>
+      <% end %>
+    </ul>
+
+    <%= hidden_field_tag :id, @old_lend_out.id %>
+    <table>
+      <tr>
+        <td><%= f.label "Rein von" %></td>
+        <td><%= f.text_field :receiver, required: true %></td>
+      </tr>
+
+      <tr>
+        <td></td>
+        <td><%= f.submit "Ordner zurücknehmen" %></td>
+      </tr>
+    </table>
+
+<% end %>
