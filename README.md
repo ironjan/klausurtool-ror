@@ -5,9 +5,7 @@
 
 = Next steps
 
-
- * Ausleihe zurücknehmen
- * Remove student name, add weight to lendouts
+ * Add weight to lendouts
  * Add Suchen to Ausleihe
  * Show search query in /old_exams if present as parameter, see ausleihe#index
  * Make http://0.0.0.0:3000/ausleihe/folders and http://0.0.0.0:3000/ausleihe/list readable

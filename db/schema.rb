@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151225182014) do
+ActiveRecord::Schema.define(version: 20160101220339) do
 
   create_table "old_exams", force: :cascade do |t|
     t.string   "title"
@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 20151225182014) do
 
   create_table "old_lend_outs", force: :cascade do |t|
     t.string   "deposit"
-    t.string   "student"
     t.string   "imt"
     t.string   "lender"
     t.string   "receiver"
