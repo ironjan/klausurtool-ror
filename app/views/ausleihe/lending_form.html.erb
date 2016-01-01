@@ -17,28 +17,26 @@
     <ul>
       <% @old_lend_out.old_folder_instances.each do |i| %>
           <li><%= i.barcodeId %> - <%= i.old_folder.title %></li>
+          <%= hidden_field_tag "old_folder_instances[]", i.id %>
       <% end %>
     </ul>
 
-    <% @old_lend_out.old_folder_instances.each do |i| %>
-        <%= hidden_field :old_folder_instance_ids, :multiple => true, :value => i.id, :readonly => false %>
-    <% end %>
     <table>
       <tr>
         <td><%= f.label "Student" %></td>
-        <td><%= f.text_field :student %></td>
+        <td><%= f.text_field :student, required: true %></td>
       </tr>
       <tr>
         <td><%= f.label :imt %></td>
-        <td><%= f.text_field :imt %></td>
+        <td><%= f.text_field :imt, required: true %></td>
       </tr>
       <tr>
         <td><%= f.label "Verleiher" %></td>
-        <td><%= f.text_field :lender %></td>
+        <td><%= f.text_field :lender, required: true %></td>
       </tr>
       <tr>
         <td><%= f.label "Pfand" %></td>
-        <td><%= f.text_field :deposit %></td>
+        <td><%= f.text_field :deposit, required: true %></td>
       </tr>
       <tr>
         <td></td>
