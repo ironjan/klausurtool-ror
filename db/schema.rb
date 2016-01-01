@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160101220339) do
+ActiveRecord::Schema.define(version: 20160101220944) do
 
   create_table "old_exams", force: :cascade do |t|
     t.string   "title"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20160101220339) do
     t.datetime "receivingTime"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "weigth"
   end
 
 end

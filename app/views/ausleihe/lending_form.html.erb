@@ -23,6 +23,10 @@
 
     <table>
       <tr>
+        <td><%= f.label "Gewicht der Ordner" %></td>
+        <td><%= f.number_field :weigth, required: true, min: 0 %></td>
+      </tr>
+      <tr>
         <td><%= f.label "IMT-Login des Studenten" %></td>
         <td><%= f.text_field :imt, required: true %></td>
       </tr>
