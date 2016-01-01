@@ -5,10 +5,9 @@
 
 = Next steps
 
- * Add weight to lendouts
+ * Make http://0.0.0.0:3000/ausleihe/folders and http://0.0.0.0:3000/ausleihe/list readable
  * Add Suchen to Ausleihe
  * Show search query in /old_exams if present as parameter, see ausleihe#index
- * Make http://0.0.0.0:3000/ausleihe/folders and http://0.0.0.0:3000/ausleihe/list readable
  * http://0.0.0.0:3000/ausleihe/list -> http://0.0.0.0:3000/ausleihe/lent
  * Fix instances controller new
  * Fix: delete folder_instance -> show folder
