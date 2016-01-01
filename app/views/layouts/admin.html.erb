@@ -11,7 +11,9 @@
 		<li><%= link_to "Ausleihe",         old_lend_outs_path %></li>
 	</ul>
 </nav>
-
+<% flash.each do |name, msg| -%>
+    <%= content_tag :div, msg, class: name %>
+<% end -%>
 <%= yield %>
 
 <%= render 'footer' %>

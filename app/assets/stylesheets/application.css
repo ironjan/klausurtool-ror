@@ -13,11 +13,17 @@
  *= require_tree .
  *= require_self
  */
- ul .nav {
- 	padding: 0px;
- }
+ul .nav {
+    padding: 0px;
+}
+
 .nav li {
-	display: inline-block;
-	margin: 4px;
-	list-style: none;
+    display: inline-block;
+    margin: 4px;
+    list-style: none;
+}
+
+.alert {
+    background-color: red;
+    padding: 3px;
 }

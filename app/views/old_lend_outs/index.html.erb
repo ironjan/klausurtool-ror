@@ -1,4 +1,4 @@
-<%= form_tag(ausleih_action_path, :method => "post", id: "form") do %>
+<%= form_tag(ausleihe_switch_path, :method => "post", id: "form") do %>
 <%= text_area_tag :folderList, params[:folderList], placeholder: "Ordnerliste" %>
 <%= submit_tag "Weiter" %>
 <%= submit_tag "Zurücksetzen", :id => 'reset_button', :type => "reset"  %> 

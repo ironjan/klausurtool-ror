@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
 
-  get 'old_folder_instances' => 'old_folder_instances#index', as: 'old_folder_instances'
+  post 'ausleihe/switch'            => 'old_lend_outs#switch',           as: 'ausleihe_switch'
+  get  'ausleihe/lending_form'      => 'old_lend_outs#lending_form',     as: 'lending_form'
+  post 'ausleihe/lending_action'    => 'old_lend_outs#lending_action',   as: 'lending_action'
+  get  'ausleihe/returning_form'    => 'old_lend_outs#returning_form',   as: 'returning_form'
+  post 'ausleihe/returning_action'  => 'old_lend_outs#returning_action', as: 'returning_action'
+  get  'old_folder_instances'       => 'old_folder_instances#index',     as: 'old_folder_instances'
+
   resources :old_folders, :old_exams
-  resources :old_lend_outs, :path => "ausleihe"
-  post 'ausleihe/action' => 'old_lend_outs#action', as: 'ausleih_action'
-  
+  resources :old_lend_outs, path: "ausleihe"
+
   resources :old_folders do
     resources :old_folder_instances, :old_exams
   end

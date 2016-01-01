@@ -47,3 +47,5 @@ Incomplete list, started to write these down in the middle of the project.
  * http://guides.rubyonrails.org/layouts_and_rendering.html
  * http://stackoverflow.com/questions/185965/how-do-i-change-the-title-of-a-page-in-rails
  * http://stackoverflow.com/questions/3025784/rails-layouts-per-action
+ * http://stackoverflow.com/a/23066966/1666181
+ * http://ruby-doc.org/

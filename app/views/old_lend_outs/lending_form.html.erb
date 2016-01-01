@@ -1,0 +1,49 @@
+<h2 id="lend">Verleihen</h2>
+
+
+<%= form_for(@old_lend_out, url: lending_action_path) do |f| %>
+    <% if @old_lend_out.errors.any? %>
+        <div id="error_explanation">
+          <h2>Fehler beim Ausleihen:</h2>
+          <ul>
+            <% @old_lend_out.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <p>Ordner:</p>
+    <ul>
+      <% @old_lend_out.old_folder_instances.each do |i| %>
+          <li><%= i.barcodeId %> - <%= i.old_folder.title %></li>
+      <% end %>
+    </ul>
+
+    <% @old_lend_out.old_folder_instances.each do |i| %>
+        <%= hidden_field :old_folder_instance_ids, :multiple => true, :value => i.id, :readonly => false %>
+    <% end %>
+    <table>
+      <tr>
+        <td><%= f.label "Student" %></td>
+        <td><%= f.text_field :student %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :imt %></td>
+        <td><%= f.text_field :imt %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "Verleiher" %></td>
+        <td><%= f.text_field :lender %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "Pfand" %></td>
+        <td><%= f.text_field :deposit %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit "Ordner verleihen" %>
+        </td>
+      </tr>
+    </table>
+<% end %>
