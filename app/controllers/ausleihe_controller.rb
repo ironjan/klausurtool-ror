@@ -55,7 +55,7 @@ class AusleiheController < ApplicationController
   # Renders the form when lending folder_instances. The form calls lending_action on submit.
   def lending_form
     instances = params[:old_folder_instances]
-                                .map { |id| OldFolderInstance.find_by_id(id) }
+                    .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
 
     if found_instances.count < instances.count
@@ -71,7 +71,7 @@ class AusleiheController < ApplicationController
     Rails.logger.debug("#{params}")
     old_lend_out = OldLendOut.new(old_lend_out_params)
     instances = params[:old_folder_instances]
-                                .map { |id| OldFolderInstance.find_by_id(id) }
+                    .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
 
     if found_instances.count < instances.count
@@ -79,7 +79,7 @@ class AusleiheController < ApplicationController
     end
 
     all_available = found_instances
-                        .map {|i| i.old_lend_out}
+                        .map { |i| i.old_lend_out }
                         .compact
                         .empty?
 
@@ -104,22 +104,22 @@ class AusleiheController < ApplicationController
     flash[:notify] = "Ordner erfolgreich verliehen"
     redirect_to ausleihe_path
 
-  #rescue Exception => ex
-  #  flash[:alert] = "Fehler beim Speichern: #{ex}"
-  #  redirect_to ausleihe_path
+    #rescue Exception => ex
+    #  flash[:alert] = "Fehler beim Speichern: #{ex}"
+    #  redirect_to ausleihe_path
   end
 
   # Renders the form when returning folder_instances. The form calls returning_action on submit.
   def returning_form
     instances = params[:old_folder_instances]
-                                .map { |id| OldFolderInstance.find_by_id(id) }
+                    .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
 
     if found_instances.count < instances.count
       flash[:alert] << "Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?"
     end
 
-    old_lend_outs = found_instances.map {|i| i.old_lend_out }.uniq
+    old_lend_outs = found_instances.map { |i| i.old_lend_out }.uniq
     if old_lend_outs.count > 1
       flash[:alert] = "Die eingegebenen Ordner gehören zu verschiedenen Ausleih-Vorgängen."
       redirect_to ausleihe_path and return
@@ -134,12 +134,19 @@ class AusleiheController < ApplicationController
 
     @old_lend_out.receivingTime = Time.new
 
-    if @old_lend_out.update(old_lend_out_params)
-			flash[:notice] = "Ordner erfolgreich zurückgenommen"
-      redirect_to ausleihe_path and return
-		else
-			render 'returning_form'
-		end
+    OldLendOut.transaction do
+      if @old_lend_out.update(old_lend_out_params)
+        @old_lend_out.old_folder_instances.each do |i|
+          i.old_lend_out = nil
+          i.save
+        end
+        flash[:notice] = "Ordner erfolgreich zurückgenommen"
+        redirect_to ausleihe_path and return
+      else
+        render 'returning_form' and return
+      end
+    end
+
   end
 
 
