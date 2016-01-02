@@ -1,0 +1,30 @@
+<%= page_heading "Prüfungen" %>
+
+<%= form_tag(ausleihe_exams_path, method: "get") do %>
+    <%= label_tag(:search, "Prüfungen suchen:") %>
+    <%= text_field_tag(:search, params[:search]) %>
+    <%= submit_tag("Suche") %>
+    <%= submit_tag "Zurücksetzen", :id => 'reset_button', :name => 'reset' %>
+<% end %>
+
+<table>
+  <tr>
+    <th>Titel</th>
+    <th>Prüfer</th>
+    <th>Datum</th>
+    <th>Ordner</th>
+    <th>Farbe</th>
+    <th>Verfügbare Exemplare</th>
+  </tr>
+  <% @old_exams.each do |e| %>
+      <tr>
+        <td><%= e.title %></td>
+        <td><%= e.examiners %></td>
+        <td><%= e.date %></td>
+        <td><%= link_to e.old_folder.title, ausleihe_folders_path(:search => e.old_folder.title) %></td>
+        <td><%= e.old_folder.color %></td>
+        <td><%= e.old_folder.old_folder_instances.select { |o| o.old_lend_out.nil? }.count %></td>
+      </tr>
+  <% end %>
+</table>
+</ul>

@@ -1,3 +1,6 @@
+<%= page_heading "Ausleih-Tool der FSMI" %>
+
+
 <%= form_tag(ausleihe_switch_path, :method => "post", id: "form") do %>
 <%= text_area_tag :folderList, params[:folderList], placeholder: "Ordnerliste", required: true %><br>
 

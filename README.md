@@ -5,10 +5,11 @@
 
 = Next steps
 
- * Add Exam Search to Ausleihe
  * Show search query in /old_exams if present as parameter, see ausleihe#index
  * http://0.0.0.0:3000/ausleihe/list -> http://0.0.0.0:3000/ausleihe/lent
  * Styling old klausurtool
+ * Add "Return" to http://0.0.0.0:3000/ausleihe/lent
+ * Add "Lend" to http://0.0.0.0:3000/ausleihe/folders
  * Fix instances controller new
  * Fix: delete folder_instance -> show folder
  * Fix: old_exams_controller#update error handling: what if update fails when coming from folder?
@@ -17,6 +18,7 @@
  * Suche nach Ordnern
  * Fix: Show errors in embedded forms (Create exam from folder)
  * old_lend_outs_controller "# Fixme Use transaction with post validation that lending was correct"
+ * Ausleih-Archiv
  * Deckblätter u.ä. generieren
  
 = TODO for README

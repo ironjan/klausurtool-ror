@@ -21,6 +21,20 @@ class AusleiheController < ApplicationController
     end
   end
 
+  def exams
+    if params[:reset]
+      params[:search] = nil
+    end
+
+    if params[:search].nil? or params[:search].empty?
+      @old_exams = OldExam.all
+    else
+      @old_exams = OldExam.joins(:old_folder)
+                                  .where("date = ? OR old_exams.title LIKE ? OR old_exams.examiners LIKE ? OR old_folders.title LIKE ?",
+                                         "#{params[:search]}", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
+    end
+  end
+
   # This controller method is used to decide if we are lending or returning folders. It redirects to the corresponding
   # form.
   def switch
