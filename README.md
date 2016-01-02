@@ -5,7 +5,6 @@
 
 = Next steps
 
- * Show search query in /old_exams if present as parameter, see ausleihe#index
  * http://0.0.0.0:3000/ausleihe/list -> http://0.0.0.0:3000/ausleihe/lent
  * Styling old klausurtool
  * Add "Return" to http://0.0.0.0:3000/ausleihe/lent
