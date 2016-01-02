@@ -1,10 +1,34 @@
-<ul>
-<% @old_lend_outs.each do |o| %>
-<li><%= o.inspect %></li>
-      <ul>
-        <% o.old_folder_instances.each do |i| %>
-        <li><%= i.inspect %></li>
-        <% end %>
-      </ul>
-<% end %>
-</ul>
+<%= page_heading "Aktuell verliehen" %>
+
+<table border="1px">
+  <tr>
+    <th>Ausleih ID</th>
+    <th>Ausgeliehen von</th>
+    <th>Pfand</th>
+    <th>Gewicht</th>
+    <th>Raus von</th>
+    <th>Zeitpunkt</th>
+  </tr>
+
+  <% @old_lend_outs.each do |o| %>
+      <tr>
+        <td><%= o.id %></td>
+        <td><%= o.imt %></td>
+        <td><%= o.deposit %></td>
+        <td><%= o.weigth %></td>
+        <td><%= o.lender %></td>
+        <td><%= o.lendingTime %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td colspan="5">
+          <ul>
+            <% o.old_folder_instances.each do |i| %>
+                <li><%= i.barcodeId %>, <%= i.old_folder.title %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+      </tr>
+  <% end %>
+</table>

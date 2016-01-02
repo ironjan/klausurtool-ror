@@ -1,15 +1,15 @@
-  <%= page_heading "Ordner-Exemplare" %>
+<%= page_heading "Ordner-Exemplare" %>
 
 
-  <%= form_tag(ausleihe_folders_path, method: "get") do %>
-      <%= label_tag(:search, "Ordner suchen:") %>
-      <%= text_field_tag(:search, params[:search]) %>
-      <%= submit_tag("Suche") %>
-      <%= submit_tag "Zurücksetzen", :id => 'reset_button', :name => 'reset' %>
-  <% end %>
+<%= form_tag(ausleihe_folders_path, method: "get") do %>
+    <%= label_tag(:search, "Ordner suchen:") %>
+    <%= text_field_tag(:search, params[:search]) %>
+    <%= submit_tag("Suche") %>
+    <%= submit_tag "Zurücksetzen", :id => 'reset_button', :name => 'reset' %>
+<% end %>
 
 
-  <table>
+<table>
   <tr>
     <th>Code</th>
     <th>Name</th>
@@ -19,13 +19,13 @@
     <th>Verfügbar?</th>
   </tr>
   <% @old_folder_instances.each do |i| %>
-  <tr>
-    <td><%= i.barcodeId %></td>
-    <td><%= i.old_folder.title %></td>
-    <td><%= i.old_folder.contentType %></td>
-    <td><%= i.old_folder.color %></td>
-    <td><%= i.old_folder.area %></td>
-    <td><%= i.old_lend_out.nil? %></td>
-  </tr>
+      <tr>
+        <td><%= i.barcodeId %></td>
+        <td><%= i.old_folder.title %></td>
+        <td><%= i.old_folder.contentType %></td>
+        <td><%= i.old_folder.color %></td>
+        <td><%= i.old_folder.area %></td>
+        <td><%= i.old_lend_out.nil? %></td>
+      </tr>
   <% end %>
 </table>

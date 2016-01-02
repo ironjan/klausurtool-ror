@@ -5,10 +5,10 @@
 
 = Next steps
 
- * Make http://0.0.0.0:3000/ausleihe/folders and http://0.0.0.0:3000/ausleihe/folders readable
- * Add Suchen to Ausleihe
+ * Add Exam Search to Ausleihe
  * Show search query in /old_exams if present as parameter, see ausleihe#index
  * http://0.0.0.0:3000/ausleihe/list -> http://0.0.0.0:3000/ausleihe/lent
+ * Styling old klausurtool
  * Fix instances controller new
  * Fix: delete folder_instance -> show folder
  * Fix: old_exams_controller#update error handling: what if update fails when coming from folder?
@@ -44,3 +44,4 @@ Incomplete list, started to write these down in the middle of the project.
  * http://stackoverflow.com/questions/3025784/rails-layouts-per-action
  * http://stackoverflow.com/a/23066966/1666181
  * http://ruby-doc.org/
+ * http://www.mediaevent.de/xhtml/html-section-header.html

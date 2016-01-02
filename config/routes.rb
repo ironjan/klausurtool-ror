@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   get  'ausleihe'                  => 'ausleihe#index',             as: 'ausleihe'
   get  'ausleihe/list'             => 'ausleihe#list',              as: 'ausleihe_list'
   get  'ausleihe/folders'          => 'ausleihe#folders',           as: 'ausleihe_folders'
-  # get  'ausleihe/folder_search'          => 'ausleihe#folders',           as: 'ausleihe_folders'
-  # get  'ausleihe/folders'          => 'ausleihe#folders',           as: 'ausleihe_folders'
+  get  'ausleihe/exams'            => 'ausleihe#exams',             as: 'ausleihe_exams'
 
   # Routes that should not be manually navigated to in "Ausleihe"
   post 'ausleihe/switch'           => 'ausleihe#switch',            as: 'ausleihe_switch'
