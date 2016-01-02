@@ -5,7 +5,7 @@
 
 = Next steps
 
- * Make http://0.0.0.0:3000/ausleihe/folders and http://0.0.0.0:3000/ausleihe/list readable
+ * Make http://0.0.0.0:3000/ausleihe/folders and http://0.0.0.0:3000/ausleihe/folders readable
  * Add Suchen to Ausleihe
  * Show search query in /old_exams if present as parameter, see ausleihe#index
  * http://0.0.0.0:3000/ausleihe/list -> http://0.0.0.0:3000/ausleihe/lent

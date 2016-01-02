@@ -6,4 +6,12 @@ class OldFolderInstance < ActiveRecord::Base
   validates :old_folder_id, presence: true
   validates :barcodeId,     presence: true, uniqueness: true
 
+
+	def self.search(search)
+		# Replacing spaces as wild-cards
+    search = search.gsub(" ", "%")
+    Rails.logger.debug("Searching for \"#{search}\"")
+    # We want exact match for date but non-exact matches for other values
+		where("number = ?", "#{search}")
+	end
 end

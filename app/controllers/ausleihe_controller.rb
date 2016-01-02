@@ -9,7 +9,11 @@ class AusleiheController < ApplicationController
   end
 
   def folders
-    @old_folder_instances = OldFolderInstance.all
+    if params[:search].nil? or params[:search].empty?
+      @old_folder_instances = OldFolderInstance.all
+    else
+      @old_folder_instances = OldFolderInstance.search(params[:search])
+    end
   end
 
   # This controller method is used to decide if we are lending or returning folders. It redirects to the corresponding
