@@ -11,6 +11,7 @@
  * Fix instances controller new
  * Fix: delete folder_instance -> show folder
  * Fix: old_exams_controller#update error handling: what if update fails when coming from folder?
+ * Search for TODO ;)
  * http://berk.es/2011/03/29/simplest-authentication-in-rails-basic-authentication-with-a-logged_in-helper/
    * For editing methods...
  * Suche nach Ordnern
