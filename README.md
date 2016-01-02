@@ -5,7 +5,6 @@
 
 = Next steps
 
- * http://0.0.0.0:3000/ausleihe/list -> http://0.0.0.0:3000/ausleihe/lent
  * Styling old klausurtool
  * Add "Return" to http://0.0.0.0:3000/ausleihe/lent
  * Add "Lend" to http://0.0.0.0:3000/ausleihe/folders

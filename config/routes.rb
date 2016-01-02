@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   # Navigateable "Ausleihe"-routes
   get 'ausleihe' => 'ausleihe#index', as: 'ausleihe'
-  get 'ausleihe/list' => 'ausleihe#list', as: 'ausleihe_list'
+  get 'ausleihe/lent' => 'ausleihe#lent', as: 'ausleihe_lent'
   get 'ausleihe/folders' => 'ausleihe#folders', as: 'ausleihe_folders'
   get 'ausleihe/exams' => 'ausleihe#exams', as: 'ausleihe_exams'
 

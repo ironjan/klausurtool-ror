@@ -4,7 +4,7 @@ class AusleiheController < ApplicationController
   def index
   end
 
-  def list
+  def lent
     @old_lend_outs = OldLendOut.where(:receiver => nil)
   end
 
