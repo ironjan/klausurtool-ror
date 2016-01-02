@@ -29,7 +29,7 @@ class OldFolderInstancesController < ApplicationController
 	def update
 		@old_folder_instance = OldFolderInstance.find(params[:id])
 
-		if @old_folder_instance.update
+		if @old_folder_instance.update(old_folder_instance_params)
 			redirect_to @old_folder_instance
 		else
 			render 'edit'

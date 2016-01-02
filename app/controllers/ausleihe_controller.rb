@@ -9,10 +9,15 @@ class AusleiheController < ApplicationController
   end
 
   def folders
+    if params[:reset]
+      params[:search] = nil
+    end
+
     if params[:search].nil? or params[:search].empty?
       @old_folder_instances = OldFolderInstance.all
     else
-      @old_folder_instances = OldFolderInstance.search(params[:search])
+      @old_folder_instances = OldFolderInstance.joins(:old_folder)
+                                  .where("old_folders.title LIKE ?", "%#{params[:search]}%")
     end
   end
 
