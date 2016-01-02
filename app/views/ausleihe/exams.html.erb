@@ -1,7 +1,7 @@
 <%= page_heading "Prüfungen" %>
 
 <%= form_tag(ausleihe_exams_path, method: "get") do %>
-    <%= label_tag(:search, "Prüfungen suchen:") %>
+    <%= label_tag :search, "Prüfungen suchen:" %>
     <%= text_field_tag(:search, params[:search]) %>
     <%= submit_tag("Suche") %>
     <%= submit_tag "Zurücksetzen", :id => 'reset_button', :name => 'reset' %>

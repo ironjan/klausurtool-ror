@@ -1,6 +1,3 @@
-<%= page_heading "Verwaltung" %>
-
-
 <%= render 'header' %>
 
 <nav>
@@ -8,12 +5,12 @@
 		<li><%= link_to "Ordner-Gruppen",   old_folders_path %></li>
 		<li><%= link_to "Ordner-Exemplare", old_folder_instances_path %></li>
 		<li><%= link_to "Prüfungen",        old_exams_path %></li>
-		<li><%= link_to "Ausleihe",         ausleihe_path %></li>
 	</ul>
 </nav>
 <% flash.each do |name, msg| -%>
     <%= content_tag :div, msg, class: name %>
 <% end -%>
+
 <%= yield %>
 
 <%= render 'footer' %>

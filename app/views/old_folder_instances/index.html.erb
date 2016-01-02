@@ -1,4 +1,3 @@
-<div>
-	<h1>Alle Ordner-Exemplare</h1>
-	<%= render "old_folder_instances/instance_list", instances: @old_folder_instances %>
-</div>
+<% page_heading "Alle Ordner-Exemplare" %>
+
+<%= render "old_folder_instances/instance_list", instances: @old_folder_instances %>

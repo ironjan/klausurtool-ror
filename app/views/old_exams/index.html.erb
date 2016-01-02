@@ -1,34 +1,34 @@
 <div>
-	<h1>Alle Prüfungen</h1>
-	
-	<%= form_tag(old_exams_path, method: "get") do %>
-	<%= label_tag(:search, "Prüfung suchen:") %>
-	<%= text_field_tag(:search) %>
-	<%= submit_tag("Suche") %>
-	<% end %>
+  <%= page_heading "Alle Prüfungen" %>
 
-	<% if @old_exams.size > 0 %>
-	<table>
-		<tr>
-			<th>Veranstaltungen</th>
-			<th>Prüfer</th>
-			<th>Datum</th>
-			<th>Ordner</th>
-			<th></th>
-		</tr>
+  <%= form_tag(old_exams_path, method: "get") do %>
+      <%= label_tag(:search, "Prüfung suchen:") %>
+      <%= text_field_tag(:search, params[:search]) %>
+      <%= submit_tag("Suche") %>
+  <% end %>
 
-		<% @old_exams.each do |e| %>
-		<tr>
-			<td><%= e.title %></td>
-			<td><%= e.examiners %></td>
-			<td><%= e.date %></td>
-			<td><%= link_to e.old_folder.title, e.old_folder %></td>
-			<td><%= link_to "Prüfung anzeigen", [e.old_folder, e] %>, TODO: Bearbeiten</td>
-		</tr>
-		<% end %>
-	</table>
+  <% if @old_exams.size > 0 %>
+      <table>
+        <tr>
+          <th>Veranstaltungen</th>
+          <th>Prüfer</th>
+          <th>Datum</th>
+          <th>Ordner</th>
+          <th></th>
+        </tr>
 
-	<% else %>
-	<p>Keine Prüfungen gefunden.</p>
-	<% end %>
+        <% @old_exams.each do |e| %>
+            <tr>
+              <td><%= e.title %></td>
+              <td><%= e.examiners %></td>
+              <td><%= e.date %></td>
+              <td><%= link_to e.old_folder.title, e.old_folder %></td>
+              <td><%= link_to "Prüfung anzeigen", [e.old_folder, e] %>, TODO: Bearbeiten</td>
+            </tr>
+        <% end %>
+      </table>
+
+  <% else %>
+      <p>Keine Prüfungen gefunden.</p>
+  <% end %>
 </div>
