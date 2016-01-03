@@ -20,4 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  old_folder:
+    color:
+      black:  "schwarz"
+      red:    "rot"
+      blue:   "blau"
+      green:  "grün"

@@ -5,8 +5,8 @@
 
 = Next steps
 
- * Styling old klausurtool
  * Replace color names by colors in ui with colors
+ * Styling old klausurtool
  * Fix instances controller new
  * Fix: delete folder_instance -> show folder
  * Fix: old_exams_controller#update error handling: what if update fails when coming from folder?
@@ -28,7 +28,7 @@
 
 Incomplete list, started to write these down in the middle of the project. 
 
- * Rails Getting Started
+ * [Rails Getting Started](http://guides.rubyonrails.org/getting_started.html)
  * http://www.korenlc.com/creating-a-simple-search-in-rails-4/
  * http://www.dotnetperls.com/sub-ruby
  * http://stackoverflow.com/questions/6551128/split-on-different-newlines
@@ -45,3 +45,8 @@ Incomplete list, started to write these down in the middle of the project.
  * http://stackoverflow.com/a/23066966/1666181
  * http://ruby-doc.org/
  * http://www.mediaevent.de/xhtml/html-section-header.html
+ * http://railsguides.net/change-data-in-migrations-like-a-boss/
+ * http://stackoverflow.com/questions/4282710/how-do-i-describe-an-enumeration-column-in-a-rails-3-migration
+ * http://stackoverflow.com/questions/23686265/saving-enum-from-select-in-rails-4-1
+ * http://joanswork.com/localized-activerecordenum-display-names/
+ * http://guides.rubyonrails.org/i18n.html

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160101220944) do
+ActiveRecord::Schema.define(version: 20160103143444) do
 
   create_table "old_exams", force: :cascade do |t|
     t.string   "title"
@@ -39,10 +39,10 @@ ActiveRecord::Schema.define(version: 20160101220944) do
   create_table "old_folders", force: :cascade do |t|
     t.string   "title"
     t.string   "contentType"
-    t.string   "color"
     t.string   "area"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "color",       default: 0, null: false
   end
 
   create_table "old_lend_outs", force: :cascade do |t|

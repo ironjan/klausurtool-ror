@@ -19,8 +19,8 @@
 		</tr>
 		<tr>
 			<td><%= f.label "Farbe" %></td>
-			<td><%= f.select(:color, options_for_select(OldFolder::COLORS)) %></td>
-		</tr>	
+      <td><%= f.select :color, OldFolder.color_names_for_select %></td>
+		</tr>
 		<tr>
 			<td></td>
 			<td><%= f.submit "Änderungen übernehmen"  %>
