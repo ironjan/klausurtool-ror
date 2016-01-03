@@ -17,6 +17,7 @@
     <th>Farbe</th>
     <th>Gebiet</th>
     <th>Verfügbar?</th>
+    <th></th>
   </tr>
   <% @old_folder_instances.each do |i| %>
       <tr>
@@ -26,6 +27,7 @@
         <td><%= i.old_folder.color %></td>
         <td><%= i.old_folder.area %></td>
         <td><%= i.old_lend_out.nil? %></td>
+        <td><%= link_to "Verleihen", lending_form_path(old_folder_instances: [i]) %></td>
       </tr>
   <% end %>
 </table>

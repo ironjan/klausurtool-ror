@@ -5,8 +5,8 @@
 
 = Next steps
 
- * Add "Lend" to http://0.0.0.0:3000/ausleihe/folders
  * Styling old klausurtool
+ * Replace color names by colors in ui with colors
  * Fix instances controller new
  * Fix: delete folder_instance -> show folder
  * Fix: old_exams_controller#update error handling: what if update fails when coming from folder?
