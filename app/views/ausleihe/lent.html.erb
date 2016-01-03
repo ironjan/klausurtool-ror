@@ -29,6 +29,10 @@
           </ul>
         </td>
       </tr>
+      <tr>
+        <td colspan="6" align="right">
+          <%= link_to "Zurücknehmen", returning_form_path(old_folder_instances: [o.old_folder_instances.first]) %>
+        </td>
       </tr>
-  <% end %>
+<% end %>
 </table>

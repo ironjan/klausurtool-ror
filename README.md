@@ -5,9 +5,8 @@
 
 = Next steps
 
- * Styling old klausurtool
- * Add "Return" to http://0.0.0.0:3000/ausleihe/lent
  * Add "Lend" to http://0.0.0.0:3000/ausleihe/folders
+ * Styling old klausurtool
  * Fix instances controller new
  * Fix: delete folder_instance -> show folder
  * Fix: old_exams_controller#update error handling: what if update fails when coming from folder?
