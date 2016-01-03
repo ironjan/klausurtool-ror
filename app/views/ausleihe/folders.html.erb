@@ -13,24 +13,26 @@
 
   <table class="table table-hover">
     <tr>
+      <th></th>
       <th>Code</th>
       <th>Name</th>
       <th>Inhalt</th>
-      <th>Farbe</th>
       <th>Gebiet</th>
-      <th>Verfügbar?</th>
       <th></th>
     </tr>
     <!-- todo Extract "Verfügbar" from here -->
     <% @old_folder_instances.each do |instance| %>
         <tr>
+          <td style="background-color: <%= instance.old_folder.css_color %>"></td>
           <td><%= instance.barcodeId %></td>
           <td><%= instance.old_folder.title %></td>
           <td><%= instance.old_folder.contentType %></td>
-          <td style="background-color: <%= instance.old_folder.css_color %>">&nbsp;</td>
           <td><%= instance.old_folder.area %></td>
-          <td><%= instance.old_lend_out.nil? ? "Verfügbar" : "" %></td>
-          <td><%= link_to "Verleihen", lending_form_path(old_folder_instances: [instance]) %></td>
+          <td>
+            <% if instance.old_lend_out.nil? %>
+                <%= link_to "Verleihen", lending_form_path(old_folder_instances: [instance]) %>
+            <% end %>
+          </td>
         </tr>
     <% end %>
   </table>
