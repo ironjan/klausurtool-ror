@@ -5,13 +5,11 @@
 
 = Next steps
 
- * Styling klausurtool
- * Localize times...
+ * Localize displayed times...
  * Extract embedded forms:
   * http://0.0.0.0:3000/admin/old_folders/1 - new instance
   * http://0.0.0.0:3000/admin/old_folders/1 - new exam
-  * 
-  * 
+ * Write converter: og -> ror
  * Fix instances controller new
  * Fix: delete folder_instance -> show folder
  * Fix: old_exams_controller#update error handling: what if update fails when coming from folder?
