@@ -1,16 +1,19 @@
 <%= render 'header' %>
+<main class="center">
 
-<nav>
-	<ul class="nav">
-		<li><%= link_to "Ordner-Gruppen",   old_folders_path %></li>
-		<li><%= link_to "Ordner-Exemplare", old_folder_instances_path %></li>
-		<li><%= link_to "Prüfungen",        old_exams_path %></li>
-	</ul>
-</nav>
-<% flash.each do |name, msg| -%>
-    <%= content_tag :div, msg, class: name %>
-<% end -%>
+  <h1><%= page_title %></h1>
+  <nav>
+    <ul class="nav nav-pills">
+      <li><%= link_to "Neue Ordnergruppe", new_old_folder_path %></li>
+      <li><%= link_to "Ordner-Gruppen", old_folders_path %></li>
+      <li><%= link_to "Ordner-Exemplare", old_folder_instances_path %></li>
+      <li><%= link_to "Prüfungen", old_exams_path %></li>
+    </ul>
+  </nav>
+  <% flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, class: name %>
+  <% end -%>
 
-<%= yield %>
-
+  <%= yield %>
+</main>
 <%= render 'footer' %>

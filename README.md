@@ -53,3 +53,6 @@ Incomplete list, started to write these down in the middle of the project.
  * http://maxdesign.com.au/articles/definition/
  * https://github.com/twbs/bootstrap-sass
  * http://bootcards.org/
+ * http://stackoverflow.com/questions/19622056/include-bootstrap-role-attribute-in-rails-form-helper
+ * http://v4-alpha.getbootstrap.com/components/forms/#form-layouts
+ * http://www.w3schools.com/bootstrap/
