@@ -1,12 +1,20 @@
 <%= page_heading "Ausleih-Tool der FSMI" %>
 
-<%= form_tag(ausleihe_switch_path, :method => "post", id: "form") do %>
+<div class="clearfix spacer">
 
-    <%= label_tag :folderList, "Ordner:" %><br>
-    <%= text_area_tag :folderList, params[:folderList], placeholder: "Ordnerliste", required: true %><br>
+  <%= form_tag ausleihe_switch_path, :method => "post", id: "form", html: {class: "form-horizontal", role: "form"} do %>
 
-    <%= submit_tag "Weiter" %>
+      <div class="form-group row">
+        <%= label_tag :folderList, "Ordner:", :class => "control-label" %><br>
+        <%= text_area_tag :folderList, params[:folderList], placeholder: "Ordnerliste", required: true,
+                          rows: 6, columns: 10, :class => "form-control" %>
+      </div>
 
-    <%= submit_tag "Zurücksetzen", :id => 'reset_button', :type => "reset" %>
-<% end %>
+      <div class="form-group row pull-right">
+        <%= submit_tag "(W)eiter", class: "btn btn-primary", :accesskey => "w" %>
+        <%= submit_tag "Zu(r)ücksetzen", :id => 'reset_button', :type => "reset", class: "btn", :accesskey => "r" %>
+      </div>
+  <% end %>
 
+
+</div>

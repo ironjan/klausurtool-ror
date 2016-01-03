@@ -5,8 +5,13 @@
 
 = Next steps
 
- * Styling old klausurtool
+ * Styling klausurtool
  * Localize times...
+ * Extract embedded forms:
+  * http://0.0.0.0:3000/admin/old_folders/1 - new instance
+  * http://0.0.0.0:3000/admin/old_folders/1 - new exam
+  * 
+  * 
  * Fix instances controller new
  * Fix: delete folder_instance -> show folder
  * Fix: old_exams_controller#update error handling: what if update fails when coming from folder?
@@ -56,3 +61,4 @@ Incomplete list, started to write these down in the middle of the project.
  * http://stackoverflow.com/questions/19622056/include-bootstrap-role-attribute-in-rails-form-helper
  * http://v4-alpha.getbootstrap.com/components/forms/#form-layouts
  * http://www.w3schools.com/bootstrap/
+ * http://stackoverflow.com/questions/10691442/adding-a-simple-spacer-to-twitter-bootstrap

@@ -26,31 +26,8 @@
   <div class="clearfix">
     <nav>
       <ul class="nav nav-pills pull-right">
-        <li><%= link_to "Zurücknehmen", returning_form_path(old_folder_instances: [old_lend_out.old_folder_instances.first]) %></li>
+        <li><%= link_to "Zurücknehmen", returning_form_path(old_folder_instances: [old_lend_out.old_folder_instances.first]), class: "btn btn-primary" %></li>
       </ul>
     </nav>
   </div>
 </div>
-<!--
-<tr>
-  <td><%= old_lend_out.id %></td>
-  <td><%= old_lend_out.imt %></td>
-  <td><%= old_lend_out.deposit %></td>
-  <td><%= old_lend_out.weigth %></td>
-  <td><%= old_lend_out.lender %></td>
-  <td><%= old_lend_out.lendingTime %></td>
-</tr>
-<tr>
-  <td></td>
-  <td colspan="5">
-    <ul>
-
-    </ul>
-  </td>
-</tr>
-<tr>
-  <td colspan="6" align="right">
-
-  </td>
-</tr>
--->

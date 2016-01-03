@@ -3,7 +3,7 @@
 <h2 id="lend">Zurücknehmen</h2>
 
 
-<%= form_for(@old_lend_out, url: returning_action_path, method: "post") do |f| %>
+<%= form_for @old_lend_out, url: returning_action_path, method: "post", html: {class: "form-horizontal", role: "form"} do |f| %>
     <% if @old_lend_out.errors.any? %>
         <div id="error_explanation">
           <h2>Fehler beim Zurücknehmen:</h2>
@@ -15,24 +15,37 @@
         </div>
     <% end %>
 
-    <p>Ordner:</p>
-    <ul>
-      <% @old_lend_out.old_folder_instances.each do |i| %>
-          <li><%= i.barcodeId %> - <%= i.old_folder.title %></li>
-      <% end %>
-    </ul>
+    <div class="form-group row">
+      <%= f.label :folders, "Ordner", :class => "control-label col-sm-2" %>
+      <div class="col-sm-10">
+        <ul id="folders">
+          <% @old_lend_out.old_folder_instances.each do |i| %>
+              <li>
+                <%= i.barcodeId %>, <%= i.old_folder.title %>
+                <%= hidden_field_tag "old_folder_instances[]", i.id %>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
 
     <%= hidden_field_tag :id, @old_lend_out.id %>
-    <table>
-      <tr>
-        <td><%= f.label "Rein von" %></td>
-        <td><%= f.text_field :receiver, required: true %></td>
-      </tr>
 
-      <tr>
-        <td></td>
-        <td><%= f.submit "Ordner zurücknehmen" %></td>
-      </tr>
-    </table>
+
+    <div class="form-group row">
+      <%= f.label :receiver, "Rein von", :class => "control-label col-sm-2" %>
+      <div class="col-sm-10">
+        <%= f.number_field :receiver, required: true, :class => "form-control" %>
+      </div>
+    </div>
+
+    <div class="pull-right">
+      <div class="form-group row">
+        <div class="col-sm-2">
+          <%= f.submit "Ordner zurücknehmen", class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+
 
 <% end %>

@@ -1,34 +1,42 @@
 <div>
-  <%= page_heading "Alle Prüfungen" %>
+  <%= page_heading "Prüfungen" %>
 
-  <%= form_tag(old_exams_path, method: "get") do %>
-      <%= label_tag(:search, "Prüfung suchen:") %>
-      <%= text_field_tag(:search, params[:search]) %>
-      <%= submit_tag("Suche") %>
+  <%= form_tag old_exams_path, method: "get", :class => "form-inline", :role => "form" do %>
+      <div class="form-group">
+        <%= label_tag :search, "Prüfung filtern:", :class => "control-label" %>
+        <%= text_field_tag :search, params[:search], :class => "form-control" %>
+      </div>
+      <%= submit_tag "Filtern", :class => "btn btn-primary" %>
+      <%= submit_tag "Zurücksetzen", :id => 'reset_button', :name => 'reset', :class => "btn" %>
   <% end %>
 
-  <% if @old_exams.size > 0 %>
-      <table>
-        <tr>
-          <th>Veranstaltungen</th>
-          <th>Prüfer</th>
-          <th>Datum</th>
-          <th>Ordner</th>
-          <th></th>
-        </tr>
+  <div class="spacer">
+    <% if @old_exams.size > 0 %>
+        <table class="table table-hover">
+          <tr>
+            <th>Veranstaltungen</th>
+            <th>Prüfer</th>
+            <th>Datum</th>
+            <th>Ordner</th>
+            <th></th>
+          </tr>
 
-        <% @old_exams.each do |e| %>
-            <tr>
-              <td><%= e.title %></td>
-              <td><%= e.examiners %></td>
-              <td><%= e.date %></td>
-              <td><%= link_to e.old_folder.title, e.old_folder %></td>
-              <td><%= link_to "Prüfung anzeigen", [e.old_folder, e] %>, TODO: Bearbeiten</td>
-            </tr>
-        <% end %>
-      </table>
+          <% @old_exams.each do |e| %>
+              <tr>
+                <td><%= e.title %></td>
+                <td><%= e.examiners %></td>
+                <td><%= e.date %></td>
+                <td><%= link_to e.old_folder.title, e.old_folder %></td>
+                <td>
+                  <%= link_to "Anzeigen", [e.old_folder, e] %>,
+                  <%= link_to "Bearbeiten", edit_old_folder_old_folder_instance_path(e.old_folder, e) %>
+                </td>
+              </tr>
+          <% end %>
+        </table>
 
-  <% else %>
-      <p>Keine Prüfungen gefunden.</p>
-  <% end %>
+    <% else %>
+        <p>Keine Prüfungen gefunden.</p>
+    <% end %>
+  </div>
 </div>

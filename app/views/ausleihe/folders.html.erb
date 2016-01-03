@@ -1,34 +1,37 @@
 <%= page_heading "Ordner-Exemplare" %>
 
-
-<%= form_tag(ausleihe_folders_path, method: "get") do %>
-    <%= label_tag(:search, "Ordner suchen:") %>
-    <%= text_field_tag(:search, params[:search]) %>
-    <%= submit_tag("Suche") %>
-    <%= submit_tag "Zurücksetzen", :id => 'reset_button', :name => 'reset' %>
+<%= form_tag ausleihe_folders_path, method: "get", :class => "form-inline" do %>
+    <div class="form-group">
+      <%= label_tag :search, "Ordner suchen:" %>
+      <%= text_field_tag :search, params[:search], :class => "form-control" %>
+      <%= submit_tag "Suche", :class => "btn btn-primary" %>
+      <%= submit_tag "Zurücksetzen", :id => 'reset_button', :name => 'reset', :class => "btn" %>
+    </div>
 <% end %>
 
+<div class="clearfix spacer">
 
-<table>
-  <tr>
-    <th>Code</th>
-    <th>Name</th>
-    <th>Inhalt</th>
-    <th>Farbe</th>
-    <th>Gebiet</th>
-    <th>Verfügbar?</th>
-    <th></th>
-  </tr>
-  <!-- todo Extract "Verfügbar" from here -->
-  <% @old_folder_instances.each do |instance| %>
-      <tr>
-        <td><%= instance.barcodeId %></td>
-        <td><%= instance.old_folder.title %></td>
-        <td><%= instance.old_folder.contentType %></td>
-        <td style="background-color: <%= instance.old_folder.css_color %>">&nbsp;</td>
-        <td><%= instance.old_folder.area %></td>
-        <td><%= instance.old_lend_out.nil? ? "Verfügbar" : "" %></td>
-        <td><%= link_to "Verleihen", lending_form_path(old_folder_instances: [instance]) %></td>
-      </tr>
-  <% end %>
-</table>
+  <table class="table table-hover">
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Inhalt</th>
+      <th>Farbe</th>
+      <th>Gebiet</th>
+      <th>Verfügbar?</th>
+      <th></th>
+    </tr>
+    <!-- todo Extract "Verfügbar" from here -->
+    <% @old_folder_instances.each do |instance| %>
+        <tr>
+          <td><%= instance.barcodeId %></td>
+          <td><%= instance.old_folder.title %></td>
+          <td><%= instance.old_folder.contentType %></td>
+          <td style="background-color: <%= instance.old_folder.css_color %>">&nbsp;</td>
+          <td><%= instance.old_folder.area %></td>
+          <td><%= instance.old_lend_out.nil? ? "Verfügbar" : "" %></td>
+          <td><%= link_to "Verleihen", lending_form_path(old_folder_instances: [instance]) %></td>
+        </tr>
+    <% end %>
+  </table>
+</div>

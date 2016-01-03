@@ -1,23 +1,26 @@
 <% page_heading "Prüfungs-Details" %>
 
-<ul class="nav">
-	<li><%= link_to "Bearbeiten", edit_old_folder_old_exam_path(@old_exam.old_folder, @old_exam) %></li>
-	<li><%= link_to "Löschen", [@old_exam.old_folder, @old_exam], method: :delete,
-		data: { confirm: 'Prüfung wirklich löschen?' } %>
-	</li>
-</ul>
-<p>Prüfung gehört zu Ordner <%= link_to @old_exam.old_folder.title, @old_exam.old_folder %>.</p>
-<table>
-	<tr>
-		<td>Veranstaltungen:</td>
-		<td><%= @old_exam.title %></td>
-	</tr>
-	<tr>
-		<td>Prüfer:</td>
-		<td><%= @old_exam.examiners %></td>
-	</tr>
-	<tr>
-		<td>Datum:</td>
-		<td><%= @old_exam.date %></td>
-	</tr>
-</table>
+
+<div class="full-width">
+  <div class="full-width">
+
+    <h2 class="pull-left"><%= @old_exam.title %></h2>
+    <%= link_to "Bearbeiten", edit_old_folder_old_exam_path(@old_exam.old_folder, @old_exam), class: "pull-right btn btn-default" %>
+  </div>
+  <dl>
+    <dt>Ordner</dt>
+    <dd><%= link_to @old_exam.old_folder.title, @old_exam.old_folder %></dd>
+    <dt>Prüfer</dt>
+    <dd><%= @old_exam.examiners %></dd>
+    <dt>Datum</dt>
+    <dd><%= @old_exam.date %></dd>
+  </dl>
+  <div class="clearfix"></div>
+</div>
+
+<div class="clearfix spacer">
+  <h2>Prüfung löschen</h2>
+  <p class="danger">Diese Operation kann nicht rückgängig gemacht werden.</p>
+  <%= link_to "Löschen", [@old_exam.old_folder, @old_exam], method: :delete, class: "btn btn-danger",
+              data: { confirm: 'Prüfung wirklich löschen?' } %>
+</div>

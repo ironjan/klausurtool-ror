@@ -16,6 +16,10 @@ class OldExamsController < ApplicationController
 	end
 
 	def index
+		if params[:reset]
+			params[:search] = nil
+		end
+
 		if params[:search]
 			@old_exams = OldExam.search(params[:search])
 		else

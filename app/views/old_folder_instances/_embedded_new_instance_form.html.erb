@@ -1,0 +1,16 @@
+<% if @old_folder.old_folder_instances.count < 9 %>
+    <div class="clearfix spacer">
+
+      <h2 id="new-instance">Neues Ordner-Exemplar</h2>
+      <%= form_for [@old_folder, @old_folder.old_folder_instances.build], html: {class: "form-inline", role: "form"}  do |f| %>
+          <div class="form-group">
+            <%= f.label :number, "Nummer", :class => "control-label"  %>
+            <%= f.number_field :number, :min => 1, :max => 9, :step => 1, :length => 1, :class => "form-control" %>
+          </div>
+          <%= f.submit "Exemplar hinzufügen", :class => "btn btn-primary" %>
+          <p class="hint">Bereits existierende Exemplar-Nummern werden stillschweigend ignoriert.</p>
+      <% end %>
+
+    </div>
+
+<% end %>

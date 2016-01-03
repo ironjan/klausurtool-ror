@@ -1,13 +1,17 @@
 <%= page_heading "Prüfungen" %>
 
-<%= form_tag(ausleihe_exams_path, method: "get") do %>
-    <%= label_tag :search, "Prüfungen suchen:" %>
-    <%= text_field_tag(:search, params[:search]) %>
-    <%= submit_tag("Suche") %>
-    <%= submit_tag "Zurücksetzen", :id => 'reset_button', :name => 'reset' %>
+<!-- TODO extract this to partial -->
+<%= form_tag ausleihe_exams_path, method: "get", :class => "form-inline" do %>
+    <div class="form-group">
+      <%= label_tag :search, "Prüfungen suchen:", :class => "control-label" %>
+      <%= text_field_tag :search, params[:search], :class => "form-control" %>
+      <%= submit_tag "Filtern", :class => "btn btn-primary" %>
+      <%= submit_tag "Zurücksetzen", :id => 'reset_button', :name => 'reset', :class => "btn" %>
+    </div>
 <% end %>
 
-<table>
+<div class="clearfix spacer">
+<table class="table table-hover">
   <tr>
     <th>Titel</th>
     <th>Prüfer</th>
@@ -27,4 +31,4 @@
       </tr>
   <% end %>
 </table>
-</ul>
+</div>
