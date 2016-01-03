@@ -18,8 +18,8 @@
 	</tr>
 	<tr>
 		<td><%= f.label "Farbe" %></td>
-    <td><%= f.select :color, OldFolder.color_names_for_select %></td>
-	</tr>	
+    <td><%= f.select :color, OldFoldersHelper::View.color_names_for_select %></td>
+	</tr>
 	<tr>
 	<td><%= f.label "Anzahl" %></td>
 	<td><%= number_field_tag("count", 1, min: 1, max: 9, step: 1) %></td>

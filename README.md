@@ -5,7 +5,6 @@
 
 = Next steps
 
- * Replace color names by colors in ui with colors
  * Styling old klausurtool
  * Fix instances controller new
  * Fix: delete folder_instance -> show folder

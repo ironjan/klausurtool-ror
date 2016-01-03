@@ -1,21 +1,12 @@
 module OldFoldersHelper
-  class OldFoldersViewHelper
-    def colors_map
-      OldFolder.color.to_a.map { |o|
-        case o
-          when :black
-            ["schwarz", o]
-          when :red
-            ["rot", o]
-          when :blue
-            ["blau", o]
-          when :green
-            ["grün", o]
-          else
-            ["Fehler: Farbe fehlt in old_folders_helper", o]
-        end
-      }
+  class View
+    def self.color_names_for_select
+      names = []
+      OldFolder.colors.keys.each do |color|
+        display_name = I18n.t("old_folder.color.#{color}", default: color.humanize)
+        names << [display_name, color]
+      end
+      names
     end
-
   end
 end

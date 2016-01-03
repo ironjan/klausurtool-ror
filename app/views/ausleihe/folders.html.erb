@@ -19,15 +19,16 @@
     <th>Verfügbar?</th>
     <th></th>
   </tr>
-  <% @old_folder_instances.each do |i| %>
+  <!-- todo Extract "Verfügbar" from here -->
+  <% @old_folder_instances.each do |instance| %>
       <tr>
-        <td><%= i.barcodeId %></td>
-        <td><%= i.old_folder.title %></td>
-        <td><%= i.old_folder.contentType %></td>
-        <td><%= i.old_folder.color %></td>
-        <td><%= i.old_folder.area %></td>
-        <td><%= i.old_lend_out.nil? %></td>
-        <td><%= link_to "Verleihen", lending_form_path(old_folder_instances: [i]) %></td>
+        <td><%= instance.barcodeId %></td>
+        <td><%= instance.old_folder.title %></td>
+        <td><%= instance.old_folder.contentType %></td>
+        <td style="background-color: <%= instance.old_folder.css_color %>">&nbsp;</td>
+        <td><%= instance.old_folder.area %></td>
+        <td><%= instance.old_lend_out.nil? ? "Verfügbar" : "" %></td>
+        <td><%= link_to "Verleihen", lending_form_path(old_folder_instances: [instance]) %></td>
       </tr>
   <% end %>
 </table>
