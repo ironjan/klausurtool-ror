@@ -1,38 +1,5 @@
 <%= page_heading "Aktuell verliehen" %>
 
-<table border="1px">
-  <tr>
-    <th>Ausleih ID</th>
-    <th>Ausgeliehen von</th>
-    <th>Pfand</th>
-    <th>Gewicht</th>
-    <th>Raus von</th>
-    <th>Zeitpunkt</th>
-  </tr>
 
-  <% @old_lend_outs.each do |o| %>
-      <tr>
-        <td><%= o.id %></td>
-        <td><%= o.imt %></td>
-        <td><%= o.deposit %></td>
-        <td><%= o.weigth %></td>
-        <td><%= o.lender %></td>
-        <td><%= o.lendingTime %></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td colspan="5">
-          <ul>
-            <% o.old_folder_instances.each do |i| %>
-                <li><%= i.barcodeId %>, <%= i.old_folder.title %></li>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="6" align="right">
-          <%= link_to "Zurücknehmen", returning_form_path(old_folder_instances: [o.old_folder_instances.first]) %>
-        </td>
-      </tr>
-<% end %>
-</table>
+<%= render partial: "old_lend_out", collection: @old_lend_outs %>
+

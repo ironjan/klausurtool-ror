@@ -1,0 +1,47 @@
+<div>
+  <header>
+    <span class="right"><%= old_lend_out.lendingTime %></span>
+    <h3><%= old_lend_out.id %> - <%= old_lend_out.imt %></h3>
+    <dl>
+      <dt>Pfand</dt>
+      <dd><%= old_lend_out.deposit %></dd>
+      <dt>Gewicht</dt>
+      <dd><%= old_lend_out.weigth %></dd>
+      <dt>Raus von</dt>
+      <dd><%= old_lend_out.lender %></dd>
+    </dl>
+    <div class="folder-list">
+      <h4>Ordner: </h4>
+
+      <ul>
+        <% old_lend_out.old_folder_instances.each do |i| %>
+            <li><%= i.barcodeId %>, <%= i.old_folder.title %></li>
+        <% end %>
+      </ul>
+      </td>
+    </div>
+  </header>
+</div>
+<!--
+<tr>
+  <td><%= old_lend_out.id %></td>
+  <td><%= old_lend_out.imt %></td>
+  <td><%= old_lend_out.deposit %></td>
+  <td><%= old_lend_out.weigth %></td>
+  <td><%= old_lend_out.lender %></td>
+  <td><%= old_lend_out.lendingTime %></td>
+</tr>
+<tr>
+  <td></td>
+  <td colspan="5">
+    <ul>
+
+    </ul>
+  </td>
+</tr>
+<tr>
+  <td colspan="6" align="right">
+    <%= link_to "Zurücknehmen", returning_form_path(old_folder_instances: [old_lend_out.old_folder_instances.first]) %>
+  </td>
+</tr>
+-->

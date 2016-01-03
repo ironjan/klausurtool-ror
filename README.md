@@ -6,6 +6,7 @@
 = Next steps
 
  * Styling old klausurtool
+ * Localize times...
  * Fix instances controller new
  * Fix: delete folder_instance -> show folder
  * Fix: old_exams_controller#update error handling: what if update fails when coming from folder?
@@ -49,3 +50,6 @@ Incomplete list, started to write these down in the middle of the project.
  * http://stackoverflow.com/questions/23686265/saving-enum-from-select-in-rails-4-1
  * http://joanswork.com/localized-activerecordenum-display-names/
  * http://guides.rubyonrails.org/i18n.html
+ * http://maxdesign.com.au/articles/definition/
+ * https://github.com/twbs/bootstrap-sass
+ * http://bootcards.org/

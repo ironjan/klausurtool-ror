@@ -1,19 +1,20 @@
 <%= render 'header' %>
 
-<h1><%= page_title %></h1>
+<main class="center">
+  <h1><%= page_title %></h1>
 
-<nav>
-	<ul class="nav">
-		<li><%= link_to "Zur Ausleihe", ausleihe_path %></li>
-		<li><%= link_to "Ausgeliehene", ausleihe_lent_path %></li>
-		<li><%= link_to "Ordner", ausleihe_folders_path %></li>
-		<li><%= link_to "Inhalte", ausleihe_exams_path %></li>
-	</ul>
-</nav>
-<% flash.each do |name, msg| -%>
-    <%= content_tag :div, msg, class: name %>
-<% end %>
+  <nav>
+    <ul class="nav">
+      <li><%= link_to "(A)usleihe", ausleihe_path, :accesskey => "a" %></li>
+      <li><%= link_to "(Z)eige Ausgeliehene", ausleihe_lent_path, :accesskey => "z" %></li>
+      <li><%= link_to "(O)rdner", ausleihe_folders_path, :accesskey => "o" %></li>
+      <li><%= link_to "(I)nhalte", ausleihe_exams_path, :accesskey => "i" %></li>
+    </ul>
+  </nav>
+  <% flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, class: name %>
+  <% end %>
 
-<%= yield %>
-
+  <%= yield %>
+</main>
 <%= render 'footer' %>
