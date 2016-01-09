@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # Navigateable "Ausleihe"-routes
   get 'ausleihe' => 'ausleihe#index', as: 'ausleihe'
   get 'ausleihe/lent' => 'ausleihe#lent', as: 'ausleihe_lent'
+  get 'ausleihe/history' => 'ausleihe#history', as: 'ausleihe_history'
   get 'ausleihe/folders' => 'ausleihe#folders', as: 'ausleihe_folders'
   get 'ausleihe/exams' => 'ausleihe#exams', as: 'ausleihe_exams'
 
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
     get 'old_folder_instances' => 'old_folder_instances#index', as: 'old_folder_instances'
 
     get 'lent' => 'admin_lendouts#lent', as: 'admin_lent'
+    get 'history' => 'admin_lendouts#history', as: 'admin_history'
 
     resources :old_folders, :old_exams
 

@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160103143444) do
+ActiveRecord::Schema.define(version: 20160109151751) do
+
+  create_table "archived_old_lend_outs", force: :cascade do |t|
+    t.string   "deposit"
+    t.string   "imt"
+    t.string   "lender"
+    t.string   "receiver"
+    t.datetime "lendingTime"
+    t.datetime "receivingTime"
+    t.integer  "weigth"
+    t.string   "old_folder_instances"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "archived_old_lend_outs_old_folder_instances", id: false, force: :cascade do |t|
+    t.integer "archived_old_lend_out_id", null: false
+    t.integer "old_folder_instance_id",   null: false
+  end
 
   create_table "old_exams", force: :cascade do |t|
     t.string   "title"

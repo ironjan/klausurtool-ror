@@ -8,6 +8,10 @@ class AusleiheController < ApplicationController
     @old_lend_outs = OldLendOut.where(:receiver => nil)
   end
 
+  def history
+    @archived_lend_outs = ArchivedOldLendOut.all
+  end
+
   def folders
     if params[:reset]
       params[:search] = nil
@@ -30,8 +34,8 @@ class AusleiheController < ApplicationController
       @old_exams = OldExam.all
     else
       @old_exams = OldExam.joins(:old_folder)
-                                  .where("date = ? OR old_exams.title LIKE ? OR old_exams.examiners LIKE ? OR old_folders.title LIKE ?",
-                                         "#{params[:search]}", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
+                       .where("date = ? OR old_exams.title LIKE ? OR old_exams.examiners LIKE ? OR old_folders.title LIKE ?",
+                              "#{params[:search]}", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
     end
   end
 
@@ -121,71 +125,89 @@ class AusleiheController < ApplicationController
       end
     end
 
-      flash[:notify] = "Ordner erfolgreich verliehen"
-      redirect_to ausleihe_path
+    flash[:notify] = "Ordner erfolgreich verliehen"
+    redirect_to ausleihe_path
 
-      #rescue Exception => ex
-      #  flash[:alert] = "Fehler beim Speichern: #{ex}"
-      #  redirect_to ausleihe_path
-    end
-
-    # Renders the form when returning folder_instances. The form calls returning_action on submit.
-    def returning_form
-      instances = params[:old_folder_instances]
-                      .map { |id| OldFolderInstance.find_by_id(id) }
-      found_instances = instances.compact
-
-      if found_instances.count < instances.count
-        flash[:alert] << "Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?"
-      end
-
-      old_lend_outs = found_instances.map { |i| i.old_lend_out }.uniq
-      if old_lend_outs.count > 1
-        flash[:alert] = "Die eingegebenen Ordner gehören zu verschiedenen Ausleih-Vorgängen."
-        redirect_to ausleihe_path and return
-      end
-
-      @old_lend_out = old_lend_outs.first
-    end
-
-    # Takes the given folders back and returns the user to the main screen.
-    def returning_action
-      @old_lend_out = OldLendOut.find(params[:id])
-
-      @old_lend_out.receivingTime = Time.new
-
-      OldLendOut.transaction do
-        if @old_lend_out.update!(old_lend_out_params)
-          @old_lend_out.old_folder_instances.each do |i|
-            i.old_lend_out = nil
-            i.save!
-          end
-          flash[:notice] = "Ordner erfolgreich zurückgenommen"
-          redirect_to ausleihe_path and return
-        else
-          render 'returning_form' and return
-        end
-      end
-
-    end
-
-
-    private
-    def old_lend_out_params
-      params.require(:old_lend_out).permit(:imt, :lender, :deposit, :weigth, :receiver, :recivingTime, :old_folder_instances => [])
-    end
-
-
-    def hasMixedContent?(old_folder_instances)
-      lend_outs = old_folder_instances.map { |i| i.old_lend_out }
-      lent = lend_outs.reject { |l| l.nil? }
-
-      if lent.empty?
-        mixed_content = false
-      else
-        mixed_content = (lent.count != lend_outs.count)
-      end
-
-      mixed_content
-    end
+    #rescue Exception => ex
+    #  flash[:alert] = "Fehler beim Speichern: #{ex}"
+    #  redirect_to ausleihe_path
   end
+
+  # Renders the form when returning folder_instances. The form calls returning_action on submit.
+  def returning_form
+    instances = params[:old_folder_instances]
+                    .map { |id| OldFolderInstance.find_by_id(id) }
+    found_instances = instances.compact
+
+    if found_instances.count < instances.count
+      flash[:alert] << "Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?"
+    end
+
+    old_lend_outs = found_instances.map { |i| i.old_lend_out }.uniq
+    if old_lend_outs.count > 1
+      flash[:alert] = "Die eingegebenen Ordner gehören zu verschiedenen Ausleih-Vorgängen."
+      redirect_to ausleihe_path and return
+    end
+
+    @old_lend_out = old_lend_outs.first
+  end
+
+  # Takes the given folders back and returns the user to the main screen.
+  def returning_action
+    @old_lend_out = OldLendOut.find(params[:id])
+
+    @old_lend_out.receivingTime = Time.new
+
+    OldLendOut.transaction do
+      if @old_lend_out.update!(old_lend_out_params)
+        @old_lend_out.old_folder_instances.each do |i|
+          i.old_lend_out = nil
+          i.save!
+        end
+
+        # archive
+        archive(@old_lend_out)
+
+        flash[:notice] = "Ordner erfolgreich zurückgenommen"
+        redirect_to ausleihe_path and return
+      else
+        render 'returning_form' and return
+      end
+    end
+
+  end
+
+
+  private
+  def old_lend_out_params
+    params.require(:old_lend_out).permit(:imt, :lender, :deposit, :weigth, :receiver, :recivingTime, :old_folder_instances => [])
+  end
+
+
+  def archive(old_lend_out)
+    archived = ArchivedOldLendOut.new
+    archived.old_folder_instances = old_lend_out.old_folder_instances
+    archived.imt = old_lend_out.imt
+    archived.lender = old_lend_out.lender
+    archived.lendingTime = old_lend_out.lendingTime
+    archived.deposit = old_lend_out.deposit
+    archived.weigth = old_lend_out.weigth
+    archived.receiver = old_lend_out.receiver
+    archived.receivingTime = old_lend_out.receivingTime
+
+    archived.save!
+  end
+
+  def hasMixedContent?(old_folder_instances)
+    lend_outs = old_folder_instances.map { |i| i.old_lend_out }
+    lent = lend_outs.reject { |l| l.nil? }
+
+    if lent.empty?
+      mixed_content = false
+    else
+      mixed_content = (lent.count != lend_outs.count)
+    end
+
+    mixed_content
+  end
+end

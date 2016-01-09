@@ -1,6 +1,7 @@
 class OldLendOut < ActiveRecord::Base
   has_many :old_folder_instances, inverse_of: :old_lend_out
 
+
   validates :imt,         presence: true
   validates :lender,      presence: true
   validates :lendingTime, presence: true

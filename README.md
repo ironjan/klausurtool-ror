@@ -5,13 +5,11 @@
 
 = Next steps
 
- * Ausleih-Historie
-  * Create another model and relation: OldLendoutHistory *-* OldFolderInstance
-  * When returning: create history entry
  * Localize displayed times...
  * Extract embedded forms:
   * http://0.0.0.0:3000/admin/old_folders/1 - new instance
   * http://0.0.0.0:3000/admin/old_folders/1 - new exam
+ * Merge ```ausleihe#lent``` and ```admin_lend_outs#lent``` (and also ```*.history```) - perhaps into "concerns"?
  * Write converter: og -> ror
  * Fix instances controller new
  * Fix: delete folder_instance -> show folder

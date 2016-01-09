@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  deposit: MyString
+  imt: MyString
+  lender: MyString
+  receiver: MyString
+  lendingTime: 2016-01-09 16:17:51
+  receivingTime: 2016-01-09 16:17:51
+  weigth: 1
+  old_folder_instances: MyString
+
+two:
+  deposit: MyString
+  imt: MyString
+  lender: MyString
+  receiver: MyString
+  lendingTime: 2016-01-09 16:17:51
+  receivingTime: 2016-01-09 16:17:51
+  weigth: 1
+  old_folder_instances: MyString
