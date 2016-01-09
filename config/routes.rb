@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   scope '/admin' do
     get 'old_folder_instances' => 'old_folder_instances#index', as: 'old_folder_instances'
 
+    get 'lent' => 'admin_lendouts#lent', as: 'admin_lent'
+
     resources :old_folders, :old_exams
 
     resources :old_folders do

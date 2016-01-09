@@ -5,6 +5,7 @@
 
 = Next steps
 
+ * Ausleih-Historie
  * Localize displayed times...
  * Extract embedded forms:
   * http://0.0.0.0:3000/admin/old_folders/1 - new instance
