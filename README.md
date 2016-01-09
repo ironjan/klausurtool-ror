@@ -6,6 +6,8 @@
 = Next steps
 
  * Ausleih-Historie
+  * Create another model and relation: OldLendoutHistory *-* OldFolderInstance
+  * When returning: create history entry
  * Localize displayed times...
  * Extract embedded forms:
   * http://0.0.0.0:3000/admin/old_folders/1 - new instance
