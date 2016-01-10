@@ -26,3 +26,7 @@ de:
       red:    "rot"
       blue:   "blau"
       green:  "grün"
+  will_paginate:
+    previous_label: "<"
+    next_label: ">"
+    page_gap: "&hellip;"
