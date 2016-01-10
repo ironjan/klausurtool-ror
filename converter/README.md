@@ -1,7 +1,10 @@
 # Converter
 
-Needs peewee installed. http://docs.peewee-orm.com/en/latest/
+ * Dependencies: python3, [peewee](http://docs.peewee-orm.com/en/latest/)
+ * Needs a dump of the current Klausurtool
+  * Create via ```mysqldump --compatible=ansi --skip-extended-insert --compact```
+  * Place in a file called ```og.sqlite```
+ * Needs a clean database in ```../db/development.sqlite3```: ```rake db:schema:load``` and then run ```python converter.py``` 
 
 Current conversion (2016-01-08) takes around 12 minutes on a computer 
 with Intel(R) Core(TM) i7-4770K CPU @ 3.50GHz and 8GB RAM
-
