@@ -1,6 +1,9 @@
 <div class="clearfix spacer">
+  <%= will_paginate @old_folder_instances %>
+
   <table class="table">
     <tr>
+      <th></th>
       <th>Exemplar-Id</th>
       <th>Gruppen-Name</th>
       <th></th>
@@ -8,6 +11,7 @@
 
     <% instances.each do |i| %>
         <tr>
+          <td style="background-color: <%= i.old_folder.css_color %>"></td>
           <td><%= i.barcodeId %></td>
           <td><%= link_to i.old_folder.title, i.old_folder %></td>
           <td><% if i.old_folder.old_folder_instances.count > 1 %>

@@ -2,7 +2,11 @@ class OldFolderInstancesController < ApplicationController
 	layout 'admin'
 
 	def index
-		@old_folder_instances = OldFolderInstance.all
+		@old_folder_instances = OldFolderInstance
+																.joins(:old_folder)
+																.where('old_folders.title LIKE ?', "%#{params[:search]}%")
+																.order('old_folders.title ASC')
+																.paginate(:page => params[:page], :per_page => 50)
 	end
 
 	def show

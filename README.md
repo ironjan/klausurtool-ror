@@ -1,7 +1,17 @@
 = Getting started
 
- * ```bundle install```
- * ```bin/rails server```
+ * Install Ruby on Rails
+  * Check that ruby and sqlite3 are installed
+   * ```ruby -v``` ruby 2.3.0p0
+   * ```sqlite3 --version```
+  * Install Rails: ```gem install rails```
+   * Add the rails bin-directory to your path 
+ * Install dependencies via ```bundle install```
+  * If you don't have sudo access, you can install the gems to a path of your choice via e.g. ```bundle install --path $HOME/bundle/```
+ * Create the db:schema via ```bin/rake db:schema:load```
+  * In development mode, RoR will tell you, when migrations need to be run via ```bin/rake db:migrate```
+ * Start the server via ```bin/rails server```
+  * The ```-e``` switch can be used to start a server in a different environment: 
 
 = Next steps
 

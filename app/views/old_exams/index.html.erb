@@ -15,8 +15,11 @@
 
   <div class="spacer">
     <% if @old_exams.size > 0 %>
+        <%= will_paginate @old_exams %>
+
         <table class="table table-hover">
           <tr>
+            <th></th>
             <th>Veranstaltungen</th>
             <th>Prüfer</th>
             <th>Datum</th>
@@ -26,6 +29,7 @@
 
           <% @old_exams.each do |e| %>
               <tr>
+                <td style="background-color: <%= e.old_folder.css_color %>"></td>
                 <td><%= e.title %></td>
                 <td><%= e.examiners %></td>
                 <td><%= e.date %></td>

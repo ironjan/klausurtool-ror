@@ -4,13 +4,12 @@ class OldFoldersController < ApplicationController
 	def index
 	  if params[:reset]
       redirect_to old_folders_path
-    end
+		end
 
-    if params[:search].nil? or params[:search].empty?
-			@old_folders = OldFolder.all
-    else
-			@old_folders = OldFolder.search("%#{params[:search]}%")
-    end
+		@old_folders = OldFolder
+											 .where("title like '%#{params[:search]}%'")
+											 .order(:title)
+											 .paginate(:page => params[:page], :per_page => 50)
 	end
 
 	def list_broken_encodings
