@@ -13,20 +13,20 @@
 <div class="clearfix spacer">
 <table class="table table-hover">
   <tr>
+    <th></th>
     <th>Titel</th>
     <th>Prüfer</th>
     <th>Datum</th>
     <th>Ordner</th>
-    <th>Farbe</th>
     <th>Verfügbare Exemplare</th>
   </tr>
   <% @old_exams.each do |e| %>
       <tr>
+        <td style="background-color: <%= e.old_folder.css_color %>"></td>
         <td><%= e.title %></td>
         <td><%= e.examiners %></td>
         <td><%= e.date %></td>
         <td><%= link_to e.old_folder.title, ausleihe_folders_path(:search => e.old_folder.title) %></td>
-        <td><%= e.old_folder.color %></td>
         <td><%= e.old_folder.old_folder_instances.select { |o| o.old_lend_out.nil? }.count %></td>
       </tr>
   <% end %>

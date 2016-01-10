@@ -9,7 +9,7 @@
   * http://0.0.0.0:3000/admin/old_folders/1 - new instance
   * http://0.0.0.0:3000/admin/old_folders/1 - new exam
  * Merge ```ausleihe#lent``` and ```admin_lend_outs#lent``` (and also ```*.history```) - perhaps into "concerns"?
-   * Fix instances controller new
+ * Fix instances controller new: error when number exists.
  * Fix: delete folder_instance -> show folder
  * Fix: old_exams_controller#update error handling: what if update fails when coming from folder?
  * Search for TODO ;)

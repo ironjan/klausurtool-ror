@@ -10,7 +10,6 @@ class OldFolderInstancesController < ApplicationController
 	end
 
 	def new
-		# FIXME? 
 		@old_folder_instance = OldFolderInstance.new
 	end
 

@@ -3,7 +3,7 @@
 <div class="full-width">
   <div class="full-width">
 
-    <h2 class="pull-left">Name: <%= @old_folder.title %></h2>
+    <h2 class="pull-left"><%= @old_folder.title %></h2>
     <%= link_to 'Bearbeiten', edit_old_folder_path, class: 'pull-right btn btn-default' %>
   </div>
   <dl>
@@ -12,15 +12,12 @@
     <dt>Gebiet</dt>
     <dd><%= @old_folder.area %></dd>
     <dt>Farbe</dt>
-    <dd><%= @old_folder.color %></dd>
+    <dd><%= @old_folder.display_color %></dd>
   </dl>
   <div class="clearfix"></div>
 </div>
 
-<%= render 'exams_in_folder' %>
-<%= render 'folder_instances' %>
-<%= render 'embedded_new_exam' %>
-<%= render 'old_folder_instances/embedded_new_instance_form' %>
+<%= render 'embedded_folder_information' %>
 
 <div class="clearfix spacer">
   <h2>Ordner löschen</h2>
