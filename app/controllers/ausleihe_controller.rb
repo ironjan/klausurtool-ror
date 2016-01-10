@@ -17,12 +17,11 @@ class AusleiheController < ApplicationController
       params[:search] = nil
     end
 
-    if params[:search].nil? or params[:search].empty?
-      @old_folder_instances = OldFolderInstance.all
-    else
-      @old_folder_instances = OldFolderInstance.joins(:old_folder)
-                                  .where('old_folders.title LIKE ?', "%#{params[:search]}%")
-    end
+    @old_folder_instances = OldFolderInstance
+                                .joins(:old_folder)
+                                .where('old_folders.title LIKE ?', "%#{params[:search]}%")
+                                .order('old_folders.title ASC')
+                                .paginate(:page => params[:page], :per_page => 50)
   end
 
   def exams
@@ -30,13 +29,12 @@ class AusleiheController < ApplicationController
       params[:search] = nil
     end
 
-    if params[:search].nil? or params[:search].empty?
-      @old_exams = OldExam.all
-    else
-      @old_exams = OldExam.joins(:old_folder)
-                       .where('date = ? OR old_exams.title LIKE ? OR old_exams.examiners LIKE ? OR old_folders.title LIKE ?',
-                              "#{params[:search]}", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
-    end
+    @old_exams = OldExam
+                     .joins(:old_folder)
+                     .where('date = ? OR old_exams.title LIKE ? OR old_exams.examiners LIKE ? OR old_folders.title LIKE ?',
+                            "#{params[:search]}", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
+                     .order('old_folders.title ASC')
+                     .paginate(:page => params[:page], :per_page => 50)
   end
 
   # This controller method is used to decide if we are lending or returning folders. It redirects to the corresponding
@@ -54,15 +52,15 @@ class AusleiheController < ApplicationController
       elsif f.length == 8
         barcodeId = f[3..6]
       else
-        barcodeId = ''
+        flash[:alert] = '#{f} ist keine korrekte ID und kein korrekter Barcode.'
+        redirect_to ausleihe_path and return
       end
-
 
       old_folder_instance = OldFolderInstance.find_by(barcodeId: barcodeId)
 
       if old_folder_instance.nil?
-        @old_lend_out.errors.add(:base, "Es gibt kein Ordner-Exemplar #{f}.")
-        Rails.logger.debug("Added error for #{f}")
+        flash[:alert] = "Es gibt kein Ordner-Exemplar #{f}."
+        redirect_to ausleihe_path and return
       else
         instances << old_folder_instance
       end
