@@ -28,11 +28,11 @@ class OldExamsController < ApplicationController
 	end
 
 	def list_broken_encodings
-		regex = /.*(Â¦|Â¨|\?|Â´|Â¸|Ã€|Ã|Ã‚|Ãƒ|Ã„|Ã…|Ã†|Ã‡|Ãˆ|Ã‰|ÃŠ|Ã‹|ÃŒ|Ã|ÃŽ|Ã|Ã‘|Ã’|Ã“|Ã”|Ã•|Ã–|Ã˜|Ã™|Ãš|Ã›|Ãœ|Ã|Ãž|ÃŸ|Ã |Ã¡|Ã¢|Ã£|Ã¤|Ã¥|Ã¦|Ã§|Ã¨|Ã©|Ãª|Ã«|Ã¬|Ã­|Ã®|Ã¯|Ã°|Ã±|Ã²|Ã³|Ã´|Ãµ|Ã¶|Ã¸|Ã¹|Ãº|Ã»|Ã½|Ã¾|Ã¿).*/
+		regex = /.*(ï¿½|Â¦|Â¨|\?|Â´|Â¸|Ã€|Ã|Ã‚|Ãƒ|Ã„|Ã…|Ã†|Ã‡|Ãˆ|Ã‰|ÃŠ|Ã‹|ÃŒ|Ã|ÃŽ|Ã|Ã‘|Ã’|Ã“|Ã”|Ã•|Ã–|Ã˜|Ã™|Ãš|Ã›|Ãœ|Ã|Ãž|ÃŸ|Ã |Ã¡|Ã¢|Ã£|Ã¤|Ã¥|Ã¦|Ã§|Ã¨|Ã©|Ãª|Ã«|Ã¬|Ã­|Ã®|Ã¯|Ã°|Ã±|Ã²|Ã³|Ã´|Ãµ|Ã¶|Ã¸|Ã¹|Ãº|Ã»|Ã½|Ã¾|Ã¿).*/
 		@old_exams = OldExam.all
 		Rails.logger.debug("Found #{@old_exams.count} exams")
 		@old_exams = @old_exams
-										 .select {|exam| exam.examiners[regex] or exam.title[regex]}
+										 .select {|exam| regex.match(exam.examiners) || regex.match(exam.title) }
 		Rails.logger.debug("Filtered down to #{@old_exams.count} exams with broken encodings")
 	end
 
@@ -41,7 +41,7 @@ class OldExamsController < ApplicationController
 	end
 
 	# def new
-	# 	# FIXME? 
+	# 	# FIXME?
 	# 	@old_exam = OldExam.new
 	# end
 
