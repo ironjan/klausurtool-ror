@@ -5,7 +5,7 @@ class AusleiheController < ApplicationController
   end
 
   def lent
-    @old_lend_outs = OldLendOut.where(:receiver => nil)
+    @old_lend_outs = OldLendOut.all
   end
 
   def history
@@ -170,6 +170,7 @@ class AusleiheController < ApplicationController
 
         # archive
         archive(@old_lend_out)
+        @old_lend_out.destroy!
 
         flash[:notice] = 'Ordner erfolgreich zurückgenommen'
         redirect_to ausleihe_path and return

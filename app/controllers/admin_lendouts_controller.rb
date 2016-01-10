@@ -2,7 +2,7 @@ class AdminLendoutsController < ApplicationController
   layout 'admin'
 
   def lent
-    @old_lend_outs = OldLendOut.where(:receiver => nil)
+    @old_lend_outs = OldLendOut.all
   end
 
   def history

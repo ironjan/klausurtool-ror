@@ -15,10 +15,12 @@
 
     <% @old_folder.old_exams.each do |e| %>
         <tr>
-          <td><%= link_to e.title, [e.old_folder, e] %></td>
+          <td><%= link_to e.title, e %></td>
           <td><%= e.examiners %></td>
           <td><%= e.date %></td>
-          <td><%= link_to 'Löschen', [e.old_folder, e], method: :delete,
+          <td>
+            <%= link_to 'Bearbeiten', edit_old_exam_path(e) %>,
+            <%= link_to 'Löschen', [e.old_folder, e], method: :delete,
                           data: {confirm: 'Prüfung wirklich löschen?'} %>
           </td>
         </tr>

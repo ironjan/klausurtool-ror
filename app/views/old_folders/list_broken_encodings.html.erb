@@ -1,18 +1,6 @@
-<% page_heading 'Ordnergruppen' %>
-
-
-<%= form_tag old_folders_path, method: 'get', :class => 'form-inline' do %>
-    <div class="form-group">
-      <%= label_tag :search, 'Ordner suchen:' %>
-      <%= text_field_tag :search, params[:search], :class => 'form-control' %>
-      <%= submit_tag 'Suche', :class => 'btn btn-primary' %>
-      <%= submit_tag 'Zurücksetzen', :id => 'reset_button', :name => 'reset', :class => 'btn' %>
-      <%= link_to 'Nur Ordner mit defektem Encoding anzeigen.', folders_broken_encodings_path, class: "btn btn-link pull-right" %>
-    </div>
-<% end %>
+<% page_heading 'Ordnergruppen mit defektem Encoding' %>
 
 <% unless @old_folders.nil? %>
-
     <div>
       <table class="table">
         <tr>
@@ -35,7 +23,6 @@
         <% end %>
       </table>
     </div>
-
-<% else %>
-    <div><p>Keine Ordner gefunden.</p></div>
+    <% else %>
+    <div><p>Es gibt keine Ordner mit ungefixtem Encoding.</p></div>
 <% end %>
