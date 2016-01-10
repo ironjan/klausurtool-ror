@@ -11,7 +11,10 @@
  * Create the db:schema via ```bin/rake db:schema:load```
   * In development mode, RoR will tell you, when migrations need to be run via ```bin/rake db:migrate```
  * Start the server via ```bin/rails server```
-  * The ```-e``` switch can be used to start a server in a different environment: 
+  * The ```-e``` switch can be used to start a server in a different environment
+  * Start with ```bin/rails server --binding 0.0.0.0``` to listen to external requests
+   * This does not automatically mean "production mode"
+   * More information will be added later
 
 = Next steps
 
