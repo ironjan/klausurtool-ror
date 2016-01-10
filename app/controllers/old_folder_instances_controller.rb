@@ -4,8 +4,8 @@ class OldFolderInstancesController < ApplicationController
 	def index
 		@old_folder_instances = OldFolderInstance
 																.joins(:old_folder)
-																.where('old_folders.title LIKE ?', "%#{params[:search]}%")
-																.order('old_folders.title ASC')
+																.where('old_folders.title LIKE ? OR barcodeId LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
+																.order('old_folders.title ASC, old_folder_instances.barcodeId ASC')
 																.paginate(:page => params[:page], :per_page => 50)
 	end
 

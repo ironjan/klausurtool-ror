@@ -1,11 +1,13 @@
 <div class="clearfix spacer">
   <%= will_paginate @old_folder_instances %>
 
-  <table class="table">
+  <table class="table table-hover">
     <tr>
       <th></th>
       <th>Exemplar-Id</th>
       <th>Gruppen-Name</th>
+      <th>Gebiet</th>
+      <th>Inhalt</th>
       <th></th>
     </tr>
 
@@ -14,6 +16,8 @@
           <td style="background-color: <%= i.old_folder.css_color %>"></td>
           <td><%= i.barcodeId %></td>
           <td><%= link_to i.old_folder.title, i.old_folder %></td>
+          <td><%= link_to i.old_folder.area %></td>
+          <td><%= link_to i.old_folder.contentType %></td>
           <td><% if i.old_folder.old_folder_instances.count > 1 %>
                 <%= link_to 'Löschen', [i.old_folder, i], method: :delete,
                             data: { confirm: 'Ordner-Exemplar wirklich löschen?' } %>
