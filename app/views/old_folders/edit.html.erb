@@ -44,10 +44,7 @@
   <% end %>
 </div>
 
-<div class="clearfix spacer">
-  <h2>Verknüpfte Exemplare</h2>
-
-<%= render 'old_folder_instances/instances_table', instances: @old_folder.old_folder_instances %>
-</div>
-
+<%= render 'exams_in_folder' %>
+<%= render 'folder_instances' %>
+<%= render 'embedded_new_exam' %>
 <%= render 'old_folder_instances/embedded_new_instance_form' %>

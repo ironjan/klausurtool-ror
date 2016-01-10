@@ -1,0 +1,27 @@
+<div class="clearfix spacer">
+  <div class="full-width">
+    <h2 class="pull-left">Prüfungen</h2>
+    <a href="#new-exam" class="pull-right btn btn-default">Neue Prüfung</a>
+  </div>
+
+  <table class="table table-hover">
+    <tr>
+      <th>Veranstaltungen</th>
+      <th>Prüfer</th>
+      <th>Datum</th>
+      <th></th>
+    </tr>
+
+
+    <% @old_folder.old_exams.each do |e| %>
+        <tr>
+          <td><%= link_to e.title, [e.old_folder, e] %></td>
+          <td><%= e.examiners %></td>
+          <td><%= e.date %></td>
+          <td><%= link_to 'Löschen', [e.old_folder, e], method: :delete,
+                          data: {confirm: 'Prüfung wirklich löschen?'} %>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+</div>
