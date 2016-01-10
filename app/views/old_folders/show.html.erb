@@ -1,10 +1,10 @@
-<% page_heading "Details" %>
+<% page_heading 'Details' %>
 
 <div class="full-width">
   <div class="full-width">
 
     <h2 class="pull-left">Name: <%= @old_folder.title %></h2>
-    <%= link_to "Bearbeiten", edit_old_folder_path, class: "pull-right btn btn-default" %>
+    <%= link_to 'Bearbeiten', edit_old_folder_path, class: 'pull-right btn btn-default' %>
   </div>
   <dl>
     <dt>Inhalt</dt>
@@ -37,7 +37,7 @@
           <td><%= link_to e.title, [e.old_folder, e] %></td>
           <td><%= e.examiners %></td>
           <td><%= e.date %></td>
-          <td><%= link_to "Löschen", [e.old_folder, e], method: :delete,
+          <td><%= link_to 'Löschen', [e.old_folder, e], method: :delete,
                           data: {confirm: 'Prüfung wirklich löschen?'} %>
           </td>
         </tr>
@@ -52,34 +52,34 @@
     <a href="#new-instance" class="pull-right btn btn-default">Neues Exemplar</a>
   </div>
 
-  <%= render "old_folder_instances/instances_table", instances: @old_folder.old_folder_instances %>
+  <%= render 'old_folder_instances/instances_table', instances: @old_folder.old_folder_instances %>
 </div>
 
 <div class="clearfix spacer">
   <h2 id="new-exam">Neue Prüfung</h2>
-  <%= form_for [@old_folder, @old_folder.old_exams.build], html: {class: "form-horizontal", role: "form"} do |f| %>
+  <%= form_for [@old_folder, @old_folder.old_exams.build], html: {class: 'form-horizontal', role: 'form'} do |f| %>
       <div class="form-group row">
-        <%= f.label :title, :class => "control-label col-sm-2" %>
+        <%= f.label :title, :class => 'control-label col-sm-2' %>
         <div class="col-sm-10">
-          <%= f.text_field :title, :class => "form-control" %>
+          <%= f.text_field :title, :class => 'form-control' %>
         </div>
       </div>
       <div class="form-group row">
-        <%= f.label :examiners, :class => "control-label col-sm-2" %>
+        <%= f.label :examiners, :class => 'control-label col-sm-2' %>
         <div class="col-sm-10">
-          <%= f.text_field :examiners, :class => "form-control" %>
+          <%= f.text_field :examiners, :class => 'form-control' %>
         </div>
       </div>
       <div class="form-group row">
-        <%= f.label :date, :class => "control-label col-sm-2" %>
+        <%= f.label :date, :class => 'control-label col-sm-2' %>
         <div class="col-sm-10">
-          <%= f.date_field :date, :class => "form-control" %>
+          <%= f.date_field :date, :class => 'form-control' %>
         </div>
       </div>
       <div class="pull-right">
         <div class="form-group row">
           <div class="col-sm-2">
-            <%= f.submit "Prüfung hinzufügen", class: "btn btn-primary" %>
+            <%= f.submit 'Prüfung hinzufügen', class: 'btn btn-primary' %>
           </div>
         </div>
       </div>
@@ -87,11 +87,11 @@
 
 </div>
 
-<%= render "old_folder_instances/embedded_new_instance_form" %>
+<%= render 'old_folder_instances/embedded_new_instance_form' %>
 
 <div class="clearfix spacer">
   <h2>Ordner löschen</h2>
   <p class="danger">Diese Operation kann nicht rückgängig gemacht werden.</p>
-  <%= link_to "Löschen", old_folder_path(@old_folder), method: :delete, class: "btn btn-danger",
+  <%= link_to 'Löschen', old_folder_path(@old_folder), method: :delete, class: 'btn btn-danger',
               data: {confirm: 'Dies löscht ALLE verknüpften Exemplare und Klausuren. Wirklich löschen?'} %>
 </div>

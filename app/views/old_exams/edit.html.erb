@@ -1,12 +1,12 @@
-<% page_heading "Prüfung bearbeiten" %>
+<% page_heading 'Prüfung bearbeiten' %>
 
 
 <div class="clearfix spacer">
-  <%= form_for @old_exam, html: {class: "form-horizontal", role: "form"} do |f| %>
+  <%= form_for @old_exam, html: {class: 'form-horizontal', role: 'form'} do |f| %>
       <% if @old_exam.errors.any? %>
           <div id="error_explanation">
             <h2>
-              <%= pluralize(@old_exam.errors.count, "error") %> prohibited
+              <%= pluralize(@old_exam.errors.count, 'error') %> prohibited
               this article from being saved:
             </h2>
             <ul>
@@ -17,27 +17,27 @@
           </div>
       <% end %>
       <div class="form-group row">
-        <%= f.label :title, "Veranstaltungen", :class => "control-label col-sm-2" %>
+        <%= f.label :title, 'Veranstaltungen', :class => 'control-label col-sm-2' %>
         <div class="col-sm-10">
-          <%= f.text_field :title, :required => true, :class => "form-control" %>
+          <%= f.text_field :title, :required => true, :class => 'form-control' %>
         </div>
       </div>
       <div class="form-group row">
-        <%= f.label :examiners, "Prüfer", :class => "control-label col-sm-2" %>
+        <%= f.label :examiners, 'Prüfer', :class => 'control-label col-sm-2' %>
         <div class="col-sm-10">
-          <%= f.text_field :examiners, :required => true, :class => "form-control" %>
+          <%= f.text_field :examiners, :required => true, :class => 'form-control' %>
         </div>
       </div>
       <div class="form-group row">
-        <%= f.label :date, "Datum", :class => "control-label col-sm-2" %>
+        <%= f.label :date, 'Datum', :class => 'control-label col-sm-2' %>
         <div class="col-sm-10">
-          <%= f.date_field :date, :required => true, :class => "form-control" %>
+          <%= f.date_field :date, :required => true, :class => 'form-control' %>
         </div>
       </div>
       <div class="pull-right">
         <div class="form-group row">
           <div class="col-sm-2">
-            <%= f.submit "Prüfung hinzufügen", class: "btn btn-primary" %>
+            <%= f.submit 'Prüfung hinzufügen', class: 'btn btn-primary' %>
           </div>
         </div>
       </div>

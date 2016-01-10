@@ -1,42 +1,42 @@
-<% page_heading "Ordnergruppe bearbeiten" %>
+<% page_heading 'Ordnergruppe bearbeiten' %>
 <div class="full-width">
-  <%= form_for @old_folder, html: {class: "form-horizontal", role: "form"} do |f| %>
+  <%= form_for @old_folder, html: {class: 'form-horizontal', role: 'form'} do |f| %>
       <%= render 'error_header' %>
 
       <div class="form-group row">
-        <%= f.label "Name", :class => "control-label col-sm-2" %>
+        <%= f.label 'Name', :class => 'control-label col-sm-2' %>
         <div class="col-sm-10">
-          <%= f.text_field :title, :class => "form-control" %>
+          <%= f.text_field :title, :class => 'form-control' %>
         </div>
       </div>
       <div class="form-group row">
-        <%= f.label "Inhalt", :class => "control-label col-sm-2" %>
+        <%= f.label 'Inhalt', :class => 'control-label col-sm-2' %>
         <div class="col-sm-10">
-          <%= f.select :contentType, options_for_select(OldFolder::CONTENT_TYPES), {}, {class: "form-control"} %>
+          <%= f.select :contentType, options_for_select(OldFolder::CONTENT_TYPES), {}, {class: 'form-control'} %>
         </div>
       </div>
       <div class="form-group row">
-        <%= f.label "Gebiet", :class => "control-label col-sm-2" %>
+        <%= f.label 'Gebiet', :class => 'control-label col-sm-2' %>
         <div class="col-sm-10">
-          <%= f.select :area, options_for_select(OldFolder::AREAS), {}, {class: "form-control"} %>
+          <%= f.select :area, options_for_select(OldFolder::AREAS), {}, {class: 'form-control'} %>
         </div>
       </div>
       <div class="form-group row">
-        <%= f.label "Farbe", :class => "control-label col-sm-2" %>
+        <%= f.label 'Farbe', :class => 'control-label col-sm-2' %>
         <div class="col-sm-10">
-          <%= f.select :color, OldFoldersHelper::View.color_names_for_select, {}, {class: "form-control"} %>
+          <%= f.select :color, OldFoldersHelper::View.color_names_for_select, {}, {class: 'form-control'} %>
         </div>
       </div>
       <div class="form-group row">
-        <%= f.label "Anzahl", :class => "control-label col-sm-2" %>
+        <%= f.label 'Anzahl', :class => 'control-label col-sm-2' %>
         <div class="col-sm-10">
-          <%= number_field_tag "count", 1, min: 1, max: 9, step: 1, :class => "form-control" %>
+          <%= number_field_tag 'count', 1, min: 1, max: 9, step: 1, :class => 'form-control' %>
         </div>
       </div>
       <div class="form-group row">
       <div class="pull-right">
           <div class="col-sm-2">
-            <%= f.submit "Änderungen übernehmen", class: "btn btn-primary" %>
+            <%= f.submit 'Änderungen übernehmen', class: 'btn btn-primary' %>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@
 <div class="clearfix spacer">
   <h2>Verknüpfte Exemplare</h2>
 
-<%= render "old_folder_instances/instances_table", instances: @old_folder.old_folder_instances %>
+<%= render 'old_folder_instances/instances_table', instances: @old_folder.old_folder_instances %>
 </div>
 
-<%= render "old_folder_instances/embedded_new_instance_form" %>
+<%= render 'old_folder_instances/embedded_new_instance_form' %>

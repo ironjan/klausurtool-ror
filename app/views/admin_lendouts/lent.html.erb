@@ -1,8 +1,8 @@
-<%= page_heading "Aktuell verliehen" %>
+<%= page_heading 'Aktuell verliehen' %>
 
 <% if @old_lend_outs.empty? %>
     <p>Aktuell sind keine Ordner verliehen.</p>
 <% end %>
 
-<%= render partial: "ausleihe/old_lend_out", collection: @old_lend_outs %>
+<%= render partial: 'ausleihe/old_lend_out', collection: @old_lend_outs %>
 

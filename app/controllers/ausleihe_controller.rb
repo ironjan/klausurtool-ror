@@ -1,5 +1,5 @@
 class AusleiheController < ApplicationController
-  layout "ausleihe", except: "error"
+  layout 'ausleihe', except: 'error'
 
   def index
   end
@@ -21,7 +21,7 @@ class AusleiheController < ApplicationController
       @old_folder_instances = OldFolderInstance.all
     else
       @old_folder_instances = OldFolderInstance.joins(:old_folder)
-                                  .where("old_folders.title LIKE ?", "%#{params[:search]}%")
+                                  .where('old_folders.title LIKE ?', "%#{params[:search]}%")
     end
   end
 
@@ -34,7 +34,7 @@ class AusleiheController < ApplicationController
       @old_exams = OldExam.all
     else
       @old_exams = OldExam.joins(:old_folder)
-                       .where("date = ? OR old_exams.title LIKE ? OR old_exams.examiners LIKE ? OR old_folders.title LIKE ?",
+                       .where('date = ? OR old_exams.title LIKE ? OR old_exams.examiners LIKE ? OR old_folders.title LIKE ?',
                               "#{params[:search]}", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
     end
   end
@@ -53,7 +53,10 @@ class AusleiheController < ApplicationController
         barcodeId = f
       elsif f.length == 8
         barcodeId = f[3..6]
+      else
+        barcodeId = ''
       end
+
 
       old_folder_instance = OldFolderInstance.find_by(barcodeId: barcodeId)
 
@@ -70,11 +73,11 @@ class AusleiheController < ApplicationController
     if lent_instances.empty?
       redirect_to lending_form_path(old_folder_instances: instances) and return
 
-    elsif (lent_instances.count == instances.count)
+    elsif lent_instances.count == instances.count
       redirect_to returning_form_path(old_folder_instances: instances) and return
 
     else
-      flash[:alert] = "Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen."
+      flash[:alert] = 'Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen.'
       redirect_to ausleihe_path and return
     end
   end
@@ -86,7 +89,7 @@ class AusleiheController < ApplicationController
     found_instances = instances.compact
 
     if found_instances.count < instances.count
-      flash[:alert] = "Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?"
+      flash[:alert] = 'Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?'
     end
 
     @old_lend_out = OldLendOut.new
@@ -112,7 +115,7 @@ class AusleiheController < ApplicationController
 
 
     unless all_available
-      flash[:alert] = "Einige der Ordner sind bereits verliehen."
+      flash[:alert] = 'Einige der Ordner sind bereits verliehen.'
       redirect_to ausleihe_path and return
     end
 
@@ -125,7 +128,7 @@ class AusleiheController < ApplicationController
       end
     end
 
-    flash[:notify] = "Ordner erfolgreich verliehen"
+    flash[:notify] = 'Ordner erfolgreich verliehen'
     redirect_to ausleihe_path
 
     #rescue Exception => ex
@@ -140,12 +143,12 @@ class AusleiheController < ApplicationController
     found_instances = instances.compact
 
     if found_instances.count < instances.count
-      flash[:alert] << "Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?"
+      flash[:alert] << 'Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?'
     end
 
     old_lend_outs = found_instances.map { |i| i.old_lend_out }.uniq
     if old_lend_outs.count > 1
-      flash[:alert] = "Die eingegebenen Ordner gehören zu verschiedenen Ausleih-Vorgängen."
+      flash[:alert] = 'Die eingegebenen Ordner gehören zu verschiedenen Ausleih-Vorgängen.'
       redirect_to ausleihe_path and return
     end
 
@@ -168,7 +171,7 @@ class AusleiheController < ApplicationController
         # archive
         archive(@old_lend_out)
 
-        flash[:notice] = "Ordner erfolgreich zurückgenommen"
+        flash[:notice] = 'Ordner erfolgreich zurückgenommen'
         redirect_to ausleihe_path and return
       else
         render 'returning_form' and return
@@ -198,7 +201,7 @@ class AusleiheController < ApplicationController
     archived.save!
   end
 
-  def hasMixedContent?(old_folder_instances)
+  def has_mixed_content?(old_folder_instances)
     lend_outs = old_folder_instances.map { |i| i.old_lend_out }
     lent = lend_outs.reject { |l| l.nil? }
 

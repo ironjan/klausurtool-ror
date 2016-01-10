@@ -1,6 +1,6 @@
-<% page_heading "Verleihen" %>
+<% page_heading 'Verleihen' %>
 
-<%= form_for @old_lend_out, url: lending_action_path, html: {class: "form-horizontal", role: "form"} do |f| %>
+<%= form_for @old_lend_out, url: lending_action_path, html: {class: 'form-horizontal', role: 'form'} do |f| %>
     <% if @old_lend_out.errors.any? %>
         <div id="error_explanation full-width">
           <h2>Fehler beim Ausleihen:</h2>
@@ -13,13 +13,13 @@
     <% end %>
 
     <div class="form-group row">
-      <%= f.label :folders, "Ordner", :class => "control-label col-sm-4" %>
+      <%= f.label :folders, 'Ordner', :class => 'control-label col-sm-4' %>
       <div class="col-sm-8">
         <ul id="folders">
           <% @old_lend_out.old_folder_instances.each do |i| %>
               <li>
                 <%= i.barcodeId %>, <%= i.old_folder.title %>
-                <%= hidden_field_tag "old_folder_instances[]", i.id %>
+                <%= hidden_field_tag 'old_folder_instances[]', i.id %>
               </li>
           <% end %>
         </ul>
@@ -28,34 +28,34 @@
 
 
     <div class="form-group row">
-      <%= f.label :weigth, "Gewicht der Ordner", :class => "control-label col-sm-4" %>
+      <%= f.label :weigth, 'Gewicht der Ordner', :class => 'control-label col-sm-4' %>
       <div class="col-sm-8">
-        <%= f.number_field :weigth, required: true, min: 0, :class => "form-control" %>
+        <%= f.number_field :weigth, required: true, min: 0, :class => 'form-control' %>
       </div>
     </div>
     <div class="form-group row">
-      <%= f.label "IMT-Login des Studenten", :class => "control-label col-sm-4" %>
+      <%= f.label 'IMT-Login des Studenten', :class => 'control-label col-sm-4' %>
       <div class="col-sm-8">
-        <%= f.text_field :imt, required: true, :class => "form-control" %>
+        <%= f.text_field :imt, required: true, :class => 'form-control' %>
       </div>
     </div>
     <div class="form-group row">
-      <%= f.label "Verleiher", :class => "control-label col-sm-4" %>
+      <%= f.label 'Verleiher', :class => 'control-label col-sm-4' %>
       <div class="col-sm-8">
-        <%= f.text_field :lender, required: true, :class => "form-control" %>
+        <%= f.text_field :lender, required: true, :class => 'form-control' %>
       </div>
     </div>
     <div class="form-group row">
-      <%= f.label "Pfand", :class => "control-label col-sm-4" %>
+      <%= f.label 'Pfand', :class => 'control-label col-sm-4' %>
       <div class="col-sm-8">
-        <%= f.text_field :deposit, required: true, :class => "form-control" %>
+        <%= f.text_field :deposit, required: true, :class => 'form-control' %>
       </div>
     </div>
 
     <div class="pull-right">
       <div class="form-group row">
         <div class="col-sm-2">
-          <%= f.submit "Ordner verleihen", class: "btn btn-primary" %>
+          <%= f.submit 'Ordner verleihen', class: 'btn btn-primary' %>
         </div>
       </div>
     </div>

@@ -7,13 +7,13 @@ class ConvertOldFolderColorToEnum < ActiveRecord::Migration
 
     OldFolder.find_each do |o|
       case o.color_name
-        when "schwarz"
+        when 'schwarz'
           o.color = :black
-        when "rot"
+        when 'rot'
           o.color = :red
-        when "blau"
+        when 'blau'
           o.color = :blue
-        when "grün"
+        when 'grün'
           o.color = :green
         else
           o.color = :black
@@ -30,15 +30,15 @@ class ConvertOldFolderColorToEnum < ActiveRecord::Migration
     OldFolder.find_each do |o|
       case o.color
         when :black
-          o.color_name = "schwarz"
+          o.color_name = 'schwarz'
         when :red
-          o.color_name = "rot"
+          o.color_name = 'rot'
         when :blue
-          o.color_name = "blau"
+          o.color_name = 'blau'
         when :green
-          o.color_name = "grün"
+          o.color_name = 'grün'
         else
-          o.color_name = "schwarz"
+          o.color_name = 'schwarz'
       end
       o.save!
     end

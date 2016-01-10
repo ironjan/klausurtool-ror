@@ -1,13 +1,13 @@
 <div>
-  <%= page_heading "Prüfungen" %>
+  <%= page_heading 'Prüfungen' %>
 
-  <%= form_tag old_exams_path, method: "get", :class => "form-inline", :role => "form" do %>
+  <%= form_tag old_exams_path, method: 'get', :class => 'form-inline', :role => 'form' do %>
       <div class="form-group">
-        <%= label_tag :search, "Prüfung filtern:", :class => "control-label" %>
-        <%= text_field_tag :search, params[:search], :class => "form-control" %>
+        <%= label_tag :search, 'Prüfung filtern:', :class => 'control-label' %>
+        <%= text_field_tag :search, params[:search], :class => 'form-control' %>
       </div>
-      <%= submit_tag "Filtern", :class => "btn btn-primary" %>
-      <%= submit_tag "Zurücksetzen", :id => 'reset_button', :name => 'reset', :class => "btn" %>
+      <%= submit_tag 'Filtern', :class => 'btn btn-primary' %>
+      <%= submit_tag 'Zurücksetzen', :id => 'reset_button', :name => 'reset', :class => 'btn' %>
   <% end %>
 
   <div class="spacer">
@@ -28,8 +28,8 @@
                 <td><%= e.date %></td>
                 <td><%= link_to e.old_folder.title, e.old_folder %></td>
                 <td>
-                  <%= link_to "Anzeigen", [e.old_folder, e] %>,
-                  <%= link_to "Bearbeiten", edit_old_folder_old_folder_instance_path(e.old_folder, e) %>
+                  <%= link_to 'Anzeigen', [e.old_folder, e] %>,
+                  <%= link_to 'Bearbeiten', edit_old_folder_old_folder_instance_path(e.old_folder, e) %>
                 </td>
               </tr>
           <% end %>

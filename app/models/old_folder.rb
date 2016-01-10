@@ -2,9 +2,9 @@ class OldFolder < ActiveRecord::Base
   has_many :old_exams
   has_many :old_folder_instances, dependent: :destroy
 
-  CONTENT_TYPES = ["Klausurordner", "Klausurmappe", "Prüfungsprotokollordner", "Prüfungsprotokollmappe", "Übungsblätter", "Sonstiges"]
+  CONTENT_TYPES = ['Klausurordner', 'Klausurmappe', 'Prüfungsprotokollordner', 'Prüfungsprotokollmappe', 'Übungsblätter', 'Sonstiges']
   enum color: [:black, :red, :blue, :green]
-  AREAS = ["ESS", "MMWW", "SWT", "MUA", "Grundst. Info", "Mathe", "Sonstiges"]
+  AREAS = ['ESS', 'MMWW', 'SWT', 'MUA', 'Grundst. Info', 'Mathe', 'Sonstiges']
 
   validates :title, presence: true
   validates :contentType, presence: true, :inclusion => {:in => CONTENT_TYPES}
@@ -14,10 +14,10 @@ class OldFolder < ActiveRecord::Base
 
   def self.search(search)
     # Replacing spaces as wild-cards
-    search = search.gsub(" ", "%")
+    search = search.gsub(' ', '%')
     Rails.logger.debug("Searching for \"#{search}\"")
     # We want exact match for date but non-exact matches for other values
-    where("title LIKE ?", "%#{search}%")
+    where('title LIKE ?', "%#{search}%")
   end
 
   # todo: is this the correct place for this method?
@@ -29,15 +29,15 @@ class OldFolder < ActiveRecord::Base
   def css_color
     case color.to_sym
       when :black
-        css_color = "#000"
+        css_color = '#000'
       when :red
-        css_color = "#f00"
+        css_color = '#f00'
       when :blue
-        css_color = "#00f"
+        css_color = '#00f'
       when :green
-        css_color = "#0f0"
+        css_color = '#0f0'
       else
-        css_color = ""
+        css_color = ''
     end
     Rails.logger.debug("#{color} -> #{css_color}")
     css_color

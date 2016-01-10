@@ -39,7 +39,7 @@
     <% if old_lend_out.receiver.nil? %>
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li><%= link_to "Zurücknehmen", returning_form_path(old_folder_instances: [old_lend_out.old_folder_instances.first]), class: "btn btn-primary" %></li>
+            <li><%= link_to 'Zurücknehmen', returning_form_path(old_folder_instances: [old_lend_out.old_folder_instances.first]), class: 'btn btn-primary' %></li>
           </ul>
         </nav>
     <% end %>

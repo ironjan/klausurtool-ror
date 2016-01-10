@@ -1,11 +1,11 @@
-<% page_heading "Prüfungs-Details" %>
+<% page_heading 'Prüfungs-Details' %>
 
 
 <div class="full-width">
   <div class="full-width">
 
     <h2 class="pull-left"><%= @old_exam.title %></h2>
-    <%= link_to "Bearbeiten", edit_old_folder_old_exam_path(@old_exam.old_folder, @old_exam), class: "pull-right btn btn-default" %>
+    <%= link_to 'Bearbeiten', edit_old_folder_old_exam_path(@old_exam.old_folder, @old_exam), class: 'pull-right btn btn-default' %>
   </div>
   <dl>
     <dt>Ordner</dt>
@@ -21,6 +21,6 @@
 <div class="clearfix spacer">
   <h2>Prüfung löschen</h2>
   <p class="danger">Diese Operation kann nicht rückgängig gemacht werden.</p>
-  <%= link_to "Löschen", [@old_exam.old_folder, @old_exam], method: :delete, class: "btn btn-danger",
+  <%= link_to 'Löschen', [@old_exam.old_folder, @old_exam], method: :delete, class: 'btn btn-danger',
               data: { confirm: 'Prüfung wirklich löschen?' } %>
 </div>

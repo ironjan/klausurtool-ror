@@ -1,11 +1,11 @@
-<%= page_heading "Ordner-Exemplare" %>
+<%= page_heading 'Ordner-Exemplare' %>
 
-<%= form_tag ausleihe_folders_path, method: "get", :class => "form-inline" do %>
+<%= form_tag ausleihe_folders_path, method: 'get', :class => 'form-inline' do %>
     <div class="form-group">
-      <%= label_tag :search, "Ordner suchen:" %>
-      <%= text_field_tag :search, params[:search], :class => "form-control" %>
-      <%= submit_tag "Suche", :class => "btn btn-primary" %>
-      <%= submit_tag "Zurücksetzen", :id => 'reset_button', :name => 'reset', :class => "btn" %>
+      <%= label_tag :search, 'Ordner suchen:' %>
+      <%= text_field_tag :search, params[:search], :class => 'form-control' %>
+      <%= submit_tag 'Suche', :class => 'btn btn-primary' %>
+      <%= submit_tag 'Zurücksetzen', :id => 'reset_button', :name => 'reset', :class => 'btn' %>
     </div>
 <% end %>
 
@@ -30,7 +30,7 @@
           <td><%= instance.old_folder.area %></td>
           <td>
             <% if instance.old_lend_out.nil? %>
-                <%= link_to "Verleihen", lending_form_path(old_folder_instances: [instance]) %>
+                <%= link_to 'Verleihen', lending_form_path(old_folder_instances: [instance]) %>
             <% end %>
           </td>
         </tr>

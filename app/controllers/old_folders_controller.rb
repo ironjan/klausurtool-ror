@@ -1,5 +1,5 @@
 class OldFoldersController < ApplicationController
-	layout "admin"
+	layout 'admin'
 
 	def index
 		@old_folders = OldFolder.all
@@ -20,7 +20,7 @@ class OldFoldersController < ApplicationController
 	def create
 		@old_folder = OldFolder.new(old_folder_params)
 
-		Rails.logger.debug("Before loop")
+		Rails.logger.debug('Before loop')
 
 		if @old_folder.save
 
@@ -28,7 +28,7 @@ class OldFoldersController < ApplicationController
 			numberOfFolderInstances = params[:count].gsub(/\D/, '').to_i
 			Rails.logger.debug("Loop values: #{i}, #{numberOfFolderInstances}")
 			until i > numberOfFolderInstances
-				barcodeId = "#{format("%03d", @old_folder.id)}#{i}"
+				barcodeId = "#{format('%03d', @old_folder.id)}#{i}"
 				Rails.logger.debug("Trying to create instance #{i} with barcodeId #{barcodeId}")
 				folder_instance_params = ActionController::Parameters.new({
 					old_folder_instance: {
@@ -38,7 +38,7 @@ class OldFoldersController < ApplicationController
 					})
 				@old_folder.old_folder_instances.create(
 					folder_instance_params.require(:old_folder_instance).permit(:number, :barcodeId))
-				i += 1;
+				i += 1
 			end
 
 			redirect_to @old_folder

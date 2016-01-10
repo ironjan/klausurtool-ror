@@ -1,9 +1,9 @@
-<% page_heading "Ausleihe" %>
+<% page_heading 'Ausleihe' %>
 
 <h2 id="lend">Zurücknehmen</h2>
 
 
-<%= form_for @old_lend_out, url: returning_action_path, method: "post", html: {class: "form-horizontal", role: "form"} do |f| %>
+<%= form_for @old_lend_out, url: returning_action_path, method: 'post', html: {class: 'form-horizontal', role: 'form'} do |f| %>
     <% if @old_lend_out.errors.any? %>
         <div id="error_explanation">
           <h2>Fehler beim Zurücknehmen:</h2>
@@ -16,13 +16,13 @@
     <% end %>
 
     <div class="form-group row">
-      <%= f.label :folders, "Ordner", :class => "control-label col-sm-2" %>
+      <%= f.label :folders, 'Ordner', :class => 'control-label col-sm-2' %>
       <div class="col-sm-10">
         <ul id="folders">
           <% @old_lend_out.old_folder_instances.each do |i| %>
               <li>
                 <%= i.barcodeId %>, <%= i.old_folder.title %>
-                <%= hidden_field_tag "old_folder_instances[]", i.id %>
+                <%= hidden_field_tag 'old_folder_instances[]', i.id %>
               </li>
           <% end %>
         </ul>
@@ -33,16 +33,16 @@
 
 
     <div class="form-group row">
-      <%= f.label :receiver, "Rein von", :class => "control-label col-sm-2" %>
+      <%= f.label :receiver, 'Rein von', :class => 'control-label col-sm-2' %>
       <div class="col-sm-10">
-        <%= f.text_field :receiver, required: true, :class => "form-control" %>
+        <%= f.text_field :receiver, required: true, :class => 'form-control' %>
       </div>
     </div>
 
     <div class="pull-right">
       <div class="form-group row">
         <div class="col-sm-2">
-          <%= f.submit "Ordner zurücknehmen", class: "btn btn-primary" %>
+          <%= f.submit 'Ordner zurücknehmen', class: 'btn btn-primary' %>
         </div>
       </div>
     </div>
