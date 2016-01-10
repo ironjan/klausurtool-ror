@@ -69,3 +69,4 @@ Incomplete list, started to write these down in the middle of the project.
  * http://v4-alpha.getbootstrap.com/components/forms/#form-layouts
  * http://www.w3schools.com/bootstrap/
  * http://stackoverflow.com/questions/10691442/adding-a-simple-spacer-to-twitter-bootstrap
+ * http://stackoverflow.com/questions/9282689/allow-public-connections-to-local-ruby-on-rails-development-server
