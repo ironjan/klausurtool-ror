@@ -1,4 +1,4 @@
-= Getting started
+# Getting started
 
  * Install Ruby on Rails
   * Check that ruby and sqlite3 are installed
@@ -16,14 +16,17 @@
    * This does not automatically mean "production mode"
    * More information will be added later
 
-= Versioing
+# Versioing
 
  * Follows [Semantic Versioning](http://semver.org/)
  * Uses http://stackoverflow.com/questions/9073446/where-do-you-store-your-rails-applications-version-number to update version
   * ```git tag $version``` & restart server
  
-= Next steps
+# Next steps
 
+ * Move this list to https://git.cs.upb.de/ljan/klausurtool-ror/issues
+ * Replace buttons on lending_form and returning_form with "(W)eiter" 
+(hotkey!)
  * Extract embedded forms:
   * http://0.0.0.0:3000/admin/old_folders/1 - new instance
   * http://0.0.0.0:3000/admin/old_folders/1 - new exam
@@ -40,12 +43,12 @@
  * Ausleih-Archiv
  * Deckblätter u.ä. generieren
  
-= TODO for README
+# TODO for README
 
  * Ruby version
  * Rails version
  
-= Links that helped
+# Links that helped
 
 Incomplete list, started to write these down in the middle of the project. 
 
