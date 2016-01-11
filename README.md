@@ -1,4 +1,14 @@
-# Getting started
+# Klausurtool RoR
+
+## Fehler melden, Feedback geben
+
+ * Sieh [in der README](https://git.cs.upb.de/ljan/klausurtool-ror/blob/development/README.md#next-steps) nach, ob das Feedback oder Problem bereits bekannt wird
+ * Sieh dann unter https://git.cs.upb.de/ljan/klausurtool-ror/issues nach, ob das Feedback oder Problem bereits bekannt wird
+ * Falls es nicht nicht bekannt ist, erstelle einen neuen Issue
+  * Sei bitte so ausführlich wie möglich
+  * Falls es um eine bestimmte Seite im Tool geht, bitte URL mit einfügen
+
+## Getting started
 
  * Install Ruby on Rails
   * Check that ruby and sqlite3 are installed
@@ -16,13 +26,13 @@
    * This does not automatically mean "production mode"
    * More information will be added later
 
-# Versioing
+## Versioing
 
  * Follows [Semantic Versioning](http://semver.org/)
  * Uses http://stackoverflow.com/questions/9073446/where-do-you-store-your-rails-applications-version-number to update version
   * ```git tag $version``` & restart server
  
-# Next steps
+## Next steps
 
  * Add student name to lendouts -> find deposit again (if we don't 
 switch to money only)
@@ -41,16 +51,16 @@ switch to money only)
    * For editing methods...
  * Suche nach Ordnern
  * Fix: Show errors in embedded forms (Create exam from folder)
- * old_lend_outs_controller "# Fixme Use transaction with post validation that lending was correct"
+ * old_lend_outs_controller "## Fixme Use transaction with post validation that lending was correct"
  * Ausleih-Archiv
  * Deckblätter u.ä. generieren
  
-# TODO for README
+## TODO for README
 
  * Ruby version
  * Rails version
  
-# Links that helped
+## Links that helped
 
 Incomplete list, started to write these down in the middle of the project. 
 
