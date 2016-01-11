@@ -24,6 +24,8 @@
  
 # Next steps
 
+ * Add student name to lendouts -> find deposit again (if we don't 
+switch to money only)
  * Move this list to https://git.cs.upb.de/ljan/klausurtool-ror/issues
  * Replace buttons on lending_form and returning_form with "(W)eiter" 
 (hotkey!)
