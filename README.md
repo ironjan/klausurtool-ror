@@ -2,7 +2,6 @@
 
 ## Fehler melden, Feedback geben
 
- * Sieh [in der README](https://git.cs.upb.de/ljan/klausurtool-ror/blob/development/README.md#next-steps) nach, ob das Feedback oder Problem bereits bekannt wird
  * Sieh dann unter https://git.cs.upb.de/ljan/klausurtool-ror/issues nach, ob das Feedback oder Problem bereits bekannt wird
  * Falls es nicht nicht bekannt ist, erstelle einen neuen Issue
   * Sei bitte so ausführlich wie möglich
@@ -31,29 +30,6 @@
  * Follows [Semantic Versioning](http://semver.org/)
  * Uses http://stackoverflow.com/questions/9073446/where-do-you-store-your-rails-applications-version-number to update version
   * ```git tag $version``` & restart server
- 
-## Next steps
-
- * Add student name to lendouts -> find deposit again (if we don't 
-switch to money only)
- * Move this list to https://git.cs.upb.de/ljan/klausurtool-ror/issues
- * Replace buttons on lending_form and returning_form with "(W)eiter" 
-(hotkey!)
- * Extract embedded forms:
-  * http://0.0.0.0:3000/admin/old_folders/1 - new instance
-  * http://0.0.0.0:3000/admin/old_folders/1 - new exam
- * Merge ```ausleihe#lent``` and ```admin_lend_outs#lent``` (and also ```*.history```) - perhaps into "concerns"?
- * Fix instances controller new: error when number exists.
- * Fix: delete folder_instance -> show folder
- * Fix: old_exams_controller#update error handling: what if update fails when coming from folder?
- * Search for TODO ;)
- * http://berk.es/2011/03/29/simplest-authentication-in-rails-basic-authentication-with-a-logged_in-helper/
-   * For editing methods...
- * Suche nach Ordnern
- * Fix: Show errors in embedded forms (Create exam from folder)
- * old_lend_outs_controller "## Fixme Use transaction with post validation that lending was correct"
- * Ausleih-Archiv
- * Deckblätter u.ä. generieren
  
 ## TODO for README
 
