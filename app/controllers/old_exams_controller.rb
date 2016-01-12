@@ -29,13 +29,10 @@ class OldExamsController < ApplicationController
                      .paginate(:page => params[:page], :per_page => 50)
   end
 
-  def list_broken_encodings
+  def list_broken
     regex = /.*(ï¿½|Â¦|Â¨|\?|Â´|Â¸|Ã€|Ã|Ã‚|Ãƒ|Ã„|Ã…|Ã†|Ã‡|Ãˆ|Ã‰|ÃŠ|Ã‹|ÃŒ|Ã|ÃŽ|Ã|Ã‘|Ã’|Ã“|Ã”|Ã•|Ã–|Ã˜|Ã™|Ãš|Ã›|Ãœ|Ã|Ãž|ÃŸ|Ã |Ã¡|Ã¢|Ã£|Ã¤|Ã¥|Ã¦|Ã§|Ã¨|Ã©|Ãª|Ã«|Ã¬|Ã­|Ã®|Ã¯|Ã°|Ã±|Ã²|Ã³|Ã´|Ãµ|Ã¶|Ã¸|Ã¹|Ãº|Ã»|Ã½|Ã¾|Ã¿).*/
     @old_exams = OldExam.all
-    Rails.logger.debug("Found #{@old_exams.count} exams")
-    @old_exams = @old_exams
-                     .select { |exam| regex.match(exam.examiners) || regex.match(exam.title) }
-    Rails.logger.debug("Filtered down to #{@old_exams.count} exams with broken encodings")
+    @old_exams = @old_exams.select { |exam| regex.match(exam.examiners) || regex.match(exam.title) }
   end
 
   def show
@@ -56,7 +53,7 @@ class OldExamsController < ApplicationController
     date_before_type_cast = @old_exam.read_attribute_before_type_cast('date')
     if date_before_type_cast.include? '-00'
       flash[:alert] = "Datum in Datenbank (#{date_before_type_cast}) ist fehlerhaft. Bitte das Datum korrigieren."
-      fixed_date = date_before_type_cast.sub('0000', '1970').gsub('00','01')
+      fixed_date = date_before_type_cast.sub('0000', '1970').gsub('00', '01')
       @old_exam.date = fixed_date
     end
   end

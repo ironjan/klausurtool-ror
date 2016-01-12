@@ -1,7 +1,9 @@
 <div>
-  <%= page_heading 'Prüfungen mit defektem Encoding' %>
+  <%= page_heading 'Fehlerhafte Prüfungen' %>
 
-
+  <p>Das alte Tool hat weder UTF-8 korrekt unterstützt, noch Daten validiert. Diese Seite listet alle hiervon
+    betroffenen Prüfungen auf.</p>
+  <p>Bei invalidaten Daten wird das Datum aus der Datenbank in Klammern angezeigt.</p>
   <div class="spacer pull-left">
     <% if @old_exams.size > 0 %>
         <table class="table table-hover">
@@ -17,7 +19,13 @@
               <tr>
                 <td><%= e.title %></td>
                 <td><%= e.examiners %></td>
-                <td><%= e.date %></td>
+                <td>
+                  <% if e.date %>
+                      <%= e.date %>
+                  <% else %>
+                      (<%= e.read_attribute_before_type_cast('date') %>)
+                  <% end %>
+                </td>
                 <td><%= link_to e.old_folder.title, e.old_folder %></td>
                 <td>
                   <%= link_to 'Anzeigen', old_exam_path(e) %>,
