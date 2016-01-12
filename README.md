@@ -56,7 +56,7 @@ Incomplete list, started to write these down in the middle of the project.
  * http://stackoverflow.com/questions/3025784/rails-layouts-per-action
  * http://stackoverflow.com/a/23066966/1666181
  * http://ruby-doc.org/
- * http://www.mediaevent.de/xhtml/html-section-header.html
+ * http://www.mediaevent.de/xhtml/htmtl-section-header.html
  * http://railsguides.net/change-data-in-migrations-like-a-boss/
  * http://stackoverflow.com/questions/4282710/how-do-i-describe-an-enumeration-column-in-a-rails-3-migration
  * http://stackoverflow.com/questions/23686265/saving-enum-from-select-in-rails-4-1
@@ -70,3 +70,4 @@ Incomplete list, started to write these down in the middle of the project.
  * http://www.w3schools.com/bootstrap/
  * http://stackoverflow.com/questions/10691442/adding-a-simple-spacer-to-twitter-bootstrap
  * http://stackoverflow.com/questions/9282689/allow-public-connections-to-local-ruby-on-rails-development-server
+ * http://stackoverflow.com/questions/18000037/rails-how-to-handle-existing-invalid-dates-in-database
