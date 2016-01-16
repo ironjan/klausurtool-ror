@@ -52,14 +52,14 @@ class AusleiheController < ApplicationController
       elsif f.length == 8
         barcodeId = f[3..6]
       else
-        flash[:alert] = '#{f} ist keine korrekte ID und kein korrekter Barcode.'
+        flash[:alert] = "#{Time.new}: #{f} ist keine korrekte ID und kein korrekter Barcode."
         redirect_to ausleihe_path and return
       end
 
       old_folder_instance = OldFolderInstance.find_by(barcodeId: barcodeId)
 
       if old_folder_instance.nil?
-        flash[:alert] = "Es gibt kein Ordner-Exemplar #{f}."
+        flash[:alert] = "#{Time.new}: Es gibt kein Ordner-Exemplar #{f}."
         redirect_to ausleihe_path and return
       else
         instances << old_folder_instance
@@ -75,7 +75,7 @@ class AusleiheController < ApplicationController
       redirect_to returning_form_path(old_folder_instances: instances) and return
 
     else
-      flash[:alert] = 'Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen.'
+      flash[:alert] = "#{Time.new}: Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen."
       redirect_to ausleihe_path and return
     end
   end
@@ -87,7 +87,7 @@ class AusleiheController < ApplicationController
     found_instances = instances.compact
 
     if found_instances.count < instances.count
-      flash[:alert] = 'Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?'
+      flash[:alert] = "#{Time.new}: Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?"
     end
 
     @old_lend_out = OldLendOut.new
@@ -111,9 +111,8 @@ class AusleiheController < ApplicationController
                         .compact
                         .empty?
 
-
     unless all_available
-      flash[:alert] = 'Einige der Ordner sind bereits verliehen.'
+      flash[:alert] = "#{Time.new}: Einige der Ordner sind bereits verliehen."
       redirect_to ausleihe_path and return
     end
 
@@ -126,7 +125,7 @@ class AusleiheController < ApplicationController
       end
     end
 
-    flash[:notify] = 'Ordner erfolgreich verliehen'
+    flash[:notify] = "#{Time.new}: Ordner erfolgreich verliehen"
     redirect_to ausleihe_path
 
     #rescue Exception => ex
@@ -141,12 +140,12 @@ class AusleiheController < ApplicationController
     found_instances = instances.compact
 
     if found_instances.count < instances.count
-      flash[:alert] << 'Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?'
+      flash[:alert] << "#{Time.new}: Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?"
     end
 
     old_lend_outs = found_instances.map { |i| i.old_lend_out }.uniq
     if old_lend_outs.count > 1
-      flash[:alert] = 'Die eingegebenen Ordner gehören zu verschiedenen Ausleih-Vorgängen.'
+      flash[:alert] = "#{Time.new}: Die eingegebenen Ordner gehören zu verschiedenen Ausleih-Vorgängen."
       redirect_to ausleihe_path and return
     end
 
@@ -170,7 +169,7 @@ class AusleiheController < ApplicationController
         archive(@old_lend_out)
         @old_lend_out.destroy!
 
-        flash[:notice] = 'Ordner erfolgreich zurückgenommen'
+        flash[:notice] = "#{Time.new}: Ordner erfolgreich zurückgenommen"
         redirect_to ausleihe_path and return
       else
         render 'returning_form' and return
