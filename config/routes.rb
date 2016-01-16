@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   get  'ausleihe/returning_form' => 'ausleihe#returning_form', as: 'returning_form'
   post 'ausleihe/returning_action' => 'ausleihe#returning_action', as: 'returning_action'
 
+  get  '/feedback' => 'feedback#index'
+  post '/feedback' => 'feedback#send_feedback'
+
   get '/admin' => 'old_folders#index'
 
   scope '/admin' do
