@@ -21,10 +21,11 @@ class OldExamsController < ApplicationController
       params[:search] = nil
     end
 
+    wildCardSearch = params[:search].gsub(' ', '%')
     @old_exams = OldExam
                      .joins(:old_folder)
                      .where('date = ? OR old_exams.title LIKE ? OR old_exams.examiners LIKE ? OR old_folders.title LIKE ?',
-                            "#{params[:search]}", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
+                            "#{params[:search]}", wildCardSearch, wildCardSearch, wildCardSearch)
                      .order('old_folders.title ASC')
                      .paginate(:page => params[:page], :per_page => 50)
   end
