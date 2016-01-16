@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
     get 'lent' => 'admin_lendouts#lent', as: 'admin_lent'
     get 'history' => 'admin_lendouts#history', as: 'admin_history'
-    get 'exams/list_broken_encodings' => 'old_exams#list_broken_encodings', as: 'exams_broken_encodings'
+    get 'exams/list_broken' => 'old_exams#list_broken', as: 'exams_broken_encodings'
     get 'old_folders/list_broken_encodings' => 'old_folders#list_broken_encodings', as: 'folders_broken_encodings'
 
     resources :old_folders, :old_exams
