@@ -2,15 +2,21 @@ class OldFoldersController < ApplicationController
 	layout 'admin'
 
 	def index
-	  if params[:reset]
-      redirect_to old_folders_path
+		if params[:reset]
+			redirect_to old_folders_path
 		end
 
-    	wildCardSearch = params[:search].gsub(' ', '%')
-		@old_folders = OldFolder
-											 .where("title like ?", wildCardSearch)
-											 .order(:title)
-											 .paginate(:page => params[:page], :per_page => 50)
+		if params[:search]
+			wildCardSearch = params[:search].gsub(' ', '%')
+			@old_folders = OldFolder
+			.where("title like ?", wildCardSearch)
+			.order(:title)
+			.paginate(:page => params[:page], :per_page => 50)
+		else
+			@old_folders = OldFolder
+			.order(:title)
+			.paginate(:page => params[:page], :per_page => 50)
+		end
 	end
 
 	def list_broken_encodings
@@ -18,7 +24,7 @@ class OldFoldersController < ApplicationController
 		@old_exams = OldExam.all
 		Rails.logger.debug("Found #{@old_exams.count} exams")
 		@old_exams = @old_exams
-										 .select {|exam| exam.examiners[regex] or exam.title[regex]}
+		.select {|exam| exam.examiners[regex] or exam.title[regex]}
 		Rails.logger.debug("Filtered down to #{@old_exams.count} exams with broken encodings")
 	end
 
