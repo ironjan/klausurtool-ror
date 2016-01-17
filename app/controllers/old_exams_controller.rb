@@ -21,13 +21,20 @@ class OldExamsController < ApplicationController
       params[:search] = nil
     end
 
-    wildCardSearch = params[:search].gsub(' ', '%')
-    @old_exams = OldExam
-                     .joins(:old_folder)
-                     .where('date = ? OR old_exams.title LIKE ? OR old_exams.examiners LIKE ? OR old_folders.title LIKE ?',
-                            "#{params[:search]}", wildCardSearch, wildCardSearch, wildCardSearch)
-                     .order('old_folders.title ASC')
-                     .paginate(:page => params[:page], :per_page => 50)
+    if params[:search]
+      wildCardSearch = params[:search].gsub(' ', '%')
+      @old_exams = OldExam
+      .joins(:old_folder)
+      .where('date = ? OR old_exams.title LIKE ? OR old_exams.examiners LIKE ? OR old_folders.title LIKE ?',
+        "#{params[:search]}", wildCardSearch, wildCardSearch, wildCardSearch)
+      .order('old_folders.title ASC')
+      .paginate(:page => params[:page], :per_page => 50)
+    else
+      @old_exams = OldExam
+      .joins(:old_folder)
+      .order('old_folders.title ASC')
+      .paginate(:page => params[:page], :per_page => 50)
+    end
   end
 
   def list_broken
@@ -35,7 +42,7 @@ class OldExamsController < ApplicationController
     @old_exams = OldExam.all
     Rails.logger.debug("Found #{@old_exams.count} exams")
     @old_exams = @old_exams
-                     .select { |exam| regex.match(exam.examiners) || regex.match(exam.title) }
+    .select { |exam| regex.match(exam.examiners) || regex.match(exam.title) }
     Rails.logger.debug("Filtered down to #{@old_exams.count} exams with broken encodings")
   end
 
