@@ -1,0 +1,31 @@
+<div class="card shadow clearfix">
+  <div class="full-width">
+    <h3 class="pull-left"><%= archived_old_lend_out.id %> - <%= archived_old_lend_out.imt %></h3>
+  </div>
+  <div class="full-width">
+    <div class="half-width">
+      <dl>
+        <dt>Pfand</dt>
+        <dd><%= archived_old_lend_out.deposit %></dd>
+        <dt>Gewicht</dt>
+        <dd><%= archived_old_lend_out.weigth %></dd>
+        <dt>Raus von</dt>
+        <dd><%= archived_old_lend_out.lender %></dd>
+        <dt>Raus am</dt>
+        <dd><%= archived_old_lend_out.lendingTime %></dd>
+        <dt>Rein von</dt>
+        <dd><%= archived_old_lend_out.receiver %></dd>
+        <dt>Zurück am</dt>
+        <dd><%= archived_old_lend_out.receivingTime %></dd>
+      </dl>
+    </div>
+    <div class="half-width">
+      <dl>
+        <dt>Ordner</dt>
+        <% archived_old_lend_out.old_folder_instances.each do |i| %>
+        <dd><%= i.barcodeId %>, <%= i.old_folder.title %></dd>
+        <% end %>
+      </dl>
+    </div>
+  </div>
+</div>
