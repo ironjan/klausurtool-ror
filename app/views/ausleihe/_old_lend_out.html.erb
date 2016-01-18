@@ -1,9 +1,7 @@
 <div class="card shadow">
   <div class="full-width">
     <h3 class="pull-left"><%= old_lend_out.id %> - <%= old_lend_out.imt %></h3>
-    <% if old_lend_out.receiver.nil? %>
-        <h3 class="pull-right"><%= old_lend_out.lendingTime %></h3>
-    <% end %>
+    <h3 class="pull-right"><%= old_lend_out.lendingTime %></h3>
   </div>
   <div class="full-width">
     <div class="half-width">
@@ -14,35 +12,24 @@
         <dd><%= old_lend_out.weigth %></dd>
         <dt>Raus von</dt>
         <dd><%= old_lend_out.lender %></dd>
-        <% unless old_lend_out.receiver.nil? %>
-            <dt>Raus am</dt>
-            <dd><%= old_lend_out.lendingTime %></dd>
-            <dt>Rein von</dt>
-            <dd><%= old_lend_out.receiver %></dd>
-            <dt>Zurück am</dt>
-            <dd><%= old_lend_out.receivingTime %></dd>
-
-        <% end %>
       </dl>
     </div>
     <div class="half-width">
       <dl>
         <dt>Ordner</dt>
         <% old_lend_out.old_folder_instances.each do |i| %>
-            <dd><%= i.barcodeId %>, <%= i.old_folder.title %></dd>
+        <dd><%= i.barcodeId %>, <%= i.old_folder.title %></dd>
         <% end %>
       </dl>
     </div>
   </div>
 
   <div class="clearfix">
-    <% if old_lend_out.receiver.nil? %>
-        <nav>
-          <ul class="nav nav-pills pull-right">
-            <li><%= link_to 'Zurücknehmen', returning_form_path(old_folder_instances: [old_lend_out.old_folder_instances.first]), class: 'btn btn-primary' %></li>
-          </ul>
-        </nav>
-    <% end %>
+    <nav>
+      <ul class="nav nav-pills pull-right">
+        <li><%= link_to 'Zurücknehmen', returning_form_path(old_folder_instances: [old_lend_out.old_folder_instances.first]), class: 'btn btn-primary' %></li>
+      </ul>
+    </nav>
   </div>
 
 </div>
