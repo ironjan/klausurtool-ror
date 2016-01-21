@@ -4,6 +4,7 @@ gem 'rails', '4.2.4'
 gem 'sqlite3'
 gem 'will_paginate', '~> 3.0.6'
 
+gem 'rake'
 
 
 gem 'bootstrap-sass', '~> 3.3.6'
