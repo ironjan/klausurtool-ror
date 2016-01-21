@@ -2,7 +2,7 @@
 
 ## Fehler melden, Feedback geben
 
- * Sieh dann unter https://git.cs.upb.de/ljan/klausurtool-ror/issues nach, ob das Feedback oder Problem bereits bekannt wird
+ * Sieh dann unter https://github.com/ironjan/klausurtool-ror/issues nach, ob das Feedback oder Problem bereits bekannt wird
  * Falls es nicht nicht bekannt ist, erstelle einen neuen Issue
   * Sei bitte so ausführlich wie möglich
   * Falls es um eine bestimmte Seite im Tool geht, bitte URL mit einfügen
