@@ -4,8 +4,8 @@
  * Needs a dump of the current Klausurtool
   * Create via ```mysqldump --compatible=ansi --skip-extended-insert --compact```
   * Remove all "AUTO_INCREMENT"
-  * Import into file called ```og.sqlite```: 
-   * ```sqlite3 og.sqlite``` 
+  * Import into file called ```og.sqlite3```: 
+   * ```sqlite3 og.sqlite3``` 
    * ```.read dump.sql```
  * Needs a clean database in ```../db/development.sqlite3```: ```rake db:schema:load``` and then run ```python converter.py``` 
 
