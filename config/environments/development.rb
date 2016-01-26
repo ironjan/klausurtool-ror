@@ -37,5 +37,9 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
 
   # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
+  config.action_view.raise_on_missing_translations = true
+
+  # Different prefix for assets in development mode to use pre-compiled
+  # assets in production mode
+  config.assets.prefix = "/dev-assets"
 end
