@@ -1,3 +1,7 @@
+# 0.0.6
+
+ * [Fixed: Assets wurden im production mode nicht ausgeliefert](https://github.com/ironjan/klausurtool-ror/issues/12)
+
 # 0.0.5
 
  * [Fixed: Version number now points to Changelog](https://git.cs.upb.de/ljan/klausurtool-ror/issues/14)
