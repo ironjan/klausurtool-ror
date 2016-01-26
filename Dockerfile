@@ -18,6 +18,8 @@ USER klausurtool
 
 # create empty development database
 RUN bin/rake db:schema:load
+# precompile assets
+RUN bin/rake assets:precompile
 
 # start rails, listening on port 3000
 EXPOSE 3000
