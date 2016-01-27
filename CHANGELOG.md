@@ -1,3 +1,7 @@
+# 0.0.7
+
+ * [Fixed: Verleiher und Gewicht werden beim Zurücknehmen angezeigt](https://github.com/ironjan/klausurtool-ror/issues/19)
+
 # 0.0.6
 
  * [Fixed: Assets wurden im production mode nicht ausgeliefert](https://github.com/ironjan/klausurtool-ror/issues/12)
