@@ -74,6 +74,9 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
+  # Do not buffer stdout or stderr, we want to collect logs.
+  $stdout.sync = $stderr.sync = true
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
