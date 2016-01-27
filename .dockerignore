@@ -1,3 +1,7 @@
+# do not invalidate on Dockerfile change
+Dockerfile
+
+### the following is taken from .gitignore
 *.rbc
 capybara-*.html
 .rspec
