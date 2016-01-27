@@ -22,5 +22,6 @@ RUN bin/rake db:schema:load
 RUN bin/rake assets:precompile
 
 # start rails, listening on port 3000
+ENV __LISTEN_ADDR="0.0.0.0"
 EXPOSE 3000
-CMD ["rails", "server", "--binding", "0.0.0.0"]
+CMD rails server --binding $__LISTEN_ADDR
