@@ -16,16 +16,22 @@
     <% end %>
 
     <div class="form-group row">
-      <%= f.label :folders, 'Ordner', :class => 'control-label col-sm-2' %>
-      <div class="col-sm-10">
-        <ul id="folders">
+      <div class="col-sm-10 pull-right">
+        <dl>
+          <dt>Verleiher</dt>
+          <dd><%= @old_lend_out.lender %></dd>
+
+          <dt>Gewicht</dt>
+          <dd><%= @old_lend_out.weigth %></dd>
+
+	  <dt>Ordner</td>
           <% @old_lend_out.old_folder_instances.each do |i| %>
-              <li>
+              <dd>
                 <%= i.barcodeId %>, <%= i.old_folder.title %>
                 <%= hidden_field_tag 'old_folder_instances[]', i.id %>
-              </li>
+              </dd>
           <% end %>
-        </ul>
+        </dl>
       </div>
     </div>
 
