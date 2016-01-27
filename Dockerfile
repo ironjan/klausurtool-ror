@@ -6,10 +6,13 @@ RUN adduser --disabled-login --gecos "Klausurtool ruby-on-rails" klausurtool
 
 WORKDIR /home/klausurtool/klausurtool-ror/
 
-# copy project files
-COPY . .
-
+# copy gemfiles and run bundler
+COPY Gemfile Gemfile
+COPY Gemfile.lock Gemfile.lock
 RUN bundle install
+
+# copy everything else (do this after installing deps, our code changes more often than deps)
+COPY . .
 
 # TODO: ony chown what really needs to be writable
 RUN chown -hR klausurtool .
