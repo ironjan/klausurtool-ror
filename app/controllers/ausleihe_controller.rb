@@ -17,19 +17,9 @@ class AusleiheController < ApplicationController
       params[:search] = nil
     end
 
-    if params[:search]
-      wildCardSearch = params[:search].gsub(' ', '%')
-      @old_folder_instances = OldFolderInstance
-                                  .joins(:old_folder)
-                                  .where('old_folders.title LIKE ? OR barcodeId LIKE ?', wildCardSearch, wildCardSearch)
-                                  .order('old_folders.title ASC, old_folder_instances.barcodeId ASC')
-                                  .paginate(:page => params[:page], :per_page => 50)
-    else
-      @old_folder_instances = OldFolderInstance
-                                  .joins(:old_folder)
-                                  .order('old_folders.title ASC, old_folder_instances.barcodeId ASC')
-                                  .paginate(:page => params[:page], :per_page => 50)
-    end
+    @old_folder_instances = OldFolderInstance
+                                .search(params[:search])
+                                .paginate(:page => params[:page], :per_page => 50)
   end
 
   def exams

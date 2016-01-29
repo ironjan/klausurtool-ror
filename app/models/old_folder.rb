@@ -13,11 +13,16 @@ class OldFolder < ActiveRecord::Base
 
 
   def self.search(search)
-    # Replacing spaces as wild-cards
-    search = search.gsub(' ', '%')
-    Rails.logger.debug("Searching for \"#{search}\"")
-    # We want exact match for date but non-exact matches for other values
-    where('title LIKE ?', "%#{search}%")
+    if search.nil? || search.empty?
+      order('old_folders.title ASC')
+    else
+      # Replacing spaces as wild-cards
+      search = search.gsub(' ', '%')
+      Rails.logger.debug("Searching for \"#{search}\"")
+      # We want exact match for date but non-exact matches for other values
+      where('title LIKE ?', "%#{search}%")
+          .order('old_folders.title ASC')
+    end
   end
 
   # todo: is this the correct place for this method?
