@@ -1,3 +1,7 @@
+# 0.0.9
+
+ * Logging für Docker angepasst
+
 # 0.0.8
 
  * [Fixed: Suche zeigte manchmal keine Resultate](https://github.com/ironjan/klausurtool-ror/issues/26)
