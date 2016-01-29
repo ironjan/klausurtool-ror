@@ -1,3 +1,8 @@
+# 0.0.8
+
+ * [Fixed: Suche zeigte manchmal keine Resultate](https://github.com/ironjan/klausurtool-ror/issues/26)
+ * [Fixed: Ausleih-Archiv wird absteigend nach Rückgabe-Datum sortiert](https://github.com/ironjan/klausurtool-ror/issues/23)
+ 
 # 0.0.7
 
  * [Fixed: Verleiher und Gewicht werden beim Zurücknehmen angezeigt](https://github.com/ironjan/klausurtool-ror/issues/19)
