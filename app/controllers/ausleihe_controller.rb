@@ -17,6 +17,7 @@ class AusleiheController < ApplicationController
       params[:search] = nil
     end
 
+    # FIXME Extract to model, check for typos
     if params[:search]
       wildCardSearch = params[:search].gsub(' ', '%')
       @old_folder_instances = OldFolderInstance

@@ -2,6 +2,7 @@ class OldFolderInstancesController < ApplicationController
 	layout 'admin'
 
 	def index
+		# FIXME Extract to model, check for typos
 		@old_folder_instances = OldFolderInstance
 																.joins(:old_folder)
 																.where('old_folders.title LIKE ? OR barcodeId LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")

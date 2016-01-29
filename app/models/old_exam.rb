@@ -7,6 +7,7 @@ class OldExam < ActiveRecord::Base
   validates :examiners, presence: true
 
 
+  # FIXME Check for typos
   def self.search(search)
     if not (search.nil? || search.empty?)
       # Replacing spaces as wild-cards

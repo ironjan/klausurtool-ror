@@ -12,6 +12,7 @@ class OldFolder < ActiveRecord::Base
   validates :area, presence: true, :inclusion => {:in => AREAS}
 
 
+  # FIXME Check for typos
   def self.search(search)
     # Replacing spaces as wild-cards
     search = search.gsub(' ', '%')
