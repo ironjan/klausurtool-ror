@@ -59,4 +59,9 @@ describe OldFolder do
   it "returns 2 results for search matching 2 folders" do
     expect(OldFolder.search("Title")).to match_array([@o1, @o2])
   end
+
+  it "returns the correct result when searching for something with spaces" do
+    expect(OldFolder.search("Tit le 2")).to match_array([@o2])
+  end
+
 end

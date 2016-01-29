@@ -6,18 +6,8 @@ class OldFoldersController < ApplicationController
       redirect_to old_folders_path
     end
 
-    # FIXME Extract to model, check for typos
-    if params[:search]
-      wildCardSearch = params[:search].gsub(' ', '%')
-      @old_folders = OldFolder
-                         .where("title like ?", wildCardSearch)
-                         .order(:title)
-                         .paginate(:page => params[:page], :per_page => 50)
-    else
-      @old_folders = OldFolder
-                         .order(:title)
-                         .paginate(:page => params[:page], :per_page => 50)
-    end
+    @old_folders = OldFolder.search(params[:search])
+                       .paginate(:page => params[:page], :per_page => 50)
   end
 
   def list_broken_encodings

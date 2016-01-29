@@ -2,11 +2,8 @@ class OldFolderInstancesController < ApplicationController
 	layout 'admin'
 
 	def index
-		# FIXME Extract to model, check for typos
 		@old_folder_instances = OldFolderInstance
-																.joins(:old_folder)
-																.where('old_folders.title LIKE ? OR barcodeId LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
-																.order('old_folders.title ASC, old_folder_instances.barcodeId ASC')
+																.search(params[:search])
 																.paginate(:page => params[:page], :per_page => 50)
 	end
 
@@ -25,7 +22,7 @@ class OldFolderInstancesController < ApplicationController
 	def create
 		@old_folder = OldFolder.find(params[:old_folder_id])
 		@old_folder_instance = @old_folder.old_folder_instances.create(old_folder_instance_params)
-		@old_folder_instance.barcodeId = "#{format('%03d', @old_folder_instance.old_folder_id)}#{@old_folder_instance.number}"
+		@old_folder_instance.update_and_get_barcodeId
 		@old_folder_instance.save
 		redirect_to old_folder_path(@old_folder)
 	end
