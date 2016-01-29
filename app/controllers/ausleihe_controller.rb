@@ -9,7 +9,9 @@ class AusleiheController < ApplicationController
   end
 
   def history
-    @archived_lend_outs = ArchivedOldLendOut.paginate(:page => params[:page], :per_page => 50)
+    @archived_lend_outs = ArchivedOldLendOut
+                              .order(:receivingTime => :desc)
+                              .paginate(:page => params[:page], :per_page => 50)
   end
 
   def folders

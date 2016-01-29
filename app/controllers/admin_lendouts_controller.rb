@@ -6,6 +6,8 @@ class AdminLendoutsController < ApplicationController
   end
 
   def history
-    @archived_lend_outs = ArchivedOldLendOut.paginate(:page => params[:page], :per_page => 50)
+    @archived_lend_outs = ArchivedOldLendOutArchivedOldLendOut
+                              .order(:receivingTime => :desc)
+                              .paginate(:page => params[:page], :per_page => 50)
   end
 end
