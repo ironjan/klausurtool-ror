@@ -11,7 +11,7 @@ class OldExam < ActiveRecord::Base
     if not (search.nil? || search.empty?)
       # Replacing spaces as wild-cards
       search = search.gsub(' ', '%')
-      wildCardSearch = "%{search}%"
+      wildCardSearch = "%#{search}%"
 
       # We want exact match for date but non-exact matches for other values
       # where('date LIKE ? OR title LIKE ? OR examiners LIKE ?',
