@@ -20,15 +20,15 @@ class AusleiheController < ApplicationController
     if params[:search]
       wildCardSearch = params[:search].gsub(' ', '%')
       @old_folder_instances = OldFolderInstance
-      .joins(:old_folder)
-      .where('old_folders.title LIKE ? OR barcodeId LIKE ?', wildCardSearch, wildCardSearch)
-      .order('old_folders.title ASC, old_folder_instances.barcodeId ASC')
-      .paginate(:page => params[:page], :per_page => 50)
+                                  .joins(:old_folder)
+                                  .where('old_folders.title LIKE ? OR barcodeId LIKE ?', wildCardSearch, wildCardSearch)
+                                  .order('old_folders.title ASC, old_folder_instances.barcodeId ASC')
+                                  .paginate(:page => params[:page], :per_page => 50)
     else
       @old_folder_instances = OldFolderInstance
-      .joins(:old_folder)
-      .order('old_folders.title ASC, old_folder_instances.barcodeId ASC')
-      .paginate(:page => params[:page], :per_page => 50)
+                                  .joins(:old_folder)
+                                  .order('old_folders.title ASC, old_folder_instances.barcodeId ASC')
+                                  .paginate(:page => params[:page], :per_page => 50)
     end
   end
 
@@ -37,20 +37,9 @@ class AusleiheController < ApplicationController
       params[:search] = nil
     end
 
-    if params[:search]
-      wildCardSearch = params[:search].gsub(' ', '%')
-      @old_exams = OldExam
-      .joins(:old_folder)
-      .where('date = ? OR old_exams.title LIKE ? OR old_exams.examiners LIKE ? OR old_folders.title LIKE ?',
-        "#{params[:search]}", wildCardSearch, wildCardSearch, wildCardSearch)
-      .order('old_folders.title ASC')
-      .paginate(:page => params[:page], :per_page => 50)
-    else
-      @old_exams = OldExam
-      .joins(:old_folder)
-      .order('old_folders.title ASC')
-      .paginate(:page => params[:page], :per_page => 50)
-    end
+    @old_exams = OldExam
+                     .search(params[:search])
+                     .paginate(:page => params[:page], :per_page => 50)
   end
 
   # This controller method is used to decide if we are lending or returning folders. It redirects to the corresponding
@@ -99,7 +88,7 @@ class AusleiheController < ApplicationController
   # Renders the form when lending folder_instances. The form calls lending_action on submit.
   def lending_form
     instances = params[:old_folder_instances]
-    .map { |id| OldFolderInstance.find_by_id(id) }
+                    .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
 
     if found_instances.count < instances.count
@@ -115,7 +104,7 @@ class AusleiheController < ApplicationController
     Rails.logger.debug("#{params}")
     @old_lend_out = OldLendOut.new(old_lend_out_params)
     instances = params[:old_folder_instances]
-    .map { |id| OldFolderInstance.find_by_id(id) }
+                    .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
 
     if found_instances.count < instances.count
@@ -123,9 +112,9 @@ class AusleiheController < ApplicationController
     end
 
     all_available = found_instances
-    .map { |i| i.old_lend_out }
-    .compact
-    .empty?
+                        .map { |i| i.old_lend_out }
+                        .compact
+                        .empty?
 
     unless all_available
       flash[:alert] = "#{Time.new}: Einige der Ordner sind bereits verliehen."
@@ -152,7 +141,7 @@ class AusleiheController < ApplicationController
   # Renders the form when returning folder_instances. The form calls returning_action on submit.
   def returning_form
     instances = params[:old_folder_instances]
-    .map { |id| OldFolderInstance.find_by_id(id) }
+                    .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
 
     if found_instances.count < instances.count
