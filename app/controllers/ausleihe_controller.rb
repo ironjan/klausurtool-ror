@@ -42,6 +42,7 @@ class AusleiheController < ApplicationController
     instances = []
 
     folderList.each do |f|
+      f = f.strip
       next if f.empty?
 
       if f.length == 4
