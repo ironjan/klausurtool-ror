@@ -19,5 +19,16 @@ class OldExam < ActiveRecord::Base
           .order('old_folders.title ASC')
     end
   end
+
+
+  def self.existing_titles
+    select(:title).uniq.map(&:title)
+  end
+
+  def self.existing_examiners
+    select(:examiners).uniq.map(&:examiners)
+  end
+
+
 end
 
