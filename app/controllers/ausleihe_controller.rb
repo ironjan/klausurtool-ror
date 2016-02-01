@@ -42,6 +42,7 @@ class AusleiheController < ApplicationController
     instances = []
 
     folderList.each do |f|
+      f = f.strip
       next if f.empty?
 
       if f.length == 4
@@ -49,21 +50,21 @@ class AusleiheController < ApplicationController
       elsif f.length == 8
         barcodeId = f[3..6]
       else
-        flash[:alert] = "#{Time.new}: #{f} ist keine korrekte ID und kein korrekter Barcode."
+        flash[:alert] = "#{Time.new}: \"#{f}\" ist keine korrekte ID und kein korrekter Barcode."
         redirect_to ausleihe_path and return
       end
 
       old_folder_instance = OldFolderInstance.find_by(barcodeId: barcodeId)
 
       if old_folder_instance.nil?
-        flash[:alert] = "#{Time.new}: Es gibt kein Ordner-Exemplar #{f}."
+        flash[:alert] = "#{Time.new}: Es gibt kein Ordner-Exemplar \"#{f}\"."
         redirect_to ausleihe_path and return
       else
         instances << old_folder_instance
       end
     end
 
-    lent_instances = instances.map { |i| i.old_lend_out }.compact
+    lent_instances = instances.reject { |i| i.old_lend_out.nil? }
 
     if lent_instances.empty?
       redirect_to lending_form_path(old_folder_instances: instances) and return
@@ -72,7 +73,16 @@ class AusleiheController < ApplicationController
       redirect_to returning_form_path(old_folder_instances: instances) and return
 
     else
-      flash[:alert] = "#{Time.new}: Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen."
+      lentAsStrings = lent_instances
+                          .map { |i| i.barcodeId }
+                          .join(', ')
+      allAsStrings = instances.map { |i| i.barcodeId }
+                          .join(', ')
+
+      message = ["#{Time.new}: Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen."]
+      message << "Ordner-Exemplare: #{allAsStrings}, davon verliehen: #{lentAsStrings}"
+      flash[:alert] = message.join
+
       redirect_to ausleihe_path and return
     end
   end
