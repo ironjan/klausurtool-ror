@@ -3,7 +3,7 @@
 <%= form_tag ausleihe_folders_path, method: 'get', :class => 'form-inline' do %>
     <div class="form-group">
       <%= label_tag :search, 'Ordner suchen:' %>
-      <%= text_field_tag :search, params[:search], :class => 'form-control' %>
+      <%= text_field_tag :search, params[:search], :class => 'form-control', autofocus: true  %>
       <%= submit_tag 'Suche', :class => 'btn btn-primary' %>
       <%= submit_tag 'Zurücksetzen', :id => 'reset_button', :name => 'reset', :class => 'btn' %>
     </div>
