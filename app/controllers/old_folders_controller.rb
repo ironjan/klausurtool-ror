@@ -25,10 +25,14 @@ class OldFoldersController < ApplicationController
 
   def new
     @old_folder = OldFolder.new
+    @existing_titles = OldExam.existing_titles
+    @existing_examiners = OldExam.existing_examiners
   end
 
   def edit
     @old_folder = OldFolder.find(params[:id])
+    @existing_titles = OldExam.existing_titles
+    @existing_examiners = OldExam.existing_examiners
   end
 
   def create
