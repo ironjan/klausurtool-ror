@@ -1,4 +1,6 @@
 module ApplicationHelper
+	include ImtToNameHelper
+
 	def page_title
 		content_for(:title)
 	end
