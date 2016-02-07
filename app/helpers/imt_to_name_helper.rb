@@ -1,4 +1,4 @@
-require 'net/ldap' # gem install net-ldap
+require 'net/ldap'
 
 module ImtToNameHelper
   LDAP_UPB = Net::LDAP.new(host: 'ldap.uni-paderborn.de')
