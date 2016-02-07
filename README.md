@@ -75,3 +75,4 @@ Incomplete list, started to write these down in the middle of the project.
  * Testing:
   * http://everydayrails.com/2012/03/19/testing-series-rspec-models-factory-girl.html
   * http://rspec.info/blog/2012/06/rspecs-new-expectation-syntax/
+  * https://www.relishapp.com/rspec/rspec-mocks/docs
