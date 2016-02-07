@@ -12,8 +12,10 @@
         <dd><%= old_lend_out.weigth %></dd>
         <dt>Raus von</dt>
         <dd><%= old_lend_out.lender %></dd>
+        <dt>Imt-Login:</dt>
+        <dd><%= old_lend_out.imt %></dd>
         <dt>Name:</dt>
-        <dd><%= name_for_login 'ljan' %></dd>
+        <dd><%= name_for_login old_lend_out.imt %></dd>
       </dl>
     </div>
     <div class="half-width">
