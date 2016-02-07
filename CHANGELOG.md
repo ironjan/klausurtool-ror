@@ -1,3 +1,14 @@
+# 0.0.10
+
+ * [Fixed: Erstes Feld in Forms wird fokussiert](https://github.com/ironjan/klausurtool-ror/issues/1 )
+ * [Barcode-Erkennung verbessert](https://github.com/ironjan/klausurtool-ror/issues/37)
+ * [Hinzugefügt: Auto-Completion für existierende Profs beim Anlegen von Prüfungen](https://github.com/ironjan/klausurtool-ror/issues/42)
+ * Verbessert: Flash-Messages sind klickbar und schließen sich nach einer Minute automatisch 
+  [#39](https://github.com/ironjan/klausurtool-ror/issues/39) 
+  [#40](https://github.com/ironjan/klausurtool-ror/issues/40)
+  [#47](https://github.com/ironjan/klausurtool-ror/issues/47)
+ * [Fixed: man konnte beim Verleihen Daten eintragen, die zu einem HTTP500 geführt haben](https://github.com/ironjan/klausurtool-ror/issues/51)
+
 # 0.0.9
 
  * Logging für Docker angepasst
