@@ -12,9 +12,7 @@
       <li><%= link_to 'Ausleih-Historie', admin_history_path %></li>
     </ul>
   </nav>
-  <% flash.each do |name, msg| -%>
-      <%= content_tag :div, msg, class: name %>
-  <% end -%>
+  <%= render 'flashes' %>
   <%= yield %>
 </main>
 <%= render 'footer' %>

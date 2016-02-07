@@ -12,9 +12,7 @@
       <li><%= link_to '(A)usleih-Archiv', ausleihe_history_path, :accesskey => 'a' %></li>
     </ul>
   </nav>
-  <% flash.each do |name, msg| -%>
-      <%= content_tag :div, msg, class: name %>
-  <% end %>
+  <%= render 'flashes' %>
 
   <%= yield %>
 </main>
