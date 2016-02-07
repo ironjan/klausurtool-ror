@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'rails_helper'
+
 
 describe ImtToNameHelper do
   describe "#name_for_login" do
