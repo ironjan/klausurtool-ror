@@ -21,6 +21,8 @@ class OldFoldersController < ApplicationController
 
   def show
     @old_folder = OldFolder.find(params[:id])
+    @existing_titles = OldExam.existing_titles
+    @existing_examiners = OldExam.existing_examiners
   end
 
   def new
