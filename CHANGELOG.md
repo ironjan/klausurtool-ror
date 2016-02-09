@@ -1,3 +1,7 @@
+# 0.0.12
+
+ * [Fixed: Ordner-Details in Admin-Bereich gefixt](https://github.com/ironjan/klausurtool-ror/issues/65)
+
 # 0.0.11
 
  * [Fixed: Imt-Login, Name des Studenten und Pfand zum Zurücknehm-Formular hinzugefügt](https://github.com/ironjan/klausurtool-ror/issues/69)
