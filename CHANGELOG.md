@@ -1,3 +1,7 @@
+# 0.0.11
+
+ * [Fixed: Imt-Login, Name des Studenten und Pfand zum Zurücknehm-Formular hinzugefügt](https://github.com/ironjan/klausurtool-ror/issues/69)
+
 # 0.0.10
 
  * [Fixed: Erstes Feld in Forms wird fokussiert](https://github.com/ironjan/klausurtool-ror/issues/1 )
