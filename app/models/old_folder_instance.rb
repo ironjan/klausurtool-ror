@@ -16,9 +16,13 @@ class OldFolderInstance < ActiveRecord::Base
       @old_folder_instances = all
     else
       wildcard_search = "%#{search}%"
+      upcase_search = wildcard_search.upcase
 
       @old_folder_instances = joins(:old_folder)
-                                   .where('old_folders.title LIKE ? OR barcodeId LIKE ?', wildcard_search, wildcard_search)
+                                   .where('old_folders.title LIKE ? OR barcodeId LIKE ?'\
+                                          ' OR old_folders.title LIKE ?', 
+                                          wildcard_search, wildcard_search,
+                                          upcase_search)
                                    .order('old_folders.title ASC, old_folder_instances.barcodeId ASC')
     end
     # OldFolderInstance

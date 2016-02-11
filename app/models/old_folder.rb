@@ -17,12 +17,15 @@ class OldFolder < ActiveRecord::Base
       order('old_folders.title ASC')
     else
       # Replacing spaces as wild-cards
-      search = search.gsub(' ', '%')
+      search = "%#{search.gsub(' ', '%')}%"
       up_search = search.upcase
 
       Rails.logger.debug("Searching for \"#{search}\"")
       # We want exact match for date but non-exact matches for other values
-      where('title LIKE ? OR title LIKE ?', "%#{search}%", "%#{up_search}%")
+      where('title LIKE ?'\
+            ' OR title LIKE ?', 
+            search, 
+            up_search)
           .order('old_folders.title ASC')
     end
   end
