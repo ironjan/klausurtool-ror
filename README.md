@@ -25,7 +25,7 @@
   * Start with ```bin/rails server --binding 0.0.0.0``` to listen to external requests
    * This does not automatically mean "production mode"
    * More information will be added later
-
+ * Pre-Compile assets for production via ```RAILS_ENV=production bin/rake assets:precompile```
 ## Versioing
 
  * Follows [Semantic Versioning](http://semver.org/)
