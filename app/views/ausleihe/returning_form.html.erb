@@ -4,63 +4,40 @@
 
 
 <%= form_for @old_lend_out, url: returning_action_path, method: 'post', html: {class: 'form-horizontal', role: 'form'} do |f| %>
-    <% if @old_lend_out.errors.any? %>
-        <div id="error_explanation">
-          <h2>Fehler beim Zurücknehmen:</h2>
-          <ul>
-            <% @old_lend_out.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
+<% if @old_lend_out.errors.any? %>
+<div id="error_explanation">
+  <h2>Fehler beim Zurücknehmen:</h2>
+  <ul>
+    <% @old_lend_out.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
     <% end %>
+  </ul>
+</div>
+<% end %>
 
-    <div class="form-group row">
-      <div class="col-sm-10 pull-right">
-        <dl>
-          <dt>Verleiher</dt>
-          <dd><%= @old_lend_out.lender %></dd>
+<div class="form-group row">
+  <div class="col-sm-10 pull-right">
+  <%= render 'old_lend_out_infos', old_lend_out: @old_lend_out %>
+  </div>
+</div>
 
-          <dt>Gewicht</dt>
-          <dd><%= @old_lend_out.weigth %>g</dd>
+<%= hidden_field_tag :id, @old_lend_out.id %>
 
-          <dt>Imt-Login</dt>
-          <dd><%= @old_lend_out.imt %></dd>
 
-          <dt>Name</dt>
-          <dd><%= name_for_login @old_lend_out.imt %></dd>
+<div class="form-group row">
+  <%= f.label :receiver, 'Rein von', :class => 'control-label col-sm-2' %>
+  <div class="col-sm-10">
+    <%= f.text_field :receiver, required: true, :class => 'form-control', autofocus: true %>
+  </div>
+</div>
 
-          <dt>Pfand</dt>
-          <dd><%= @old_lend_out.deposit %></dd>
-
-          <dt class='folderlist'>Ordner</dt>
-          <% @old_lend_out.old_folder_instances.each do |i| %>
-              <dd class='folderlist'>
-                <%= i.barcodeId %>, <%= i.old_folder.title %>
-                <%= hidden_field_tag 'old_folder_instances[]', i.id %>
-              </dd>
-          <% end %>
-        </dl>
-      </div>
+<div class="pull-right">
+  <div class="form-group row">
+    <div class="col-sm-2">
+      <%= f.submit '(W)eiter', class: 'btn btn-primary', :accesskey => 'w' %>
     </div>
-
-    <%= hidden_field_tag :id, @old_lend_out.id %>
-
-
-    <div class="form-group row">
-      <%= f.label :receiver, 'Rein von', :class => 'control-label col-sm-2' %>
-      <div class="col-sm-10">
-        <%= f.text_field :receiver, required: true, :class => 'form-control', autofocus: true %>
-      </div>
-    </div>
-
-    <div class="pull-right">
-      <div class="form-group row">
-        <div class="col-sm-2">
-          <%= f.submit '(W)eiter', class: 'btn btn-primary', :accesskey => 'w' %>
-        </div>
-      </div>
-    </div>
+  </div>
+</div>
 
 
 <% end %>
