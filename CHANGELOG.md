@@ -1,3 +1,7 @@
+# 0.0.14
+
+ * Updated production assets
+
 # 0.0.13
 
  * Fixed: Javascript-Dateien waren áuf production nicht aktualisiert; dies wurde nachgeholt.
