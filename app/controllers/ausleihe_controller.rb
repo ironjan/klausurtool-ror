@@ -132,12 +132,8 @@ class AusleiheController < ApplicationController
       end
     end
 
-    flash[:notify] = "#{Time.new}: Ordner erfolgreich verliehen"
+    flash[:notice] = "#{Time.new}: Ordner erfolgreich verliehen"
     redirect_to ausleihe_path
-
-    #rescue Exception => ex
-    #  flash[:alert] = "Fehler beim Speichern: #{ex}"
-    #  redirect_to ausleihe_path
   end
 
   # Renders the form when returning folder_instances. The form calls returning_action on submit.
