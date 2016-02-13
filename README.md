@@ -31,15 +31,12 @@
  * Follows [Semantic Versioning](http://semver.org/)
  * Uses http://stackoverflow.com/questions/9073446/where-do-you-store-your-rails-applications-version-number to update version
   * ```git tag $version``` & restart server
- 
-## TODO for README
+ * The [Milestones](https://github.com/ironjan/klausurtool-ror/milestones) of this project are named in a more or less funny way
+  * They are more or less used as orientation on what to work next.
 
- * Ruby version
- * Rails version
- 
-## Links that helped
+## Links that helped to get started
 
-Incomplete list, started to write these down in the middle of the project. 
+The goal of this list is to collect links that helped me Getting started. It was started in the middle of the project and is therefore incomplete.
 
  * [Rails Getting Started](http://guides.rubyonrails.org/getting_started.html)
  * http://www.korenlc.com/creating-a-simple-search-in-rails-4/

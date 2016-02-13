@@ -23,11 +23,15 @@ class OldExam < ActiveRecord::Base
 
 
   def self.existing_titles
-    select(:title).uniq.map(&:title)
+    order(:title)
+        .map {|e| e.title }
+        .uniq
   end
 
   def self.existing_examiners
-    select(:examiners).uniq.map(&:examiners)
+    order(:examiners)
+        .map {|e| e.examiners }
+        .uniq
   end
 
 
