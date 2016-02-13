@@ -13,7 +13,7 @@ addCloseAfterOneMinute = function (flash) {
 };
 
 addEventsToFlashes = function () {
-    flashes = document.querySelectorAll('.alert, .notice');
+    flashes = document.querySelectorAll('.alert, .warning, .notice');
 
     for (i = 0; i < flashes.length; i++) {
         flash = flashes[i];
