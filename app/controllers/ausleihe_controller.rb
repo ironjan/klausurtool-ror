@@ -1,17 +1,10 @@
 class AusleiheController < ApplicationController
+  include LentFolders, LendingArchive
+
   layout 'ausleihe', except: 'error'
 
+
   def index
-  end
-
-  def lent
-    @old_lend_outs = OldLendOut.all
-  end
-
-  def history
-    @archived_lend_outs = ArchivedOldLendOut
-    .order(:receivingTime => :desc)
-    .paginate(:page => params[:page], :per_page => 50)
   end
 
   def folders
@@ -43,12 +36,11 @@ class AusleiheController < ApplicationController
     warnings = []
 
     Rails.logger.debug("Got switch request containing #{folderList.count} elements.")
-    folderList.each do |f|
-      Rails.logger.debug(" Parsing `#{f}`.")
-      f = f.strip
-      next if f.empty?
+    folderList = folderList.map { |f| f.strip }
+                           .reject { |f| f.empty?}
 
-      Rails.logger.debug(" `#{f}` has been stripped and is not empty.")
+    folderList.each do |f|
+      Rails.logger.debug(" `#{f}` has been stripped and was not empty.")
       
       if f.length == 4
         Rails.logger.debug(" `#{f}` is 4 chars long. barcodeId will be #{f}.")
