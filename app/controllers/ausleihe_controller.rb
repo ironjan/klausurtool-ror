@@ -10,8 +10,8 @@ class AusleiheController < ApplicationController
 
   def history
     @archived_lend_outs = ArchivedOldLendOut
-                              .order(:receivingTime => :desc)
-                              .paginate(:page => params[:page], :per_page => 50)
+    .order(:receivingTime => :desc)
+    .paginate(:page => params[:page], :per_page => 50)
   end
 
   def folders
@@ -20,8 +20,8 @@ class AusleiheController < ApplicationController
     end
 
     @old_folder_instances = OldFolderInstance
-                                .search(params[:search])
-                                .paginate(:page => params[:page], :per_page => 50)
+    .search(params[:search])
+    .paginate(:page => params[:page], :per_page => 50)
   end
 
   def exams
@@ -30,8 +30,8 @@ class AusleiheController < ApplicationController
     end
 
     @old_exams = OldExam
-                     .search(params[:search])
-                     .paginate(:page => params[:page], :per_page => 50)
+    .search(params[:search])
+    .paginate(:page => params[:page], :per_page => 50)
   end
 
   # This controller method is used to decide if we are lending or returning folders. It redirects to the corresponding
@@ -40,18 +40,37 @@ class AusleiheController < ApplicationController
     folderList = params[:folderList].split(/\r?\n/)
 
     instances = []
+    warnings = []
 
+    Rails.logger.debug("Got switch request containing #{folderList.count} elements.")
     folderList.each do |f|
+      Rails.logger.debug(" Parsing `#{f}`.")
       f = f.strip
       next if f.empty?
 
+      Rails.logger.debug(" `#{f}` has been stripped and is not empty.")
+      
       if f.length == 4
+        Rails.logger.debug(" `#{f}` is 4 chars long. barcodeId will be #{f}.")
         barcodeId = f
       elsif f.length == 8
+        Rails.logger.debug(" `#{f}` is 8 chars long. barcodeId will be #{f[3..6]}.")
         barcodeId = f[3..6]
       else
-        flash[:alert] = "#{Time.new}: \"#{f}\" ist keine korrekte ID und kein korrekter Barcode."
-        redirect_to ausleihe_path and return
+
+        # Workaround for invalid barcodes taped on folders
+        # remove leading zeros, then take the first four values (if existing)
+        workaround_f = f.sub!(/^0*/, "")[0..3]
+        Rails.logger.warn("Input `#{f}` for folderId or barcode was modified to `#{workaround_f}`.")
+
+
+        if workaround_f.length != 4
+          flash[:alert] = "#{Time.new}: \"#{f}\" ist keine korrekte ID und kein korrekter Barcode. Ein Reparaturversuch schlug fehl."
+          redirect_to ausleihe_path and return
+        else
+          warnings << "`#{f}` wurde zu `#{workaround_f}` abgeändert."
+          barcodeId = workaround_f
+        end          
       end
 
       old_folder_instance = OldFolderInstance.find_by(barcodeId: barcodeId)
@@ -66,6 +85,13 @@ class AusleiheController < ApplicationController
 
     lent_instances = instances.reject { |i| i.old_lend_out.nil? }
 
+
+    if warnings.count > 0
+      warnings << 'Falls Barcodes gescannt wurden, sind diese möglicherweise fehlerhaft erstellt worden.'
+      flash[:warning] = warnings.join(' ')
+    end
+
+
     if lent_instances.empty?
       redirect_to lending_form_path(old_folder_instances: instances) and return
 
@@ -74,10 +100,10 @@ class AusleiheController < ApplicationController
 
     else
       lentAsStrings = lent_instances
-                          .map { |i| i.barcodeId }
-                          .join(', ')
+      .map { |i| i.barcodeId }
+      .join(', ')
       allAsStrings = instances.map { |i| i.barcodeId }
-                          .join(', ')
+      .join(', ')
 
       message = ["#{Time.new}: Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen."]
       message << "Ordner-Exemplare: #{allAsStrings}, davon verliehen: #{lentAsStrings}"
@@ -90,7 +116,7 @@ class AusleiheController < ApplicationController
   # Renders the form when lending folder_instances. The form calls lending_action on submit.
   def lending_form
     instances = params[:old_folder_instances]
-                    .map { |id| OldFolderInstance.find_by_id(id) }
+    .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
 
     if found_instances.count < instances.count
@@ -106,7 +132,7 @@ class AusleiheController < ApplicationController
     Rails.logger.debug("#{params}")
     @old_lend_out = OldLendOut.new(old_lend_out_params)
     instances = params[:old_folder_instances]
-                    .map { |id| OldFolderInstance.find_by_id(id) }
+    .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
 
     if found_instances.count < instances.count
@@ -114,9 +140,9 @@ class AusleiheController < ApplicationController
     end
 
     all_available = found_instances
-                        .map { |i| i.old_lend_out }
-                        .compact
-                        .empty?
+    .map { |i| i.old_lend_out }
+    .compact
+    .empty?
 
     unless all_available
       flash[:alert] = "#{Time.new}: Einige der Ordner sind bereits verliehen."
@@ -139,7 +165,7 @@ class AusleiheController < ApplicationController
   # Renders the form when returning folder_instances. The form calls returning_action on submit.
   def returning_form
     instances = params[:old_folder_instances]
-                    .map { |id| OldFolderInstance.find_by_id(id) }
+    .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
 
     if found_instances.count < instances.count
