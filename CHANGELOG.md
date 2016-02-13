@@ -1,3 +1,11 @@
+# 0.0.13
+
+ * Fixed: Javascript-Dateien waren áuf production nicht aktualisiert; dies wurde nachgeholt.
+ * [Workaround: fehlender UTF-8-Support in SQLITE wird durch Einfügen von Wildcards umgangen](https://github.com/ironjan/klausurtool-ror/issues/64)
+ * [Fixed: Fehlerhafte Feedback-Nachricht beim Verleihen](https://github.com/ironjan/klausurtool-ror/issues/66)
+ * [Fixed: Unvollständige Liste für Ordner mit fehlerhaftem Encoding](https://github.com/ironjan/klausurtool-ror/issues/)
+ * [Fixed: Barcodes auf bestimmten Ordnern wurden korrekt als fehlerhaft erkannt, kleben aber nun mal so auf den Ordnern :/](https://github.com/ironjan/klausurtool-ror/issues/49)
+
 # 0.0.12
 
  * [Fixed: Ordner-Details in Admin-Bereich gefixt](https://github.com/ironjan/klausurtool-ror/issues/65)
