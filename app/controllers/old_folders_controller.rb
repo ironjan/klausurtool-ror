@@ -15,7 +15,7 @@ class OldFoldersController < ApplicationController
     @old_folders = OldFolder.all
     @old_folders = @old_folders.select { |folder| folder.title[regex]}
     
-    Rails.logger.debug("Filtered down to #{@old_exams.count} exams with broken encodings")
+    Rails.logger.debug("Filtered down to #{@old_folders.count} exams with broken encodings")
   end
 
   def show
