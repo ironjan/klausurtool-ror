@@ -1,63 +1,70 @@
 <% page_heading 'Verleihen' %>
 
+<div class="warning">
+  <span class="pull-right">×</span>
+  Bitte erinnere den Studenten daran, dass die Ordner nur zum Kopieren gedacht sind und nach 2 Werktagen zurückgebracht werden sollen.
+</div>
+
+
 <%= form_for @old_lend_out, url: lending_action_path, html: {class: 'form-horizontal', role: 'form'} do |f| %>
-    <% if @old_lend_out.errors.any? %>
-        <div id="error_explanation full-width">
-          <h2>Fehler beim Ausleihen:</h2>
-          <ul>
-            <% @old_lend_out.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
+<% if @old_lend_out.errors.any? %>
+<div id="error_explanation full-width">
+  <h2>Fehler beim Ausleihen:</h2>
+  <ul>
+    <% @old_lend_out.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
     <% end %>
+  </ul>
+</div>
+<% end %>
 
-    <div class="form-group row">
-      <%= f.label :folders, 'Ordner', :class => 'control-label col-sm-4' %>
-      <div class="col-sm-8">
-        <ul id="folders">
-          <% @old_lend_out.old_folder_instances.each do |i| %>
-              <li>
-                <%= i.barcodeId %>, <%= i.old_folder.title %>
-                <%= hidden_field_tag 'old_folder_instances[]', i.id %>
-              </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
+<div class="form-group row">
+  <%= f.label :folders, 'Ordner', :class => 'control-label col-sm-4' %>
+  <div class="col-sm-8">
+    <ul id="folders">
+      <% @old_lend_out.old_folder_instances.each do |i| %>
+      <li>
+        <%= i.barcodeId %>, <%= i.old_folder.title %>
+        <%= hidden_field_tag 'old_folder_instances[]', i.id %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
 
-    <div class="form-group row">
-      <%= f.label :weigth, 'Gewicht der Ordner', :class => 'control-label col-sm-4' %>
-      <div class="col-sm-8">
-        <%= f.number_field :weigth, required: true, min: 1, :class => 'form-control', autofocus: true  %>
-      </div>
-    </div>
-    <div class="form-group row">
-      <%= f.label 'IMT-Login des Studenten', :class => 'control-label col-sm-4' %>
-      <div class="col-sm-8">
-        <%= f.text_field :imt, required: true, :class => 'form-control' %>
-      </div>
-    </div>
-    <div class="form-group row">
-      <%= f.label 'Verleiher', :class => 'control-label col-sm-4' %>
-      <div class="col-sm-8">
-        <%= f.text_field :lender, required: true, :class => 'form-control' %>
-      </div>
-    </div>
-    <div class="form-group row">
-      <%= f.label 'Pfand', :class => 'control-label col-sm-4' %>
-      <div class="col-sm-8">
-        <%= f.text_field :deposit, required: true, :class => 'form-control' %>
-      </div>
-    </div>
+<div class="form-group row">
+  <%= f.label :weigth, 'Gewicht der Ordner', :class => 'control-label col-sm-4' %>
+  <div class="col-sm-8">
+    <%= f.number_field :weigth, required: true, min: 1, :class => 'form-control', autofocus: true  %>
+  </div>
+</div>
+<div class="form-group row">
+  <%= f.label 'IMT-Login des Studenten', :class => 'control-label col-sm-4' %>
+  <div class="col-sm-8">
+    <%= f.text_field :imt, required: true, :class => 'form-control' %>
+  </div>
+</div>
+<div class="form-group row">
+  <%= f.label 'Verleiher', :class => 'control-label col-sm-4' %>
+  <div class="col-sm-8">
+    <%= f.text_field :lender, required: true, :class => 'form-control' %>
+  </div>
+</div>
+<div class="form-group row">
+  <%= f.label 'Pfand', :class => 'control-label col-sm-4' %>
+  <div class="col-sm-8">
+    <%= f.text_field :deposit, required: true, :class => 'form-control' %>
+  </div>
+</div>
 
-    <div class="pull-right">
-      <div class="form-group row">
-        <div class="col-sm-2">
-          <%= f.submit '(W)eiter', class: 'btn btn-primary', :accesskey => 'w' %>
-        </div>
-      </div>
+
+<div class="pull-right">
+  <div class="form-group row">
+    <div class="col-sm-2">
+      <%= f.submit '(W)eiter', class: 'btn btn-primary', :accesskey => 'w' %>
     </div>
+  </div>
+</div>
 
 <% end %>
