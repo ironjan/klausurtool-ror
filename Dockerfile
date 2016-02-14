@@ -21,8 +21,8 @@ USER klausurtool
 
 # create empty development database
 RUN bin/rake db:schema:load
-# precompile assets
-RUN bin/rake assets:precompile
+# precompile assets for production
+RUN RAILS_ENV=production bin/rake assets:precompile
 
 # start rails, listening on port 3000
 ENV __LISTEN_ADDR="0.0.0.0"
