@@ -8,12 +8,7 @@
       <%= render 'old_lend_out_infos', old_lend_out: old_lend_out %>
     </div>
     <div class="half-width">
-      <dl>
-        <dt>Ordner</dt>
-        <% old_lend_out.old_folder_instances.each do |i| %>
-        <dd><%= i.barcodeId %>, <%= i.old_folder.title %></dd>
-        <% end %>
-      </dl>
+      <%= render 'old_lend_out_folder_list', old_lend_out: old_lend_out %>
     </div>
   </div>
 
