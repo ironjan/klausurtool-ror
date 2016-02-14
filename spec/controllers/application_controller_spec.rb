@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe ApplicationController do
-	it "reminds me to implement spec for this controller"
-	it "returns the index when required"
+
+	it "returns the index when required" do
+		get :index
+		expect(response).to render_template(:index)
+	end
 end
