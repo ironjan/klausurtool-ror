@@ -80,17 +80,17 @@ describe OldFolder do
     end
   end
 
-describe "OldFolder color handling" do
-  it "returns the correct css-color" do
-    expect(FactoryGirl.build(:old_folder, color: :black).css_color
-).to eq("#000")
-    expect(FactoryGirl.build(:old_folder, color: :red).css_color
-).to eq("#f00")
-    expect(FactoryGirl.build(:old_folder, color: :blue).css_color
-).to eq("#00f")
-    expect(FactoryGirl.build(:old_folder, color: :green).css_color
-).to eq("#0f0")
-  end
+  describe "OldFolder color handling" do
+    it "returns the correct css-color" do
+      expect(FactoryGirl.build(:old_folder, color: :black).css_color
+      ).to eq("#000")
+      expect(FactoryGirl.build(:old_folder, color: :red).css_color
+      ).to eq("#f00")
+      expect(FactoryGirl.build(:old_folder, color: :blue).css_color
+      ).to eq("#00f")
+      expect(FactoryGirl.build(:old_folder, color: :green).css_color
+      ).to eq("#0f0")
+    end
 
-end
+  end
 end

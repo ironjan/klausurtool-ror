@@ -12,7 +12,6 @@ TITLE_PRUEFUNG = "Prüfung"
 TITLE_TIT_LE = "Tit le"
 
 
-
 describe OldExam do
   describe "Basic functionality" do
 
