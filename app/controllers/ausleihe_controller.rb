@@ -1,17 +1,10 @@
 class AusleiheController < ApplicationController
+  include LentFolders, LendingArchive
+
   layout 'ausleihe', except: 'error'
 
+
   def index
-  end
-
-  def lent
-    @old_lend_outs = OldLendOut.all
-  end
-
-  def history
-    @archived_lend_outs = ArchivedOldLendOut
-    .order(:receivingTime => :desc)
-    .paginate(:page => params[:page], :per_page => 50)
   end
 
   def folders
@@ -20,8 +13,8 @@ class AusleiheController < ApplicationController
     end
 
     @old_folder_instances = OldFolderInstance
-    .search(params[:search])
-    .paginate(:page => params[:page], :per_page => 50)
+                                .search(params[:search])
+                                .paginate(:page => params[:page], :per_page => 50)
   end
 
   def exams
@@ -30,8 +23,8 @@ class AusleiheController < ApplicationController
     end
 
     @old_exams = OldExam
-    .search(params[:search])
-    .paginate(:page => params[:page], :per_page => 50)
+                     .search(params[:search])
+                     .paginate(:page => params[:page], :per_page => 50)
   end
 
   # This controller method is used to decide if we are lending or returning folders. It redirects to the corresponding
@@ -43,13 +36,12 @@ class AusleiheController < ApplicationController
     warnings = []
 
     Rails.logger.debug("Got switch request containing #{folderList.count} elements.")
-    folderList.each do |f|
-      Rails.logger.debug(" Parsing `#{f}`.")
-      f = f.strip
-      next if f.empty?
+    folderList = folderList.map { |f| f.strip }
+                     .reject { |f| f.empty? }
 
-      Rails.logger.debug(" `#{f}` has been stripped and is not empty.")
-      
+    folderList.each do |f|
+      Rails.logger.debug(" `#{f}` has been stripped and was not empty.")
+
       if f.length == 4
         Rails.logger.debug(" `#{f}` is 4 chars long. barcodeId will be #{f}.")
         barcodeId = f
@@ -70,7 +62,7 @@ class AusleiheController < ApplicationController
         else
           warnings << "`#{f}` wurde zu `#{workaround_f}` abgeändert."
           barcodeId = workaround_f
-        end          
+        end
       end
 
       old_folder_instance = OldFolderInstance.find_by(barcodeId: barcodeId)
@@ -100,10 +92,10 @@ class AusleiheController < ApplicationController
 
     else
       lentAsStrings = lent_instances
-      .map { |i| i.barcodeId }
-      .join(', ')
+                          .map { |i| i.barcodeId }
+                          .join(', ')
       allAsStrings = instances.map { |i| i.barcodeId }
-      .join(', ')
+                         .join(', ')
 
       message = ["#{Time.new}: Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen."]
       message << "Ordner-Exemplare: #{allAsStrings}, davon verliehen: #{lentAsStrings}"
@@ -116,7 +108,7 @@ class AusleiheController < ApplicationController
   # Renders the form when lending folder_instances. The form calls lending_action on submit.
   def lending_form
     instances = params[:old_folder_instances]
-    .map { |id| OldFolderInstance.find_by_id(id) }
+                    .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
 
     if found_instances.count < instances.count
@@ -132,7 +124,7 @@ class AusleiheController < ApplicationController
     Rails.logger.debug("#{params}")
     @old_lend_out = OldLendOut.new(old_lend_out_params)
     instances = params[:old_folder_instances]
-    .map { |id| OldFolderInstance.find_by_id(id) }
+                    .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
 
     if found_instances.count < instances.count
@@ -140,9 +132,9 @@ class AusleiheController < ApplicationController
     end
 
     all_available = found_instances
-    .map { |i| i.old_lend_out }
-    .compact
-    .empty?
+                        .map { |i| i.old_lend_out }
+                        .compact
+                        .empty?
 
     unless all_available
       flash[:alert] = "#{Time.new}: Einige der Ordner sind bereits verliehen."
@@ -165,7 +157,7 @@ class AusleiheController < ApplicationController
   # Renders the form when returning folder_instances. The form calls returning_action on submit.
   def returning_form
     instances = params[:old_folder_instances]
-    .map { |id| OldFolderInstance.find_by_id(id) }
+                    .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
 
     if found_instances.count < instances.count

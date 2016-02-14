@@ -17,30 +17,8 @@
 
     <div class="form-group row">
       <div class="col-sm-10 pull-right">
-        <dl>
-          <dt>Verleiher</dt>
-          <dd><%= @old_lend_out.lender %></dd>
-
-          <dt>Gewicht</dt>
-          <dd><%= @old_lend_out.weigth %>g</dd>
-
-          <dt>Imt-Login</dt>
-          <dd><%= @old_lend_out.imt %></dd>
-
-          <dt>Name</dt>
-          <dd><%= name_for_login @old_lend_out.imt %></dd>
-
-          <dt>Pfand</dt>
-          <dd><%= @old_lend_out.deposit %></dd>
-
-          <dt class='folderlist'>Ordner</dt>
-          <% @old_lend_out.old_folder_instances.each do |i| %>
-              <dd class='folderlist'>
-                <%= i.barcodeId %>, <%= i.old_folder.title %>
-                <%= hidden_field_tag 'old_folder_instances[]', i.id %>
-              </dd>
-          <% end %>
-        </dl>
+        <%= render 'old_lend_out_infos', old_lend_out: @old_lend_out %>
+        <%= render 'old_lend_out_folder_list', old_lend_out: @old_lend_out %>
       </div>
     </div>
 

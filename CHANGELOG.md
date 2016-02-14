@@ -1,3 +1,12 @@
+# 0.0.15
+
+ * [Erinnerung beim Verleihen hinzugefügt](https://github.com/ironjan/klausurtool-ror/issues/67)
+ * [Fixed: Größe der JavaScript-Dateien stark reduziert](https://github.com/ironjan/klausurtool-ror/issues/47)
+ * [Fixed: Bug im Backend beim Auflisten der Ordner mit kaputten Namen](https://github.com/ironjan/klausurtool-ror/issues/86)
+ * Code-Clean up: [#6](https://github.com/ironjan/klausurtool-ror/issues/6) und weitere
+ * Mehr Tests, um Regressions zu vermeiden
+ * Kleinere Bugs behoben, die es nicht ins Live-System geschafft haben
+
 # 0.0.14
 
  * Updated production assets
