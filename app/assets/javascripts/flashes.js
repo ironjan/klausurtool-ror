@@ -1,5 +1,4 @@
 var addClickListener = function (element) {
-    element = flashes[i];
     element.addEventListener("click", function (event) {
         event.currentTarget.style.display = 'none';
     }, false);
