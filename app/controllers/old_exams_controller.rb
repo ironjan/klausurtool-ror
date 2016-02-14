@@ -1,4 +1,6 @@
 class OldExamsController < ApplicationController
+  include SearchableIndex
+
   layout 'admin'
 
   def create
@@ -17,10 +19,7 @@ class OldExamsController < ApplicationController
 
 
   def index
-    if params[:reset]
-      params[:search] = nil
-    end
-
+    clear_search_on_reset
 
     @old_exams = OldExam
                      .search(params[:search])

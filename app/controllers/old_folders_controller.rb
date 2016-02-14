@@ -1,11 +1,9 @@
 class OldFoldersController < ApplicationController
+  include SearchableIndex
+
   layout 'admin'
 
   def index
-    if params[:reset]
-      redirect_to old_folders_path
-    end
-
     @old_folders = OldFolder.search(params[:search])
                        .paginate(:page => params[:page], :per_page => 50)
   end
