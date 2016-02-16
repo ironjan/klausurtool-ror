@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     end
   end
 
+  # TODO is this route used?
   get '/search' => 'old_exams#index'
 
   root 'application#index'

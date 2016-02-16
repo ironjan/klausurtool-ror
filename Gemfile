@@ -3,8 +3,9 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.4'
 gem 'sqlite3'
 gem 'will_paginate', '~> 3.0.6'
-
-
+gem 'net-ldap'
+gem 'rake'
+gem 'rails-i18n', '~> 4.0.0'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '~> 5.0'
@@ -37,6 +38,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+
+  gem 'rspec-rails'
+  gem 'rspec-mocks'
+  gem 'simplecov', :require => false, :group => :test
 end
 
 group :development do
@@ -45,5 +50,8 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'faker'
 end
-

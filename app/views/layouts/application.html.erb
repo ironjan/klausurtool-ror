@@ -1,9 +1,7 @@
 <%= render 'header' %>
-<main class="center">
-	<h1><%= page_title %></h1>
-	<% flash.each do |name, msg| -%>
-	<%= content_tag :div, msg, class: name %>
-	<% end %>
-	<%= yield %>
-</main>
+<%= render 'flashes' %>
+
+<%= yield %>
+
+
 <%= render 'footer' %>
