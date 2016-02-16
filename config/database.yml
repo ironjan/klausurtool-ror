@@ -6,8 +6,8 @@
 #
 default: &default
   adapter: mysql2
-  username: klausurtool
-  password: u9d1ZSnESDHK7s2U
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PW'] %>
   encoding: utf8
   cast: false
   pool: 5
