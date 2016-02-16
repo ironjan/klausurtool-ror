@@ -36,32 +36,32 @@ class AusleiheController < ApplicationController
     warnings = []
 
     Rails.logger.debug("Got switch request containing #{folderList.count} elements.")
-    folderList = folderList.map { |f| f.strip }
-                     .reject { |f| f.empty? }
+    folderList = folderList.map { |f| [f, f.strip] }
+                     .reject { |f,stripped| f.empty? }
 
-    folderList.each do |f|
-      Rails.logger.debug(" `#{f}` has been stripped and was not empty.")
+    folderList.each do |f,stripped|
+      Rails.logger.debug(" `#{f}` has been stripped to `#{stripped}` and was not empty.")
 
-      if f.length == 4
-        Rails.logger.debug(" `#{f}` is 4 chars long. barcodeId will be #{f}.")
-        barcodeId = f
-      elsif f.length == 8
-        Rails.logger.debug(" `#{f}` is 8 chars long. barcodeId will be #{f[3..6]}.")
-        barcodeId = f[3..6]
+      if stripped.length == 4
+        Rails.logger.debug(" `#{stripped}` is 4 chars long. barcodeId will be #{stripped}.")
+        barcodeId = stripped
+      elsif stripped.length == 8
+        Rails.logger.debug(" `#{stripped}` is 8 chars long. barcodeId will be #{stripped[3..6]}.")
+        barcodeId = stripped[3..6]
       else
 
         # Workaround for invalid barcodes taped on folders
         # remove leading zeros, then take the first four values (if existing)
-        workaround_f = f.sub!(/^0*/, "")[0..3]
-        Rails.logger.warn("Input `#{f}` for folderId or barcode was modified to `#{workaround_f}`.")
+        workaround_stripped = stripped.sub!(/^0*/, "")[0..3]
+        Rails.logger.warn("Input `#{stripped}` for folderId or barcode was modified to `#{workaround_stripped}`.")
 
 
-        if workaround_f.length != 4
+        if workaround_stripped.length != 4
           flash[:alert] = "#{Time.new}: \"#{f}\" ist keine korrekte ID und kein korrekter Barcode. Ein Reparaturversuch schlug fehl."
           redirect_to ausleihe_path and return
         else
-          warnings << "`#{f}` wurde zu `#{workaround_f}` abgeändert."
-          barcodeId = workaround_f
+          warnings << "`#{f}` wurde zu `#{workaround_stripped}` abgeändert."
+          barcodeId = workaround_stripped
         end
       end
 
@@ -79,7 +79,6 @@ class AusleiheController < ApplicationController
 
 
     if warnings.count > 0
-      warnings << 'Falls Barcodes gescannt wurden, sind diese möglicherweise fehlerhaft erstellt worden.'
       flash[:warning] = warnings.join(' ')
     end
 
