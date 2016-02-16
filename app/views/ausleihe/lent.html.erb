@@ -1,7 +1,7 @@
 <%= page_heading 'Aktuell verliehen' %>
 
 
-<% if @old_lend_outs.empty? %>
+<% if @old_lend_outs.nil? || @old_lend_outs.empty? %>
     <p>Aktuell sind keine Ordner verliehen.</p>
 <% end %>
 

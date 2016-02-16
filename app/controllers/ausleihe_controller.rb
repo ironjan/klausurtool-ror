@@ -1,17 +1,10 @@
 class AusleiheController < ApplicationController
+  include LentFolders, LendingArchive
+
   layout 'ausleihe', except: 'error'
 
+
   def index
-  end
-
-  def lent
-    @old_lend_outs = OldLendOut.all
-  end
-
-  def history
-    @archived_lend_outs = ArchivedOldLendOut
-                              .order(:receivingTime => :desc)
-                              .paginate(:page => params[:page], :per_page => 50)
   end
 
   def folders
@@ -40,18 +33,36 @@ class AusleiheController < ApplicationController
     folderList = params[:folderList].split(/\r?\n/)
 
     instances = []
+    warnings = []
+
+    Rails.logger.debug("Got switch request containing #{folderList.count} elements.")
+    folderList = folderList.map { |f| f.strip }
+                     .reject { |f| f.empty? }
 
     folderList.each do |f|
-      f = f.strip
-      next if f.empty?
+      Rails.logger.debug(" `#{f}` has been stripped and was not empty.")
 
       if f.length == 4
+        Rails.logger.debug(" `#{f}` is 4 chars long. barcodeId will be #{f}.")
         barcodeId = f
       elsif f.length == 8
+        Rails.logger.debug(" `#{f}` is 8 chars long. barcodeId will be #{f[3..6]}.")
         barcodeId = f[3..6]
       else
-        flash[:alert] = "#{Time.new}: \"#{f}\" ist keine korrekte ID und kein korrekter Barcode."
-        redirect_to ausleihe_path and return
+
+        # Workaround for invalid barcodes taped on folders
+        # remove leading zeros, then take the first four values (if existing)
+        workaround_f = f.sub!(/^0*/, "")[0..3]
+        Rails.logger.warn("Input `#{f}` for folderId or barcode was modified to `#{workaround_f}`.")
+
+
+        if workaround_f.length != 4
+          flash[:alert] = "#{Time.new}: \"#{f}\" ist keine korrekte ID und kein korrekter Barcode. Ein Reparaturversuch schlug fehl."
+          redirect_to ausleihe_path and return
+        else
+          warnings << "`#{f}` wurde zu `#{workaround_f}` abgeändert."
+          barcodeId = workaround_f
+        end
       end
 
       old_folder_instance = OldFolderInstance.find_by(barcodeId: barcodeId)
@@ -66,6 +77,13 @@ class AusleiheController < ApplicationController
 
     lent_instances = instances.reject { |i| i.old_lend_out.nil? }
 
+
+    if warnings.count > 0
+      warnings << 'Falls Barcodes gescannt wurden, sind diese möglicherweise fehlerhaft erstellt worden.'
+      flash[:warning] = warnings.join(' ')
+    end
+
+
     if lent_instances.empty?
       redirect_to lending_form_path(old_folder_instances: instances) and return
 
@@ -77,7 +95,7 @@ class AusleiheController < ApplicationController
                           .map { |i| i.barcodeId }
                           .join(', ')
       allAsStrings = instances.map { |i| i.barcodeId }
-                          .join(', ')
+                         .join(', ')
 
       message = ["#{Time.new}: Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen."]
       message << "Ordner-Exemplare: #{allAsStrings}, davon verliehen: #{lentAsStrings}"
@@ -132,12 +150,8 @@ class AusleiheController < ApplicationController
       end
     end
 
-    flash[:notify] = "#{Time.new}: Ordner erfolgreich verliehen"
+    flash[:notice] = "#{Time.new}: Ordner erfolgreich verliehen"
     redirect_to ausleihe_path
-
-    #rescue Exception => ex
-    #  flash[:alert] = "Fehler beim Speichern: #{ex}"
-    #  redirect_to ausleihe_path
   end
 
   # Renders the form when returning folder_instances. The form calls returning_action on submit.

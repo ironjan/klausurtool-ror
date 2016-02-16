@@ -5,26 +5,10 @@
   </div>
   <div class="full-width">
     <div class="half-width">
-      <dl>
-        <dt>Pfand</dt>
-        <dd><%= old_lend_out.deposit %></dd>
-        <dt>Gewicht</dt>
-        <dd><%= old_lend_out.weigth %>g</dd>
-        <dt>Raus von</dt>
-        <dd><%= old_lend_out.lender %></dd>
-        <dt>Imt-Login:</dt>
-        <dd><%= old_lend_out.imt %></dd>
-        <dt>Name:</dt>
-        <dd><%= name_for_login old_lend_out.imt %></dd>
-      </dl>
+      <%= render 'ausleihe/old_lend_out_infos', old_lend_out: old_lend_out %>
     </div>
     <div class="half-width">
-      <dl>
-        <dt>Ordner</dt>
-        <% old_lend_out.old_folder_instances.each do |i| %>
-        <dd><%= i.barcodeId %>, <%= i.old_folder.title %></dd>
-        <% end %>
-      </dl>
+      <%= render 'ausleihe/old_lend_out_folder_list', old_lend_out: old_lend_out %>
     </div>
   </div>
 

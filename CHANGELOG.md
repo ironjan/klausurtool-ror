@@ -1,3 +1,28 @@
+# 0.0.15
+
+ * [Erinnerung beim Verleihen hinzugefügt](https://github.com/ironjan/klausurtool-ror/issues/67)
+ * [Fixed: Größe der JavaScript-Dateien stark reduziert](https://github.com/ironjan/klausurtool-ror/issues/47)
+ * [Fixed: Bug im Backend beim Auflisten der Ordner mit kaputten Namen](https://github.com/ironjan/klausurtool-ror/issues/86)
+ * Code-Clean up: [#6](https://github.com/ironjan/klausurtool-ror/issues/6) und weitere
+ * Mehr Tests, um Regressions zu vermeiden
+ * Kleinere Bugs behoben, die es nicht ins Live-System geschafft haben
+
+# 0.0.14
+
+ * Updated production assets
+
+# 0.0.13
+
+ * Fixed: Javascript-Dateien waren áuf production nicht aktualisiert; dies wurde nachgeholt.
+ * [Workaround: fehlender UTF-8-Support in SQLITE wird durch Einfügen von Wildcards umgangen](https://github.com/ironjan/klausurtool-ror/issues/64)
+ * [Fixed: Fehlerhafte Feedback-Nachricht beim Verleihen](https://github.com/ironjan/klausurtool-ror/issues/66)
+ * [Fixed: Unvollständige Liste für Ordner mit fehlerhaftem Encoding](https://github.com/ironjan/klausurtool-ror/issues/)
+ * [Fixed: Barcodes auf bestimmten Ordnern wurden korrekt als fehlerhaft erkannt, kleben aber nun mal so auf den Ordnern :/](https://github.com/ironjan/klausurtool-ror/issues/49)
+
+# 0.0.12
+
+ * [Fixed: Ordner-Details in Admin-Bereich gefixt](https://github.com/ironjan/klausurtool-ror/issues/65)
+
 # 0.0.11
 
  * [Fixed: Imt-Login, Name des Studenten und Pfand zum Zurücknehm-Formular hinzugefügt](https://github.com/ironjan/klausurtool-ror/issues/69)

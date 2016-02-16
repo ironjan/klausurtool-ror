@@ -1,0 +1,6 @@
+<dl class="folderlist">
+  <dt>Ordner</dt>
+  <% old_lend_out.old_folder_instances.each do |i| %>
+      <dd><%= i.barcodeId %>, <%= i.old_folder.title %></dd>
+  <% end %>
+</dl>

@@ -1,4 +1,6 @@
 class OldExamsController < ApplicationController
+  include SearchableIndex
+
   layout 'admin'
 
   def create
@@ -17,10 +19,7 @@ class OldExamsController < ApplicationController
 
 
   def index
-    if params[:reset]
-      params[:search] = nil
-    end
-
+    clear_search_on_reset
 
     @old_exams = OldExam
                      .search(params[:search])
@@ -32,7 +31,7 @@ class OldExamsController < ApplicationController
     @old_exams = OldExam.all
     Rails.logger.debug("Found #{@old_exams.count} exams")
     @old_exams = @old_exams
-    .select { |exam| regex.match(exam.examiners) || regex.match(exam.title) }
+                     .select { |exam| regex.match(exam.examiners) || regex.match(exam.title) }
     Rails.logger.debug("Filtered down to #{@old_exams.count} exams with broken encodings")
   end
 
