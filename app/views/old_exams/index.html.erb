@@ -5,45 +5,13 @@
   <%= form_tag old_exams_path, method: 'get', :class => 'form-inline', :role => 'form' do %>
       <div class="form-group">
         <%= label_tag :search, 'Prüfung filtern:', :class => 'control-label' %>
-        <%= text_field_tag :search, params[:search], :class => 'form-control', autofocus: true  %>
+        <%= text_field_tag :search, params[:search], :class => 'form-control', autofocus: true %>
       </div>
       <%= submit_tag 'Filtern', :class => 'btn btn-primary' %>
       <%= submit_tag 'Zurücksetzen', :id => 'reset_button', :name => 'reset', :class => 'btn' %>
       <%= link_to 'Nur fehlerhafte Prüfungen anzeigen.', exams_broken_encodings_path, class: "btn btn-link pull-right" %>
 
-<% end %>
+  <% end %>
 
-  <div class="spacer">
-    <% if @old_exams.size > 0 %>
-        <%= will_paginate @old_exams %>
-
-        <table class="table table-hover">
-          <tr>
-            <th></th>
-            <th>Veranstaltungen</th>
-            <th>Prüfer</th>
-            <th>Datum</th>
-            <th>Ordner</th>
-            <th></th>
-          </tr>
-
-          <% @old_exams.each do |e| %>
-              <tr>
-                <td style="background-color: <%= e.old_folder.css_color %>"></td>
-                <td><%= e.title %></td>
-                <td><%= e.examiners %></td>
-                <td><%= e.date %></td>
-                <td><%= link_to e.old_folder.title, e.old_folder %></td>
-                <td>
-                  <%= link_to 'Anzeigen', old_exam_path(e) %>,
-                  <%= link_to 'Bearbeiten', edit_old_exam_path(e) %>
-                </td>
-              </tr>
-          <% end %>
-        </table>
-
-    <% else %>
-        <p>Keine Prüfungen gefunden.</p>
-    <% end %>
-  </div>
+  <%= render 'old_exams/exams_table' %>
 </div>
