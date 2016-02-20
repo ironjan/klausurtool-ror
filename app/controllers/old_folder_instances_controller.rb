@@ -1,12 +1,10 @@
 class OldFolderInstancesController < ApplicationController
-  include SearchableIndex
+  include PaginatedFolderInstanceList
 
   layout 'admin'
 
   def index
-    @old_folder_instances = OldFolderInstance
-                                .search(params[:search])
-                                .paginate(:page => params[:page], :per_page => 50)
+    paginated_folder_instance_list
   end
 
   def show
