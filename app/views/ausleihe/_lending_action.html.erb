@@ -1,0 +1,3 @@
+<% if i.old_lend_out.nil? %>
+    <%= link_to 'Verleihen', lending_form_path(old_folder_instances: [i]) %>
+<% end %>

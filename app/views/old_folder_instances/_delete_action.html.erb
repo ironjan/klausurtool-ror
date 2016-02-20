@@ -1,0 +1,4 @@
+<% if i.old_folder.old_folder_instances.count > 1 %>
+    <%= link_to 'Löschen', [i.old_folder, i], method: :delete,
+                data: { confirm: 'Ordner-Exemplar wirklich löschen?' } %>
+<% end %>
