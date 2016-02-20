@@ -1,5 +1,5 @@
 class OldExamsController < ApplicationController
-  include SearchableIndex
+  include PaginatedExamsList
 
   layout 'admin'
 
@@ -19,11 +19,7 @@ class OldExamsController < ApplicationController
 
 
   def index
-    clear_search_on_reset
-
-    @old_exams = OldExam
-                     .search(params[:search])
-                     .paginate(:page => params[:page], :per_page => 50)
+    paginated_exams_list
   end
 
   def list_broken

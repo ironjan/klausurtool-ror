@@ -1,5 +1,6 @@
 class AusleiheController < ApplicationController
-  include LentFolders, LendingArchive
+  include LentFolders, LendingArchive, PaginatedFolderInstanceList, PaginatedExamsList
+
 
   layout 'ausleihe', except: 'error'
 
@@ -8,23 +9,11 @@ class AusleiheController < ApplicationController
   end
 
   def folders
-    if params[:reset]
-      params[:search] = nil
-    end
-
-    @old_folder_instances = OldFolderInstance
-                                .search(params[:search])
-                                .paginate(:page => params[:page], :per_page => 50)
+    paginated_folder_instance_list
   end
 
   def exams
-    if params[:reset]
-      params[:search] = nil
-    end
-
-    @old_exams = OldExam
-                     .search(params[:search])
-                     .paginate(:page => params[:page], :per_page => 50)
+    paginated_exams_list
   end
 
   # This controller method is used to decide if we are lending or returning folders. It redirects to the corresponding
