@@ -23,9 +23,17 @@
               <td><%= link_to i.old_folder.contentType %></td>
 
               <td>
-                <!-- Action is rendered depending on the controller that renders this page -->
-                <%= render "ausleihe/lending_action", i: i if controller_name == "ausleihe" %>
-                <%= render "old_folder_instances/delete_action", i: i if controller_name == "old_folder_instances" %>
+                <% if controller_name == "ausleihe" %>
+                    <% if i.old_lend_out.nil? %>
+                        <%= link_to 'Verleihen', lending_form_path(old_folder_instances: [i]) %>
+                    <% end %>
+
+                <% elsif controller_name == "old_folder_instances" %>
+                    <% if i.old_folder.old_folder_instances.count > 1 %>
+                        <%= link_to 'Löschen', [i.old_folder, i], method: :delete,
+                                    data: {confirm: 'Ordner-Exemplar wirklich löschen?'} %>
+                    <% end %>
+                <% end %>
               </td>
             </tr>
         <% end %>
