@@ -40,16 +40,22 @@ describe OldExam do
       expect(FactoryGirl.build(:old_exam, date: nil)).to_not be_valid
     end
 
-    it "cannot have an invalid date 0000-00-00" do
-      expect(FactoryGirl.build(:old_exam, date: "0000-00-00")).to_not be_valid
+    it "fixes an invalid date of the form 0000-00-00" do
+      exam = FactoryGirl.build(:old_exam, date: "0000-00-00")
+      expect(exam.date).to eq("1970-01-01")
+      expect(exam).to be_valid
     end
 
-    it "cannot have an invalid date 2015-00-00" do
-      expect(FactoryGirl.build(:old_exam, date: "2015-00-00")).to_not be_valid
+    it "fixes an invalid date of the form 2015-00-00" do
+      exam = FactoryGirl.build(:old_exam, date: "2015-00-00")
+      expect(exam.date).to eq("2015-01-01")
+      expect(exam).to be_valid
     end
 
-    it "cannot have an invalid date 2015-12-00" do
-      expect(FactoryGirl.build(:old_exam, date: "2015-15-00")).to_not be_valid
+    it "fixes an invalid date of the form 2015-12-00" do
+      exam = FactoryGirl.build(:old_exam, date: "2015-12-00")
+      expect(exam.date).to eq("2015-12-01")
+      expect(exam).to be_valid
     end
 
     it "cannot have empty title" do
@@ -139,6 +145,24 @@ describe OldExam do
       build_autocompletion_test_data
       expect(OldExam.existing_examiners).to match([EXAMINERS_BAR, EXAMINERS_FOO, EXAMINERS_FOO_BAR])
       destroy_autocompletion_test_data
+    end
+  end
+
+  describe 'Date fixes from database' do
+    it 'returns true for has_invalid_date if its date had an invalid day before typecast' do
+      expect(FactoryGirl.build(:old_exam, date: "2015-01-00").has_invalid_date?).to be(true)
+    end
+
+    it 'returns true for has_invalid_date if its date had an invalid month before typecast' do
+      expect(FactoryGirl.build(:old_exam, date: "2015-00-21").has_invalid_date?).to be(true)
+    end
+
+    it 'returns true for has_invalid_date if its date had an invalid year before typecast' do
+      expect(FactoryGirl.build(:old_exam, date: "0000-01-21").has_invalid_date?).to be(true)
+    end
+
+    it 'returns false for has_invalid_date if its date was valid before typecase' do
+      expect(FactoryGirl.build(:old_exam, date: "2015-01-21").has_invalid_date?).to be(false)
     end
   end
 end
