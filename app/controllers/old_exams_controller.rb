@@ -1,5 +1,5 @@
 class OldExamsController < ApplicationController
-  include SearchableIndex
+  include PaginatedExamsList
 
   layout 'admin'
 
@@ -19,11 +19,7 @@ class OldExamsController < ApplicationController
 
 
   def index
-    clear_search_on_reset
-
-    @old_exams = OldExam
-                     .search(params[:search])
-                     .paginate(:page => params[:page], :per_page => 50)
+    paginated_exams_list
   end
 
   def list_broken
@@ -50,11 +46,8 @@ class OldExamsController < ApplicationController
 
   def edit
     @old_exam = OldExam.find(params[:id])
-    date_before_type_cast = @old_exam.read_attribute_before_type_cast('date')
-    if date_before_type_cast.include? '-00'
+    if @old_exam.has_invalid_date?
       flash[:alert] = "Datum in Datenbank (#{date_before_type_cast}) ist fehlerhaft. Bitte das Datum korrigieren."
-      fixed_date = date_before_type_cast.sub('0000', '1970').gsub('00', '01')
-      @old_exam.date = fixed_date
     end
   end
 
