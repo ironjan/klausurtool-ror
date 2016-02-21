@@ -1,8 +1,10 @@
 <div class="clearfix spacer">
-  <% if @old_folder_instances.nil? || @old_folder_instances.empty? %>
+  <% if old_folder_instances.nil? || old_folder_instances.empty? %>
       <p>Keine Ordner gefunden.</p>
   <% else %>
-      <%= will_paginate @old_folder_instances %>
+      <% unless @old_folder_instances.nil? %>
+          <%= will_paginate @old_folder_instances %>
+      <% end %>
 
       <table class="table table-hover">
         <tr>
@@ -14,7 +16,7 @@
           <th></th>
         </tr>
 
-        <% @old_folder_instances.each do |i| %>
+        <% old_folder_instances.each do |i| %>
             <tr>
               <td style="background-color: <%= i.old_folder.css_color %>"></td>
               <td><%= i.barcodeId %></td>
