@@ -23,7 +23,18 @@ class OldFolderInstancesController < ApplicationController
     @old_folder = OldFolder.find(params[:old_folder_id])
     @old_folder_instance = @old_folder.old_folder_instances.create(old_folder_instance_params)
     @old_folder_instance.update_and_get_barcodeId
-    @old_folder_instance.save
+
+    if @old_folder_instance.save
+      flash[:notice] = 'Exemplar wurde angelegt.'
+    else
+      messages = []
+      messages << 'Exemplar konnte nicht erstellt werden.'
+      @old_folder_instance.errors.full_messages.each do |msg|
+        messages << msg
+      end
+      flash[:alert] = messages.join(' ')
+    end
+
     redirect_to old_folder_path(@old_folder)
   end
 

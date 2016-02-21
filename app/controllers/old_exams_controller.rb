@@ -4,10 +4,23 @@ class OldExamsController < ApplicationController
   layout 'admin'
 
   def create
-    @old_folder = OldFolder.find(params[:old_folder_id])
+    @existing_titles = OldExam.existing_titles
+    @existing_examiners = OldExam.existing_examiners
+
+
+    @old_folder = OldFolder.find_by_id(params[:old_folder_id])
+
+    if @old_folder.nil?
+      flash[:alert] = 'Ordner nicht gefunden.'
+      render :new and return
+    end
+
     @old_exam = @old_folder.old_exams.create(old_exam_params)
-    @old_exam.save
-    redirect_to @old_folder
+    if @old_exam.save
+      redirect_to @old_folder
+    else
+      render :new
+    end
   end
 
   def destroy
@@ -39,10 +52,24 @@ class OldExamsController < ApplicationController
     end
   end
 
-  # def new
-  # 	# FIXME?
-  # 	@old_exam = OldExam.new
-  # end
+  def new
+    old_folder_id = params[:old_folder_id]
+
+    if old_folder_id.nil?
+      flash[:alert] = 'Kein Ordner angegeben.'
+      return
+    end
+
+    @old_folder = OldFolder.find_by_id(old_folder_id)
+
+    if @old_folder.nil?
+      flash[:alert] = 'Ordner nicht gefunden.'
+    end
+
+    @old_exam = OldExam.new
+    @existing_titles = OldExam.existing_titles
+    @existing_examiners = OldExam.existing_examiners
+  end
 
   def edit
     @old_exam = OldExam.find(params[:id])
