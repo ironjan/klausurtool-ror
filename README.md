@@ -15,6 +15,7 @@
    * ```sqlite3 --version```
   * Install Rails: ```gem install rails```
    * Add the rails bin-directory to your path 
+   * Currently, rails 4.2.4 is used
  * Install dependencies via ```bundle install```
   * If you don't have sudo access, you can install the gems to a path of your choice via e.g. ```bundle install --path $HOME/bundle/```
  * Copy ```config/secrets.yml.template``` to ```config/secrets.yml``` and generate different values for secret_key_base (You can use ```bin/rake secret```)
