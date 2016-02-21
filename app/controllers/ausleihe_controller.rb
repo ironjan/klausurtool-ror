@@ -95,12 +95,20 @@ class AusleiheController < ApplicationController
 
   # Renders the form when lending folder_instances. The form calls lending_action on submit.
   def lending_form
-    instances = params[:old_folder_instances]
+    old_folder_instances = params[:old_folder_instances]
+    if old_folder_instances.nil? || old_folder_instances.empty?
+      flash[:alert] = "#{Time.new}: Verleih-Formular kann nicht ohne Ordner aufgerufen werden."
+      redirect_to ausleihe_path and return
+    end
+
+
+    instances = old_folder_instances
                     .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
 
     if found_instances.count < instances.count
       flash[:alert] = "#{Time.new}: Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?"
+      redirect_to ausleihe_path and return
     end
 
     @old_lend_out = OldLendOut.new
@@ -109,7 +117,11 @@ class AusleiheController < ApplicationController
 
   # Lents the given folders and returns the user to the main screen.
   def lending_action
-    Rails.logger.debug("#{params}")
+
+    if params[:old_lend_out].nil?
+      render "ausleihe/lending_form" and return
+    end
+
     @old_lend_out = OldLendOut.new(old_lend_out_params)
     instances = params[:old_folder_instances]
                     .map { |id| OldFolderInstance.find_by_id(id) }
@@ -144,7 +156,14 @@ class AusleiheController < ApplicationController
 
   # Renders the form when returning folder_instances. The form calls returning_action on submit.
   def returning_form
-    instances = params[:old_folder_instances]
+    old_folder_instances = params[:old_folder_instances]
+
+    if old_folder_instances.nil? || old_folder_instances.empty?
+      flash[:alert] = "#{Time.new}: Rückgabe-Formular darf nicht ohne Ordner aufgerufen werden."
+      redirect_to ausleihe_path and return
+    end
+
+    instances = old_folder_instances
                     .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
 
@@ -163,6 +182,10 @@ class AusleiheController < ApplicationController
 
   # Takes the given folders back and returns the user to the main screen.
   def returning_action
+    if params[:id].nil?
+      render "ausleihe/returning_form" and return
+    end
+
     @old_lend_out = OldLendOut.find(params[:id])
 
     @old_lend_out.receivingTime = Time.new
