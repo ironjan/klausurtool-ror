@@ -7,7 +7,7 @@ var addClickListener = function (element) {
 var addCloseAfterOneMinute = function (flash) {
     const delay_one_minute = 60000;
     setTimeout(function () {
-        flash.style.display = 'none';
+        flash.style.display = "none";
     }, delay_one_minute);
 };
 
@@ -15,13 +15,13 @@ var addEventsToFlashes = function () {
     var flashes = document.querySelectorAll('.alert, .warning, .notice');
 
     for (i = 0; i < flashes.length; i++) {
-        flash = flashes[i];
+        var flash = flashes[i];
         addClickListener(flash);
         addCloseAfterOneMinute(flash);
     }
 
     var xButtons = document.querySelectorAll('.close');
-    for(i = 0; i<xButtons.length; i++){
+    for(var i = 0; i<xButtons.length; i++){
         addClickListener(xButtons[i]);
     }
 };
