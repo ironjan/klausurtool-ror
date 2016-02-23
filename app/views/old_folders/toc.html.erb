@@ -1,0 +1,22 @@
+
+<img src="/assets/images/pi_kreis.jpg" >
+
+
+<h1>Inhaltsverzeichnis</h1>
+
+<h2>Ordner: <%= @old_folder.title %></h2>
+
+<table>
+  <tr>
+    <th>Veranstaltung</th>
+    <th>Dozent</th>
+    <th>Datum</th>
+  </tr>
+<% @old_folder.old_exams.each do |e| %>
+  <tr>
+    <td><%= e.title %></td>
+    <td><%= e.examiners %></td>
+    <td><%= e.date %></td>
+  </tr>
+  <% end %>
+</table>

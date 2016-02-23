@@ -2,6 +2,7 @@ class OldFoldersController < ApplicationController
   include Searchable
 
   layout 'admin'
+  layout 'print', only: 'toc'
 
   def index
     clear_search_on_reset
@@ -81,6 +82,21 @@ class OldFoldersController < ApplicationController
     redirect_to old_folders_path
   end
 
+
+  def toc
+    id = params[:old_folder_id]
+    if id.nil?
+      flash[:alert] = 'Kein Ordner angegeben.' and return
+    end
+
+    @old_folder = OldFolder.find_by_id(id)
+
+    if @old_folder.nil?
+      flash[:alert] = "Ordner mit Id `#{id}` nicht gefunden."
+      @old_folder = OldFolder.new
+    end
+
+  end
 
   private
   def old_folder_params

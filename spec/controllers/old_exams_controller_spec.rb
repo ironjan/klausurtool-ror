@@ -33,14 +33,8 @@ describe OldExamsController do
   end
 
   describe "new" do
-    it "shows error if requested without folder" do
-      get :new
-      expect(response).to render_template("old_exams/new")
-      expect(flash[:alert]).to be_present
-      expect(flash[:alert]).to eq('Kein Ordner angegeben.')
-    end
 
-    it "shows error if an non-existing folder is requested" do
+    it "shows error if it is tried to create an exam in a non-existing folder" do
       get :new, old_folder_id: -1
       expect(response).to render_template("old_exams/new")
       expect(flash[:alert]).to be_present
