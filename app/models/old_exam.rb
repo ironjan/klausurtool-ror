@@ -36,19 +36,23 @@ class OldExam < ActiveRecord::Base
 
   def date
     date_attr = read_attribute(:date)
-    unless read_attribute(:date).nil?
+    unless date_attr.nil?
       return date_attr
     end
 
-    if date_before_type_cast.nil?
+    if date_before_cast.nil?
       nil
     else
-      date_before_type_cast.sub('0000', '1970').gsub('00', '01')
+      date_before_cast.sub('0000', '1970').gsub('00', '01')
     end
   end
 
+  def date_before_cast
+    read_attribute_before_type_cast('date')
+  end
+
   def has_invalid_date?
-    read_attribute_before_type_cast('date').include? '00'
+    date_before_cast.nil? || date_before_cast.include?('0000') || date_before_cast.include?('-00')
   end
 
 end

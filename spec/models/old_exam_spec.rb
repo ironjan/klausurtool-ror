@@ -41,7 +41,7 @@ describe OldExam do
     end
 
     it "fixes an invalid date of the form 0000-00-00" do
-      exam = FactoryGirl.build(:old_exam, date: "0000-00-00")
+      exam  = FactoryGirl.build(:old_exam, date: "0000-00-00")
       expect(exam.date).to eq("1970-01-01")
       expect(exam).to be_valid
     end
@@ -163,6 +163,26 @@ describe OldExam do
 
     it 'returns false for has_invalid_date if its date was valid before typecase' do
       expect(FactoryGirl.build(:old_exam, date: "2015-01-21").has_invalid_date?).to be(false)
+    end
+
+    it 'does not recognize ISO-date as invalid' do
+      expect(FactoryGirl.build(:old_exam, date: "2015-01-21 00:00:00").has_invalid_date?).to be(false)
+    end
+
+    it 'does not recognize ISO-datetime as invalid' do
+      expect(FactoryGirl.build(:old_exam, date: "2015-01-21").has_invalid_date?).to be(false)
+    end
+  end
+
+  describe 'date_before_cast' do
+    it 'returns the raw date for valid dates' do
+      exam = FactoryGirl.build(:old_exam, date: "2015-01-21")
+      expect(exam.date_before_cast).to eq("2015-01-21")
+    end
+
+    it 'returns the raw date for invalid dates' do
+      exam = FactoryGirl.build(:old_exam, date: "0000-01-21")
+      expect(exam.date_before_cast).to eq("0000-01-21")
     end
   end
 end

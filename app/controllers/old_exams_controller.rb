@@ -74,7 +74,7 @@ class OldExamsController < ApplicationController
   def edit
     @old_exam = OldExam.find(params[:id])
     if @old_exam.has_invalid_date?
-      flash[:alert] = "Datum in Datenbank (#{date_before_type_cast}) ist fehlerhaft. Bitte das Datum korrigieren."
+      flash[:alert] = "Datum in Datenbank (#{@old_exam.date_before_cast}) ist fehlerhaft. Bitte das Datum korrigieren."
     end
   end
 
