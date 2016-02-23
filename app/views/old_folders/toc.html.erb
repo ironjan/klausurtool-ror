@@ -1,22 +1,26 @@
+<div class="toc-page">
+  <div class="toc-header">
+    <h1 class="pull-left">Inhaltsverzeichnis</h1>
 
-<img src="/assets/images/pi_kreis.jpg" >
+    <img class="pull-right toc-logo" src="/assets/images/pi_kreis.jpg">
+  </div>
 
+  <div class="toc-content">
+    <h2>Ordner: <%= @old_folder.title %></h2>
 
-<h1>Inhaltsverzeichnis</h1>
-
-<h2>Ordner: <%= @old_folder.title %></h2>
-
-<table>
-  <tr>
-    <th>Veranstaltung</th>
-    <th>Dozent</th>
-    <th>Datum</th>
-  </tr>
-<% @old_folder.old_exams.each do |e| %>
-  <tr>
-    <td><%= e.title %></td>
-    <td><%= e.examiners %></td>
-    <td><%= e.date %></td>
-  </tr>
-  <% end %>
-</table>
+    <table>
+      <tr>
+        <th>Veranstaltung</th>
+        <th>Dozent</th>
+        <th>Datum</th>
+      </tr>
+      <% @old_folder.old_exams.each do |e| %>
+          <tr>
+            <td class="toc-table-title"><%= e.title %></td>
+            <td class="toc-table-examiners"><%= e.examiners %></td>
+            <td class="toc-table-date"><%= e.date %></td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

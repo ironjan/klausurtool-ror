@@ -40,10 +40,10 @@ class OldExam < ActiveRecord::Base
       return date_attr
     end
 
-    if date_before_cast.nil?
-      nil
+    if has_invalid_date?
+      date_before_cast.sub('0000', '1970').gsub('-00', '-01')
     else
-      date_before_cast.sub('0000', '1970').gsub('00', '01')
+      date_attr
     end
   end
 

@@ -1,8 +1,7 @@
 class OldFoldersController < ApplicationController
   include Searchable
 
-  layout 'admin'
-  layout 'print', only: 'toc'
+  layout 'admin', except: 'toc'
 
   def index
     clear_search_on_reset
@@ -84,6 +83,7 @@ class OldFoldersController < ApplicationController
 
 
   def toc
+
     id = params[:old_folder_id]
     if id.nil?
       flash[:alert] = 'Kein Ordner angegeben.' and return
@@ -96,6 +96,7 @@ class OldFoldersController < ApplicationController
       @old_folder = OldFolder.new
     end
 
+    render layout: "print"
   end
 
   private
