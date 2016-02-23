@@ -96,6 +96,10 @@ class OldFoldersController < ApplicationController
     end
 
     number_of_filler_exams = 34 - @old_folder.old_exams.count
+    if number_of_filler_exams < 0
+      flash[:warning] = 'Es können nicht alle Prüfungen auf eine Seite gedruckt werden. Bitte einige Klausuren archivieren oder auslaugern.'
+    end
+
     filler_exam = OldExam.new
     while number_of_filler_exams > 0
       @old_folder.old_exams << filler_exam
