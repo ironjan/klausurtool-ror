@@ -83,7 +83,6 @@ class OldFoldersController < ApplicationController
 
 
   def toc
-
     id = params[:old_folder_id]
     if id.nil?
       flash[:alert] = 'Kein Ordner angegeben.' and return
@@ -94,6 +93,13 @@ class OldFoldersController < ApplicationController
     if @old_folder.nil?
       flash[:alert] = "Ordner mit Id `#{id}` nicht gefunden."
       @old_folder = OldFolder.new
+    end
+
+    number_of_filler_exams = 34 - @old_folder.old_exams.count
+    filler_exam = OldExam.new
+    while number_of_filler_exams > 0
+      @old_folder.old_exams << filler_exam
+      number_of_filler_exams -= 1
     end
 
     render layout: "print"
