@@ -14,6 +14,7 @@ var addCloseAfterOneMinute = function (flash) {
 var addEventsToFlashes = function () {
     var flashes = document.querySelectorAll('.alert, .warning, .notice');
 
+    var i;
     for (i = 0; i < flashes.length; i++) {
         var flash = flashes[i];
         addClickListener(flash);
@@ -21,7 +22,7 @@ var addEventsToFlashes = function () {
     }
 
     var xButtons = document.querySelectorAll('.close');
-    for(var i = 0; i<xButtons.length; i++){
+    for(i = 0; i<xButtons.length; i++){
         addClickListener(xButtons[i]);
     }
 };
