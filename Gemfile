@@ -44,7 +44,8 @@ group :development, :test do
 
   gem 'rspec-rails'
   gem 'rspec-mocks'
-  gem 'simplecov', :require => false, :group => :test
+  gem 'simplecov', :require => false
+  gem 'codacy-coverage', :require => false
 end
 
 group :development do
