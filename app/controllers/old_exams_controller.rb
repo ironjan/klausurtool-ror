@@ -72,7 +72,8 @@ class OldExamsController < ApplicationController
       @old_exam.update(old_exam_params)
       redirect_to @old_folder
     else
-      @old_exam = OldExam.find(params[:id])
+      flash[:warning] = 'Ordner wurde nicht übergeben.'
+      @old_exam = OldExam.new
       render 'edit'
     end
   end
