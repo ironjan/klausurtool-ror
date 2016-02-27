@@ -47,19 +47,6 @@ describe OldExamsController do
   describe "edit" do
     it "reminds me to implement this spec"
     it "loads the edit template"
-
-    it "shows a flash message for invalid dates" do
-      invalid_date = '2015-00-00'
-      exam = FactoryGirl.build(:old_exam, date: invalid_date)
-      exam.save!
-
-      get :edit, id: exam.id
-      expect(response).to render_template("old_exams/edit")
-      expect(flash[:alert]).to be_present
-      expect(flash[:alert]).to match(/Datum in Datenbank (.*) ist fehlerhaft. Bitte das Datum korrigieren\./)
-
-      exam.destroy!
-    end
   end
 
   describe "show" do

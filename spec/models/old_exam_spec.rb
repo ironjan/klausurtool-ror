@@ -40,24 +40,6 @@ describe OldExam do
       expect(FactoryGirl.build(:old_exam, date: nil)).to_not be_valid
     end
 
-    it "fixes an invalid date of the form 0000-00-00" do
-      exam  = FactoryGirl.build(:old_exam, date: "0000-00-00")
-      expect(exam.date).to eq("1970-01-01")
-      expect(exam).to be_valid
-    end
-
-    it "fixes an invalid date of the form 2015-00-00" do
-      exam = FactoryGirl.build(:old_exam, date: "2015-00-00")
-      expect(exam.date).to eq("2015-01-01")
-      expect(exam).to be_valid
-    end
-
-    it "fixes an invalid date of the form 2015-12-00" do
-      exam = FactoryGirl.build(:old_exam, date: "2015-12-00")
-      expect(exam.date).to eq("2015-12-01")
-      expect(exam).to be_valid
-    end
-
     it "cannot have empty title" do
       expect(FactoryGirl.build(:old_exam, title: nil)).to_not be_valid
     end
