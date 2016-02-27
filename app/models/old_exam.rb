@@ -56,7 +56,12 @@ class OldExam < ActiveRecord::Base
   end
 
   def has_invalid_date?
-    date_before_cast.nil? || date_before_cast.include?('0000') || date_before_cast.include?('-00')
+    date_regex_iso = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/
+    date_regex_short =  /^\d{4}-\d{2}-\d{2}$/
+
+    is_valid = date_regex_iso.match(date_before_type_cast) || date_regex_short.match(date_before_type_cast)
+
+    not is_valid
   end
 
 end
