@@ -43,15 +43,15 @@ class OldFoldersController < ApplicationController
     if @old_folder.save
 
       i = 1
-      numberOfFolderInstances = params[:count].gsub(/\D/, '').to_i
-      Rails.logger.debug("Loop values: #{i}, #{numberOfFolderInstances}")
-      until i > numberOfFolderInstances
-        barcodeId = "#{format('%03d', @old_folder.id)}#{i}"
-        Rails.logger.debug("Trying to create instance #{i} with barcodeId #{barcodeId}")
+      number_of_instances = params[:count].gsub(/\D/, '').to_i
+      Rails.logger.debug("Loop values: #{i}, #{number_of_instances}")
+      until i > number_of_instances
+        barcode_id = "#{format('%03d', @old_folder.id)}#{i}"
+        Rails.logger.debug("Trying to create instance #{i} with barcodeId #{barcode_id}")
         folder_instance_params = ActionController::Parameters.new({
                                                                       old_folder_instance: {
                                                                           number: i,
-                                                                          barcodeId: barcodeId
+                                                                          barcodeId: barcode_id
                                                                       }
                                                                   })
         @old_folder.old_folder_instances.create(
