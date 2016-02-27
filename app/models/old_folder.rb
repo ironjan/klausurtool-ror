@@ -48,4 +48,8 @@ class OldFolder < ActiveRecord::Base
     Rails.logger.debug("#{color} -> #{css_color}")
     css_color
   end
+
+  def to_s
+    "#{id} - #{title}"
+  end
 end

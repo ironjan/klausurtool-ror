@@ -46,7 +46,8 @@ class OldExamsController < ApplicationController
 
   def show
     @old_exam = OldExam.find(params[:id])
-    if @old_exam.has_invalid_date?
+    date_before_type_cast = @old_exam.read_attribute_before_type_cast('date')
+    if date_before_type_cast.include? '00'
       flash[:alert] = "Datum in Datenbank (#{date_before_type_cast}) ist fehlerhaft. Bitte durch ein korrektes Datum ersetzen."
     end
   end
@@ -72,9 +73,8 @@ class OldExamsController < ApplicationController
 
   def edit
     @old_exam = OldExam.find(params[:id])
-    Rails.logger.debug("#{@old_exam}")
     if @old_exam.has_invalid_date?
-      flash[:alert] = "Datum in Datenbank (#{@old_exam.date_before_cast}) ist fehlerhaft. Bitte das Datum korrigieren."
+      flash[:alert] = "Datum in Datenbank (#{date_before_type_cast}) ist fehlerhaft. Bitte das Datum korrigieren."
     end
   end
 
@@ -87,11 +87,7 @@ class OldExamsController < ApplicationController
       redirect_to @old_folder
     else
       @old_exam = OldExam.find(params[:id])
-      if @old_exam.update(old_exam_params)
-        redirect_to @old_exam
-      else
-        render 'edit'
-      end
+      render 'edit'
     end
   end
 
