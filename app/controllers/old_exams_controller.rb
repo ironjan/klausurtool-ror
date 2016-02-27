@@ -92,9 +92,4 @@ class OldExamsController < ApplicationController
     params.require(:old_exam).permit(:title, :examiners, :date)
   end
 
-  def add_date_warning
-    if @old_exam.has_invalid_date?
-      flash[:warning] = "Datum in Datenbank (#{date_before_type_cast}) ist fehlerhaft. Bitte das Datum korrigieren."
-    end
-  end
 end

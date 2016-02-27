@@ -148,41 +148,4 @@ describe OldExam do
     end
   end
 
-  describe 'Date fixes from database' do
-    it 'returns true for has_invalid_date if its date had an invalid day before typecast' do
-      expect(FactoryGirl.build(:old_exam, date: "2015-01-00").has_invalid_date?).to be(true)
-    end
-
-    it 'returns true for has_invalid_date if its date had an invalid month before typecast' do
-      expect(FactoryGirl.build(:old_exam, date: "2015-00-21").has_invalid_date?).to be(true)
-    end
-
-    it 'returns true for has_invalid_date if its date had an invalid year before typecast' do
-      expect(FactoryGirl.build(:old_exam, date: "0000-01-21").has_invalid_date?).to be(true)
-    end
-
-    it 'returns false for has_invalid_date if its date was valid before typecase' do
-      expect(FactoryGirl.build(:old_exam, date: "2015-01-21").has_invalid_date?).to be(false)
-    end
-
-    it 'does not recognize ISO-date as invalid' do
-      expect(FactoryGirl.build(:old_exam, date: "2015-01-21 00:00:00").has_invalid_date?).to be(false)
-    end
-
-    it 'does not recognize ISO-datetime as invalid' do
-      expect(FactoryGirl.build(:old_exam, date: "2015-01-21").has_invalid_date?).to be(false)
-    end
-  end
-
-  describe 'date_before_cast' do
-    it 'returns the raw date for valid dates' do
-      exam = FactoryGirl.build(:old_exam, date: "2015-01-21")
-      expect(exam.date_before_cast).to eq("2015-01-21")
-    end
-
-    it 'returns the raw date for invalid dates' do
-      exam = FactoryGirl.build(:old_exam, date: "0000-01-21")
-      expect(exam.date_before_cast).to eq("0000-01-21")
-    end
-  end
 end

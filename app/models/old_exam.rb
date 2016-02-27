@@ -34,35 +34,5 @@ class OldExam < ActiveRecord::Base
         .uniq
   end
 
-  def date
-    date_attr = read_attribute(:date)
-    unless date_attr.nil?
-      return date_attr
-    end
-
-    if has_invalid_date?
-      if date_before_type_cast.nil?
-        nil
-      else
-        date_before_cast.sub('0000', '1970').gsub('-00', '-01')
-      end
-    else
-      date_attr
-    end
-  end
-
-  def date_before_cast
-    read_attribute_before_type_cast('date')
-  end
-
-  def has_invalid_date?
-    date_regex_iso = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/
-    date_regex_short =  /^\d{4}-\d{2}-\d{2}$/
-
-    is_valid = date_regex_iso.match(date_before_type_cast) || date_regex_short.match(date_before_type_cast)
-
-    not is_valid
-  end
-
 end
 
