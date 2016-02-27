@@ -1,3 +1,13 @@
+# 0.0.16
+
+ * [Fixed: HTTP 500, wenn Verleih-Formular fehlerhaft aufgerufen wurde](https://github.com/ironjan/klausurtool-ror/issues/55)
+ * [Admin-UI aufgeräumt](https://github.com/ironjan/klausurtool-ror/issues/7)
+ * [Replaced jQuery by Vanilla JavaScript](https://github.com/ironjan/klausurtool-ror/issues/47),
+ * Allgemeine Code Cleanup Tasks: [#6](https://github.com/ironjan/klausurtool-ror/issues/6), 
+                                  [#74](https://github.com/ironjan/klausurtool-ror/issues/74),
+                                  [#78](https://github.com/ironjan/klausurtool-ror/issues/78),
+                                  [#93](https://github.com/ironjan/klausurtool-ror/issues/93)
+
 # 0.0.15
 
  * [Erinnerung beim Verleihen hinzugefügt](https://github.com/ironjan/klausurtool-ror/issues/67)

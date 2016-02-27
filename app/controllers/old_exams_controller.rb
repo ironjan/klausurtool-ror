@@ -1,13 +1,26 @@
 class OldExamsController < ApplicationController
-  include SearchableIndex
+  include PaginatedExamsList
 
   layout 'admin'
 
   def create
-    @old_folder = OldFolder.find(params[:old_folder_id])
+    @existing_titles = OldExam.existing_titles
+    @existing_examiners = OldExam.existing_examiners
+
+
+    @old_folder = OldFolder.find_by_id(params[:old_folder_id])
+
+    if @old_folder.nil?
+      flash[:alert] = 'Ordner nicht gefunden.'
+      render :new and return
+    end
+
     @old_exam = @old_folder.old_exams.create(old_exam_params)
-    @old_exam.save
-    redirect_to @old_folder
+    if @old_exam.save
+      redirect_to @old_folder
+    else
+      render :new
+    end
   end
 
   def destroy
@@ -19,11 +32,7 @@ class OldExamsController < ApplicationController
 
 
   def index
-    clear_search_on_reset
-
-    @old_exams = OldExam
-                     .search(params[:search])
-                     .paginate(:page => params[:page], :per_page => 50)
+    paginated_exams_list
   end
 
   def list_broken
@@ -43,18 +52,29 @@ class OldExamsController < ApplicationController
     end
   end
 
-  # def new
-  # 	# FIXME?
-  # 	@old_exam = OldExam.new
-  # end
+  def new
+    old_folder_id = params[:old_folder_id]
+
+    if old_folder_id.nil?
+      flash[:alert] = 'Kein Ordner angegeben.'
+      return
+    end
+
+    @old_folder = OldFolder.find_by_id(old_folder_id)
+
+    if @old_folder.nil?
+      flash[:alert] = 'Ordner nicht gefunden.'
+    end
+
+    @old_exam = OldExam.new
+    @existing_titles = OldExam.existing_titles
+    @existing_examiners = OldExam.existing_examiners
+  end
 
   def edit
     @old_exam = OldExam.find(params[:id])
-    date_before_type_cast = @old_exam.read_attribute_before_type_cast('date')
-    if date_before_type_cast.include? '-00'
+    if @old_exam.has_invalid_date?
       flash[:alert] = "Datum in Datenbank (#{date_before_type_cast}) ist fehlerhaft. Bitte das Datum korrigieren."
-      fixed_date = date_before_type_cast.sub('0000', '1970').gsub('00', '01')
-      @old_exam.date = fixed_date
     end
   end
 
