@@ -26,7 +26,8 @@ class OldExamsController < ApplicationController
   def destroy
     @old_folder = OldFolder.find(params[:old_folder_id])
     @old_exam = @old_folder.old_exams.find(params[:id])
-    @old_exam.destroy
+    @old_exam.destroy!
+    flash[:notice] = "Prüfung erfolgreich gelöscht."
     redirect_to @old_folder
   end
 
