@@ -52,6 +52,7 @@ class OldExamsController < ApplicationController
 
     if @old_folder.nil?
       flash[:alert] = 'Ordner nicht gefunden.'
+      render :new and return
     end
 
     @old_exam = @old_folder.old_exams.new
