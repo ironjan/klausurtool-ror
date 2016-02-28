@@ -6,7 +6,7 @@
       <div class="form-group row">
         <%= f.label 'Name', :class => 'control-label col-sm-2' %>
         <div class="col-sm-10">
-          <%= f.text_field :title, :class => 'form-control', autofocus: true  %>
+          <%= f.text_field :title, :class => 'form-control', autofocus: true, required: true  %>
         </div>
       </div>
       <div class="form-group row">
@@ -25,12 +25,6 @@
         <%= f.label 'Farbe', :class => 'control-label col-sm-2' %>
         <div class="col-sm-10">
           <%= f.select :color, OldFoldersHelper::View.color_names_for_select, {}, {class: 'form-control'} %>
-        </div>
-      </div>
-      <div class="form-group row">
-        <%= f.label 'Anzahl', :class => 'control-label col-sm-2' %>
-        <div class="col-sm-10">
-          <%= number_field_tag 'count', 1, min: 1, max: 9, step: 1, :class => 'form-control' %>
         </div>
       </div>
       <div class="form-group row">
