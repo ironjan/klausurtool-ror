@@ -1,3 +1,12 @@
+# 0.1.0
+
+ * [LDAP access via SSH-tunnel ermöglicht das Umwandeln von IMT-Logins in Klarnamen](https://github.com/ironjan/klausurtool-ror/issues/63)
+ * [Delete-Actions repariert (diese wurden von jQuery bereitgestellt, welches zuvor entfernt wurde](https://github.com/ironjan/klausurtool-ror/issues/88)
+ * [False positives beim Erkennen von fehlerhaften Datumsangaben in der Datenbank durch Fixen der Datenbank behoben](https://github.com/ironjan/klausurtool-ror/issues/106)
+ * [Fixed #108](https://github.com/ironjan/klausurtool-ror/issues/108)
+ * [Fixed #116: Firefox date picker](https://github.com/ironjan/klausurtool-ror/issues/116)
+ 
+
 # 0.0.16
 
  * [Fixed: HTTP 500, wenn Verleih-Formular fehlerhaft aufgerufen wurde](https://github.com/ironjan/klausurtool-ror/issues/55)

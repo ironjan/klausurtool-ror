@@ -34,22 +34,5 @@ class OldExam < ActiveRecord::Base
         .uniq
   end
 
-  def date
-    date_attr = read_attribute(:date)
-    unless read_attribute(:date).nil?
-      return date_attr
-    end
-
-    if date_before_type_cast.nil?
-      nil
-    else
-      date_before_type_cast.sub('0000', '1970').gsub('00', '01')
-    end
-  end
-
-  def has_invalid_date?
-    read_attribute_before_type_cast('date').include? '00'
-  end
-
 end
 
