@@ -6,6 +6,9 @@
     <h2 class="pull-left"><%= @old_folder.title %></h2>
     <%= link_to 'Bearbeiten', edit_old_folder_path, class: 'pull-right btn btn-default' %>
   </div>
+  <div class="full-width">
+    <%= link_to 'Druckbares Inhaltsverzeichnis anzeigen', old_folders_toc_path(@old_folder), class: 'pull-left', :target => "_blank" %>
+  </div>
   <dl>
     <dt>Inhalt</dt>
     <dd><%= @old_folder.contentType %></dd>
