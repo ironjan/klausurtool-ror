@@ -44,8 +44,8 @@ class OldExamsController < ApplicationController
     old_folder_id = params[:old_folder_id]
 
     if old_folder_id.nil?
-      flash[:alert] = 'Kein Ordner angegeben.'
-      return
+      flash[:alert] = 'Kein Ordner beim Anlegen einer neuen Prüfung übergeben.'
+      redirect_to old_folders_path and return
     end
 
     @old_folder = OldFolder.find_by_id(old_folder_id)
@@ -64,7 +64,8 @@ class OldExamsController < ApplicationController
     old_folder_id = params[:old_folder_id]
 
     if old_folder_id.nil?
-      flash[:alert] = 'Kein Ordner angegeben.'
+      flash[:alert] = 'Kein Ordner beim Editieren der Prüfung angegeben.'
+      redirect_to old_folders_path and return
     end
 
     @old_exam = OldExam.find(params[:id])
@@ -72,22 +73,18 @@ class OldExamsController < ApplicationController
 
 
   def update
-    if params.has_key?(:old_folder_id)
-      @old_folder = OldFolder.find(params[:old_folder_id])
-      @old_exam = @old_folder.old_exams.find(params[:id])
-      @old_exam.update(old_exam_params)
-      redirect_to @old_folder
+    @old_exam = OldExam.find(params[:id])
+    if @old_exam.update(old_exam_params)
+      redirect_to @old_exam
     else
-      flash[:warning] = 'Ordner wurde nicht übergeben.'
-      @old_exam = OldExam.new
-      render 'edit'
+      render :edit
     end
   end
 
 
   private
   def old_exam_params
-    params.require(:old_exam).permit(:title, :examiners, :date)
+    params.require(:old_exam).permit(:title, :examiners, :date, :old_folder_id)
   end
 
 end
