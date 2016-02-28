@@ -55,7 +55,7 @@ nav {
 }
 
 .center {
-  max-width: 600px;
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -72,7 +72,8 @@ nav {
 }
 
 .spacer {
-  margin-top: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 /*
@@ -101,10 +102,55 @@ dd {
   padding: 5px;
 }
 
-.folderlist dt{
+.folderlist dt {
   float: none;
 }
 
-.folderlist dd{
+.folderlist dd {
   float: none;
+}
+
+.a4 {
+  height: 297mm;
+  width: 210mm;
+  padding: 20mm;
+  border-color: #000000;
+  border-style: solid;
+}
+
+.toc-logo {
+  width: 32mm;
+  height: 32mm;
+}
+
+.toc-headline {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+table.toc-table {
+  width: 100%;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+table.toc-table tr,
+table.toc-table th,
+table.toc-table td {
+  border: 1px solid black;
+  padding: 2pt;
+  font-size: 10pt;
+}
+
+.toc-table-title {
+  width: 100%;
+}
+
+.toc-table-examiners {
+  min-width: 60mm;
+}
+
+.toc-table-date {
+  min-width: 20mm;
 }

@@ -20,7 +20,7 @@
           <td><%= e.examiners %></td>
           <td><%= e.date %></td>
           <td>
-            <%= link_to 'Bearbeiten', edit_old_exam_path(e) %>,
+            <%= link_to 'Bearbeiten', edit_old_folder_old_exam_path(@old_folder, e) %>,
             <%= link_to 'Löschen', [e.old_folder, e], method: :delete,
                           data: {confirm: 'Prüfung wirklich löschen?'} %>
           </td>
