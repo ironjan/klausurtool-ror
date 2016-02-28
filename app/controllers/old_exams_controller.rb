@@ -38,7 +38,6 @@ class OldExamsController < ApplicationController
 
   def show
     @old_exam = OldExam.find(params[:id])
-    add_date_warning
   end
 
   def new
@@ -55,14 +54,19 @@ class OldExamsController < ApplicationController
       flash[:alert] = 'Ordner nicht gefunden.'
     end
 
-    @old_exam = OldExam.new
+    @old_exam = @old_folder.old_exams.new
     @existing_titles = OldExam.existing_titles
     @existing_examiners = OldExam.existing_examiners
   end
 
   def edit
+    old_folder_id = params[:old_folder_id]
+
+    if old_folder_id.nil?
+      flash[:alert] = 'Kein Ordner angegeben.'
+    end
+
     @old_exam = OldExam.find(params[:id])
-    add_date_warning
   end
 
 
