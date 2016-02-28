@@ -9,4 +9,9 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
+//
+// jquery is needed so that the views can send delete actions correctly
+//= require jquery
+//= require jquery_ujs
+//
 //=require_tree .
