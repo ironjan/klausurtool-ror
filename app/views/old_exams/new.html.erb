@@ -1,12 +1,12 @@
 <% unless @old_folder.nil? %>
     <div class="clearfix spacer">
       <h2 id="new-exam">Neue Prüfung</h2>
-      <%= form_for [@old_folder, @old_exam], html: {class: 'form-horizontal', role: 'form'} do |f| %>
+      <%= form_for [@old_folder,@old_exam], html: {class: 'form-horizontal', role: 'form'} do |f| %>
 
 
           <% if @old_exam.errors.any? %>
               <div id="error_explanation full-width">
-                <h2>Fehler beim Ausleihen:</h2>
+                <h2>Fehler beim Speichern:</h2>
                 <ul>
                   <% @old_exam.errors.full_messages.each do |msg| %>
                       <li><%= msg %></li>
@@ -16,9 +16,16 @@
           <% end %>
 
           <div class="form-group row">
+            <div class="form-group row">
+              <%= f.label :old_folder, 'Ordner', :class => 'control-label col-sm-2' %>
+              <div class="col-sm-10">
+                <%= f.hidden_field :old_folder_id, :class => 'form-control' %>
+                <%= f.text_field :old_folder, :readonly => true, :class => 'form-control' %>
+              </div>
+            </div>
             <%= f.label :title, :class => 'control-label col-sm-2' %>
             <div class="col-sm-10">
-              <%= f.text_field :title, :class => 'form-control', list: 'existing-titles' %>
+              <%= f.text_field :title, :class => 'form-control', list: 'existing-titles', required: true %>
               <datalist id="existing-titles">
                 <% @existing_titles.each do |title| %>
                     <option value="<%= title %>"></option>
