@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'ausleihe/lent' => 'ausleihe#lent', as: 'ausleihe_lent'
   get 'ausleihe/history' => 'ausleihe#history', as: 'ausleihe_history'
   get 'ausleihe/folders' => 'ausleihe#folders', as: 'ausleihe_folders'
+  get 'ausleihe/folders/:id' => 'ausleihe#folder_details', as: 'ausleihe_folder'
   get 'ausleihe/exams' => 'ausleihe#exams', as: 'ausleihe_exams'
 
   # Routes that should not be manually navigated to in "Ausleihe"

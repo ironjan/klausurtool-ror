@@ -32,6 +32,13 @@ describe AusleiheController do
     end
   end
 
+  describe "folder_details" do
+    it "renders the correct template on get" do
+      get :folder_details, -1
+      expect(response).to render_template("ausleihe/folders")
+    end
+  end
+
   describe "exams" do
     it "renders the correct template on get" do
       get :exams
