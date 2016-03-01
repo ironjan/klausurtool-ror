@@ -13,19 +13,22 @@ class OldFolderInstance < ActiveRecord::Base
 
   def self.search(search)
     if search.nil? || search.empty?
-      @old_folder_instances = all
+      @old_folder_instances = joins(:old_folder)
+                                  .all
+                                  .order_by_name_and_barcode
     else
-      wildcard_search = "%#{search}%".gsub(' ', '%').gsub(/[äöüÄÖÜ]/,'%')
+      wildcard_search = "%#{search}%".gsub(' ', '%').gsub(/[äöüÄÖÜ]/, '%')
 
       @old_folder_instances = joins(:old_folder)
-                                   .where('old_folders.title LIKE ? OR barcodeId LIKE ?', 
-                                          wildcard_search, wildcard_search  )
-                                   .order('old_folders.title ASC, old_folder_instances.barcodeId ASC')
+                                  .where('old_folders.title LIKE ? OR barcodeId LIKE ?',
+                                         wildcard_search, wildcard_search)
+                                  .order_by_name_and_barcode
     end
-    # OldFolderInstance
-    #                             .joins(:old_folder)
-    #                             .where('old_folders.title LIKE ? OR barcodeId LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
-    #                             .order('old_folders.title ASC, old_folder_instances.barcodeId ASC')
-    #
   end
+
+  private
+  def self.order_by_name_and_barcode
+    order('old_folders.title ASC, old_folder_instances.barcodeId ASC')
+  end
+
 end
