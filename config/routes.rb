@@ -27,9 +27,7 @@ Rails.application.routes.draw do
 
     resources :old_folders, :old_exams
 
-    get 'old_folders/list_broken_encodings' => 'old_folders#list_broken_encodings', as: 'folders_broken_encodings'
     get 'old_folders/:old_folder_id/toc' => 'old_folders#toc', as: 'old_folders_toc'
-
 
     resources :old_folders do
       resources :old_folder_instances, :old_exams
