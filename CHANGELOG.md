@@ -1,3 +1,7 @@
+# 0.1.1
+
+ * Vergessenen "broken"-Link entfernt
+
 # 0.1.0
 
  * [LDAP access via SSH-tunnel ermöglicht das Umwandeln von IMT-Logins in Klarnamen](https://github.com/ironjan/klausurtool-ror/issues/63)
