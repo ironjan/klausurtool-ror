@@ -26,6 +26,14 @@ de:
       red:    "red"
       blue:   "blue"
       green:  "green"
+    areas:
+      sonstiges:    "Misc"
+      ess:          "ESS"
+      mmww:         "MMWW"
+      swt:          "SWT"
+      mua:          "MuA"
+      grundstudium: "Basic Studies Computer Science"
+      mathe:        "Math"
   will_paginate:
     previous_label: "<"
     next_label: ">"

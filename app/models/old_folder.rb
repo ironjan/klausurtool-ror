@@ -4,12 +4,12 @@ class OldFolder < ActiveRecord::Base
 
   CONTENT_TYPES = ['Klausurordner', 'Klausurmappe', 'Prüfungsprotokollordner', 'Prüfungsprotokollmappe', 'Übungsblätter', 'Sonstiges']
   enum color: [:black, :red, :blue, :green]
-  AREAS = ['ESS', 'MMWW', 'SWT', 'MUA', 'Grundst. Info', 'Mathe', 'Sonstiges']
+  enum area: [:sonstiges, :ess, :mmww, :swt, :mua, :grundstudium, :mathe]
 
   validates :title, presence: true
   validates :contentType, presence: true, :inclusion => {:in => CONTENT_TYPES}
   validates :color, presence: true
-  validates :area, presence: true, :inclusion => {:in => AREAS}
+  validates :area, presence: true
 
 
   def self.search(search)
@@ -17,7 +17,7 @@ class OldFolder < ActiveRecord::Base
       order('old_folders.title ASC')
     else
       # Replacing spaces as wild-cards
-      search = "%#{search}%".gsub(' ', '%').gsub(/[äöüÄÖÜ]/,'%')
+      search = "%#{search}%".gsub(' ', '%').gsub(/[äöüÄÖÜ]/, '%')
 
       Rails.logger.debug("Searching for \"#{search}\"")
       # We want exact match for date but non-exact matches for other values
@@ -26,9 +26,12 @@ class OldFolder < ActiveRecord::Base
     end
   end
 
-  # todo: is this the correct place for this method?
+  # todo: is this the correct place for these methods?
   def display_color
-    I18n.t("old_folder.color.#{color}", default: color.humanize)
+    I18n.t("old_folder.colors.#{color}", default: color.humanize)
+  end
+  def display_area
+    I18n.t("old_folder.areas.#{area}", default: area.humanize)
   end
 
   # todo: is this the correct place for this method?
