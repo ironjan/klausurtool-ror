@@ -5,6 +5,19 @@ cache: bundler
 rvm:
   - 2.3.0
 
+services:
+  - mysql
+
+test:
+  adapter: mysql2
+  database: klausurtool_test
+  username: travis
+  encoding: utf8mb4
+
+
+before_script:
+  - mysql -e 'create database klausurtool_test;'
+
 script:
   - RAILS_ENV=test bundle exec rake db:schema:load test
   - bundle exec rspec
