@@ -8,7 +8,8 @@ default: &default
   adapter: mysql2
   username: <%= ENV['DATABASE_USER'] %>
   password: <%= ENV['DATABASE_PW'] %>
-  encoding: utf8
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
   cast: false
   pool: 5
   reconnect: false
