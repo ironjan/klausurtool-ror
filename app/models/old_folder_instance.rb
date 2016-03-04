@@ -15,7 +15,7 @@ class OldFolderInstance < ActiveRecord::Base
     if search.nil? || search.empty?
       @old_folder_instances = all
     else
-      wildcard_search = "%#{search}%".gsub(' ', '%').gsub(/[äöüÄÖÜ]/,'%')
+      wildcard_search = "%#{search}%".gsub(' ', '%')
 
       @old_folder_instances = joins(:old_folder)
                                    .where('old_folders.title LIKE ? OR barcodeId LIKE ?', 
