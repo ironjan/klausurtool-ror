@@ -5,21 +5,26 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: sqlite3
+  adapter: mysql2
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PW'] %>
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
+  cast: false
   pool: 5
-  timeout: 5000
+  reconnect: false
 
 development:
   <<: *default
-  database: db/sqlite/development.sqlite3
+  database: klausurtool_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/sqlite/test.sqlite3
+  database: klausurtool_test
 
 production:
   <<: *default
-  database: db/sqlite/production.sqlite3
+  database: klausurtool
