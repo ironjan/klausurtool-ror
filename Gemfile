@@ -13,10 +13,15 @@ gem 'sass-rails', '~> 5.0'
 
 gem 'unicode'
 
+# Use jquery as the JavaScript library
+# Used to extend the forms with delete actions
+gem 'jquery-rails'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -40,7 +45,8 @@ group :development, :test do
 
   gem 'rspec-rails'
   gem 'rspec-mocks'
-  gem 'simplecov', :require => false, :group => :test
+  gem 'simplecov', :require => false
+  gem 'codacy-coverage', :require => false
 end
 
 group :development do

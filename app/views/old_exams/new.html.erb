@@ -1,0 +1,64 @@
+<% unless @old_folder.nil? %>
+    <div class="clearfix spacer">
+      <h2 id="new-exam">Neue Prüfung</h2>
+      <%= form_for [@old_folder,@old_exam], html: {class: 'form-horizontal', role: 'form'} do |f| %>
+
+
+          <% if @old_exam.errors.any? %>
+              <div id="error_explanation full-width">
+                <h2>Fehler beim Speichern:</h2>
+                <ul>
+                  <% @old_exam.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+
+          <div class="form-group row">
+            <div class="form-group row">
+              <%= f.label :old_folder, 'Ordner', :class => 'control-label col-sm-2' %>
+              <div class="col-sm-10">
+                <%= f.hidden_field :old_folder_id, :class => 'form-control' %>
+                <%= f.text_field :old_folder, :readonly => true, :class => 'form-control' %>
+              </div>
+            </div>
+            <%= f.label :title, :class => 'control-label col-sm-2' %>
+            <div class="col-sm-10">
+              <%= f.text_field :title, :class => 'form-control', list: 'existing-titles', required: true %>
+              <datalist id="existing-titles">
+                <% @existing_titles.each do |title| %>
+                    <option value="<%= title %>"></option>
+                <% end %>
+              </datalist>
+            </div>
+          </div>
+          <div class="form-group row">
+            <%= f.label :examiners, :class => 'control-label col-sm-2' %>
+            <div class="col-sm-10">
+              <%= f.text_field :examiners, :class => 'form-control', list: 'existing-examiners', required: true %>
+              <datalist id="existing-examiners">
+                <% @existing_examiners.each do |examiner| %>
+                    <option value="<%= examiner %>"></option>
+                <% end %>
+              </datalist>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <%= f.label :date, 'Datum (yyyy-mm-dd)', :class => 'control-label col-sm-2' %>
+            <div class="col-sm-10">
+              <%= f.date_select :date, :class => 'form-control', required: true %>
+            </div>
+          </div>
+          <div class="pull-right">
+            <div class="form-group row">
+              <div class="col-sm-2">
+                <%= f.submit 'Prüfung hinzufügen', class: 'btn btn-primary' %>
+              </div>
+            </div>
+          </div>
+      <% end %>
+
+    </div>
+<% end %>

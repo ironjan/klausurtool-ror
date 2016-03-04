@@ -1,0 +1,39 @@
+<div class="spacer">
+  <% if @old_exams.nil? || @old_exams.empty? %>
+      <p>Keine Prüfungen gefunden.</p>
+  <% else %>
+
+      <%= will_paginate @old_exams %>
+
+      <table class="table table-hover">
+        <tr>
+          <th></th>
+          <th>Veranstaltungen</th>
+          <th>Prüfer</th>
+          <th>Datum</th>
+          <th>Ordner</th>
+          <th></th>
+        </tr>
+
+        <% @old_exams.each do |e| %>
+            <tr>
+              <td style="background-color: <%= e.old_folder.css_color %>"></td>
+              <td><%= e.title %></td>
+              <td><%= e.examiners %></td>
+              <td><%= e.date %></td>
+              <td><%= link_to e.old_folder.title, e.old_folder %></td>
+              <td>
+                <% if controller_name == "old_exams" %>
+                    <%= link_to 'Anzeigen', old_exam_path(e) %>,
+                    <%= link_to 'Bearbeiten', edit_old_folder_old_exam_path(@old_exam.old_folder, @old_exam) %>
+
+                <% elsif controller_name == "ausleihe" %>
+                    <%= e.old_folder.old_folder_instances.select { |o| o.old_lend_out.nil? }.count %>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+      </table>
+
+  <% end %>
+</div>

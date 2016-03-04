@@ -4,5 +4,21 @@
     <a href="#new-instance" class="pull-right btn btn-default">Neues Exemplar</a>
   </div>
 
-  <%= render 'old_folder_instances/instances_table', instances: @old_folder.old_folder_instances %>
+  <%= render 'old_folder_instances/instances_table', old_folder_instances: @old_folder.old_folder_instances %>
+
+  <% if @old_folder.old_folder_instances.count < 9 %>
+      <div class="clearfix spacer">
+
+        <%= form_for [@old_folder, @old_folder.old_folder_instances.build], html: {class: 'form-inline', role: 'form'}  do |f| %>
+            <div class="form-group">
+              <%= f.label :number, 'Neues Exemplar:', :class => 'control-label' %>
+              <%= f.number_field :number, :min => 1, :max => 9, :step => 1, :length => 1, :class => 'form-control' %>
+            </div>
+            <%= f.submit 'Exemplar hinzufügen', :class => 'btn btn-primary' %>
+        <% end %>
+
+      </div>
+
+  <% end %>
+
 </div>

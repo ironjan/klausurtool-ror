@@ -40,18 +40,6 @@ describe OldExam do
       expect(FactoryGirl.build(:old_exam, date: nil)).to_not be_valid
     end
 
-    it "cannot have an invalid date 0000-00-00" do
-      expect(FactoryGirl.build(:old_exam, date: "0000-00-00")).to_not be_valid
-    end
-
-    it "cannot have an invalid date 2015-00-00" do
-      expect(FactoryGirl.build(:old_exam, date: "2015-00-00")).to_not be_valid
-    end
-
-    it "cannot have an invalid date 2015-12-00" do
-      expect(FactoryGirl.build(:old_exam, date: "2015-15-00")).to_not be_valid
-    end
-
     it "cannot have empty title" do
       expect(FactoryGirl.build(:old_exam, title: nil)).to_not be_valid
     end
@@ -141,4 +129,5 @@ describe OldExam do
       destroy_autocompletion_test_data
     end
   end
+
 end

@@ -1,7 +1,8 @@
 <div class="clearfix spacer">
   <div class="full-width">
     <h2 class="pull-left">Prüfungen</h2>
-    <a href="#new-exam" class="pull-right btn btn-default">Neue Prüfung</a>
+    <%= link_to "Neue Prüfung", new_old_exam_path(:old_folder_id => @old_folder), :class => "pull-right btn btn-default" %>
+    <a href="" class=""></a>
   </div>
 
   <table class="table table-hover">
@@ -19,7 +20,7 @@
           <td><%= e.examiners %></td>
           <td><%= e.date %></td>
           <td>
-            <%= link_to 'Bearbeiten', edit_old_exam_path(e) %>,
+            <%= link_to 'Bearbeiten', edit_old_folder_old_exam_path(@old_folder, e) %>,
             <%= link_to 'Löschen', [e.old_folder, e], method: :delete,
                           data: {confirm: 'Prüfung wirklich löschen?'} %>
           </td>

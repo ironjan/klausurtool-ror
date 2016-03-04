@@ -1,5 +1,7 @@
 # Klausurtool RoR
 
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/dd4147004f17412f96893e99d90d1245)](https://www.codacy.com/app/lippertsjan/klausurtool-ror)
+
 ## Fehler melden, Feedback geben
 
  * Sieh dann unter https://github.com/ironjan/klausurtool-ror/issues nach, ob das Feedback oder Problem bereits bekannt wird
@@ -15,6 +17,7 @@
    * ```sqlite3 --version```
   * Install Rails: ```gem install rails```
    * Add the rails bin-directory to your path 
+   * Currently, rails 4.2.4 is used
  * Install dependencies via ```bundle install```
   * If you don't have sudo access, you can install the gems to a path of your choice via e.g. ```bundle install --path $HOME/bundle/```
  * Copy ```config/secrets.yml.template``` to ```config/secrets.yml``` and generate different values for secret_key_base (You can use ```bin/rake secret```)

@@ -1,0 +1,26 @@
+<div class="a4">
+  <section class="toc-header full-width">
+    <h1 class="pull-left">Inhaltsverzeichnis</h1>
+
+    <img class="pull-right toc-logo" src="/assets/images/pi_kreis.jpg">
+  </section>
+
+  <section class="toc-content full-width">
+    <h2 class="toc-headline">Ordner: <%= @old_folder.title %></h2>
+
+    <table class="toc-table">
+      <tr>
+        <th>Veranstaltung</th>
+        <th>Dozent</th>
+        <th>Datum</th>
+      </tr>
+      <% @old_folder.old_exams.each do |e| %>
+          <tr>
+            <td class="toc-table-title"><% if e.title.nil? %>&nbsp;<% else %><%= e.title %><% end %></td>
+            <td class="toc-table-examiners"><%= e.examiners %></td>
+            <td class="toc-table-date"><%= e.date %></td>
+          </tr>
+      <% end %>
+    </table>
+  </section>
+</div>

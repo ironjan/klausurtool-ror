@@ -1,19 +1,12 @@
 class OldFoldersController < ApplicationController
-  include SearchableIndex
+  include Searchable
 
-  layout 'admin'
+  layout 'admin', except: 'toc'
 
   def index
+    clear_search_on_reset
     @old_folders = OldFolder.search(params[:search])
                        .paginate(:page => params[:page], :per_page => 50)
-  end
-
-  def list_broken_encodings
-    regex = /.*(Â¦|Â¨|\?|Â´|Â¸|Ã€|Ã|Ã‚|Ãƒ|Ã„|Ã…|Ã†|Ã‡|Ãˆ|Ã‰|ÃŠ|Ã‹|ÃŒ|Ã|ÃŽ|Ã|Ã‘|Ã’|Ã“|Ã”|Ã•|Ã–|Ã˜|Ã™|Ãš|Ã›|Ãœ|Ã|Ãž|ÃŸ|Ã |Ã¡|Ã¢|Ã£|Ã¤|Ã¥|Ã¦|Ã§|Ã¨|Ã©|Ãª|Ã«|Ã¬|Ã­|Ã®|Ã¯|Ã°|Ã±|Ã²|Ã³|Ã´|Ãµ|Ã¶|Ã¸|Ã¹|Ãº|Ã»|Ã½|Ã¾|Ã¿).*/
-    @old_folders = OldFolder.all
-    @old_folders = @old_folders.select { |folder| folder.title[regex] }
-
-    Rails.logger.debug("Filtered down to #{@old_folders.count} exams with broken encodings")
   end
 
   def show
@@ -42,15 +35,15 @@ class OldFoldersController < ApplicationController
     if @old_folder.save
 
       i = 1
-      numberOfFolderInstances = params[:count].gsub(/\D/, '').to_i
-      Rails.logger.debug("Loop values: #{i}, #{numberOfFolderInstances}")
-      until i > numberOfFolderInstances
-        barcodeId = "#{format('%03d', @old_folder.id)}#{i}"
-        Rails.logger.debug("Trying to create instance #{i} with barcodeId #{barcodeId}")
+      number_of_instances = params[:count].gsub(/\D/, '').to_i
+      Rails.logger.debug("Loop values: #{i}, #{number_of_instances}")
+      until i > number_of_instances
+        barcode_id = "#{format('%03d', @old_folder.id)}#{i}"
+        Rails.logger.debug("Trying to create instance #{i} with barcodeId #{barcode_id}")
         folder_instance_params = ActionController::Parameters.new({
                                                                       old_folder_instance: {
                                                                           number: i,
-                                                                          barcodeId: barcodeId
+                                                                          barcodeId: barcode_id
                                                                       }
                                                                   })
         @old_folder.old_folder_instances.create(
@@ -80,6 +73,33 @@ class OldFoldersController < ApplicationController
     redirect_to old_folders_path
   end
 
+
+  def toc
+    id = params[:old_folder_id]
+    if id.nil?
+      flash[:alert] = 'Kein Ordner angegeben.' and return
+    end
+
+    @old_folder = OldFolder.find_by_id(id)
+
+    if @old_folder.nil?
+      flash[:alert] = "Ordner mit Id `#{id}` nicht gefunden."
+      @old_folder = OldFolder.new
+    end
+
+    number_of_filler_exams = 34 - @old_folder.old_exams.count
+    if number_of_filler_exams < 0
+      flash[:warning] = 'Es können nicht alle Prüfungen auf eine Seite gedruckt werden. Bitte einige Klausuren archivieren oder auslaugern.'
+    end
+
+    filler_exam = OldExam.new
+    while number_of_filler_exams > 0
+      @old_folder.old_exams << filler_exam
+      number_of_filler_exams -= 1
+    end
+
+    render layout: "print"
+  end
 
   private
   def old_folder_params

@@ -21,8 +21,7 @@ class OldFolder < ActiveRecord::Base
 
       Rails.logger.debug("Searching for \"#{search}\"")
       # We want exact match for date but non-exact matches for other values
-      where('title LIKE ?', 
-            search)
+      where('title LIKE ?', search)
           .order('old_folders.title ASC')
     end
   end
@@ -48,5 +47,9 @@ class OldFolder < ActiveRecord::Base
     end
     Rails.logger.debug("#{color} -> #{css_color}")
     css_color
+  end
+
+  def to_s
+    "#{id} - #{title}"
   end
 end
