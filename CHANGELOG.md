@@ -1,3 +1,11 @@
+# 0.1.3
+
+ * Version wird nun beim Start aus Tag gelesen
+
+# 0.1.2
+
+ * [Switch auf MySQL](https://github.com/ironjan/klausurtool-ror/issues/64)
+
 # 0.1.1
 
  * Vergessenen "broken"-Link entfernt

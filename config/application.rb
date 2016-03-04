@@ -23,15 +23,7 @@ module KlausurtoolRoR
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    # Only attempt update on local machine
-    if Rails.env.development?
-      # Update version file from latest git tag
-      File.open('config/version', 'w') do |file|
-        file.write `git describe --tags --always` # or equivalent
-      end
-    end
-
-    config.version = File.read('config/version')
+    config.version = `git describe --tags --always`
 
     config.generators do |g|
       g.test_framework :rspec,
