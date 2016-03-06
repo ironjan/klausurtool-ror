@@ -14,65 +14,68 @@
 ActiveRecord::Schema.define(version: 20160109151751) do
 
   create_table "archived_old_lend_outs", force: :cascade do |t|
-    t.string   "deposit"
-    t.string   "imt"
-    t.string   "lender"
-    t.string   "receiver"
+    t.string   "deposit",              limit: 255
+    t.string   "imt",                  limit: 255
+    t.string   "lender",               limit: 255
+    t.string   "receiver",             limit: 255
     t.datetime "lendingTime"
     t.datetime "receivingTime"
-    t.integer  "weigth"
-    t.string   "old_folder_instances"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "weigth",               limit: 4
+    t.string   "old_folder_instances", limit: 255
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   create_table "archived_old_lend_outs_old_folder_instances", id: false, force: :cascade do |t|
-    t.integer "archived_old_lend_out_id", null: false
-    t.integer "old_folder_instance_id",   null: false
+    t.integer "archived_old_lend_out_id", limit: 4, null: false
+    t.integer "old_folder_instance_id",   limit: 4, null: false
   end
 
   create_table "old_exams", force: :cascade do |t|
-    t.string   "title"
-    t.string   "examiners"
+    t.string   "title",         limit: 255
+    t.string   "examiners",     limit: 255
     t.date     "date"
-    t.integer  "old_folder_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "old_folder_id", limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
-  add_index "old_exams", ["old_folder_id"], name: "index_old_exams_on_old_folder_id"
+  add_index "old_exams", ["old_folder_id"], name: "index_old_exams_on_old_folder_id", using: :btree
 
   create_table "old_folder_instances", force: :cascade do |t|
-    t.integer  "number"
-    t.integer  "old_folder_id"
-    t.string   "barcodeId"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "old_lend_out_id"
+    t.integer  "number",          limit: 4
+    t.integer  "old_folder_id",   limit: 4
+    t.string   "barcodeId",       limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "old_lend_out_id", limit: 4
   end
 
-  add_index "old_folder_instances", ["old_folder_id"], name: "index_old_folder_instances_on_old_folder_id"
-  add_index "old_folder_instances", ["old_lend_out_id"], name: "index_old_folder_instances_on_old_lend_out_id"
+  add_index "old_folder_instances", ["old_folder_id"], name: "index_old_folder_instances_on_old_folder_id", using: :btree
+  add_index "old_folder_instances", ["old_lend_out_id"], name: "index_old_folder_instances_on_old_lend_out_id", using: :btree
 
   create_table "old_folders", force: :cascade do |t|
-    t.string   "title"
-    t.string   "contentType"
-    t.string   "area"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "color",       default: 0, null: false
+    t.string   "title",       limit: 255
+    t.string   "contentType", limit: 255
+    t.string   "area",        limit: 255
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "color",       limit: 4,   default: 0, null: false
   end
 
   create_table "old_lend_outs", force: :cascade do |t|
-    t.string   "deposit"
-    t.string   "imt"
-    t.string   "lender"
+    t.string   "deposit",       limit: 255
+    t.string   "imt",           limit: 255
+    t.string   "lender",        limit: 255
+    t.string   "receiver",      limit: 255
     t.datetime "lendingTime"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "weigth"
-    t.string   "receivingTime"
-    t.string   "receiver"
+    t.datetime "receivingTime"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "weigth",        limit: 4
   end
 
+  add_foreign_key "old_exams", "old_folders"
+  add_foreign_key "old_folder_instances", "old_folders"
+  add_foreign_key "old_folder_instances", "old_lend_outs"
 end
