@@ -20,9 +20,16 @@
             <tr>
               <td style="background-color: <%= i.old_folder.css_color %>"></td>
               <td><%= i.barcodeId %></td>
-              <td><%= link_to i.old_folder.title, i.old_folder %></td>
-              <td><%= link_to i.old_folder.area %></td>
-              <td><%= link_to i.old_folder.contentType %></td>
+              <td>
+                <% if controller_name == "ausleihe" %>
+                    <%= link_to i.old_folder.title, ausleihe_folder_path(i.old_folder) %>
+                <% elsif controller_name == "old_folder_instances" %>
+                    <%= link_to i.old_folder.title, i.old_folder %>
+                <% end %>
+
+              </td>
+              <td><%= i.old_folder.area %></td>
+              <td><%= i.old_folder.contentType %></td>
 
               <td>
                 <% if controller_name == "ausleihe" %>

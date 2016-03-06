@@ -12,16 +12,14 @@ describe OldFoldersController do
     end
 
     it 'renders the toc template when requested for a valid folder' do
-      folder = FactoryGirl.build(:old_folder)
-      folder.save!
-      exam_1 = FactoryGirl.build(:old_exam, old_folder_id: folder.id)
-      exam_1.save!
+      folder = FactoryGirl.create(:old_folder)
+      exam_1 = FactoryGirl.create(:old_exam, old_folder_id: folder.id)
 
       get :toc, old_folder_id: folder.id
       expect(response).to render_template("old_folders/toc")
 
-      folder.destroy!
       exam_1.destroy!
+      folder.destroy!
     end
   end
 end

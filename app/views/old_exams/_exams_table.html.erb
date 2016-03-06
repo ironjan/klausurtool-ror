@@ -25,7 +25,7 @@
               <td>
                 <% if controller_name == "old_exams" %>
                     <%= link_to 'Anzeigen', old_exam_path(e) %>,
-                    <%= link_to 'Bearbeiten', edit_old_folder_old_exam_path(@old_exam.old_folder, @old_exam) %>
+                    <%= link_to 'Bearbeiten', edit_old_folder_old_exam_path(e.old_folder, e) %>
 
                 <% elsif controller_name == "ausleihe" %>
                     <%= e.old_folder.old_folder_instances.select { |o| o.old_lend_out.nil? }.count %>

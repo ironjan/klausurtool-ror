@@ -12,6 +12,10 @@ class AusleiheController < ApplicationController
     paginated_folder_instance_list
   end
 
+  def folder_details
+    @old_folder = OldFolder.find_by_id(params[:id])
+  end
+
   def exams
     paginated_exams_list
   end

@@ -33,7 +33,7 @@ describe OldExam do
     end
 
     it "has a valid factory" do
-      expect(FactoryGirl.create(:old_exam)).to be_valid
+      expect(FactoryGirl.build(:old_exam)).to be_valid
     end
 
     it "cannot have empty date" do
