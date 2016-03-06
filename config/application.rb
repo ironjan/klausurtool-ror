@@ -23,7 +23,7 @@ module KlausurtoolRoR
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    config.version = `git describe --tags --always`
+    config.version = `git describe | sed -e 's/-/+/' -e 's/-/_/'`
 
     config.generators do |g|
       g.test_framework :rspec,
