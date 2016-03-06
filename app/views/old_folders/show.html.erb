@@ -3,20 +3,32 @@
 <div class="full-width">
   <div class="full-width">
 
-    <h2 class="pull-left"><%= @old_folder.title %></h2>
+    <h2 ><%= @old_folder.title %></h2>
     <%= link_to 'Bearbeiten', edit_old_folder_path, class: 'pull-right btn btn-default' %>
+    <dl>
+      <dt>Inhalt</dt>
+      <dd><%= @old_folder.contentType %></dd>
+      <dt>Gebiet</dt>
+      <dd><%= @old_folder.area %></dd>
+      <dt>Farbe</dt>
+      <dd><%= @old_folder.display_color %></dd>
+    </dl>
   </div>
-  <div class="full-width">
-    <%= link_to 'Druckbares Inhaltsverzeichnis anzeigen', old_folders_toc_path(@old_folder), class: 'pull-left', :target => "_blank" %>
+
+  <div class="full-width spacer">
+    <h3>Druck-Aktionen</h3>
+    <p>Es werden neue Tabs geöffnet. Bitte Druck-Vorschau bei nicht-PDFs beachten.</p>
+    <ul>
+      <li><%= link_to 'Inhaltsverzeichnis', old_folders_toc_path(@old_folder), :target => "_blank" %></li>
+      <li>
+        <% if @old_folder.contains_written_exams? %>
+            <%= link_to 'Roter Zettel', asset_path('RoterZettel_Klausuren.pdf') %>
+        <% else %>
+            <%= link_to 'Roter Zettel', asset_path('RoterZettel_Protokolle.pdf') %>
+        <% end %></li>
+    </ul>
   </div>
-  <dl>
-    <dt>Inhalt</dt>
-    <dd><%= @old_folder.contentType %></dd>
-    <dt>Gebiet</dt>
-    <dd><%= @old_folder.area %></dd>
-    <dt>Farbe</dt>
-    <dd><%= @old_folder.display_color %></dd>
-  </dl>
+
   <div class="clearfix"></div>
 </div>
 
