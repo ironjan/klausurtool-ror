@@ -1,4 +1,6 @@
 class OldLendOut < ActiveRecord::Base
+  include LendersAndReceivers
+
   has_many :old_folder_instances, inverse_of: :old_lend_out
 
 
@@ -14,4 +16,7 @@ class OldLendOut < ActiveRecord::Base
   		errors.add(:base, 'receiver and receivingTime must both be set or both be unset.')
   	end
   end
+
+
+
 end
