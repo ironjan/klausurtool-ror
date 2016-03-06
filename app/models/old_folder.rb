@@ -26,6 +26,10 @@ class OldFolder < ActiveRecord::Base
     end
   end
 
+  def contains_written_exams?
+    contentType.in? ['Klausurordner', 'Klausurmappe']
+  end
+
   # todo: is this the correct place for this method?
   def display_color
     I18n.t("old_folder.color.#{color}", default: color.humanize)

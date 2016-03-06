@@ -93,4 +93,38 @@ describe OldFolder do
     end
 
   end
+
+  describe "contains_written_exams?" do
+    it 'returns true for contentType=Klausurordner' do
+      exam = FactoryGirl.build(:old_folder, contentType: 'Klausurordner')
+      expect(exam.contains_written_exams?).to eq(true)
+    end
+
+    it 'returns true for contentType=Klausurmappe' do
+      exam = FactoryGirl.build(:old_folder, contentType: 'Klausurmappe')
+      expect(exam.contains_written_exams?).to eq(true)
+    end
+
+    it 'returns false for contentType=Prüfungsprotokollordner' do
+      exam = FactoryGirl.build(:old_folder, contentType: 'Prüfungsprotokollordner')
+      expect(exam.contains_written_exams?).to eq(false)
+    end
+
+    it 'returns false for contentType=Prüfungsprotokollmappe' do
+      exam = FactoryGirl.build(:old_folder, contentType: 'Prüfungsprotokollmappe')
+      expect(exam.contains_written_exams?).to eq(false)
+    end
+
+    it 'returns false for contentType=Übungsblätter' do
+      exam = FactoryGirl.build(:old_folder, contentType: 'Übungsblätter')
+      expect(exam.contains_written_exams?).to eq(false)
+    end
+
+    it 'returns false for contentType=Sonstiges' do
+      exam = FactoryGirl.build(:old_folder, contentType: 'Sonstiges')
+      expect(exam.contains_written_exams?).to eq(false)
+    end
+
+
+  end
 end
