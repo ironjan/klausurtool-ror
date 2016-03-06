@@ -17,7 +17,7 @@ class OldFolder < ActiveRecord::Base
       order('old_folders.title ASC')
     else
       # Replacing spaces as wild-cards
-      search = "%#{search}%".gsub(' ', '%').gsub(/[äöüÄÖÜ]/,'%')
+      search = "%#{search}%".gsub(' ', '%')
 
       Rails.logger.debug("Searching for \"#{search}\"")
       # We want exact match for date but non-exact matches for other values
