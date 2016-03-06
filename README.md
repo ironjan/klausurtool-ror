@@ -2,12 +2,14 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/dd4147004f17412f96893e99d90d1245)](https://www.codacy.com/app/lippertsjan/klausurtool-ror)
 
+
 ## Fehler melden, Feedback geben
 
  * Sieh dann unter https://github.com/ironjan/klausurtool-ror/issues nach, ob das Feedback oder Problem bereits bekannt wird
  * Falls es nicht nicht bekannt ist, erstelle einen neuen Issue
   * Sei bitte so ausführlich wie möglich
   * Falls es um eine bestimmte Seite im Tool geht, bitte URL mit einfügen
+
 
 ## Getting started
 
@@ -18,6 +20,7 @@
   * Install Rails: ```gem install rails```
    * Add the rails bin-directory to your path 
    * Currently, rails 4.2.4 is used
+  * Other requirements: ```git``` and ```sed```
  * Install dependencies via ```bundle install```
   * If you don't have sudo access, you can install the gems to a path of your choice via e.g. ```bundle install --path $HOME/bundle/```
  * Copy ```config/secrets.yml.template``` to ```config/secrets.yml``` and generate different values for secret_key_base (You can use ```bin/rake secret```)
@@ -30,6 +33,8 @@
    * This does not automatically mean "production mode"
    * More information will be added later
  * Pre-Compile assets for production via ```RAILS_ENV=production bin/rake assets:precompile```
+
+
 ## Versioing
 
  * Follows [Semantic Versioning](http://semver.org/)
@@ -37,6 +42,7 @@
   * ```git tag $version``` & restart server
  * The [Milestones](https://github.com/ironjan/klausurtool-ror/milestones) of this project are named in a more or less funny way
   * They are more or less used as orientation on what to work next.
+
 
 ## Links that helped to get started
 
