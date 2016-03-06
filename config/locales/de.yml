@@ -21,19 +21,11 @@
 
 de:
   old_folder:
-    colors:
+    color:
       black:  "schwarz"
       red:    "rot"
       blue:   "blau"
       green:  "grün"
-    areas:
-      sonstiges:    "Sonstiges"
-      ess:          "ESS"
-      mmww:         "MMWW"
-      swt:          "SWT"
-      mua:          "MuA"
-      grundstudium: "Grundstudium Informatik"
-      mathe:        "Mathe"
   will_paginate:
     previous_label: "<"
     next_label: ">"
