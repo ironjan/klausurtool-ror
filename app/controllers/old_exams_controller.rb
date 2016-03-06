@@ -4,10 +4,6 @@ class OldExamsController < ApplicationController
   layout 'admin'
 
   def create
-    @existing_titles = OldExam.existing_titles
-    @existing_examiners = OldExam.existing_examiners
-
-
     @old_folder = OldFolder.find_by_id(params[:old_folder_id])
 
     if @old_folder.nil?
@@ -56,8 +52,6 @@ class OldExamsController < ApplicationController
     end
 
     @old_exam = @old_folder.old_exams.new
-    @existing_titles = OldExam.existing_titles
-    @existing_examiners = OldExam.existing_examiners
   end
 
   def edit
