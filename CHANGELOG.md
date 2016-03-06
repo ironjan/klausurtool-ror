@@ -1,3 +1,8 @@
+# 0.2.0
+
+ * [Drucken von "Roten Zetteln"](https://github.com/ironjan/klausurtool-ror/issues/53)
+ * [Drucken von Inhaltsverzeichnissen verbessert](https://github.com/ironjan/klausurtool-ror/issues/54)
+
 # 0.1.3
 
  * Version wird nun beim Start aus Tag gelesen
