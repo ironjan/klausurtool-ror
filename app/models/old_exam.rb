@@ -23,11 +23,11 @@ class OldExam < ActiveRecord::Base
 
 
   def self.existing_titles
-    method_name(:title)
+    get_unique_field_values(:title)
   end
 
   def self.existing_examiners
-    method_name(:examiners)
+    get_unique_field_values(:examiners)
   end
 
   private
