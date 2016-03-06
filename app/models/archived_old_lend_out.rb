@@ -1,4 +1,6 @@
 class ArchivedOldLendOut < ActiveRecord::Base
+  include LendersAndReceivers
+
   has_and_belongs_to_many :old_folder_instances
 
   validates :imt,           presence: true
