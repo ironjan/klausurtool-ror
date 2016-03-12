@@ -23,16 +23,21 @@ class OldExam < ActiveRecord::Base
 
 
   def self.existing_titles
-    order(:title)
-        .map { |e| e.title }
-        .uniq
+    get_unique_field_values(:title)
   end
 
   def self.existing_examiners
-    order(:examiners)
-        .map { |e| e.examiners }
+    get_unique_field_values(:examiners)
+  end
+
+  private
+  def self.get_unique_field_values(symbol)
+    select(symbol)
+        .order(symbol)
+        .map(&symbol)
         .uniq
   end
+
 
 end
 

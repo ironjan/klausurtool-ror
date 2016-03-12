@@ -70,31 +70,35 @@ describe OldExam do
     end
 
     it "finds 1 match for title search matching 1 element" do
-      expect(OldExam.search(TITLE_PRUEFUNG)).to match([@exam3])
+      expect(OldExam.search(TITLE_PRUEFUNG)).to match_array([@exam3])
     end
 
     it "finds 2 matches for title search matching 2 elements" do
-      expect(OldExam.search(TITLE_TIT_LE)).to match([@exam1, @exam2])
+      expect(OldExam.search(TITLE_TIT_LE)).to match_array([@exam1, @exam2])
     end
 
 
     it "finds 1 match for examiners search matching 1 element" do
-      expect(OldExam.search(EXAMINERS_FOO_BAR)).to match([@exam1])
+      expect(OldExam.search(EXAMINERS_FOO_BAR)).to match_array([@exam1])
     end
 
     it "finds 2 matches for examiners search matching 2 elements" do
-      expect(OldExam.search(EXAMINERS_FOO)).to match([@exam1, @exam2])
-      expect(OldExam.search(EXAMINERS_BAR)).to match([@exam1, @exam3])
+      expect(OldExam.search(EXAMINERS_FOO)).to match_array([@exam1, @exam2])
+      expect(OldExam.search(EXAMINERS_BAR)).to match_array([@exam1, @exam3])
     end
   end
 
-  describe 'Autocompletion functions for empty db' do
-    it 'returns an empty array, if no titles are found' do
-      expect(OldExam.existing_titles).to match([])
+  describe 'Auto-Completion functions for filled db' do
+    describe 'existing_titles' do
+      it 'returns an empty array, if no titles are found' do
+      expect(OldExam.existing_titles).to match_array([])
+      end
     end
 
-    it 'returns an empty array, if no examiners are found' do
-      expect(OldExam.existing_examiners).to match([])
+    describe 'existing_examiners' do
+      it 'returns an empty array, if no examiners are found' do
+      expect(OldExam.existing_examiners).to match_array([])
+      end
     end
   end
 
@@ -117,16 +121,20 @@ describe OldExam do
       @exam3.destroy!
     end
 
-    it 'returns the titles if there are titles' do
-      build_autocompletion_test_data
-      expect(OldExam.existing_titles).to match([TITLE_EXAM_TITLE, TITLE_PRUEFUNG, TITLE_TIT_LE])
-      destroy_autocompletion_test_data
+    describe 'existing_titles' do
+      it 'returns the titles if there are titles' do
+        build_autocompletion_test_data
+      expect(OldExam.existing_titles).to match_array([TITLE_EXAM_TITLE, TITLE_PRUEFUNG, TITLE_TIT_LE])
+        destroy_autocompletion_test_data
+      end
     end
 
-    it 'returns the examiners if there are examiners' do
-      build_autocompletion_test_data
-      expect(OldExam.existing_examiners).to match([EXAMINERS_BAR, EXAMINERS_FOO, EXAMINERS_FOO_BAR])
-      destroy_autocompletion_test_data
+    describe 'existing_examiners' do
+      it 'returns the examiners if there are examiners' do
+        build_autocompletion_test_data
+      expect(OldExam.existing_examiners).to match_array([EXAMINERS_BAR, EXAMINERS_FOO, EXAMINERS_FOO_BAR])
+        destroy_autocompletion_test_data
+      end
     end
   end
 
