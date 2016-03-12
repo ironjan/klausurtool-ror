@@ -1,0 +1,35 @@
+<%= page_heading 'Feedback' %>
+
+<div class="clearfix spacer">
+
+    <%= form_tag feedback_path, :method => 'post', id: 'form', html: {class: 'form-horizontal', role: 'form'} do %>
+
+<% if @feedback_url %>
+    <div class="form-group row">
+    <%= label_tag :url, 'Feedback zu:', :class => 'control-label col-sm-4' %>
+        <div class="col-sm-8">
+            <%= text_field_tag :url, @feedback_url, required: true, :class => 'form-control', readonly: true %>
+        </div>
+    </div>
+    <% end %>
+
+    <div class="form-group row">
+    <%= label_tag :imt, 'IMT-Login:', :class => 'control-label col-sm-4' %>
+        <div class="col-sm-8">
+            <%= text_field_tag :imt, "",  required: true, :class => 'form-control' %>
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <%= label_tag :comment, 'Kommentar:', :class => 'control-label' %><br>
+        <%= text_area_tag :comment, params[:comment], placeholder: 'Kommentar', required: true, rows: 6, columns: 10, :class => 'form-control' %>
+    </div>
+
+    <div class="form-group row pull-right">
+        <a href="<%= @feedback_url %>" class="btn">Zurück</a>
+        <%= submit_tag 'Senden', class: 'btn btn-primary' %>
+    </div>
+    <% end %>
+
+
+</div>
