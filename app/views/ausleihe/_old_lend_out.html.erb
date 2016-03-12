@@ -15,7 +15,16 @@
   <div class="clearfix">
     <nav>
       <ul class="nav nav-pills pull-right">
-        <li><%= link_to 'Zurücknehmen', returning_form_path(old_folder_instances: [old_lend_out.old_folder_instances.first]), class: 'btn btn-primary' %></li>
+        <% if controller_name == "ausleihe" %>
+            <li><%= link_to 'Zurücknehmen', returning_form_path(old_folder_instances: [old_lend_out.old_folder_instances.first]), class: 'btn btn-primary' %></li>
+        <% end %>
+
+        <% if controller_name == "admin_lendouts" %>
+            <li><%= mail_to recipient(old_lend_out), "Erinnerungsmail in externem Programm öffnen", body: body(old_lend_out), cc: cc,
+                      subject: subject %>
+            </li>
+        <% end %>
+
       </ul>
     </nav>
   </div>
