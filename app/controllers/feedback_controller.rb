@@ -2,7 +2,6 @@ class FeedbackController < ApplicationController
   layout 'ausleihe', except: 'error'
 
   def feedback_form
-    nyi
     source_page = params[:source_page]
     if source_page.nil?
       @source_page = 'Keine Seite angegeben'
@@ -12,7 +11,6 @@ class FeedbackController < ApplicationController
   end
 
   def send_feedback
-    nyi
     imt = params[:imt]
     comment = params[:comment]
     source_page = params[:source_page]
@@ -24,8 +22,4 @@ class FeedbackController < ApplicationController
     render 'feedback_form'
   end
 
-  private
-  def nyi
-    flash[:warning] = 'Noch nicht implementiert. Feedback wird nicht abgesendet.'
-  end
 end
