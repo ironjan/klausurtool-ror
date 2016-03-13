@@ -13,6 +13,14 @@ class FeedbackController < ApplicationController
 
   def send_feedback
     nyi
+    imt = params[:imt]
+    comment = params[:comment]
+    source_page = params[:source_page]
+    if imt.nil?  || comment.nil?
+      flash[:alert] = 'Nicht alle Pflicht-Parameter (IMT, Kommentar) übergeben.'
+      render 'feedback_form' and return
+    end
+    FeedbackMailer.delay(run_at: 5.seconds.from_now).feedback_mail(imt, comment, source_page)
     render 'feedback_form'
   end
 
