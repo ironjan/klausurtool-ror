@@ -2,16 +2,18 @@
 
 <div class="clearfix spacer">
 
-  <div class="alert">
-    Noch nicht implementiert. Feedback wird nicht abgesendet!
-  </div>
 
   <%= form_tag send_feedback_path, :method => 'post', id: 'form', html: {class: 'form-horizontal', role: 'form'} do %>
+      <div class="form-group row">
+        <b>
+          Noch nicht fertig implementiert. Feedback wird sehr wahrscheinlich nicht versendet!
+        </b>
+      </div>
 
       <div class="form-group row">
         <%= label_tag :source_page, 'Feedback für:', :class => 'control-label col-sm-2' %>
         <div class="col-sm-10">
-          <%= text_field_tag :source_page, params[:source_page], :class => 'form-control', :readonly => 'readonly'  %>
+          <%= text_field_tag :source_page, params[:source_page], :class => 'form-control', :readonly => 'readonly' %>
         </div>
       </div>
 
