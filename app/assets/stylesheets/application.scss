@@ -2,6 +2,7 @@
 @import "bootstrap";
 @import "toc";
 @import "toc_print";
+@import "flashes";
 
 main {
   padding-top: 50px;
@@ -36,25 +37,6 @@ nav {
 
 .card {
   padding: 10px;
-}
-
-.alert {
-  background-color: #f33;
-  padding: 3px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.warning {
-  background-color: #f93;
-  padding: 3px;
-  cursor: pointer;
-}
-
-.notice {
-  background-color: #393;
-  padding: 3px;
-  cursor: pointer;
 }
 
 .center {
