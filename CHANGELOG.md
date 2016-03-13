@@ -1,3 +1,7 @@
+# 0.3.1
+
+ * Fixed: Ausleih-Formular hatte Inputs ohne Label
+
 # 0.3.0
 
  * [Autovervollständigung für aktive Ausleiher beim Verleihen und Zurücknehmen](https://github.com/ironjan/klausurtool-ror/issues/3)

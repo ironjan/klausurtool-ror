@@ -40,27 +40,36 @@
         <%= f.number_field :weigth, required: true, min: 1, :class => 'form-control', autofocus: true %>
       </div>
     </div>
+
     <div class="form-group row">
       <%= f.label 'IMT-Login des Studenten', :class => 'control-label col-sm-4' %>
       <div class="col-sm-8">
         <%= f.text_field :imt, required: true, :class => 'form-control' %>
       </div>
     </div>
+
     <div class="form-group row">
-      <%= f.text_field :lender, required: true, list: 'lenders-and-receivers', :class => 'form-control' %>
-      <datalist id="lenders-and-receivers">
-        <% lenders_and_receivers.each do |name| %>
-            <option value="<%= name %>"></option>
-        <% end %>
-      </datalist>
+      <%= f.label 'Raus von:', :class => 'control-label col-sm-4' %>
+      <div class="col-sm-8">
+        <%= f.text_field :lender, required: true, list: 'lenders-and-receivers', :class => 'form-control' %>
+        <datalist id="lenders-and-receivers">
+          <% lenders_and_receivers.each do |name| %>
+              <option value="<%= name %>"></option>
+          <% end %>
+        </datalist>
+      </div>
     </div>
+
     <div class="form-group row">
-      <%= f.text_field :deposit, required: true, list: 'deposits', :class => 'form-control' %>
-      <datalist id="deposits">
-        <% deposits.each do |deposit| %>
-            <option value="<%= deposit %>"></option>
-        <% end %>
-      </datalist>
+      <%= f.label 'Pfand', :class => 'control-label col-sm-4' %>
+      <div class="col-sm-8">
+        <%= f.text_field :deposit, required: true, list: 'deposits', :class => 'form-control' %>
+        <datalist id="deposits">
+          <% deposits.each do |deposit| %>
+              <option value="<%= deposit %>"></option>
+          <% end %>
+        </datalist>
+      </div>
     </div>
 
 
