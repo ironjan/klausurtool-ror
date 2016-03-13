@@ -3,6 +3,7 @@
 @import "toc";
 @import "toc_print";
 @import "flashes";
+@import "description_lists";
 
 main {
   padding-top: 50px;
@@ -59,38 +60,4 @@ nav {
 .spacer {
   margin-top: 20px;
   margin-bottom: 20px;
-}
-
-/*
- * Styling description lists to look like tables
- * http://maxdesign.com.au/articles/definition/
- */
-dl {
-  float: left;
-  padding: 0;
-  margin: 0;
-}
-
-dt {
-  clear: left;
-  float: left;
-  width: 10em;
-  margin: 0;
-  padding: 5px;
-  font-weight: bold;
-}
-
-dd {
-  float: left;
-  min-width: 5em;
-  margin: 0;
-  padding: 5px;
-}
-
-.folderlist dt {
-  float: none;
-}
-
-.folderlist dd {
-  float: none;
 }
