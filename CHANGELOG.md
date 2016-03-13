@@ -1,3 +1,9 @@
+# 0.3.0
+
+ * [Autovervollständigung für aktive Ausleiher beim Verleihen und Zurücknehmen](https://github.com/ironjan/klausurtool-ror/issues/3)
+ * [Link fürs Archiv-Team, um Erinnerungsmails einfacher zu versenden](https://github.com/ironjan/klausurtool-ror/issues/140)
+ * [Code Clean-Up](https://github.com/ironjan/klausurtool-ror/issues/101)
+
 # 0.2.0
 
  * [Drucken von "Roten Zetteln"](https://github.com/ironjan/klausurtool-ror/issues/53)

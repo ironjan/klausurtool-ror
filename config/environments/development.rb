@@ -42,4 +42,9 @@ Rails.application.configure do
   # Different prefix for assets in development mode to use pre-compiled
   # assets in production mode
   config.assets.prefix = "/dev-assets"
+
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
 end

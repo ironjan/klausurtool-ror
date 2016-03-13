@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'feedback' => 'feedback#feedback_form', as: 'feedback_form'
+  post 'feedback' => 'feedback#send_feedback', as: 'send_feedback'
+
   # Navigateable "Ausleihe"-routes
   get 'ausleihe' => 'ausleihe#index', as: 'ausleihe'
   get 'ausleihe/lent' => 'ausleihe#lent', as: 'ausleihe_lent'

@@ -65,8 +65,14 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.1)
+    daemons (1.2.3)
     database_cleaner (1.5.1)
     debug_inspector (0.0.2)
+    delayed_job (4.1.1)
+      activesupport (>= 3.0, < 5.0)
+    delayed_job_active_record (4.1.0)
+      activerecord (>= 3.0, < 5)
+      delayed_job (>= 3.0, < 5)
     diff-lcs (1.2.5)
     docile (1.1.5)
     domain_name (0.5.20160216)
@@ -217,7 +223,9 @@ DEPENDENCIES
   byebug
   capybara
   codacy-coverage
+  daemons
   database_cleaner
+  delayed_job_active_record
   factory_girl_rails
   faker
   jbuilder (~> 2.0)
@@ -239,3 +247,6 @@ DEPENDENCIES
   web-console (~> 2.0)
   will_paginate (~> 3.0.6)
   yaml_db
+
+BUNDLED WITH
+   1.11.2
