@@ -4,6 +4,7 @@
 @import "toc_print";
 @import "flashes";
 @import "description_lists";
+@import "colors";
 
 main {
   padding-top: 50px;
@@ -60,4 +61,12 @@ nav {
 .spacer {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.orange {
+  color: $orange;
+}
+
+.red {
+  color: $red;
 }
