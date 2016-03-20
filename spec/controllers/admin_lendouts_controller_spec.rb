@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-describe AdminLendoutsController do
+describe Internal::Admin::LendoutsController do
   it "reminds me to implement spec for this controller"
 end

@@ -39,8 +39,8 @@ Rails.application.routes.draw do
 
     namespace :admin do
 
-      get 'lent' => 'admin_lendouts#lent'#, as: 'admin_lent'
-      get 'history' => 'admin_lendouts#history'#, as: 'admin_history'
+      get 'lent' => 'lendouts#lent'#, as: 'admin_lent'
+      get 'history' => 'lendouts#history'#, as: 'admin_history'
 
     end
 

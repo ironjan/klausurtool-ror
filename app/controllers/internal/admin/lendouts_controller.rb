@@ -1,6 +1,7 @@
 module Internal
   module Admin
-    class AdminLendoutsController < ApplicationController
+    class LendoutsController < ApplicationController
+
       include LentFolders, LendingArchive
 
       layout 'admin'
