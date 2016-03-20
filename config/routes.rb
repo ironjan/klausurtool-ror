@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   get '/admin' => 'old_folders#index'
 
-  scope '/admin' do
+  scope '/internal/admin' do
     get 'old_folder_instances' => 'old_folder_instances#index', as: 'old_folder_instances'
 
 
