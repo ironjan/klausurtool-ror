@@ -24,8 +24,6 @@ Rails.application.routes.draw do
   scope '/admin' do
     get 'old_folder_instances' => 'old_folder_instances#index', as: 'old_folder_instances'
 
-    get 'lent' => 'admin_lendouts#lent', as: 'admin_lent'
-    get 'history' => 'admin_lendouts#history', as: 'admin_history'
 
     resources :old_folders, :old_exams
 
@@ -38,6 +36,14 @@ Rails.application.routes.draw do
 
   namespace :internal do
     root 'internal_application#index'
+
+    namespace :admin do
+
+      get 'lent' => 'admin_lendouts#lent'#, as: 'admin_lent'
+      get 'history' => 'admin_lendouts#history'#, as: 'admin_history'
+
+    end
+
   end
 
   root 'application#index'

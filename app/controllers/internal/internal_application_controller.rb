@@ -1,4 +1,7 @@
-class Internal::InternalApplicationController < ::ApplicationController
-  def index
+module Internal
+  class InternalApplicationController < ::ApplicationController
+
+    def index
+    end
   end
 end
