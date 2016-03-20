@@ -4,25 +4,25 @@ Rails.application.routes.draw do
   post 'feedback' => 'feedback#send_feedback', as: 'send_feedback'
 
 
-  scope '/ausleihe' do
-
-    # Navigateable "Ausleihe"-routes
-    get '/' => 'ausleihe#index', as: 'ausleihe'
-    get '/lent' => 'ausleihe#lent', as: 'ausleihe_lent'
-    get '/history' => 'ausleihe#history', as: 'ausleihe_history'
-    get '/folders' => 'ausleihe#folders', as: 'ausleihe_folders'
-    get '/folders/:id' => 'ausleihe#folder_details', as: 'ausleihe_folder'
-    get '/exams' => 'ausleihe#exams', as: 'ausleihe_exams'
-
-    # Routes that should not be manually navigated to in "Ausleihe"
-    post '/switch' => 'ausleihe#switch', as: 'ausleihe_switch'
-    get '/lending_form' => 'ausleihe#lending_form', as: 'lending_form'
-    post '/lending_action' => 'ausleihe#lending_action', as: 'lending_action'
-    get '/returning_form' => 'ausleihe#returning_form', as: 'returning_form'
-    post '/returning_action' => 'ausleihe#returning_action', as: 'returning_action'
-  end
-
   scope '/internal' do
+    scope '/ausleihe' do
+
+      # Navigateable "Ausleihe"-routes
+      get '/' => 'ausleihe#index', as: 'ausleihe'
+      get '/lent' => 'ausleihe#lent', as: 'ausleihe_lent'
+      get '/history' => 'ausleihe#history', as: 'ausleihe_history'
+      get '/folders' => 'ausleihe#folders', as: 'ausleihe_folders'
+      get '/folders/:id' => 'ausleihe#folder_details', as: 'ausleihe_folder'
+      get '/exams' => 'ausleihe#exams', as: 'ausleihe_exams'
+
+      # Routes that should not be manually navigated to in "Ausleihe"
+      post '/switch' => 'ausleihe#switch', as: 'ausleihe_switch'
+      get '/lending_form' => 'ausleihe#lending_form', as: 'lending_form'
+      post '/lending_action' => 'ausleihe#lending_action', as: 'lending_action'
+      get '/returning_form' => 'ausleihe#returning_form', as: 'returning_form'
+      post '/returning_action' => 'ausleihe#returning_action', as: 'returning_action'
+    end
+
     scope '/admin' do
       get '/' => 'old_folders#index'
 
@@ -47,12 +47,12 @@ Rails.application.routes.draw do
       get 'lent' => 'lendouts#lent' #, as: 'admin_lent'
       get 'history' => 'lendouts#history' #, as: 'admin_history'
 
-
     end
 
   end
 
 # Current redirection so that everyone has time to update bookmarks
+  get '/ausleihe/*path', to: redirect { |params, request| "/internal/ausleihe/#{params[:path]}?#{request.query_string}" }
   get '/admin/*path', to: redirect { |params, request| "/internal/admin/#{params[:path]}?#{request.query_string}" }
 
   root 'application#index'
