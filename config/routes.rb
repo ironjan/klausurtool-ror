@@ -20,21 +20,22 @@ Rails.application.routes.draw do
     post '/lending_action' => 'ausleihe#lending_action', as: 'lending_action'
     get '/returning_form' => 'ausleihe#returning_form', as: 'returning_form'
     post '/returning_action' => 'ausleihe#returning_action', as: 'returning_action'
-
   end
 
-  scope '/internal/admin' do
-    get '/' => 'old_folders#index'
+  scope '/internal' do
+    scope '/admin' do
+      get '/' => 'old_folders#index'
 
-    get 'old_folder_instances' => 'old_folder_instances#index', as: 'old_folder_instances'
+      get 'old_folder_instances' => 'old_folder_instances#index', as: 'old_folder_instances'
 
 
-    resources :old_folders, :old_exams
+      resources :old_folders, :old_exams
 
-    get 'old_folders/:old_folder_id/toc' => 'old_folders#toc', as: 'old_folders_toc'
+      get 'old_folders/:old_folder_id/toc' => 'old_folders#toc', as: 'old_folders_toc'
 
-    resources :old_folders do
-      resources :old_folder_instances, :old_exams
+      resources :old_folders do
+        resources :old_folder_instances, :old_exams
+      end
     end
   end
 
