@@ -47,6 +47,8 @@ Rails.application.routes.draw do
 
   end
 
+  # Current redirection so that everyone has time to update bookmarks
+  get '/admin/*path', to: redirect{ |params, request| "/internal/admin/#{params[:path]}?#{request.query_string}" }
 
   root 'application#index'
 
