@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'feedback' => 'feedback#feedback_form', as: 'feedback_form'
   post 'feedback' => 'feedback#send_feedback', as: 'send_feedback'
 
+
   # Navigateable "Ausleihe"-routes
   get 'ausleihe' => 'ausleihe#index', as: 'ausleihe'
   get 'ausleihe/lent' => 'ausleihe#lent', as: 'ausleihe_lent'
@@ -35,7 +36,12 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :internal do
+    root 'internal_application#index'
+  end
+
   root 'application#index'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
