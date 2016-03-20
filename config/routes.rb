@@ -19,9 +19,9 @@ Rails.application.routes.draw do
   get  'ausleihe/returning_form' => 'ausleihe#returning_form', as: 'returning_form'
   post 'ausleihe/returning_action' => 'ausleihe#returning_action', as: 'returning_action'
 
-  get '/admin' => 'old_folders#index'
-
   scope '/internal/admin' do
+    get '/' => 'old_folders#index'
+
     get 'old_folder_instances' => 'old_folder_instances#index', as: 'old_folder_instances'
 
 
@@ -42,9 +42,11 @@ Rails.application.routes.draw do
       get 'lent' => 'lendouts#lent'#, as: 'admin_lent'
       get 'history' => 'lendouts#history'#, as: 'admin_history'
 
+
     end
 
   end
+
 
   root 'application#index'
 
