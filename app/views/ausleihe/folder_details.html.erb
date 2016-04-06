@@ -25,7 +25,7 @@
 
         <% @old_folder.old_exams.each do |e| %>
             <tr>
-              <td><%= link_to e.title, e %></td>
+              <td><%= e.title %></td>
               <td><%= e.examiners %></td>
               <td><%= e.date %></td>
             </tr>
