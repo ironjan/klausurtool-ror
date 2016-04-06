@@ -1,7 +1,7 @@
 <div class="card shadow">
   <div class="full-width">
     <h3 class="pull-left"><%= old_lend_out.id %> - <%= old_lend_out.imt %></h3>
-    <h3 class="pull-right"><%= old_lend_out.lendingTime %></h3>
+    <h3 class="pull-right"><span class="<%= color_class_for_lent_since(old_lend_out) %>">Seit <%= lent_since(old_lend_out) %> Tagen verliehen</span></h3>
   </div>
   <div class="full-width">
     <div class="half-width">
