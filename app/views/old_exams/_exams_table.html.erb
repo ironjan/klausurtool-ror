@@ -21,7 +21,13 @@
               <td><%= e.title %></td>
               <td><%= e.examiners %></td>
               <td><%= e.date %></td>
-              <td><%= link_to e.old_folder.title, e.old_folder %></td>
+              <td>
+                <% if controller_name == "ausleihe" %>
+                    <%= link_to e.old_folder.title, ausleihe_folder_path(e.old_folder) %>
+                <% elsif controller_name == "old_exams" %>
+                    <%= link_to e.old_folder.title, e.old_folder %>
+                <% end %>
+              </td>
               <td>
                 <% if controller_name == "old_exams" %>
                     <%= link_to 'Anzeigen', old_exam_path(e) %>,
