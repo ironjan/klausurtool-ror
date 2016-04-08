@@ -26,7 +26,6 @@ class OldFolderInstance < ActiveRecord::Base
     end
   end
 
-  private
   def self.order_by_name_and_barcode
     order('old_folders.title ASC, old_folder_instances.barcodeId ASC')
   end
