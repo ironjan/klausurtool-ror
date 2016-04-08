@@ -23,42 +23,41 @@ class AusleiheController < ApplicationController
   # This controller method is used to decide if we are lending or returning folders. It redirects to the corresponding
   # form.
   def switch
-    folderList = params[:folderList].split(/\r?\n/)
+    folder_list = params[:folderList].split(/\r?\n/)
 
     instances = []
     warnings = []
 
-    Rails.logger.debug("Got switch request containing #{folderList.count} elements.")
-    folderList = folderList.map { |f| [f, f.strip] }
+    Rails.logger.debug("Got switch request containing #{folder_list.count} elements.")
+    folder_list = folder_list.map { |f| [f, f.strip] }
                      .reject { |f,stripped| f.empty? }
 
-    folderList.each do |f,stripped|
+    folder_list.each do |f,stripped|
       Rails.logger.debug(" `#{f}` has been stripped to `#{stripped}` and was not empty.")
 
       if stripped.length == 4
-        Rails.logger.debug(" `#{stripped}` is 4 chars long. barcodeId will be #{stripped}.")
-        barcodeId = stripped
+        Rails.logger.debug(" `#{stripped}` is 4 chars long. barcode_id will be #{stripped}.")
+        barcode_id = stripped
       elsif stripped.length == 8
-        Rails.logger.debug(" `#{stripped}` is 8 chars long. barcodeId will be #{stripped[3..6]}.")
-        barcodeId = stripped[3..6]
+        Rails.logger.debug(" `#{stripped}` is 8 chars long. barcode_id will be #{stripped[3..6]}.")
+        barcode_id = stripped[3..6]
       else
 
         # Workaround for invalid barcodes taped on folders
         # remove leading zeros, then take the first four values (if existing)
-        workaround_stripped = stripped.sub!(/^0*/, "")[0..3]
-        Rails.logger.warn("Input `#{stripped}` for folderId or barcode was modified to `#{workaround_stripped}`.")
+        barcode_id = stripped.sub!(/^0*/, "")[0..3]
+        Rails.logger.warn("Input `#{stripped}` for folderId or barcode was modified to `#{barcode_id}`.")
 
 
-        if workaround_stripped.length != 4
+        if barcode_id.length != 4
           flash[:alert] = "#{Time.new}: \"#{f}\" ist keine korrekte ID und kein korrekter Barcode. Ein Reparaturversuch schlug fehl."
           redirect_to ausleihe_path and return
         else
-          warnings << "`#{f}` wurde zu `#{workaround_stripped}` abgeändert."
-          barcodeId = workaround_stripped
+          warnings << "`#{f}` wurde zu `#{barcode_id}` abgeändert."
         end
       end
 
-      old_folder_instance = OldFolderInstance.find_by(barcodeId: barcodeId)
+      old_folder_instance = OldFolderInstance.find_by(barcodeId: barcode_id)
 
       if old_folder_instance.nil?
         flash[:alert] = "#{Time.new}: Es gibt kein Ordner-Exemplar \"#{f}\"."
@@ -83,14 +82,14 @@ class AusleiheController < ApplicationController
       redirect_to returning_form_path(old_folder_instances: instances) and return
 
     else
-      lentAsStrings = lent_instances
+      lent_as_strings = lent_instances
                           .map { |i| i.barcodeId }
                           .join(', ')
-      allAsStrings = instances.map { |i| i.barcodeId }
+      all_as_strings = instances.map { |i| i.barcodeId }
                          .join(', ')
 
       message = ["#{Time.new}: Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen."]
-      message << "Ordner-Exemplare: #{allAsStrings}, davon verliehen: #{lentAsStrings}"
+      message << "Ordner-Exemplare: #{all_as_strings}, davon verliehen: #{lent_as_strings}"
       flash[:alert] = message.join
 
       redirect_to ausleihe_path and return
@@ -187,7 +186,7 @@ class AusleiheController < ApplicationController
   # Takes the given folders back and returns the user to the main screen.
   def returning_action
     if params[:id].nil?
-      render "ausleihe/returning_form" and return
+      render 'ausleihe/returning_form' and return
     end
 
     @old_lend_out = OldLendOut.find(params[:id])
