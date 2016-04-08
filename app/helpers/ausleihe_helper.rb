@@ -31,7 +31,7 @@ module AusleiheHelper
   end
 
 
-  def self.string_to_barcode_id(s)
+  def string_to_barcode_id(s)
     if s.length == 4
       Rails.logger.debug(" `#{s}` is 4 chars long. barcode_id will be #{s}.")
       barcode_id = s
