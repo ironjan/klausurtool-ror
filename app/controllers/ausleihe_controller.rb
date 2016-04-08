@@ -29,38 +29,27 @@ class AusleiheController < ApplicationController
     warnings = []
 
     Rails.logger.debug("Got switch request containing #{folder_list.count} elements.")
-    folder_list = folder_list.map { |f| [f, f.strip] }
-                     .reject { |f,stripped| f.empty? }
+    folder_list = folder_list
+                      .map { |f| [f, f.strip] }
+                      .reject { |_, stripped| stripped.empty? }
+                      .map { |f, stripped| [f, string_to_barcode_id(stripped)] }
 
-    folder_list.each do |f,stripped|
+    folder_list.each do |f, stripped|
       Rails.logger.debug(" `#{f}` has been stripped to `#{stripped}` and was not empty.")
 
-      if stripped.length == 4
-        Rails.logger.debug(" `#{stripped}` is 4 chars long. barcode_id will be #{stripped}.")
-        barcode_id = stripped
-      elsif stripped.length == 8
-        Rails.logger.debug(" `#{stripped}` is 8 chars long. barcode_id will be #{stripped[3..6]}.")
-        barcode_id = stripped[3..6]
-      else
+      barcode_id = stripped
 
-        # Workaround for invalid barcodes taped on folders
-        # remove leading zeros, then take the first four values (if existing)
-        barcode_id = stripped.sub!(/^0*/, "")[0..3]
-        Rails.logger.warn("Input `#{stripped}` for folderId or barcode was modified to `#{barcode_id}`.")
-
-
-        if barcode_id.length != 4
-          flash[:alert] = "#{Time.new}: \"#{f}\" ist keine korrekte ID und kein korrekter Barcode. Ein Reparaturversuch schlug fehl."
-          redirect_to ausleihe_path and return
-        else
-          warnings << "`#{f}` wurde zu `#{barcode_id}` abgeändert."
-        end
+      if barcode_id.length != 4
+        flash[:alert] = "#{Time.new}: \"#{f}\" ist keine korrekte ID und kein korrekter Barcode. Ein Reparaturversuch schlug fehl."
+        redirect_to ausleihe_path and return
+      elsif barcode_id != f
+        warnings << "`#{f}` wurde zu `#{barcode_id}` abgeändert."
       end
 
       old_folder_instance = OldFolderInstance.find_by(barcodeId: barcode_id)
 
       if old_folder_instance.nil?
-        flash[:alert] = "#{Time.new}: Es gibt kein Ordner-Exemplar \"#{f}\"."
+        flash[:alert] = "#{Time.new}: Es gibt kein Ordner-Exemplar `#{barcode_id}` (Basierend auf `#{f}`)."
         redirect_to ausleihe_path and return
       else
         instances << old_folder_instance
@@ -83,10 +72,10 @@ class AusleiheController < ApplicationController
 
     else
       lent_as_strings = lent_instances
-                          .map { |i| i.barcodeId }
-                          .join(', ')
+                            .map { |i| i.barcodeId }
+                            .join(', ')
       all_as_strings = instances.map { |i| i.barcodeId }
-                         .join(', ')
+                           .join(', ')
 
       message = ["#{Time.new}: Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen."]
       message << "Ordner-Exemplare: #{all_as_strings}, davon verliehen: #{lent_as_strings}"
@@ -245,5 +234,23 @@ class AusleiheController < ApplicationController
     end
 
     mixed_content
+  end
+
+  def string_to_barcode_id(s)
+    if s.length == 4
+      Rails.logger.debug(" `#{s}` is 4 chars long. barcode_id will be #{s}.")
+      barcode_id = s
+    elsif s.length == 8
+      Rails.logger.debug(" `#{s}` is 8 chars long. barcode_id will be #{s[3..6]}.")
+      barcode_id = s[3..6]
+    else
+
+      # Workaround for invalid barcodes taped on folders
+      # remove leading zeros, then take the first four values (if existing)
+      barcode_id = s.sub!(/^0*/, "")[0..3]
+      Rails.logger.warn("Input `#{s}` for folderId or barcode was modified to `#{barcode_id}`.")
+    end
+
+    barcode_id
   end
 end
