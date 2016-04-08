@@ -124,7 +124,7 @@ describe OldExam do
     describe 'existing_titles' do
       it 'returns the titles if there are titles' do
         build_autocompletion_test_data
-      expect(OldExam.existing_titles).to match_array([TITLE_EXAM_TITLE, TITLE_PRUEFUNG, TITLE_TIT_LE])
+        expect(OldExam.existing_titles).to match_array([TITLE_EXAM_TITLE, TITLE_PRUEFUNG, TITLE_TIT_LE])
         destroy_autocompletion_test_data
       end
     end
@@ -132,7 +132,7 @@ describe OldExam do
     describe 'existing_examiners' do
       it 'returns the examiners if there are examiners' do
         build_autocompletion_test_data
-      expect(OldExam.existing_examiners).to match_array([EXAMINERS_BAR, EXAMINERS_FOO, EXAMINERS_FOO_BAR])
+        expect(OldExam.existing_examiners).to match_array([EXAMINERS_BAR, EXAMINERS_FOO, EXAMINERS_FOO_BAR])
         destroy_autocompletion_test_data
       end
     end
