@@ -23,7 +23,7 @@
               <td>
                 <% if controller_name == "ausleihe" %>
                     <%= link_to i.old_folder.title, ausleihe_folder_path(i.old_folder) %>
-                <% elsif controller_name == "old_folder_instances" %>
+                <% else %>
                     <%= link_to i.old_folder.title, i.old_folder %>
                 <% end %>
 
