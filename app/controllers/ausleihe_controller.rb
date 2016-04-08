@@ -1,5 +1,6 @@
 class AusleiheController < ApplicationController
-  include LentFolders, LendingArchive, PaginatedFolderInstanceList, PaginatedExamsList
+  include LentFolders, LendingArchive, PaginatedFolderInstanceList, PaginatedExamsList, AusleiheHelper
+
 
 
   layout 'ausleihe', except: 'error'
@@ -32,7 +33,7 @@ class AusleiheController < ApplicationController
     folder_list = folder_list
                       .map { |f| [f, f.strip] }
                       .reject { |_, stripped| stripped.empty? }
-                      .map { |f, stripped| [f, AusleiheHelper.string_to_barcode_id(stripped)] }
+                      .map { |f, stripped| [f, string_to_barcode_id(stripped)] }
 
     folder_list.each do |f, stripped|
       Rails.logger.debug(" `#{f}` has been stripped to `#{stripped}` and was not empty.")
