@@ -32,7 +32,7 @@ class AusleiheController < ApplicationController
     folder_list = folder_list
                       .map { |f| [f, f.strip] }
                       .reject { |_, stripped| stripped.empty? }
-                      .map { |f, stripped| [f, string_to_barcode_id(stripped)] }
+                      .map { |f, stripped| [f, AusleiheHelper.string_to_barcode_id(stripped)] }
 
     folder_list.each do |f, stripped|
       Rails.logger.debug(" `#{f}` has been stripped to `#{stripped}` and was not empty.")
@@ -236,21 +236,4 @@ class AusleiheController < ApplicationController
     mixed_content
   end
 
-  def string_to_barcode_id(s)
-    if s.length == 4
-      Rails.logger.debug(" `#{s}` is 4 chars long. barcode_id will be #{s}.")
-      barcode_id = s
-    elsif s.length == 8
-      Rails.logger.debug(" `#{s}` is 8 chars long. barcode_id will be #{s[3..6]}.")
-      barcode_id = s[3..6]
-    else
-
-      # Workaround for invalid barcodes taped on folders
-      # remove leading zeros, then take the first four values (if existing)
-      barcode_id = s.sub!(/^0*/, "")[0..3]
-      Rails.logger.warn("Input `#{s}` for folderId or barcode was modified to `#{barcode_id}`.")
-    end
-
-    barcode_id
-  end
 end
