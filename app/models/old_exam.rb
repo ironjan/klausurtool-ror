@@ -30,7 +30,6 @@ class OldExam < ActiveRecord::Base
     get_unique_field_values(:examiners)
   end
 
-  private
   def self.get_unique_field_values(symbol)
     select(symbol)
         .order(symbol)
