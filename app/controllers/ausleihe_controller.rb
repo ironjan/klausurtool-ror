@@ -59,7 +59,7 @@ class AusleiheController < ApplicationController
     lent_is_not_empty = (not lent.empty?)
 
     if lent_is_not_empty && not_all_folders_are_lent
-      flash[:alert] = build_invalid_input_for_switch_message(folder_list, lent)
+      flash[:alert] = invalid_input_for_switch_message(folder_list, lent)
       redirect_to ausleihe_path and return
     end
 
@@ -209,7 +209,7 @@ class AusleiheController < ApplicationController
     archived.save!
   end
 
-  def build_invalid_input_for_switch_message(folder_list, lent)
+  def invalid_input_for_switch_message(folder_list, lent)
     lent_as_strings = lent
                           .map { |f, barcode, _| "#{barcode} (#{f})" }
                           .join(', ')
