@@ -33,14 +33,24 @@ class AusleiheController < ApplicationController
                       .map { |f, stripped| [f, string_to_barcode_id(stripped)] }
                       .map { |f, barcode_id| [f, barcode_id, OldFolderInstance.find_by(barcodeId: barcode_id)]}
 
-    non_existing_instances = folder_list.select {|_,_, instance| instance.nil?}
+
+    non_existing_instances = folder_list
+                                 .select {|_,_, instance| instance.nil?}
+                                 .map { |f,barcode,_| "#{barcode} (#{f})" }
     unless non_existing_instances.empty?
-      s = non_existing_instances
-          .map { |f,barcode,_| "#{barcode} (#{f})" }
-          .join(', ')
-      flash[:alert] = "#{Time.new}: Folgende Ordner konnten nicht gefunden werden: #{s}"
+      flash[:alert] = "#{Time.new}: Folgende Ordner konnten nicht gefunden werden: #{non_existing_instances.join(', ')}"
       redirect_to ausleihe_path and return
     end
+
+
+    corrected_codes = folder_list
+                          .select { |f, barcode_id, _| f != barcode_id}
+                          .map {|f, barcode_id,_| "#{barcode_id} (#{f})"}
+    unless corrected_codes.empty?
+      flash[:warning] = "#{Time.new}: IDs wurden korrigiert: #{corrected_codes.join(', ')}"
+    end
+
+
 
     lent = folder_list.reject { |_,_,i| i.old_lend_out.nil? }
 
