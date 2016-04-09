@@ -1,3 +1,10 @@
+# 0.4.0
+
+ * [Internal-Bereich als Vorbereitung für öffentliche Suche](https://github.com/ironjan/klausurtool-ror/issues/148)
+ * ["Verliehen seit" in Ausleih-Liste](https://github.com/ironjan/klausurtool-ror/issues/133)
+ * [Links aus Ausleihe in Admin-Bereich entfernt](https://github.com/ironjan/klausurtool-ror/issues/150)
+ * [Oberfläche etwas aufgeräumt](https://github.com/ironjan/klausurtool-ror/issues/143)
+
 # 0.3.1
 
  * Fixed: Ausleih-Formular hatte Inputs ohne Label
