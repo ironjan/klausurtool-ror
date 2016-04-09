@@ -209,19 +209,6 @@ class AusleiheController < ApplicationController
     archived.save!
   end
 
-  def has_mixed_content?(old_folder_instances)
-    lend_outs = old_folder_instances.map { |i| i.old_lend_out }
-    lent = lend_outs.reject { |l| l.nil? }
-
-    if lent.empty?
-      mixed_content = false
-    else
-      mixed_content = (lent.count != lend_outs.count)
-    end
-
-    mixed_content
-  end
-
   def build_invalid_input_for_switch_message(folder_list, lent)
     lent_as_strings = lent
                           .map { |f, barcode, _| "#{barcode} (#{f})" }
