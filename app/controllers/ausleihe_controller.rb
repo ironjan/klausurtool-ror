@@ -188,7 +188,6 @@ class AusleiheController < ApplicationController
 
   end
 
-
   private
   def old_lend_out_params
     params.require(:old_lend_out).permit(:imt, :lender, :deposit, :weigth, :receiver, :recivingTime, :old_folder_instances => [])
@@ -217,9 +216,7 @@ class AusleiheController < ApplicationController
                          .map { |f, barcode, _| "#{barcode} (#{f})" }
                          .join(', ')
 
-    message = ["#{Time.new}: Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen."]
-    message << "Ordner-Exemplare: #{all_as_strings}, davon verliehen: #{lent_as_strings}"
-    join = message.join
+    "#{Time.new}: Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen. Ordner-Exemplare: #{all_as_strings}, davon verliehen: #{lent_as_strings}"
   end
 
 end
