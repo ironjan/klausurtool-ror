@@ -2,7 +2,6 @@ class AusleiheController < ApplicationController
   include LentFolders, LendingArchive, PaginatedFolderInstanceList, PaginatedExamsList, AusleiheHelper
 
 
-
   layout 'ausleihe', except: 'error'
 
 
@@ -31,12 +30,12 @@ class AusleiheController < ApplicationController
                       .map { |f| [f, f.strip] }
                       .reject { |_, stripped| stripped.empty? }
                       .map { |f, stripped| [f, string_to_barcode_id(stripped)] }
-                      .map { |f, barcode_id| [f, barcode_id, OldFolderInstance.find_by(barcodeId: barcode_id)]}
+                      .map { |f, barcode_id| [f, barcode_id, OldFolderInstance.find_by(barcodeId: barcode_id)] }
 
 
     non_existing_instances = folder_list
-                                 .select {|_,_, instance| instance.nil?}
-                                 .map { |f,barcode,_| "#{barcode} (#{f})" }
+                                 .select { |_, _, instance| instance.nil? }
+                                 .map { |f, barcode, _| "#{barcode} (#{f})" }
     unless non_existing_instances.empty?
       flash[:alert] = "#{Time.new}: Folgende Ordner konnten nicht gefunden werden: #{non_existing_instances.join(', ')}"
       redirect_to ausleihe_path and return
@@ -44,37 +43,31 @@ class AusleiheController < ApplicationController
 
 
     corrected_codes = folder_list
-                          .select { |f, barcode_id, _| f != barcode_id}
-                          .map {|f, barcode_id,_| "#{barcode_id} (#{f})"}
+                          .select { |f, barcode_id, _| f != barcode_id }
+                          .map { |f, barcode_id, _| "#{barcode_id} (#{f})" }
     unless corrected_codes.empty?
       flash[:warning] = "#{Time.new}: IDs wurden korrigiert: #{corrected_codes.join(', ')}"
     end
 
 
+    lent = folder_list.reject { |_, _, i| i.old_lend_out.nil? }
 
-    lent = folder_list.reject { |_,_,i| i.old_lend_out.nil? }
+    instances_only = folder_list.map { |_, _, i| i }
 
-    instances_only = folder_list.map{ |_,_, i| i}
+
+    not_all_folders_are_lent = lent.count != folder_list.count
+    lent_is_not_empty = (not lent.empty?)
+
+    if lent_is_not_empty && not_all_folders_are_lent
+      flash[:alert] = build_invalid_input_for_switch_message(folder_list, lent)
+      redirect_to ausleihe_path and return
+    end
+
 
     if lent.empty?
-      redirect_to lending_form_path(old_folder_instances: instances_only) and return
-
-    elsif lent.count == folder_list.count
-      redirect_to returning_form_path(old_folder_instances: instances_only) and return
-
+      redirect_to lending_form_path(old_folder_instances: instances_only)
     else
-      lent_as_strings = lent
-                            .map { |f,barcode,_| "#{barcode} (#{f})" }
-                            .join(', ')
-      all_as_strings = folder_list
-                           .map { |f,barcode,_| "#{barcode} (#{f})" }
-                           .join(', ')
-
-      message = ["#{Time.new}: Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen."]
-      message << "Ordner-Exemplare: #{all_as_strings}, davon verliehen: #{lent_as_strings}"
-      flash[:alert] = message.join
-
-      redirect_to ausleihe_path and return
+      redirect_to returning_form_path(old_folder_instances: instances_only)
     end
   end
 
@@ -227,6 +220,19 @@ class AusleiheController < ApplicationController
     end
 
     mixed_content
+  end
+
+  def build_invalid_input_for_switch_message(folder_list, lent)
+    lent_as_strings = lent
+                          .map { |f, barcode, _| "#{barcode} (#{f})" }
+                          .join(', ')
+    all_as_strings = folder_list
+                         .map { |f, barcode, _| "#{barcode} (#{f})" }
+                         .join(', ')
+
+    message = ["#{Time.new}: Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen."]
+    message << "Ordner-Exemplare: #{all_as_strings}, davon verliehen: #{lent_as_strings}"
+    join = message.join
   end
 
 end
