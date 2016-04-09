@@ -26,56 +26,38 @@ class AusleiheController < ApplicationController
   def switch
     folder_list = params[:folderList].split(/\r?\n/)
 
-    instances = []
-    warnings = []
-
     Rails.logger.debug("Got switch request containing #{folder_list.count} elements.")
     folder_list = folder_list
                       .map { |f| [f, f.strip] }
                       .reject { |_, stripped| stripped.empty? }
                       .map { |f, stripped| [f, string_to_barcode_id(stripped)] }
+                      .map { |f, barcode_id| [f, barcode_id, OldFolderInstance.find_by(barcodeId: barcode_id)]}
 
-    folder_list.each do |f, stripped|
-      Rails.logger.debug(" `#{f}` has been stripped to `#{stripped}` and was not empty.")
-
-      barcode_id = stripped
-
-      if barcode_id.length != 4
-        flash[:alert] = "#{Time.new}: \"#{f}\" ist keine korrekte ID und kein korrekter Barcode. Ein Reparaturversuch schlug fehl."
-        redirect_to ausleihe_path and return
-      elsif barcode_id != f
-        warnings << "`#{f}` wurde zu `#{barcode_id}` abgeändert."
-      end
-
-      old_folder_instance = OldFolderInstance.find_by(barcodeId: barcode_id)
-
-      if old_folder_instance.nil?
-        flash[:alert] = "#{Time.new}: Es gibt kein Ordner-Exemplar `#{barcode_id}` (Basierend auf `#{f}`)."
-        redirect_to ausleihe_path and return
-      else
-        instances << old_folder_instance
-      end
+    non_existing_instances = folder_list.select {|_,_, instance| instance.nil?}
+    unless non_existing_instances.empty?
+      s = non_existing_instances
+          .map { |f,barcode,_| "#{barcode} (#{f})" }
+          .join(', ')
+      flash[:alert] = "#{Time.new}: Folgende Ordner konnten nicht gefunden werden: #{s}"
+      redirect_to ausleihe_path and return
     end
 
-    lent_instances = instances.reject { |i| i.old_lend_out.nil? }
+    lent = folder_list.reject { |_,_,i| i.old_lend_out.nil? }
 
+    instances_only = folder_list.map{ |_,_, i| i}
 
-    if warnings.count > 0
-      flash[:warning] = warnings.join(' ')
-    end
+    if lent.empty?
+      redirect_to lending_form_path(old_folder_instances: instances_only) and return
 
-
-    if lent_instances.empty?
-      redirect_to lending_form_path(old_folder_instances: instances) and return
-
-    elsif lent_instances.count == instances.count
-      redirect_to returning_form_path(old_folder_instances: instances) and return
+    elsif lent.count == folder_list.count
+      redirect_to returning_form_path(old_folder_instances: instances_only) and return
 
     else
-      lent_as_strings = lent_instances
-                            .map { |i| i.barcodeId }
+      lent_as_strings = lent
+                            .map { |f,barcode,_| "#{barcode} (#{f})" }
                             .join(', ')
-      all_as_strings = instances.map { |i| i.barcodeId }
+      all_as_strings = folder_list
+                           .map { |f,barcode,_| "#{barcode} (#{f})" }
                            .join(', ')
 
       message = ["#{Time.new}: Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen."]
