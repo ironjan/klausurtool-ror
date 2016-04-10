@@ -52,7 +52,9 @@ Rails.application.routes.draw do
   end
 
   # Current redirection so that everyone has time to update bookmarks
+  get '/ausleihe', to: redirect { "/internal/ausleihe/" }
   get '/ausleihe/*path', to: redirect { |params, request| "/internal/ausleihe/#{params[:path]}?#{request.query_string}" }
+  get '/admin', to: redirect { "/internal/admin/" }
   get '/admin/*path', to: redirect { |params, request| "/internal/admin/#{params[:path]}?#{request.query_string}" }
 
   root 'application#index'
