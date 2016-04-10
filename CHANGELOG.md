@@ -1,3 +1,7 @@
+# 0.4.1
+
+ * Code Clean-Up
+
 # 0.4.0
 
  * [Internal-Bereich als Vorbereitung für öffentliche Suche](https://github.com/ironjan/klausurtool-ror/issues/148)
