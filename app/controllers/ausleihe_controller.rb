@@ -27,49 +27,54 @@ class AusleiheController < ApplicationController
 
     Rails.logger.debug("Got switch request containing #{folder_list.count} elements.")
     folder_list = folder_list
-                      .map { |f| [f, f.strip] }
+                      .map { |i| input_to_stripped_input_tuple(i) }
                       .reject { |_, stripped| stripped.empty? }
-                      .map { |f, stripped| [f, string_to_barcode_id(stripped)] }
-                      .map { |f, barcode_id| [f, barcode_id, OldFolderInstance.find_by(barcodeId: barcode_id)] }
+                      .map { |f, stripped| append_instance_to_tuple(f, string_to_barcode_id(stripped)) }
 
 
     non_existing_instances = folder_list
                                  .select { |_, _, instance| instance.nil? }
-                                 .map { |f, barcode, _| "#{barcode} (#{f})" }
-    unless non_existing_instances.empty?
-      flash[:alert] = "#{Time.new}: Folgende Ordner konnten nicht gefunden werden: #{non_existing_instances.join(', ')}"
-      redirect_to ausleihe_path and return
-    end
-
+                                 .map { |barcode, f| input_barcode_to_output_string(barcode, f) }
 
     corrected_codes = folder_list
                           .select { |f, barcode_id, _| f != barcode_id }
-                          .map { |f, barcode_id, _| "#{barcode_id} (#{f})" }
+                          .map { |barcode, f| input_barcode_to_output_string(barcode, f) }
+
+
+    lent_instances = folder_list.reject { |_, _, i| i.old_lend_out.nil? }
+
+
     unless corrected_codes.empty?
       flash[:warning] = "#{Time.new}: IDs wurden korrigiert: #{corrected_codes.join(', ')}"
     end
 
-
-    lent = folder_list.reject { |_, _, i| i.old_lend_out.nil? }
-
-    instances_only = folder_list.map { |_, _, i| i }
-
-
-    not_all_folders_are_lent = lent.count != folder_list.count
-    lent_is_not_empty = (not lent.empty?)
-
-    if lent_is_not_empty && not_all_folders_are_lent
-      flash[:alert] = invalid_input_for_switch_message(folder_list, lent)
+    has_non_existing_instances = (not non_existing_instances.empty?)
+    if has_non_existing_instances
+      flash[:alert] = "#{Time.new}: Folgende Ordner konnten nicht gefunden werden: #{non_existing_instances.join(', ')}"
       redirect_to ausleihe_path and return
     end
 
+    has_mixed_content = (not lent_instances.empty?) && lent_instances.count != folder_list.count
 
-    if lent.empty?
+    if has_mixed_content
+      flash[:alert] = invalid_input_for_switch_message(folder_list, lent_instances)
+      redirect_to ausleihe_path and return
+    end
+
+    redirect_to_after_switch_action(lent_instances.empty?, folder_list)
+  end
+
+  # Redirects the user to the next action. If lending is true, the user will be redirected to the lending form;
+  # otherwise the user will be redirected to the returning form.
+  def redirect_to_after_switch_action(lending, folder_list)
+    instances_only = folder_list.map { |_, _, i| i }
+    if lending
       redirect_to lending_form_path(old_folder_instances: instances_only)
     else
       redirect_to returning_form_path(old_folder_instances: instances_only)
     end
   end
+
 
   # Renders the form when lending folder_instances. The form calls lending_action on submit.
   def lending_form
@@ -208,15 +213,34 @@ class AusleiheController < ApplicationController
     archived.save!
   end
 
+  # folder_list
+  #     .map { |f| [f, f.strip] }
+  #     .reject { |_, stripped| stripped.empty? }
+  #     .map { |f, stripped| [f, string_to_barcode_id(stripped)] }
+  #     .map { |f, barcode_id| [f, barcode_id, OldFolderInstance.find_by(barcodeId: barcode_id)] }
+
+  def input_to_stripped_input_tuple(input)
+    [input, input.strip]
+  end
+
+  def append_instance_to_tuple(f, barcode_id)
+    [f, barcode_id, OldFolderInstance.find_by(barcodeId: barcode_id)]
+  end
+
+  def input_barcode_to_output_string(barcode, f)
+    "#{barcode} (#{f})"
+  end
+
   def invalid_input_for_switch_message(folder_list, lent)
     lent_as_strings = lent
-                          .map { |f, barcode, _| "#{barcode} (#{f})" }
+                          .map { |barcode, f| input_barcode_to_output_string(barcode, f) }
                           .join(', ')
     all_as_strings = folder_list
-                         .map { |f, barcode, _| "#{barcode} (#{f})" }
+                         .map { |barcode, f| input_barcode_to_output_string(barcode, f) }
                          .join(', ')
 
     "#{Time.new}: Eingabe enthält gemischte Ordner. Entweder Ausleihen oder Zurücknehmen. Ordner-Exemplare: #{all_as_strings}, davon verliehen: #{lent_as_strings}"
   end
+
 
 end
