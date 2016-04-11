@@ -1,0 +1,77 @@
+.actual-cover {
+  width: 18cm;
+  height: 23.5cm;
+  border: 1px solid black;
+
+  .cover-logo {
+    margin: 0.5cm;
+    height: 14cm;
+    text-align: center;
+  }
+
+  .cover-info {
+    text-align: center;
+    height: 6cm;
+    font-size: 12pt;
+
+    .cover-title {
+      font-weight: bold;
+      font-size: 17pt;
+    }
+  }
+
+  .cover-barcode {
+    float: right;
+    margin-right: 0.5cm;
+
+    .barcodeId {
+      font-size: 17pt;
+      left: 2cm;
+      width: 4em;
+      margin-left: -17pt;
+    }
+
+    table.barby-barcode {
+      display: block;
+      margin-left: 34pt;
+      margin-top: -2em;
+      border-spacing: 0;
+    }
+
+    td.barby-cell {
+      width: 2px;
+      height: 2cm;
+    }
+
+    td.barby-cell.on {
+      background: #000;
+    }
+
+    @media print {
+      // duplicating the style so the image is also displayed in print
+
+      td.barby-cell.on {
+        background: #000 !important;
+        -webkit-print-color-adjust: exact;
+
+      }
+    }
+  }
+
+}
+
+.rotate {
+  display: block;
+
+  -webkit-transform: rotate(-90deg); // Safari
+  -moz-transform: rotate(-90deg); // Firefox
+  -ms-transform: rotate(-90deg); // IE
+  -o-transform: rotate(-90deg); // Opera
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); // Internet Explorer
+
+}
+
+.side-strip {
+  margin-top: 1cm;
+  border: 1px solid black;
+}
