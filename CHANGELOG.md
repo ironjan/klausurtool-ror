@@ -1,3 +1,7 @@
+# 0.5.0
+
+ * [Beta: Ordner-Rücken können gedruckt werden](https://github.com/ironjan/klausurtool-ror/issues/52)
+
 # 0.4.1
 
  * Code Clean-Up
