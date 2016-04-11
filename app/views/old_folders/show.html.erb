@@ -3,7 +3,7 @@
 <div class="full-width">
   <div class="full-width">
 
-    <h2 ><%= @old_folder.title %></h2>
+    <h2><%= @old_folder.title %></h2>
     <%= link_to 'Bearbeiten', edit_old_folder_path, class: 'pull-right btn btn-default' %>
     <dl>
       <dt>Inhalt</dt>
@@ -25,7 +25,9 @@
             <%= link_to 'Roter Zettel', asset_path('RoterZettel_Klausuren.pdf') %>
         <% else %>
             <%= link_to 'Roter Zettel', asset_path('RoterZettel_Protokolle.pdf') %>
-        <% end %></li>
+        <% end %>
+      </li>
+      <li>Mappen- und Ordner-Cover bei den <a href="#linked-instances">Verknüpften Exemplaren</a>.</li>
     </ul>
   </div>
 

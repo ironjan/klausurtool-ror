@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       get '/' => 'old_folders#index'
 
       get 'old_folder_instances' => 'old_folder_instances#index', as: 'old_folder_instances'
-      get 'old_folder_instances/:barcode/cover' => 'internal/admin/print#cover'
+      get 'old_folder_instances/:barcode/cover' => 'internal/admin/print#cover', as: 'cover'
 
 
       resources :old_folders, :old_exams
