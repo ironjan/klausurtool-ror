@@ -4,9 +4,11 @@ require 'barby/outputter/html_outputter'
 
 module Internal
   module Admin
+    # Controller to provide print actions.
     class PrintController < ApplicationController
       layout 'print'
 
+      # Returns the cover for the given barcode.
       def cover
         barcode = params[:barcode]
         if barcode.nil?
