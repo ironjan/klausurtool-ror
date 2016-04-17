@@ -16,6 +16,8 @@ gem 'unicode'
 gem 'delayed_job_active_record'
 gem 'daemons'
 
+gem 'barby'
+
 # Use jquery as the JavaScript library
 # Used to extend the forms with delete actions
 gem 'jquery-rails'

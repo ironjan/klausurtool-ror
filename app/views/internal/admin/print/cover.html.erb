@@ -1,0 +1,25 @@
+<div class="a4">
+  <section class="actual-cover">
+    <div class="cover-logo">
+      <img src="/assets/images/pi_kreis.jpg"/>
+    </div>
+    <div class="cover-info">
+      <p class="cover-title"><%= @old_folder_instance.old_folder.title %></p>
+      <p><%= @old_folder_instance.old_folder.area %></p>
+      <p><%= @old_folder_instance.old_folder.contentType %></p>
+      <p>[http://www.die-fachschaft.de]</p>
+    </div>
+    <div class="cover-barcode">
+      <div class="rotate barcodeId">
+        <%= @old_folder_instance.barcodeId %>
+      </div>
+      <%= raw @barcode_for_html.to_html %>
+      <div class="rotate">
+      </div>
+    </div>
+    </section>
+
+<section class="side-strip">
+  <b><%= @old_folder_instance.old_folder.title %></b> – <%= @old_folder_instance.old_folder.area %> – <%= @old_folder_instance.old_folder.contentType %>
+</section>
+</div>

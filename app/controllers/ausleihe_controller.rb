@@ -41,7 +41,7 @@ class AusleiheController < ApplicationController
                           .map { |barcode, f| input_barcode_to_output_string(barcode, f) }
 
 
-    lent_instances = folder_list.reject { |_, _, i| i.old_lend_out.nil? }
+    lent_instances = folder_list.reject { |_, _, i| i.nil? || i.old_lend_out.nil? }
 
 
     unless corrected_codes.empty?

@@ -42,6 +42,10 @@
                         <%= link_to 'Löschen', [i.old_folder, i], method: :delete,
                                     data: {confirm: 'Ordner-Exemplar wirklich löschen?'} %>
                     <% end %>
+
+                <% elsif controller_name == "old_folders" %>
+                    <%= link_to "Cover drucken", cover_path(i.barcodeId), :target => "_blank" %>
+
                 <% end %>
               </td>
             </tr>
