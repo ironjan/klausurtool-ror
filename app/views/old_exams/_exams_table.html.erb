@@ -26,6 +26,8 @@
                     <%= link_to e.old_folder.title, ausleihe_folder_path(e.old_folder) %>
                 <% elsif controller_name == "old_exams" %>
                     <%= link_to e.old_folder.title, e.old_folder %>
+                <% else %>
+                    <%= e.old_folder.title %>
                 <% end %>
               </td>
               <td>
@@ -33,9 +35,11 @@
                     <%= link_to 'Anzeigen', old_exam_path(e) %>,
                     <%= link_to 'Bearbeiten', edit_old_folder_old_exam_path(e.old_folder, e) %>
 
-                <% elsif controller_name == "ausleihe" %>
-                    <%= e.old_folder.old_folder_instances.select { |o| o.old_lend_out.nil? }.count %>
+                <% else %>
+                    <%= e.old_folder.old_folder_instances.select { |o| o.old_lend_out.nil? }.count %> verfügbar.
+
                 <% end %>
+
               </td>
             </tr>
         <% end %>
