@@ -176,7 +176,11 @@ class AusleiheController < ApplicationController
       render 'ausleihe/returning_form' and return
     end
 
-    @old_lend_out = OldLendOut.find(params[:id])
+    @old_lend_out = OldLendOut.find_by_id(params[:id])
+    if @old_lend_out.nil?
+      flash[:warning] = "#{Time.new}: Ordner wurde bereits zurückgenommen."
+      redirect_to ausleihe_path and return
+    end
 
     @old_lend_out.receivingTime = Time.new
 
