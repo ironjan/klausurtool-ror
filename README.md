@@ -35,7 +35,7 @@
  * Pre-Compile assets for production via ```RAILS_ENV=production bin/rake assets:precompile```
 
 
-## Versioing
+## Versioning
 
  * Follows [Semantic Versioning](http://semver.org/)
  * Uses http://stackoverflow.com/questions/9073446/where-do-you-store-your-rails-applications-version-number to update version
