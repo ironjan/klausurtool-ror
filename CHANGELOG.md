@@ -1,3 +1,9 @@
+# 0.5.1
+
+ * [Fixed: Auto-Completion-Bug in Firefox](https://github.com/ironjan/klausurtool-ror/issues/165)
+ * [Fixed:unnötige Warnung entfernt](https://github.com/ironjan/klausurtool-ror/issues/161)
+ * [Fixed: 'Ordner bearbeiten' lädt nun die richtigen Werte ins Formular](https://github.com/ironjan/klausurtool-ror/issues/168)
+
 # 0.5.0
 
  * [Beta: Ordner-Rücken können gedruckt werden](https://github.com/ironjan/klausurtool-ror/issues/52)

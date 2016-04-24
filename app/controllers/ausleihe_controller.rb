@@ -37,7 +37,7 @@ class AusleiheController < ApplicationController
                                  .map { |barcode, f| input_barcode_to_output_string(barcode, f) }
 
     corrected_codes = folder_list
-                          .select { |f, barcode_id, _| f != barcode_id }
+                          .select { |f, barcode_id, _| f != barcode_id && f.length != 4 && f.length != 8 }
                           .map { |barcode, f| input_barcode_to_output_string(barcode, f) }
 
 
@@ -148,7 +148,14 @@ class AusleiheController < ApplicationController
 
     instances = old_folder_instances
                     .map { |id| OldFolderInstance.find_by_id(id) }
+
     found_instances = instances.compact
+
+    has_unlent_instances = instances.select { |i| i.old_lend_out.nil? }.length > 0
+    if has_unlent_instances
+      flash[:alert] = "#{Time.new}: Es wurden nicht verliehene Ordner übergeben."
+      redirect_to ausleihe_path and return
+    end
 
     if found_instances.count < instances.count
       flash[:alert] << "#{Time.new}: Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?"
