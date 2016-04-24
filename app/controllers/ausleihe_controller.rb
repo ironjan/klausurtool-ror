@@ -37,7 +37,7 @@ class AusleiheController < ApplicationController
                                  .map { |barcode, f| input_barcode_to_output_string(barcode, f) }
 
     corrected_codes = folder_list
-                          .select { |f, barcode_id, _| f != barcode_id }
+                          .select { |f, barcode_id, _| f != barcode_id && f.length != 4 && f.length != 8 }
                           .map { |barcode, f| input_barcode_to_output_string(barcode, f) }
 
 
