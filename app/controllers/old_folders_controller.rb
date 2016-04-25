@@ -81,14 +81,16 @@ class OldFoldersController < ApplicationController
       @old_folder = OldFolder.new
     end
 
-    number_of_filler_exams = 37 - @old_folder.old_exams.count
+    @unarchived_exams = @old_folder.old_exams.select { |e| e.unarchived? }
+
+    number_of_filler_exams = 37 - @unarchived_exams.count
     if number_of_filler_exams < 0
       flash[:warning] = 'Es können nicht alle Prüfungen auf eine Seite gedruckt werden. Bitte einige Klausuren archivieren oder auslaugern.'
     end
 
     filler_exam = OldExam.new
     while number_of_filler_exams > 0
-      @old_folder.old_exams << filler_exam
+      @unarchived_exams << filler_exam
       number_of_filler_exams -= 1
     end
 
