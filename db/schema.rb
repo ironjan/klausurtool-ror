@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160313124532) do
+ActiveRecord::Schema.define(version: 20160425120127) do
 
   create_table "archived_old_lend_outs", force: :cascade do |t|
     t.string   "deposit",              limit: 255
@@ -52,8 +52,10 @@ ActiveRecord::Schema.define(version: 20160313124532) do
     t.string   "examiners",     limit: 255
     t.date     "date"
     t.integer  "old_folder_id", limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.boolean  "visible"
+    t.boolean  "unarchived",                default: true
   end
 
   add_index "old_exams", ["old_folder_id"], name: "index_old_exams_on_old_folder_id", using: :btree
