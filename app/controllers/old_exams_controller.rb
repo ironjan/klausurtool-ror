@@ -78,7 +78,7 @@ class OldExamsController < ApplicationController
 
   private
   def old_exam_params
-    params.require(:old_exam).permit(:title, :examiners, :date, :old_folder_id)
+    params.require(:old_exam).permit(:title, :examiners, :date, :old_folder_id, :unarchived)
   end
 
 end
