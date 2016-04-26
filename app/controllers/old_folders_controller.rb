@@ -1,3 +1,4 @@
+# Provides CRUD actions for folders
 class OldFoldersController < ApplicationController
   include Searchable
 
@@ -67,7 +68,8 @@ class OldFoldersController < ApplicationController
     redirect_to old_folders_path
   end
 
-
+  # Generates a table of contents from the given params[:old_folder_id]
+  # TODO: Move to Internal::Admin::PrintController
   def toc
     id = params[:old_folder_id]
     if id.nil?

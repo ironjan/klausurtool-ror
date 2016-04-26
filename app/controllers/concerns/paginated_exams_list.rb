@@ -1,3 +1,4 @@
+# Provides a paginated exams list
 module PaginatedExamsList
   extend ActiveSupport::Concern
   include Searchable

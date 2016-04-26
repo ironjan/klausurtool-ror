@@ -1,3 +1,4 @@
+# Provides CRUD actions for folder instances
 class OldFolderInstancesController < ApplicationController
   include PaginatedFolderInstanceList
 

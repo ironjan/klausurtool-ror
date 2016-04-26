@@ -1,3 +1,4 @@
+# Provides lent and history action for lendouts
 module LentFolders
   extend ActiveSupport::Concern
 

@@ -1,3 +1,4 @@
+# Provides CRUD actions for exams
 class OldExamsController < ApplicationController
   include PaginatedExamsList
 

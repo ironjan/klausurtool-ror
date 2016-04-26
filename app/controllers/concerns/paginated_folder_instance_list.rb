@@ -1,3 +1,4 @@
+# Provides a paginated list of folder instances
 module PaginatedFolderInstanceList
   extend ActiveSupport::Concern
   include Searchable
