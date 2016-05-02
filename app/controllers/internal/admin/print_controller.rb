@@ -2,6 +2,7 @@ require 'barby'
 require 'barby/barcode/ean_8'
 require 'barby/outputter/html_outputter'
 
+# Provides actions related to printing
 module Internal
   module Admin
     # Controller to provide print actions.

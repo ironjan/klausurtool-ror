@@ -1,3 +1,4 @@
+# Provides an index page for the application
 class ApplicationController < ActionController::Base
   include PaginatedExamsList
 

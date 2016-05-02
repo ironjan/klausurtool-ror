@@ -1,3 +1,4 @@
+# Provides CRUD actions for folders
 class OldFoldersController < ApplicationController
   include Searchable
 
@@ -67,7 +68,8 @@ class OldFoldersController < ApplicationController
     redirect_to old_folders_path
   end
 
-
+  # Generates a table of contents from the given params[:old_folder_id]
+  # TODO: Move to Internal::Admin::PrintController
   def toc
     id = params[:old_folder_id]
     if id.nil?
@@ -81,14 +83,16 @@ class OldFoldersController < ApplicationController
       @old_folder = OldFolder.new
     end
 
-    number_of_filler_exams = 37 - @old_folder.old_exams.count
+    @unarchived_exams = @old_folder.old_exams.select { |e| e.unarchived? }
+
+    number_of_filler_exams = 37 - @unarchived_exams.count
     if number_of_filler_exams < 0
       flash[:warning] = 'Es können nicht alle Prüfungen auf eine Seite gedruckt werden. Bitte einige Klausuren archivieren oder auslaugern.'
     end
 
     filler_exam = OldExam.new
     while number_of_filler_exams > 0
-      @old_folder.old_exams << filler_exam
+      @unarchived_exams << filler_exam
       number_of_filler_exams -= 1
     end
 

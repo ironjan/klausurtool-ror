@@ -1,3 +1,4 @@
+# Provides an index page for the adminstration interface
 module Internal
   module Admin
     class LendoutsController < ApplicationController

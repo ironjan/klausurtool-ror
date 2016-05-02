@@ -1,3 +1,4 @@
+# Controller to actions related to lending and receiving folders
 class AusleiheController < ApplicationController
   include LentFolders, LendingArchive, PaginatedFolderInstanceList, PaginatedExamsList, AusleiheHelper
 

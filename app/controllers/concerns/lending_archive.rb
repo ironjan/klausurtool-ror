@@ -1,3 +1,5 @@
+
+# Provides the lent and history actions
 module LendingArchive
   extend ActiveSupport::Concern
 

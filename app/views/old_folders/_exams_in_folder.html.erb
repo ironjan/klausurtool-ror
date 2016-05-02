@@ -10,6 +10,7 @@
       <th>Veranstaltungen</th>
       <th>Prüfer</th>
       <th>Datum</th>
+      <th title="Ob diese Prüfung im Inhaltsverzeichnis angezeigt wird.">TOC<sup>?</sup></th>
       <th></th>
     </tr>
 
@@ -19,6 +20,7 @@
           <td><%= link_to e.title, e %></td>
           <td><%= e.examiners %></td>
           <td><%= e.date %></td>
+          <td><%= e.unarchived? ? '✔' : ' ' %></td>
           <td>
             <%= link_to 'Bearbeiten', edit_old_folder_old_exam_path(@old_folder, e) %>,
             <%= link_to 'Löschen', [e.old_folder, e], method: :delete,

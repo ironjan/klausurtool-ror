@@ -6,5 +6,6 @@ FactoryGirl.define do
     o.date { Faker::Date.birthday }
     o.title { Faker::Name.name }
     o.examiners { Faker::Name.name }
+    o.unarchived true
   end
 end

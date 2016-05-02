@@ -1,3 +1,4 @@
+# Provides a method to clear params[:search] when params[:reset] is received
 module Searchable
   extend ActiveSupport::Concern
 

@@ -14,7 +14,7 @@
         <th>Dozent</th>
         <th>Datum</th>
       </tr>
-      <% @old_folder.old_exams.each do |e| %>
+      <% @unarchived_exams.each do |e| %>
           <tr>
             <td class="toc-table-title"><% if e.title.nil? %>&nbsp;<% else %><%= e.title %><% end %></td>
             <td class="toc-table-examiners"><%= e.examiners %></td>
