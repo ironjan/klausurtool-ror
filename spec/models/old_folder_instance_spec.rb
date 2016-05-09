@@ -116,4 +116,28 @@ describe OldFolderInstance do
     end
   end
 
+  describe 'is_deletable?' do
+    it 'is not deletable if there is no other instance' do
+      old_folder_instance = FactoryGirl.build(:old_folder_instance)
+      old_folder = FactoryGirl.build(:old_folder, old_folder_instances: [old_folder_instance])
+      old_folder_instance.old_folder = old_folder
+
+      expect(old_folder_instance.is_deletable?).to be_falsey
+    end
+
+    it 'is not deletable if it is lent' do
+      old_folder_instance = FactoryGirl.build(:old_folder_instance)
+      other_old_folder_instance = FactoryGirl.build(:old_folder_instance)
+
+      old_folder = FactoryGirl.build(:old_folder, old_folder_instances: [old_folder_instance, other_old_folder_instance])
+
+      old_folder_instance.old_folder = old_folder
+      other_old_folder_instance.old_folder = old_folder
+
+
+      old_lend_out = FactoryGirl.build(:old_lend_out)
+      old_folder_instance = FactoryGirl.build(:old_folder_instance, old_folder: old_folder, old_lend_out: old_lend_out)
+      expect(old_folder_instance.is_deletable?).to be_falsey
+    end
+  end
 end
