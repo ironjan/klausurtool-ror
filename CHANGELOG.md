@@ -1,3 +1,10 @@
+# 0.6.0
+
+ * [Neu: Suche für Studenten](https://github.com/ironjan/klausurtool-ror/issues/94)
+ * [Fixed: Beim Zurückgegeben werden bereits zurück gegebene Ordner nun erkannt](https://github.com/ironjan/klausurtool-ror/issues/147)
+ * [Neu: Prüfungen sind nun archivierbar, aber noch nicht herstellbar](https://github.com/ironjan/klausurtool-ror/issues/163)
+ * [Neu: Warnung "Javascript und Cookies sind notwendig"](https://github.com/ironjan/klausurtool-ror/issues/170)
+
 # 0.5.1
 
  * [Fixed: Auto-Completion-Bug in Firefox](https://github.com/ironjan/klausurtool-ror/issues/165)
