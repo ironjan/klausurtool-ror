@@ -8,13 +8,15 @@
 </head>
 <body>
 
-<script>
-	// Cookie and JS detection
-	document.cookie = "testing=cookies_enabled; path=/";
-	var areCookiesEnabled = (document.cookie.indexOf("testing=cookies_enabled") >= 0);
-	if(areCookiesEnabled)
-	{
-		document.getElementById("js-must-be-enabled").style.display = "none";
-	}
-</script>
 <h1 id="js-must-be-enabled">JavaScript und Cookies müssen erlaubt sein, damit das Klausurtool genutzt werden kann.</h1>
+
+
+<script>
+  // Cookie and JS detection
+  document.cookie = "testing=cookies_enabled; path=/";
+  var areCookiesEnabled = (document.cookie.indexOf("testing=cookies_enabled") >= 0);
+  if(areCookiesEnabled)
+  {
+    document.getElementById("js-must-be-enabled").style.display = "none";
+  }
+</script>
