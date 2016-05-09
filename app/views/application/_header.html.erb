@@ -20,3 +20,10 @@
     document.getElementById("js-must-be-enabled").style.display = "none";
   }
 </script>
+
+<% if is_midori? %>
+    <h1>Bitte anderen Browser nutzen</h1>
+    <p>Midori wird nicht unterstützt, da midoris Verhalten inkonsistent ist und der Aufwand, dies zu beheben, zu hoch
+      ist. Für mehr Details siehe <a href="https://github.com/ironjan/klausurtool-ror/issues/177">#177</a></p>
+    <p>Auf dem Ausleihe-PC ist iceweasel installiert, welcher nicht midoris Probleme hat.</p>
+<% end %>
