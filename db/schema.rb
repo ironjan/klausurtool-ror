@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(version: 20160425120127) do
     t.integer  "old_folder_id", limit: 4
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
-    t.boolean  "visible"
     t.boolean  "unarchived",                default: true
   end
 
