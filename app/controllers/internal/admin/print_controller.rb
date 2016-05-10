@@ -12,7 +12,7 @@ module Internal
       # Returns the cover for the given barcode.
       def cover
         barcode = params[:barcode]
-        if barcode.nil?
+        if barcode.nil? || barcode.empty?
           flash[:alert] = 'Kein Ordner-Exemplar angegeben.' and return
         end
 
@@ -38,7 +38,7 @@ module Internal
       # Generates a table of contents from the given params[:old_folder_id]
       def toc
         id = params[:old_folder_id]
-        if id.nil?
+        if id.nil? || id.empty?
           flash[:alert] = 'Kein Ordner angegeben.' and return
         end
 
