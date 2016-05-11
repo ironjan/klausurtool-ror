@@ -18,7 +18,7 @@ RSpec.describe Internal::Admin::PrintController, type: :controller do
 
     it 'renders the toc template when requested for a valid folder' do
       folder = FactoryGirl.create(:old_folder)
-      folder_instance = FactoryGirl.create(:old_folder_instance, old_folder: folder, barcodeId: 9999)
+      FactoryGirl.create(:old_folder_instance, old_folder: folder, barcodeId: 9999)
 
       get :cover, barcode: 9999
       expect(response).to render_template("internal/admin/print/cover")
