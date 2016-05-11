@@ -12,7 +12,7 @@ module Internal
       # Returns the cover for the given barcode.
       def cover
         barcode = params[:barcode]
-        if barcode.nil?
+        if barcode.nil? || barcode.empty?
           flash[:alert] = 'Kein Ordner-Exemplar angegeben.' and return
         end
 
@@ -34,6 +34,41 @@ module Internal
         @barcode_for_html = Barby::HtmlOutputter.new(barcode)
         @barcode_as_string = barcode.to_s
       end
+
+      # Generates a table of contents from the given params[:old_folder_id]
+      def toc
+        id = params[:old_folder_id]
+        if id.nil? || id.empty?
+          flash[:alert] = 'Kein Ordner angegeben.' and return
+        end
+
+        @old_folder = OldFolder.find_by_id(id)
+
+        if @old_folder.nil?
+          flash[:alert] = "Ordner mit Id `#{id}` nicht gefunden."
+          @old_folder = OldFolder.new
+        end
+
+        @unarchived_exams = @old_folder.old_exams.select { |e| e.unarchived? }
+
+        @unarchived_exams = add_empty_filler_exams_to(@unarchived_exams)
+      end
+
+      def add_empty_filler_exams_to(unarchived_exams)
+        number_of_filler_exams = 37 - unarchived_exams.count
+        if number_of_filler_exams < 0
+          flash[:warning] = 'Es können nicht alle Prüfungen auf eine Seite gedruckt werden. Bitte einige Klausuren archivieren oder auslaugern.'
+        end
+
+        filler_exam = OldExam.new
+        while number_of_filler_exams > 0
+          unarchived_exams << filler_exam
+          number_of_filler_exams -= 1
+        end
+
+        unarchived_exams
+      end
+
     end
   end
 end

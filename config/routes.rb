@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
       resources :old_folders, :old_exams
 
-      get 'old_folders/:old_folder_id/toc' => 'old_folders#toc', as: 'old_folders_toc'
+      get 'old_folders/:old_folder_id/toc' => 'internal/admin/print#toc', as: 'old_folders_toc'
       resources :old_folders do
         resources :old_folder_instances, :old_exams
       end

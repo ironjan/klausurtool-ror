@@ -30,4 +30,11 @@ class OldFolderInstance < ActiveRecord::Base
     order('old_folders.title ASC, old_folder_instances.barcodeId ASC')
   end
 
+  # true, if this instance is not lent and there are other instances of this folder
+  def is_deletable?
+    is_not_lent = old_lend_out.nil?
+    has_more_than_one_instance = old_folder.old_folder_instances.count > 1
+    is_not_lent && has_more_than_one_instance
+  end
+
 end

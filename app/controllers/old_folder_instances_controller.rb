@@ -52,6 +52,13 @@ class OldFolderInstancesController < ApplicationController
   def destroy
     @old_folder = OldFolder.find(params[:old_folder_id])
     @old_folder_instance = @old_folder.old_folder_instances.find(params[:id])
+
+    instance_is_lent = @old_folder_instance.old_lend_out.nil?
+    unless instance_is_lent
+      flash[:alert] = 'Ordner-Instanz ist verliehen und kann nicht gelöscht werden.'
+      redirect_to @old_folder and return
+    end
+
     @old_folder_instance.destroy
     redirect_to @old_folder
   end
