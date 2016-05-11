@@ -23,7 +23,7 @@ module ImtToNameHelper
       else
         "Keine Verbindung zum LDAP"
       end
-    rescue Net::LDAP::NoBindResultError => e
+    rescue Errno::ECONNREFUSED => e
       Rails.logger.error(e)
       'Keine Verbindung zum LDAP'
     rescue Exception => e
