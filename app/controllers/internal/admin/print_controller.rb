@@ -51,16 +51,22 @@ module Internal
 
         @unarchived_exams = @old_folder.old_exams.select { |e| e.unarchived? }
 
-        number_of_filler_exams = 37 - @unarchived_exams.count
+        @unarchived_exams = add_empty_filler_exams_to(@unarchived_exams)
+      end
+
+      def add_empty_filler_exams_to(unarchived_exams)
+        number_of_filler_exams = 37 - unarchived_exams.count
         if number_of_filler_exams < 0
           flash[:warning] = 'Es können nicht alle Prüfungen auf eine Seite gedruckt werden. Bitte einige Klausuren archivieren oder auslaugern.'
         end
 
         filler_exam = OldExam.new
         while number_of_filler_exams > 0
-          @unarchived_exams << filler_exam
+          unarchived_exams << filler_exam
           number_of_filler_exams -= 1
         end
+
+        unarchived_exams
       end
 
     end
