@@ -1,3 +1,10 @@
+# 0.6.1
+
+ * [Warnung bei Benutzung von midori hinzugefügt](https://github.com/ironjan/klausurtool-ror/issues/177)
+ * [Fixed: Deprecation-Warnung](https://github.com/ironjan/klausurtool-ror/issues/152)
+ * Refactorings
+ * Besseres Layout für Studenten-Suche
+
 # 0.6.0
 
  * [Neu: Suche für Studenten](https://github.com/ironjan/klausurtool-ror/issues/94)
