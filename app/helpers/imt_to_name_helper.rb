@@ -12,16 +12,14 @@ module ImtToNameHelper
           filter: Net::LDAP::Filter.eq("uid", imt_login)
           )
 
-        return 'Fehler: mehr als ein Name gefunden' if ldap_search.count > 1
-
-        first_result = ldap_search.first
-        if first_result.nil?
-          "Name für #{imt_login} nicht gefunden"
+        has_exactly_one_result = ldap_search.count == 1 && !ldap_search.first.nil?
+        if has_exactly_one_result
+          ldap_search.first.gecos.first
         else
-          first_result.gecos.first
+          'Es konnte kein eindeutiger Name gefunden werden.'
         end
       else
-        "Keine Verbindung zum LDAP"
+        'Keine Verbindung zum LDAP'
       end
     rescue Errno::ECONNREFUSED => e
       Rails.logger.error(e)
@@ -41,23 +39,19 @@ module ImtToNameHelper
           filter: Net::LDAP::Filter.eq("uid", imt_login)
           )
 
-        return nil if ldap_search.count > 1
-
-        first_result = ldap_search.first
-        if first_result.nil?
-          nil
-        else
-          first_result.gecos.first
+        has_exactly_one_result = ldap_search.count == 1 && !ldap_search.first.nil?
+        if has_exactly_one_result
+          return ldap_search.first.gecos.first
         end
-        nil
       end
     rescue Errno::ECONNREFUSED => e
       Rails.logger.error(e)
-      nil
     rescue Exception => e
       Rails.logger.error(e)
-      nil
     end
+
+    # default return value
+    nil
   end
 end
 
