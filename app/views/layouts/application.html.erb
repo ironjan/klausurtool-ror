@@ -1,7 +1,11 @@
-<%= render 'header' %>
-<%= render 'flashes' %>
+<main class="center">
+  <h1><%= page_title %></h1>
 
-<%= yield %>
+  <%= render 'header' %>
+  <!--<nav><ul class="nav nav-pills"></ul></nav>-->
+  <%= render 'flashes' %>
 
 
+  <%= yield %>
+</main>
 <%= render 'footer' %>

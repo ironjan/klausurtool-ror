@@ -12,7 +12,7 @@
           <th>Prüfer</th>
           <th>Datum</th>
           <th>Ordner</th>
-          <th></th>
+          <th><% unless controller_name == "old_exams" %>Verfügbar<% end %> </th>
         </tr>
 
         <% @old_exams.each do |e| %>
@@ -36,8 +36,8 @@
                     <%= link_to 'Bearbeiten', edit_old_folder_old_exam_path(e.old_folder, e) %>
 
                 <% else %>
-                    <%= e.old_folder.old_folder_instances.select { |o| o.old_lend_out.nil? }.count %> verfügbar.
-
+                    <%= e.old_folder.old_folder_instances.select { |o| o.old_lend_out.nil? }.count %> /
+                    <%= e.old_folder.old_folder_instances.count %>
                 <% end %>
 
               </td>

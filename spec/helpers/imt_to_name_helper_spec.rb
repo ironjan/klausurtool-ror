@@ -32,7 +32,7 @@ describe ImtToNameHelper do
 
     it "returns 'Keine Verbindung zum LDAP' if there is a NoBindResultError" do
       ldap = double(:bind => true)
-      allow(ldap).to receive(:search).and_raise(Net::LDAP::NoBindResultError)
+      allow(ldap).to receive(:search).and_raise(Errno::ECONNREFUSED)
 
       expect(name_for_login('', ldap)).to eq('Keine Verbindung zum LDAP')
 
