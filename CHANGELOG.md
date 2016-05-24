@@ -1,3 +1,9 @@
+# 0.6.2
+
+ * Style für Studenten-Ansicht verbessert
+ * Code-Cleanup
+ * Dependency update
+
 # 0.6.1
 
  * [Warnung bei Benutzung von midori hinzugefügt](https://github.com/ironjan/klausurtool-ror/issues/177)
