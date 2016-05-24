@@ -7,10 +7,7 @@ module ImtToNameHelper
   def name_for_login(imt_login, ldap = LDAP_UPB)
     begin
       if ldap.bind
-        ldap_search = ldap.search(
-          base: 'o=upb,c=de',
-          filter: Net::LDAP::Filter.eq("uid", imt_login)
-          )
+        ldap_search = do_ldap_search(imt_login, ldap)
 
         has_exactly_one_result = ldap_search.count == 1 && !ldap_search.first.nil?
         if has_exactly_one_result
@@ -34,10 +31,7 @@ module ImtToNameHelper
   def name_or_nil_for_login(imt_login, ldap = LDAP_UPB)
     begin
       if ldap.bind
-        ldap_search = ldap.search(
-          base: 'o=upb,c=de',
-          filter: Net::LDAP::Filter.eq("uid", imt_login)
-          )
+        ldap_search = do_ldap_search(imt_login, ldap)
 
         has_exactly_one_result = ldap_search.count == 1 && !ldap_search.first.nil?
         if has_exactly_one_result
@@ -52,6 +46,13 @@ module ImtToNameHelper
 
     # default return value
     nil
+  end
+
+  def do_ldap_search(imt_login, ldap)
+    ldap.search(
+        base: 'o=upb,c=de',
+        filter: Net::LDAP::Filter.eq("uid", imt_login)
+    )
   end
 end
 
