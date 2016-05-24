@@ -27,4 +27,4 @@ var addEventsToFlashes = function () {
     }
 };
 
-onload = addEventsToFlashes;
+window.addEventListener("load", addEventsToFlashes);
