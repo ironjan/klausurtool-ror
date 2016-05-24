@@ -49,7 +49,6 @@ module ImtToNameHelper
         else
           first_result.gecos.first
         end
-      else
         nil
       end
     rescue Errno::ECONNREFUSED => e
