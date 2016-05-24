@@ -49,7 +49,12 @@ module Internal
           @old_folder = OldFolder.new
         end
 
-        @unarchived_exams = @old_folder.old_exams.select { |e| e.unarchived? }
+        @unarchived_exams = @old_folder.old_exams
+                                       .order(date: :asc)
+                                       .select { |e| e.unarchived? }
+
+        Rails.logger.warn('#{@unarchived_exams}')
+                                       
 
         @unarchived_exams = add_empty_filler_exams_to(@unarchived_exams)
       end
