@@ -6,6 +6,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Application module and class to configure the rails application. 
+# See http://api.rubyonrails.org/classes/Rails/Application.html
 module KlausurtoolRoR
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

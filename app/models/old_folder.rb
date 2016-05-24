@@ -1,3 +1,5 @@
+# Models folders; note that folders correspond to phyiscal folder groups of the 
+# same name. Physical folders relate to folder_instances.
 class OldFolder < ActiveRecord::Base
   has_many :old_exams
   has_many :old_folder_instances, dependent: :destroy
