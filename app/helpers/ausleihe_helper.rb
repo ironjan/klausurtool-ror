@@ -1,3 +1,4 @@
+# Helper methods for lending-related things. 
 module AusleiheHelper
 
   def lenders_and_receivers

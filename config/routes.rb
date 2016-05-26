@@ -37,6 +37,9 @@ Rails.application.routes.draw do
         resources :old_folder_instances, :old_exams
       end
     end
+
+    get '/name_for/*imt_name' => 'internal/imt_name#get_name'
+
   end
 
   namespace :internal do
