@@ -1,5 +1,6 @@
 require 'net/ldap'
 
+# This module encapsulates methods to get a person's real name from imt login
 module ImtToNameHelper
   LDAP_UPB = Net::LDAP.new(host: 'ldap.uni-paderborn.de')
 
