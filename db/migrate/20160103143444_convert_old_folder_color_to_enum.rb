@@ -1,4 +1,4 @@
-class ConvertOldFolderColorToEnum < ActiveRecord::Migration
+class ConvertOldFolderColorToEnum < ActiveRecord::Migration #:nodoc:
 
 
   def up

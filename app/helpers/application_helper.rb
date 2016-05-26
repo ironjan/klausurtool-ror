@@ -1,3 +1,4 @@
+# Contains helper methods that are used in different parts of the app or that apply to the whole app
 module ApplicationHelper
   include ImtToNameHelper
 

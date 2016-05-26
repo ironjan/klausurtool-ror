@@ -1,3 +1,4 @@
+# Helper to generate color_names for a select input
 module OldFoldersHelper
   class View
     def self.color_names_for_select
