@@ -21,7 +21,7 @@ module ImtToNameHelper
     rescue Errno::ECONNREFUSED => e
       Rails.logger.error(e)
       'Keine Verbindung zum LDAP'
-    rescue Exception => e
+    rescue => e
       Rails.logger.error(e)
       'Unbekannter LDAP Fehler'
     end
@@ -40,7 +40,7 @@ module ImtToNameHelper
       end
     rescue Errno::ECONNREFUSED => e
       Rails.logger.error(e)
-    rescue Exception => e
+    rescue => e
       Rails.logger.error(e)
     end
 
