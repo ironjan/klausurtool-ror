@@ -2,6 +2,16 @@ require 'rails_helper'
 
 
 describe ImtToNameHelper do
+  describe "common functionality of #name_for_login and #name_or_nil_for_login" do
+    it 'returns a single name for a single match' do
+      mock_result = [double('Net::LDAP::Entry', :gecos => ['Real Name'])]
+      ldap = double('Net::LDAP', :bind => true, :search => mock_result)
+      imt_login = 'one match'
+      expect(name_for_login(imt_login, ldap)).to eq('Real Name')
+      expect(name_or_nil_for_login(imt_login, ldap)).to eq('Real Name')
+    end
+  end
+
   describe "#name_for_login" do
     it "returns 'Keine Verbindung zum LDAP' when there's no LDAP connection" do
       ldap = double("Net::LDAP", :bind => false)
@@ -14,12 +24,6 @@ describe ImtToNameHelper do
       expect(name_for_login(imt_login, ldap)).to eq('Es konnte kein eindeutiger Name gefunden werden.')
     end
 
-    it 'returns a single name for a single match' do
-      mock_result = [double('Net::LDAP::Entry', :gecos => ['Real Name'])]
-      ldap = double('Net::LDAP', :bind => true, :search => mock_result)
-      imt_login = 'one match'
-      expect(name_for_login(imt_login, ldap)).to eq('Real Name')
-    end
 
     it "returns 'Es konnte kein eindeutiger Name gefunden werden.' if there is more than one match" do
       # This should not happen because every person has a unique login...
@@ -56,13 +60,6 @@ describe ImtToNameHelper do
       ldap = double("Net::LDAP", :bind => true, :search => [])
       imt_login = 'no_match'
       expect(name_or_nil_for_login(imt_login, ldap)).to eq(nil)
-    end
-
-    it 'returns a single name for a single match' do
-      mock_result = [double('Net::LDAP::Entry', :gecos => ['Real Name'])]
-      ldap = double('Net::LDAP', :bind => true, :search => mock_result)
-      imt_login = 'one match'
-      expect(name_or_nil_for_login(imt_login, ldap)).to eq('Real Name')
     end
 
     it "returns nil if there is more than one match" do
