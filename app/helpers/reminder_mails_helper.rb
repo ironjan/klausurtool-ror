@@ -1,3 +1,4 @@
+# Helper for creating reminder mails
 module ReminderMailsHelper
   include ImtToNameHelper
 

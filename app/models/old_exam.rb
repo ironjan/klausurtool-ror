@@ -1,3 +1,4 @@
+# Models an exam. Called OldExam because it was/is planned to be a "throw away" implementation.
 class OldExam < ActiveRecord::Base
   belongs_to :old_folder
 

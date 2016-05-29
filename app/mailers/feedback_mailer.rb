@@ -1,3 +1,4 @@
+# Provides a function to send feedback
 class FeedbackMailer < ApplicationMailer
 
   def feedback_mail(imt, comment, source_page)

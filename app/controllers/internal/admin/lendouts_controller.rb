@@ -1,6 +1,6 @@
-# Provides an index page for the adminstration interface
-module Internal
-  module Admin
+module Internal #:nodoc:
+  module Admin #:nodoc:
+    # Provides an index page for the adminstration interface
     class LendoutsController < ApplicationController
 
       include LentFolders, LendingArchive

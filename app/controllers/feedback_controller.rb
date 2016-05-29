@@ -1,3 +1,5 @@
+# Controller to provide feedback functionality.
+# TODO Remove?
 class FeedbackController < ApplicationController
   layout 'ausleihe', except: 'error'
 

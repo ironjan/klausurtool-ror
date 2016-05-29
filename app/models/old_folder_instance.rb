@@ -1,3 +1,5 @@
+# Models a folder instance which belongs to a folder. Called OldFolderInstance because it was/is planned to be a "throw
+# away" implementation.
 class OldFolderInstance < ActiveRecord::Base
   belongs_to :old_folder
   belongs_to :old_lend_out, inverse_of: :old_folder_instances
