@@ -152,7 +152,7 @@ class AusleiheController < ApplicationController
 
     found_instances = instances.compact
 
-    has_unlent_instances = instances.select { |i| i.old_lend_out.nil? }.length > 0
+    has_unlent_instances = instances.count { |i| i.old_lend_out.nil? } > 0
     if has_unlent_instances
       flash[:alert] = "#{Time.new}: Es wurden nicht verliehene Ordner übergeben."
       redirect_to ausleihe_path and return
