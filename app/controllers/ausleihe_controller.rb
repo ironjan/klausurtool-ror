@@ -150,22 +150,30 @@ class AusleiheController < ApplicationController
 
     old_lend_outs = found_instances.map { |i| i.old_lend_out }.uniq
 
-    if requested_instances.nil? || requested_instances.empty?
-      flash[:alert] = "#{Time.new}: Rückgabe-Formular darf nicht ohne Ordner aufgerufen werden."
-      redirect_to ausleihe_path and return
-    end
-
-    if has_unlent_instances
-      flash[:alert] = "#{Time.new}: Es wurden nicht verliehene Ordner übergeben."
-      redirect_to ausleihe_path and return
-    end
 
     if found_instances.count < requested_instances.count
       flash[:alert] << "#{Time.new}: Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?"
     end
 
+
+    is_redirect_necessary = false
+
+    if requested_instances.nil? || requested_instances.empty?
+      flash[:alert] = "#{Time.new}: Rückgabe-Formular darf nicht ohne Ordner aufgerufen werden."
+      is_redirect_necessary = true
+    end
+
+    if has_unlent_instances
+      flash[:alert] = "#{Time.new}: Es wurden nicht verliehene Ordner übergeben."
+      is_redirect_necessary = true
+    end
+
     if old_lend_outs.count > 1
       flash[:alert] = "#{Time.new}: Die eingegebenen Ordner gehören zu verschiedenen Ausleih-Vorgängen."
+      is_redirect_necessary = true
+    end
+
+    if is_redirect_necessary
       redirect_to ausleihe_path and return
     end
 
