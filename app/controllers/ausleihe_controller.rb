@@ -142,17 +142,20 @@ class AusleiheController < ApplicationController
   def returning_form
     old_folder_instances = params[:old_folder_instances]
 
-    if old_folder_instances.nil? || old_folder_instances.empty?
-      flash[:alert] = "#{Time.new}: Rückgabe-Formular darf nicht ohne Ordner aufgerufen werden."
-      redirect_to ausleihe_path and return
-    end
-
     instances = old_folder_instances
                     .map { |id| OldFolderInstance.find_by_id(id) }
 
     found_instances = instances.compact
 
     has_unlent_instances = instances.count { |i| i.old_lend_out.nil? } > 0
+
+    old_lend_outs = found_instances.map { |i| i.old_lend_out }.uniq
+
+    if old_folder_instances.nil? || old_folder_instances.empty?
+      flash[:alert] = "#{Time.new}: Rückgabe-Formular darf nicht ohne Ordner aufgerufen werden."
+      redirect_to ausleihe_path and return
+    end
+
     if has_unlent_instances
       flash[:alert] = "#{Time.new}: Es wurden nicht verliehene Ordner übergeben."
       redirect_to ausleihe_path and return
@@ -162,7 +165,6 @@ class AusleiheController < ApplicationController
       flash[:alert] << "#{Time.new}: Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?"
     end
 
-    old_lend_outs = found_instances.map { |i| i.old_lend_out }.uniq
     if old_lend_outs.count > 1
       flash[:alert] = "#{Time.new}: Die eingegebenen Ordner gehören zu verschiedenen Ausleih-Vorgängen."
       redirect_to ausleihe_path and return
