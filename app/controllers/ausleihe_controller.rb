@@ -140,18 +140,17 @@ class AusleiheController < ApplicationController
 
   # Renders the form when returning folder_instances. The form calls returning_action on submit.
   def returning_form
-    old_folder_instances = params[:old_folder_instances]
+    requested_instances = params[:old_folder_instances]
 
-    instances = old_folder_instances
-                    .map { |id| OldFolderInstance.find_by_id(id) }
+    found_instances = requested_instances
+                          .map { |id| OldFolderInstance.find_by_id(id) }
+                          .compact
 
-    found_instances = instances.compact
-
-    has_unlent_instances = instances.count { |i| i.old_lend_out.nil? } > 0
+    has_unlent_instances = requested_instances.count { |i| i.old_lend_out.nil? } > 0
 
     old_lend_outs = found_instances.map { |i| i.old_lend_out }.uniq
 
-    if old_folder_instances.nil? || old_folder_instances.empty?
+    if requested_instances.nil? || requested_instances.empty?
       flash[:alert] = "#{Time.new}: Rückgabe-Formular darf nicht ohne Ordner aufgerufen werden."
       redirect_to ausleihe_path and return
     end
@@ -161,7 +160,7 @@ class AusleiheController < ApplicationController
       redirect_to ausleihe_path and return
     end
 
-    if found_instances.count < instances.count
+    if found_instances.count < requested_instances.count
       flash[:alert] << "#{Time.new}: Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?"
     end
 
