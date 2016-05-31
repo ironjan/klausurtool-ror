@@ -140,7 +140,7 @@ class AusleiheController < ApplicationController
 
   # Renders the form when returning folder_instances. The form calls returning_action on submit.
   def returning_form
-    requested_instances = params[:old_folder_instances]
+    requested_instances = params[:old_folder_instances] || []
 
     found_instances = requested_instances
                           .map { |id| OldFolderInstance.find_by_id(id) }
