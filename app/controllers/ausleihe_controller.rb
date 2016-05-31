@@ -146,7 +146,6 @@ class AusleiheController < ApplicationController
                           .map { |id| OldFolderInstance.find_by_id(id) }
                           .compact
 
-    has_unlent_instances = requested_instances.count { |i| i.old_lend_out.nil? } > 0
 
     old_lend_outs = found_instances.map { |i| i.old_lend_out }.uniq
 
@@ -163,6 +162,7 @@ class AusleiheController < ApplicationController
       is_redirect_necessary = true
     end
 
+    has_unlent_instances = requested_instances.count { |i| i.old_lend_out.nil? } > 0
     if has_unlent_instances
       flash[:alert] = "#{Time.new}: Es wurden nicht verliehene Ordner übergeben."
       is_redirect_necessary = true
