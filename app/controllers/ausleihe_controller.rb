@@ -111,18 +111,7 @@ class AusleiheController < ApplicationController
                     .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
 
-    if found_instances.count < instances.count
-      flash[:alert] = "#{Time.new}: Einige der Ordner wurden nicht gefunden."
-      redirect_to ausleihe_path and return
-    end
-
-    all_available = found_instances
-                        .map { |i| i.old_lend_out }
-                        .compact
-                        .empty?
-
-    unless all_available
-      flash[:alert] = "#{Time.new}: Einige der Ordner sind bereits verliehen."
+    unless lending_action_request_is_valid(found_instances, instances)
       redirect_to ausleihe_path and return
     end
 
@@ -136,6 +125,25 @@ class AusleiheController < ApplicationController
 
     flash[:notice] = "#{Time.new}: Ordner erfolgreich verliehen"
     redirect_to ausleihe_path
+  end
+
+  def lending_action_request_is_valid(found_instances, instances)
+    all_available = found_instances
+                        .map { |i| i.old_lend_out }
+                        .compact
+                        .empty?
+
+    if found_instances.count < instances.count
+      flash[:alert] = "#{Time.new}: Einige der Ordner wurden nicht gefunden."
+      return false
+    end
+
+    unless all_available
+      flash[:alert] = "#{Time.new}: Einige der Ordner sind bereits verliehen."
+      return false
+    end
+
+    true
   end
 
   # Renders the form when returning folder_instances. The form calls returning_action on submit.
