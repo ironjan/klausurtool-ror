@@ -54,7 +54,7 @@ class AusleiheController < ApplicationController
       flash[:alert] = "#{Time.new}: Folgende Ordner konnten nicht gefunden werden: #{non_existing_instances.join(', ')}"
       redirect_to ausleihe_path and return
     end
-
+  
     has_mixed_content = (not lent_instances.empty?) && lent_instances.count != folder_list.count
 
     if has_mixed_content
@@ -130,8 +130,7 @@ class AusleiheController < ApplicationController
     @old_lend_out.lendingTime = Time.new
 
     OldLendOut.transaction do
-      unless @old_lend_out.save!
-      end
+      @old_lend_out.save!
     end
 
     flash[:notice] = "#{Time.new}: Ordner erfolgreich verliehen"
