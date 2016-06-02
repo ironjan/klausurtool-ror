@@ -112,7 +112,8 @@ class AusleiheController < ApplicationController
     found_instances = instances.compact
 
     if found_instances.count < instances.count
-      # fixme: Handle error. We did not find all instances that were given
+      flash[:alert] = "#{Time.new}: Einige der Ordner wurden nicht gefunden."
+      redirect_to ausleihe_path and return
     end
 
     all_available = found_instances
