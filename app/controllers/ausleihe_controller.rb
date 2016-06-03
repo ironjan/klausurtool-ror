@@ -240,13 +240,6 @@ class AusleiheController < ApplicationController
     true
   end
 
-
-  # folder_list
-  #     .map { |f| [f, f.strip] }
-  #     .reject { |_, stripped| stripped.empty? }
-  #     .map { |f, stripped| [f, string_to_barcode_id(stripped)] }
-  #     .map { |f, barcode_id| [f, barcode_id, OldFolderInstance.find_by(barcodeId: barcode_id)] }
-
   def input_to_stripped_input_tuple(input)
     [input, input.strip]
   end
