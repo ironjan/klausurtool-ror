@@ -167,25 +167,6 @@ class AusleiheController < ApplicationController
     @old_lend_out = old_lend_outs.first
   end
 
-  def returning_form_request_is_valid(requested_instances, old_lend_outs)
-    if requested_instances.nil? || requested_instances.empty?
-      flash[:alert] = "#{Time.new}: Rückgabe-Formular darf nicht ohne Ordner aufgerufen werden."
-      return false
-    end
-
-    if old_lend_outs.include?(nil)
-      flash[:alert] = "#{Time.new}: Es wurden nicht verliehene Ordner übergeben."
-      return false
-    end
-
-    if old_lend_outs.count > 1
-      flash[:alert] = "#{Time.new}: Die eingegebenen Ordner gehören zu verschiedenen Ausleih-Vorgängen."
-      return false
-    end
-
-    true
-  end
-
   # Takes the given folders back and returns the user to the main screen.
   def returning_action
     if params[:id].nil?
@@ -239,6 +220,26 @@ class AusleiheController < ApplicationController
 
     archived.save!
   end
+
+  def returning_form_request_is_valid(requested_instances, old_lend_outs)
+    if requested_instances.nil? || requested_instances.empty?
+      flash[:alert] = "#{Time.new}: Rückgabe-Formular darf nicht ohne Ordner aufgerufen werden."
+      return false
+    end
+
+    if old_lend_outs.include?(nil)
+      flash[:alert] = "#{Time.new}: Es wurden nicht verliehene Ordner übergeben."
+      return false
+    end
+
+    if old_lend_outs.count > 1
+      flash[:alert] = "#{Time.new}: Die eingegebenen Ordner gehören zu verschiedenen Ausleih-Vorgängen."
+      return false
+    end
+
+    true
+  end
+
 
   # folder_list
   #     .map { |f| [f, f.strip] }
