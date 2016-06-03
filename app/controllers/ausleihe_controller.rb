@@ -167,7 +167,7 @@ class AusleiheController < ApplicationController
     @old_lend_out = old_lend_outs.first
   end
 
-  # Takes the given folders back and returns the user to the main screen.
+    # Takes the given folders back and returns the user to the main screen.
   def returning_action
     if params[:id].nil?
       render 'ausleihe/returning_form' and return
@@ -182,24 +182,22 @@ class AusleiheController < ApplicationController
     @old_lend_out.receivingTime = Time.new
 
     OldLendOut.transaction do
-      if @old_lend_out.update!(old_lend_out_params)
-        @old_lend_out.old_folder_instances.each do |i|
-          i.old_lend_out = nil
-          i.save!
-        end
-
-        # archive
-        archive(@old_lend_out)
-        @old_lend_out.destroy!
-
-        flash[:notice] = "#{Time.new}: Ordner erfolgreich zurückgenommen"
-        redirect_to ausleihe_path and return
-      else
-        render 'returning_form' and return
-      end
+    # First, we update old_lend_out for validation
+    # Then, we update all folder_instances so that they are not lent anymore
+    @old_lend_out.update!(old_lend_out_params)
+    @old_lend_out.old_folder_instances.each do |i|
+      i.old_lend_out = nil
+      i.save!
     end
 
+    # After updating everything in place, we archive the lend_out
+    archive(@old_lend_out)
+
+    flash[:notice] = "#{Time.new}: Ordner erfolgreich zurückgenommen"
+    redirect_to ausleihe_path and return
   end
+
+end
 
   private
   def old_lend_out_params
