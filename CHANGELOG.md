@@ -1,3 +1,8 @@
+# 0.6.3
+
+ * [Fixed #162: Sortiertes TOC](https://github.com/ironjan/klausurtool-ror/issues/162)
+ * [Improved code quality: Error Prone Certification is now 100%](https://www.codacy.com/app/lippertsjan/klausurtool-ror/dashboard)
+
 # 0.6.2
 
  * Style für Studenten-Ansicht verbessert
