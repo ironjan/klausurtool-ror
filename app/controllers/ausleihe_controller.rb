@@ -33,10 +33,6 @@ class AusleiheController < ApplicationController
                       .map { |f, stripped| append_instance_to_tuple(f, string_to_barcode_id(stripped)) }
 
 
-    non_existing_instances = folder_list
-                                 .select { |_, _, instance| instance.nil? }
-                                 .map { |barcode, f| input_barcode_to_output_string(barcode, f) }
-
     corrected_codes = folder_list
                           .select { |f, barcode_id, _| f != barcode_id && f.length != 4 && f.length != 8 }
                           .map { |barcode, f| input_barcode_to_output_string(barcode, f) }
@@ -49,20 +45,32 @@ class AusleiheController < ApplicationController
       flash[:warning] = "#{Time.new}: IDs wurden korrigiert: #{corrected_codes.join(', ')}"
     end
 
-    has_non_existing_instances = (not non_existing_instances.empty?)
-    if has_non_existing_instances
-      flash[:alert] = "#{Time.new}: Folgende Ordner konnten nicht gefunden werden: #{non_existing_instances.join(', ')}"
-      redirect_to ausleihe_path and return
-    end
-  
-    has_mixed_content = (not lent_instances.empty?) && lent_instances.count != folder_list.count
-
-    if has_mixed_content
-      flash[:alert] = invalid_input_for_switch_message(folder_list, lent_instances)
+    unless switch_request_is_valid(folder_list, lent_instances)
       redirect_to ausleihe_path and return
     end
 
     redirect_to_after_switch_action(lent_instances.empty?, folder_list)
+  end
+
+  def switch_request_is_valid(folder_list, lent_instances)
+    non_existing_instances = folder_list
+                                 .select { |_, _, instance| instance.nil? }
+                                 .map { |barcode, f| input_barcode_to_output_string(barcode, f) }
+
+    has_non_existing_instances = (not non_existing_instances.empty?)
+    if has_non_existing_instances
+      flash[:alert] = "#{Time.new}: Folgende Ordner konnten nicht gefunden werden: #{non_existing_instances.join(', ')}"
+      return false
+    end
+
+    has_mixed_content = (not lent_instances.empty?) && lent_instances.count != folder_list.count
+
+    if has_mixed_content
+      flash[:alert] = invalid_input_for_switch_message(folder_list, lent_instances)
+      return false
+    end
+
+    true
   end
 
   # Redirects the user to the next action. If lending is true, the user will be redirected to the lending form;
