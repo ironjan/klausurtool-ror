@@ -1,4 +1,4 @@
-class CreateOldLendOuts < ActiveRecord::Migration
+class CreateOldLendOuts < ActiveRecord::Migration #:nodoc:
   def change
     create_table :old_lend_outs do |t|
       t.string :deposit

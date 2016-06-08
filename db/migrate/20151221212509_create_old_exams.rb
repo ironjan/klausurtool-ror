@@ -1,4 +1,4 @@
-class CreateOldExams < ActiveRecord::Migration
+class CreateOldExams < ActiveRecord::Migration #:nodoc:
   def change
     create_table :old_exams do |t|
       t.string :title

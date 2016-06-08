@@ -1,4 +1,4 @@
-class AddWeigthToOldLendOut < ActiveRecord::Migration
+class AddWeigthToOldLendOut < ActiveRecord::Migration #:nodoc:
   def change
     add_column :old_lend_outs, :weigth, :integer
   end

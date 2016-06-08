@@ -1,3 +1,4 @@
+# An archived lend out. Used to create the lending archive.
 class ArchivedOldLendOut < ActiveRecord::Base
   include LendersAndReceivers
 

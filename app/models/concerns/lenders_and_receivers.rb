@@ -1,3 +1,4 @@
+# Provides easy access to all lenders and receivers.
 module LendersAndReceivers
   extend ActiveSupport::Concern
 

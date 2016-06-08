@@ -1,3 +1,4 @@
+# Provides methods to find existing titles/examiners.
 module OldExamsHelper
 
   def self.existing_titles

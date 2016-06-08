@@ -1,5 +1,6 @@
+# Helper to generate color_names for a select input
 module OldFoldersHelper
-  class View
+  class View #:nodoc:
     def self.color_names_for_select
       names = []
       OldFolder.colors.keys.each do |color|

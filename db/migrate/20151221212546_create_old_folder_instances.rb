@@ -1,4 +1,4 @@
-class CreateOldFolderInstances < ActiveRecord::Migration
+class CreateOldFolderInstances < ActiveRecord::Migration #:nodoc:
   def change
     create_table :old_folder_instances do |t|
       t.integer :number

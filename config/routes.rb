@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'feedback' => 'feedback#feedback_form', as: 'feedback_form'
-  post 'feedback' => 'feedback#send_feedback', as: 'send_feedback'
-
-
   scope '/internal' do
     scope '/ausleihe' do
 

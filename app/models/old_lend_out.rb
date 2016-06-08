@@ -1,3 +1,4 @@
+# Models a lending action. Called OldLendOut because it was/is planned to be a "throw away" implementation
 class OldLendOut < ActiveRecord::Base
   include LendersAndReceivers
 

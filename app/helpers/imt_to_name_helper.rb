@@ -7,25 +7,25 @@ module ImtToNameHelper
   # Gets the name for the imt login. Returns the error message on error. ldap is an optional parameter to allow injection.
   def name_for_login(imt_login, ldap = LDAP_UPB)
     begin
-      if ldap.bind
-        ldap_search = do_ldap_search(imt_login, ldap)
-
-        has_exactly_one_result = ldap_search.count == 1 && !ldap_search.first.nil?
-        if has_exactly_one_result
-          ldap_search.first.gecos.first
-        else
-          'Es konnte kein eindeutiger Name gefunden werden.'
-        end
-      else
-        'Keine Verbindung zum LDAP'
+      unless ldap.bind
+        return 'Keine Verbindung zum LDAP.'
       end
+
+      ldap_search = do_ldap_search(imt_login, ldap)
+
+      has_exactly_one_result = ldap_search.count == 1 && !ldap_search.first.nil?
+      if has_exactly_one_result
+        return ldap_search.first.gecos.first
+      end
+
+      Rails.logger.error("ImtToNameHelper: Multiple LDAP results for #{imt_login}")
     rescue Errno::ECONNREFUSED => e
       Rails.logger.error(e)
-      'Keine Verbindung zum LDAP'
+      return 'Keine Verbindung zum LDAP.'
     rescue => e
       Rails.logger.error(e)
-      'Unbekannter LDAP Fehler'
     end
+    'Fehler bei der LDAP-Suche.'
   end
 
   # Gets the name for the imt login. Returns nil on error. ldap is an optional parameter to allow injection.
