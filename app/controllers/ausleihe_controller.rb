@@ -28,7 +28,7 @@ class AusleiheController < ApplicationController
 
     Rails.logger.debug("Got switch request containing #{folder_list.count} elements.")
     folder_list = folder_list
-                      .map { |i| input_to_stripped_input_tuple(i) }
+                      .map { |i| [i, i.strip] }
                       .reject { |_, stripped| stripped.empty? }
                       .map { |f, stripped| append_instance_to_tuple(f, string_to_barcode_id(stripped)) }
 
@@ -246,9 +246,6 @@ end
     true
   end
 
-  def input_to_stripped_input_tuple(input)
-    [input, input.strip]
-  end
 
   def append_instance_to_tuple(f, barcode_id)
     [f, barcode_id, OldFolderInstance.find_by(barcodeId: barcode_id)]
