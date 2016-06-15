@@ -167,10 +167,6 @@ class AusleiheController < ApplicationController
 
     old_lend_outs = found_instances.map { |i| i.old_lend_out }.uniq
 
-    if found_instances.count < requested_instances.count
-      flash[:alert] << "#{Time.new}: Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?"
-    end
-
     unless returning_form_request_is_valid(requested_instances, old_lend_outs)
       redirect_to ausleihe_path and return
     end
@@ -228,11 +224,17 @@ end
     archived.receivingTime = old_lend_out.receivingTime
 
     archived.save!
+    old_lend_out.destroy!
   end
 
   def returning_form_request_is_valid(requested_instances, old_lend_outs)
     if requested_instances.nil? || requested_instances.empty?
       flash[:alert] = "#{Time.new}: Rückgabe-Formular darf nicht ohne Ordner aufgerufen werden."
+      return false
+    end
+
+    if old_lend_outs.count < requested_instances.count
+      flash[:alert] = "#{Time.new}: Einige Ordner konnten nicht gefunden werden. Wurde diese URL direkt aufgerufen?"
       return false
     end
 
