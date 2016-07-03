@@ -15,7 +15,7 @@
 
  * Install Ruby on Rails
   * Check that ruby and MySQL/MariaDB are installed
-   * ```ruby -v``` ruby 2.3.0p0
+   * ```ruby -v``` ruby 2.3.0p0 - must be at least 2.2.2+
    * ```mysql --version```
   * Install Rails: ```gem install rails```
    * Add the rails bin-directory to your path 
