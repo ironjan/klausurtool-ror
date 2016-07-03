@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.4'
+gem 'rails', '5.0.0'
 gem 'mysql2', '~> 0.3.18'
 gem 'yaml_db'
-gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate'
 gem 'net-ldap'
 gem 'rake'
 gem 'rails-i18n', '~> 4.0.0'
@@ -51,6 +51,7 @@ group :development, :test do
   gem 'rspec-mocks'
   gem 'simplecov', :require => false
   gem 'codacy-coverage', :require => false
+  gem 'rails-controller-testing'
 end
 
 group :development do
