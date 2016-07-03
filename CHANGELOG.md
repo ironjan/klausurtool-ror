@@ -1,3 +1,9 @@
+# 0.6.4
+
+ * Fixed: [#192](https://github.com/ironjan/klausurtool-ror/issues/192)
+ * Fixed: [#196](https://github.com/ironjan/klausurtool-ror/issues/196)
+ * Fixed: [#199](https://github.com/ironjan/klausurtool-ror/issues/199)
+
 # 0.6.3
 
  * [Fixed #162: Sortiertes TOC](https://github.com/ironjan/klausurtool-ror/issues/162)
