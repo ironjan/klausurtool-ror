@@ -5,13 +5,16 @@
 
 ## Fehler melden, Feedback geben
 
- * Sieh dann unter https://github.com/ironjan/klausurtool-ror/issues nach, ob das Feedback oder Problem bereits bekannt wird
+ * Sieh im [Issue Tracker](https://github.com/ironjan/klausurtool-ror/issues) nach, ob das Feedback oder Problem bereits bekannt wird
  * Falls es nicht nicht bekannt ist, erstelle einen neuen Issue
   * Sei bitte so ausführlich wie möglich
   * Falls es um eine bestimmte Seite im Tool geht, bitte URL mit einfügen
 
+## Mithelfen
 
-## Getting started
+Wirf einen Blick in den [Issue Tracker](https://github.com/ironjan/klausurtool-ror/issues). Dort findest du alle bekannten Probleme und Erweiterungswünsche. Über das Label [high-prio](https://github.com/ironjan/klausurtool-ror/labels/high-prio) findest du die Issues, die am wichtigsten sind.
+
+### Getting started
 
  * Install Ruby on Rails
   * Check that ruby and MySQL/MariaDB are installed
