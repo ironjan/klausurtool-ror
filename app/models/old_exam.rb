@@ -12,7 +12,7 @@ class OldExam < ActiveRecord::Base
       joins(:old_folder)
           .order('old_folders.title ASC')
     else
-      wild_card_search = "%#{search}%".gsub(' ', '%').gsub(/[äöüÄÖÜ]/, '%')
+      wild_card_search = "%#{search}%".gsub(' ', '%')
       prefix_search = "#{search}%"
 
       joins(:old_folder)

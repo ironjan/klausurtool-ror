@@ -1,0 +1,15 @@
+  <% if not params[:beta].nil? %>
+
+      <%= f.label :date, 'Datum (yyyy-mm-dd)', :class => 'control-label col-sm-2' %>
+      <div class="col-sm-10">
+        <%= f.date_select :date, :class => 'form-control', required: true, use_two_digit_numbers: true, start_year: 1970, order: [:year, :month, :day] %>
+      </div>
+
+  <% else %>
+
+      <%= f.label :date, 'Datum', :class => 'control-label col-sm-2' %>
+      <div class="col-sm-10">
+        <%= f.date_select :date, :class => 'form-control', required: true, start_year: 1970 %>
+      </div>
+
+  <% end %>
