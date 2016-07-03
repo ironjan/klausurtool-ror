@@ -18,9 +18,8 @@ gem 'daemons'
 
 gem 'barby'
 
-# Use jquery as the JavaScript library
 # Used to extend the forms with delete actions
-gem 'jquery-rails'
+gem 'vanilla-ujs'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
