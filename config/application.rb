@@ -39,5 +39,6 @@ module KlausurtoolRoR
     end
 
     config.active_job.queue_adapter = :delayed_job
+    ActiveSupport.halt_callback_chains_on_return_false = false
   end
 end
