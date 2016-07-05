@@ -1,0 +1,73 @@
+main {
+  padding-top: 50px;
+}
+
+footer {
+  clear: both;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0 0 10px 0;
+}
+
+nav {
+  margin-bottom: 5px;
+}
+
+.half-width {
+  width: 50%;
+  float: left;
+}
+
+.full-width {
+  width: 100%;
+  float: left;
+}
+
+.shadow {
+  box-shadow: 0 0 10px black;
+}
+
+.card {
+  padding: 10px;
+}
+
+.center {
+  max-width: 80%;
+  min-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.right {
+  float: right;
+  display: inline-block;
+}
+
+.folder_list_input {
+  width: 100%;
+  min-width: 8em;
+
+}
+
+.spacer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.orange {
+  color: $orange;
+}
+
+.red {
+  color: $red;
+}
+
+.check_box_in_form input{
+  width: 34px;
+}
+
+.js-must-be-enabled {
+  background: red;
+}

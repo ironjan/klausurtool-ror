@@ -1,4 +1,13 @@
-<%= render 'header' %>
+<!DOCTYPE html>
+<html moznomarginboxes="" mozdisallowselectionprint="">
+<head>
+  <title><%= page_title %></title>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <%= stylesheet_link_tag 'slim-application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<% render 'js_and_midori_warning' %>
 
 <main class="center">
   <h1><%= page_title %></h1>
