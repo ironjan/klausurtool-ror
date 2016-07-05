@@ -2,7 +2,7 @@
 
 <div class="clearfix spacer">
 
-  <%= form_tag ausleihe_switch_path, :method => 'post', id: 'form', html: {class: 'form-horizontal', role: 'form'} do %>
+  <%= form_tag ausleihe_switch_path, :method => 'post', id: 'form', html: {class: 'pure-form', role: 'form'} do %>
 
       <div class="form-group row">
         <%= label_tag :folderList, 'Ordner:', :class => 'control-label' %><br>
@@ -11,8 +11,8 @@
       </div>
 
       <div class="form-group row pull-right">
-        <%= submit_tag '(W)eiter', class: 'btn btn-primary', :accesskey => 'w' %>
-        <%= submit_tag 'Zu(r)ücksetzen', :id => 'reset_button', :type => 'reset', class: 'btn', :accesskey => 'r' %>
+        <%= submit_tag '(W)eiter', class: 'pure-button pure-button-primary', :accesskey => 'w' %>
+        <%= submit_tag 'Zu(r)ücksetzen', :id => 'reset_button', :type => 'reset', class: 'pure-button', :accesskey => 'r' %>
       </div>
   <% end %>
 

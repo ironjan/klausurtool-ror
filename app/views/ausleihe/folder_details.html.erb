@@ -15,14 +15,16 @@
 
     <div class="clearfix spacer">
 
-      <table class="table table-hover">
+      <table class="table table-hover pure-table pure-table-striped">
+        <thead>
         <tr>
           <th>Veranstaltungen</th>
           <th>Prüfer</th>
           <th>Datum</th>
         </tr>
+        </thead>
 
-
+        <tbody>
         <% @old_folder.old_exams.each do |e| %>
             <tr>
               <td><%= e.title %></td>
@@ -30,6 +32,7 @@
               <td><%= e.date %></td>
             </tr>
         <% end %>
+        </tbody>
       </table>
     </div>
 <% end %>

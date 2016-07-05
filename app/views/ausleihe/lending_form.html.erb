@@ -7,7 +7,7 @@
 </div>
 
 
-<%= form_for @old_lend_out, url: lending_action_path, html: {class: 'form-horizontal', role: 'form'} do |f| %>
+<%= form_for @old_lend_out, url: lending_action_path, html: {class: 'pure-form', role: 'form'} do |f| %>
     <% if @old_lend_out.errors.any? %>
         <div id="error_explanation full-width">
           <h2>Fehler beim Ausleihen:</h2>
@@ -77,7 +77,7 @@
     <div class="pull-right">
       <div class="form-group row">
         <div class="col-sm-2">
-          <%= f.submit '(W)eiter', class: 'btn btn-primary', :accesskey => 'w' %>
+          <%= f.submit '(W)eiter', class: 'pure-button pure-button-primary', :accesskey => 'w' %>
         </div>
       </div>
     </div>
