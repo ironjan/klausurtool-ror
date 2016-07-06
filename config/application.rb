@@ -40,5 +40,7 @@ module KlausurtoolRoR
 
     config.active_job.queue_adapter = :delayed_job
     ActiveSupport.halt_callback_chains_on_return_false = false
+
+    config.action_view.automatically_disable_submit_tag = false
   end
 end
