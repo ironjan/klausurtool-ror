@@ -1,0 +1,33 @@
+@import "toc";
+@import "toc_print";
+@import "flashes";
+@import "description_lists";
+@import "colors";
+@import "cover";
+@import "styles";
+
+.pull-right {
+  text-align: right;
+}
+
+
+.ausl-nav {
+  margin-bottom: 20px;
+  a {
+    padding: 10px 15px;
+  }
+}
+
+.ausleihe-form {
+  .control-label {
+    font-weight: bold;
+  }
+  .block {
+    display: block;
+  }
+}
+
+.card {
+  margin-top: 10px;
+  padding: 10px;
+}

@@ -13,10 +13,10 @@
   </div>
 
   <div class="clearfix">
-    <nav>
-      <ul class="nav nav-pills pull-right">
+    <nav class="pull-right">
+      <ul class="nav nav-pills">
         <% if controller_name == "ausleihe" %>
-            <li><%= link_to 'Zurücknehmen', returning_form_path(old_folder_instances: [old_lend_out.old_folder_instances.first]), class: 'btn btn-primary' %></li>
+            <li><%= link_to 'Zurücknehmen', returning_form_path(old_folder_instances: [old_lend_out.old_folder_instances.first]), class: 'pure-button pure-button-primary' %></li>
         <% end %>
 
         <% if controller_name == "lendouts" %>

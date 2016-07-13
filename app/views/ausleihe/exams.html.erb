@@ -5,8 +5,8 @@
     <div class="form-group">
       <%= label_tag :search, 'Prüfungen suchen:', :class => 'control-label' %>
       <%= text_field_tag :search, params[:search], :class => 'form-control', autofocus: true %>
-      <%= submit_tag 'Filtern', :class => 'btn btn-primary' %>
-      <%= submit_tag 'Zurücksetzen', :id => 'reset_button', :name => 'reset', :class => 'btn' %>
+      <%= submit_tag 'Filtern', :class => 'pure-button pure-button-primary' %>
+      <%= submit_tag 'Zurücksetzen', :id => 'reset_button', :name => 'reset', :class => 'pure-button' %>
     </div>
 <% end %>
 

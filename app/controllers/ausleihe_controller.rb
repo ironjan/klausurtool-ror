@@ -114,10 +114,11 @@ class AusleiheController < ApplicationController
   def lending_action
 
     if params[:old_lend_out].nil?
-      render "ausleihe/lending_form" and return
+      render 'ausleihe/lending_form' and return
     end
 
     @old_lend_out = OldLendOut.new(old_lend_out_params)
+    
     instances = params[:old_folder_instances]
                     .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
@@ -129,6 +130,11 @@ class AusleiheController < ApplicationController
     @old_lend_out.old_folder_instances = found_instances
 
     @old_lend_out.lendingTime = Time.new
+
+    unless @old_lend_out.valid?
+      flash[:alert] = "#{Time.new}: Alle Felder müssen ausgefüllt sein."
+      render 'ausleihe/lending_form' and return
+    end
 
     OldLendOut.transaction do
       @old_lend_out.save!

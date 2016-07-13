@@ -7,7 +7,7 @@
 </div>
 
 
-<%= form_for @old_lend_out, url: lending_action_path, html: {class: 'form-horizontal', role: 'form'} do |f| %>
+<%= form_for @old_lend_out, url: lending_action_path, html: {class: 'pure-form pure-form-aligned ausleihe-form', role: 'form'} do |f| %>
     <% if @old_lend_out.errors.any? %>
         <div id="error_explanation full-width">
           <h2>Fehler beim Ausleihen:</h2>
@@ -19,65 +19,55 @@
         </div>
     <% end %>
 
-    <div class="form-group row">
-      <%= f.label :folders, 'Ordner', :class => 'control-label col-sm-4' %>
-      <div class="col-sm-8">
-        <ul id="folders">
-          <% @old_lend_out.old_folder_instances.each do |i| %>
-              <li>
-                <%= i.barcodeId %>, <%= i.old_folder.title %>
-                <%= hidden_field_tag 'old_folder_instances[]', i.id %>
-              </li>
-          <% end %>
-        </ul>
-      </div>
+    <div class="pure-control-group">
+      <%= f.label :folders, 'Ordner', :class => 'control-label' %>
+      <ul id="folders">
+        <% @old_lend_out.old_folder_instances.each do |i| %>
+            <li>
+              <%= i.barcodeId %>, <%= i.old_folder.title %>
+              <%= hidden_field_tag 'old_folder_instances[]', i.id %>
+            </li>
+        <% end %>
+      </ul>
     </div>
 
 
-    <div class="form-group row">
-      <%= f.label :weigth, 'Gewicht der Ordner', :class => 'control-label col-sm-4' %>
-      <div class="col-sm-8">
-        <%= f.number_field :weigth, required: true, min: 1, :class => 'form-control', autofocus: true %>
-      </div>
+    <div class="pure-control-group">
+      <%= f.label :weigth, 'Gewicht der Ordner', :class => 'control-label' %>
+      <%= f.number_field :weigth, required: true, min: 1, :class => 'form-control', autofocus: true %>
     </div>
 
-    <div class="form-group row">
-      <%= f.label 'IMT-Login des Studenten', :class => 'control-label col-sm-4' %>
-      <div class="col-sm-8">
-        <%= f.text_field :imt, required: true, :class => 'form-control' %>
-        <span id="realname"></span>
-      </div>
+    <div class="pure-control-group">
+      <%= f.label 'IMT-Login des Studenten', :class => 'control-label' %>
+      <%= f.text_field :imt, required: true, :class => 'form-control' %>
+      <span id="realname"></span>
     </div>
 
-    <div class="form-group row">
-      <%= f.label 'Raus von:', :class => 'control-label col-sm-4' %>
-      <div class="col-sm-8">
-        <%= f.text_field :lender, required: true, list: 'lenders-and-receivers', :class => 'form-control' %>
-        <datalist id="lenders-and-receivers">
-          <% lenders_and_receivers.each do |name| %>
-              <option value="<%= name %>"></option>
-          <% end %>
-        </datalist>
-      </div>
+    <div class="pure-control-group">
+      <%= f.label 'Raus von:', :class => 'control-label' %>
+      <%= f.text_field :lender, required: true, list: 'lenders-and-receivers', :class => 'form-control' %>
+      <datalist id="lenders-and-receivers">
+        <% lenders_and_receivers.each do |name| %>
+            <option value="<%= name %>"></option>
+        <% end %>
+      </datalist>
     </div>
 
-    <div class="form-group row">
-      <%= f.label 'Pfand', :class => 'control-label col-sm-4' %>
-      <div class="col-sm-8">
-        <%= f.text_field :deposit, required: true, list: 'deposits', :class => 'form-control' %>
-        <datalist id="deposits">
-          <% deposits.each do |deposit| %>
-              <option value="<%= deposit %>"></option>
-          <% end %>
-        </datalist>
-      </div>
+    <div class="pure-control-group">
+      <%= f.label 'Pfand', :class => 'control-label' %>
+      <%= f.text_field :deposit, required: true, list: 'deposits', :class => 'form-control' %>
+      <datalist id="deposits">
+        <% deposits.each do |deposit| %>
+            <option value="<%= deposit %>"></option>
+        <% end %>
+      </datalist>
     </div>
 
 
     <div class="pull-right">
-      <div class="form-group row">
+      <div class="pure-control-group">
         <div class="col-sm-2">
-          <%= f.submit '(W)eiter', class: 'btn btn-primary', :accesskey => 'w' %>
+          <%= f.submit '(W)eiter', class: 'pure-button pure-button-primary', :accesskey => 'w' %>
         </div>
       </div>
     </div>

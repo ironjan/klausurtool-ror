@@ -1,19 +1,30 @@
-<%= render 'header' %>
+<!DOCTYPE html>
+<html moznomarginboxes="" mozdisallowselectionprint="">
+<head>
+  <title><%= page_title %></title>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <%= stylesheet_link_tag 'slim-application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<% render 'js_and_midori_warning' %>
 
 <main class="center">
   <h1><%= page_title %></h1>
 
-  <nav>
-    <ul class="nav nav-pills">
-      <li><%= link_to '(S)tart', ausleihe_path, :accesskey => 's' %></li>
-      <li><%= link_to '(Z)eige Ausgeliehene', ausleihe_lent_path, :accesskey => 'z' %></li>
-      <li><%= link_to '(O)rdner', ausleihe_folders_path, :accesskey => 'o' %></li>
-      <li><%= link_to '(I)nhalte', ausleihe_exams_path, :accesskey => 'i' %></li>
-      <li><%= link_to '(A)usleih-Archiv', ausleihe_history_path, :accesskey => 'a' %></li>
+  <nav class="pure-menu pure-menu-horizontal ausl-nav">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item"><%= link_to '(S)tart', ausleihe_path, :accesskey => 's' %></li>
+      <li class="pure-menu-item"><%= link_to '(Z)eige Ausgeliehene', ausleihe_lent_path, :accesskey => 'z'  %></li>
+      <li class="pure-menu-item"><%= link_to '(O)rdner', ausleihe_folders_path, :accesskey => 'o'  %></li>
+      <li class="pure-menu-item"><%= link_to '(I)nhalte', ausleihe_exams_path, :accesskey => 'i'  %></li>
+      <li class="pure-menu-item"><%= link_to '(A)usleih-Archiv', ausleihe_history_path, :accesskey => 'a'  %></li>
     </ul>
   </nav>
   <%= render 'flashes' %>
 
   <%= yield %>
 </main>
+
 <%= render 'footer' %>
+

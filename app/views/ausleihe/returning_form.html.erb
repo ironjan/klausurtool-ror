@@ -3,7 +3,9 @@
 <h2 id="lend">Zurücknehmen</h2>
 
 
-<%= form_for @old_lend_out, url: returning_action_path, method: 'post', html: {class: 'form-horizontal', role: 'form'} do |f| %>
+<%= form_for @old_lend_out, url: returning_action_path, method: 'post', html: {class: 'pure-form ausleihe-form', role: 'form'} do |f| %>
+    <%= hidden_field_tag :id, @old_lend_out.id %>
+
     <% if @old_lend_out.errors.any? %>
         <div id="error_explanation">
           <h2>Fehler beim Zurücknehmen:</h2>
@@ -15,35 +17,27 @@
         </div>
     <% end %>
 
-    <div class="form-group row">
-      <div class="col-sm-10 pull-right">
-        <%= render 'old_lend_out_infos', old_lend_out: @old_lend_out %>
-        <%= render 'old_lend_out_folder_list', old_lend_out: @old_lend_out %>
-      </div>
+    <div class="pure-control-group block">
+      <%= render 'old_lend_out_infos', old_lend_out: @old_lend_out %>
+      <%= render 'old_lend_out_folder_list', old_lend_out: @old_lend_out %>
+
+      <div style="clear: both; margin-bottom: 20px"/>
     </div>
 
-    <%= hidden_field_tag :id, @old_lend_out.id %>
-
-
-    <div class="form-group row">
+    <div class="pure-control-group">
       <%= f.label :receiver, 'Rein von', :class => 'control-label col-sm-2' %>
-      <div class="col-sm-10">
-        <%= f.text_field :receiver, required: true, list: 'lenders-and-receivers', :class => 'form-control', autofocus: true %>
-        <datalist id="lenders-and-receivers">
-          <% lenders_and_receivers.each do |name| %>
-              <option value="<%= name %>"></option>
-          <% end %>
-        </datalist>
-      </div>
+      <%= f.text_field :receiver, required: true, list: 'lenders-and-receivers', :class => 'form-control', autofocus: true %>
+
+        <%= f.submit '(W)eiter', class: 'pull-right pure-button pure-button-primary', :accesskey => 'w' %>
+
+      <datalist id="lenders-and-receivers">
+        <% lenders_and_receivers.each do |name| %>
+            <option value="<%= name %>"></option>
+        <% end %>
+      </datalist>
     </div>
 
-    <div class="pull-right">
-      <div class="form-group row">
-        <div class="col-sm-2">
-          <%= f.submit '(W)eiter', class: 'btn btn-primary', :accesskey => 'w' %>
-        </div>
-      </div>
-    </div>
+
 
 
 <% end %>

@@ -6,7 +6,8 @@
           <%= will_paginate @old_folder_instances %>
       <% end %>
 
-      <table class="table table-hover">
+      <table class="table table-hover pure-table pure-table-horizontal">
+        <thead>
         <tr>
           <th></th>
           <th>Code</th>
@@ -15,7 +16,9 @@
           <th>Inhalt</th>
           <th></th>
         </tr>
+        </thead>
 
+        <tbody>
         <% old_folder_instances.each do |i| %>
             <tr>
               <td style="background-color: <%= i.old_folder.css_color %>"></td>
@@ -50,6 +53,7 @@
               </td>
             </tr>
         <% end %>
+        </tbody>
       </table>
   <% end %>
 </div>

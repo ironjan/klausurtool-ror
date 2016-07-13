@@ -1,3 +1,8 @@
+# 0.6.5
+
+ * Fixed: [#77](https://github.com/ironjan/klausurtool-ror/issues/77)
+  * Ausleihe ist nun performanter.
+
 # 0.6.4
 
  * Fixed: [#192](https://github.com/ironjan/klausurtool-ror/issues/192)

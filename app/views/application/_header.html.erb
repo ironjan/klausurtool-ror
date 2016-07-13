@@ -2,28 +2,9 @@
 <html moznomarginboxes="" mozdisallowselectionprint="">
 <head>
 	<title><%= page_title %></title>
-	<%= stylesheet_link_tag 'application', media: 'all' %>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <%= stylesheet_link_tag 'application', media: 'all' %>
 	<%= javascript_include_tag 'application' %>
 	<%= csrf_meta_tags %>
 </head>
-<body>
-
-<h1 id="js-must-be-enabled">JavaScript und Cookies müssen erlaubt sein, damit das Klausurtool genutzt werden kann.</h1>
-
-
-<script>
-  // Cookie and JS detection
-  document.cookie = "testing=cookies_enabled; path=/";
-  var areCookiesEnabled = (document.cookie.indexOf("testing=cookies_enabled") >= 0);
-  if(areCookiesEnabled)
-  {
-    document.getElementById("js-must-be-enabled").style.display = "none";
-  }
-</script>
-
-<% if is_midori? %>
-    <h1>Bitte anderen Browser nutzen</h1>
-    <p>Midori wird nicht unterstützt, da midoris Verhalten inkonsistent ist und der Aufwand, dies zu beheben, zu hoch
-      ist. Für mehr Details siehe <a href="https://github.com/ironjan/klausurtool-ror/issues/177">#177</a></p>
-    <p>Bitte nutzt stattdessen iceweasel; dieser ist ebenfalls auf dem Ausleih-PC installiert, hat aber nicht midoris Probleme.</p>
-<% end %>
+<% render 'js_and_midori_warning' %>
