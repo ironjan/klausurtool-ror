@@ -55,7 +55,6 @@ class OldFolder < ActiveRecord::Base
       else
         css_color = ''
     end
-    Rails.logger.debug("#{color} -> #{css_color}")
     css_color
   end
 
