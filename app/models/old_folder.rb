@@ -41,21 +41,20 @@ class OldFolder < ActiveRecord::Base
   def css_color
     case color.to_sym
       when :black
-        css_color = '#000'
+        '#000'
       when :red
-        css_color = '#f00'
+        '#f00'
       when :blue
-        css_color = '#00f'
+        '#00f'
       when :green
-        css_color = '#0f0'
+        '#0f0'
       when :white 
-        css_color = '#fff'
+        '#fff'
       when :yellow
-        css_color = '#ff0'
+        '#ff0'
       else
-        css_color = ''
+        ''
     end
-    css_color
   end
 
   def to_s
