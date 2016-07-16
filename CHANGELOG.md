@@ -1,3 +1,7 @@
+# 0.?.?
+
+ * [Neue Farbcodes](https://github.com/ironjan/klausurtool-ror/issues/217)
+
 # 0.6.5
 
  * Fixed: [#77](https://github.com/ironjan/klausurtool-ror/issues/77)
