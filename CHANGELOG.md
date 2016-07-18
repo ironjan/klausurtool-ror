@@ -1,4 +1,4 @@
-# 0.?.?
+# 0.6.6
 
  * [Neue Farbcodes](https://github.com/ironjan/klausurtool-ror/issues/217)
 
