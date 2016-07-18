@@ -5,7 +5,7 @@ class OldFolder < ActiveRecord::Base
   has_many :old_folder_instances, dependent: :destroy
 
   CONTENT_TYPES = ['Klausurordner', 'Klausurmappe', 'Prüfungsprotokollordner', 'Prüfungsprotokollmappe', 'Übungsblätter', 'Sonstiges']
-  enum color: [:black, :red, :blue, :green]
+  enum color: [:black, :red, :blue, :green, :white, :yellow]
   AREAS = ['ESS', 'MMWW', 'SWT', 'MUA', 'Grundst. Info', 'Mathe', 'Sonstiges']
 
   validates :title, presence: true
@@ -41,18 +41,20 @@ class OldFolder < ActiveRecord::Base
   def css_color
     case color.to_sym
       when :black
-        css_color = '#000'
+        '#000'
       when :red
-        css_color = '#f00'
+        '#f00'
       when :blue
-        css_color = '#00f'
+        '#00f'
       when :green
-        css_color = '#0f0'
+        '#0f0'
+      when :white 
+        '#fff'
+      when :yellow
+        '#ff0'
       else
-        css_color = ''
+        ''
     end
-    Rails.logger.debug("#{color} -> #{css_color}")
-    css_color
   end
 
   def to_s
