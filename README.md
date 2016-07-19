@@ -14,6 +14,13 @@
 
 Wirf einen Blick in den [Issue Tracker](https://github.com/ironjan/klausurtool-ror/issues). Dort findest du alle bekannten Probleme und Erweiterungswünsche. Über das Label [high-prio](https://github.com/ironjan/klausurtool-ror/labels/high-prio) findest du die Issues, die am wichtigsten sind.
 
+## Backup der Datenbank zum Testen nutzen
+
+ 1. Get a `data.yml` file created by `bin/rake db:dump` on production server
+ 2. Disable foreign key checks on your local DB: `SET GLOBAL foreign_key_checks = 0;`
+ 3. Execute `RAILS_ENV=production bin/rake db:data:load; RAILS_ENV=development bin/rake db:data:load`
+ 4. Enable foreign key checks on your DB: `SET GLOBAL foreign_key_checks = 1;`
+
 ### Getting started
 
  * Install Ruby on Rails
