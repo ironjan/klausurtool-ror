@@ -50,8 +50,6 @@ Wirf einen Blick in den [Issue Tracker](https://github.com/ironjan/klausurtool-r
  * Follows [Semantic Versioning](http://semver.org/)
  * Uses http://stackoverflow.com/questions/9073446/where-do-you-store-your-rails-applications-version-number to update version
   * ```git tag $version``` & restart server
- * The [Milestones](https://github.com/ironjan/klausurtool-ror/milestones) of this project are named in a more or less funny way
-  * They are more or less used as orientation on what to work next.
 
 
 ## Links that helped to get started
