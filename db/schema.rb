@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,88 +10,82 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160425120127) do
+ActiveRecord::Schema.define(version: 20160813184926) do
 
-  create_table "archived_old_lend_outs", force: :cascade do |t|
-    t.string   "deposit",              limit: 255
-    t.string   "imt",                  limit: 255
-    t.string   "lender",               limit: 255
-    t.string   "receiver",             limit: 255
+  create_table "archived_old_lend_outs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string   "deposit"
+    t.string   "imt"
+    t.string   "lender"
+    t.string   "receiver"
     t.datetime "lendingTime"
     t.datetime "receivingTime"
-    t.integer  "weigth",               limit: 4
-    t.string   "old_folder_instances", limit: 255
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.integer  "weigth"
+    t.string   "old_folder_instances"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
-  create_table "archived_old_lend_outs_old_folder_instances", id: false, force: :cascade do |t|
-    t.integer "archived_old_lend_out_id", limit: 4, null: false
-    t.integer "old_folder_instance_id",   limit: 4, null: false
+  create_table "archived_old_lend_outs_old_folder_instances", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "archived_old_lend_out_id", null: false
+    t.integer "old_folder_instance_id",   null: false
   end
 
-  create_table "delayed_jobs", force: :cascade do |t|
-    t.integer  "priority",   limit: 4,     default: 0, null: false
-    t.integer  "attempts",   limit: 4,     default: 0, null: false
+  create_table "delayed_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer  "priority",                 default: 0, null: false
+    t.integer  "attempts",                 default: 0, null: false
     t.text     "handler",    limit: 65535,             null: false
     t.text     "last_error", limit: 65535
     t.datetime "run_at"
     t.datetime "locked_at"
     t.datetime "failed_at"
-    t.string   "locked_by",  limit: 255
-    t.string   "queue",      limit: 255
+    t.string   "locked_by"
+    t.string   "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
-
-  create_table "old_exams", force: :cascade do |t|
-    t.string   "title",         limit: 255
-    t.string   "examiners",     limit: 255
+  create_table "old_exams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string   "title"
+    t.string   "examiners"
     t.date     "date"
-    t.integer  "old_folder_id", limit: 4
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
-    t.boolean  "unarchived",                default: true
+    t.integer  "old_folder_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "unarchived",    default: true
+    t.index ["old_folder_id"], name: "index_old_exams_on_old_folder_id", using: :btree
   end
 
-  add_index "old_exams", ["old_folder_id"], name: "index_old_exams_on_old_folder_id", using: :btree
-
-  create_table "old_folder_instances", force: :cascade do |t|
-    t.integer  "number",          limit: 4
-    t.integer  "old_folder_id",   limit: 4
-    t.string   "barcodeId",       limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "old_lend_out_id", limit: 4
+  create_table "old_folder_instances", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer  "number"
+    t.integer  "old_folder_id"
+    t.string   "barcodeId"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "old_lend_out_id"
+    t.index ["old_folder_id"], name: "index_old_folder_instances_on_old_folder_id", using: :btree
+    t.index ["old_lend_out_id"], name: "index_old_folder_instances_on_old_lend_out_id", using: :btree
   end
 
-  add_index "old_folder_instances", ["old_folder_id"], name: "index_old_folder_instances_on_old_folder_id", using: :btree
-  add_index "old_folder_instances", ["old_lend_out_id"], name: "index_old_folder_instances_on_old_lend_out_id", using: :btree
-
-  create_table "old_folders", force: :cascade do |t|
-    t.string   "title",       limit: 255
-    t.string   "contentType", limit: 255
-    t.string   "area",        limit: 255
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.integer  "color",       limit: 4,   default: 0, null: false
+  create_table "old_folders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string   "title"
+    t.string   "contentType"
+    t.string   "area"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "color",       default: 0, null: false
   end
 
-  create_table "old_lend_outs", force: :cascade do |t|
-    t.string   "deposit",       limit: 255
-    t.string   "imt",           limit: 255
-    t.string   "lender",        limit: 255
-    t.string   "receiver",      limit: 255
+  create_table "old_lend_outs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string   "deposit"
+    t.string   "imt"
+    t.string   "lender"
     t.datetime "lendingTime"
-    t.datetime "receivingTime"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "weigth",        limit: 4
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "weigth"
+    t.string   "receivingTime"
+    t.string   "receiver"
   end
 
-  add_foreign_key "old_exams", "old_folders"
-  add_foreign_key "old_folder_instances", "old_folders"
-  add_foreign_key "old_folder_instances", "old_lend_outs"
 end
