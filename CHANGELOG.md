@@ -1,3 +1,7 @@
+# 0.7.0
+
+ * [Fixed: history is nicht mehr von Ordner-Instanzen abhängig](https://github.com/ironjan/klausurtool-ror/issues/214)
+
 # 0.6.6
 
  * [Neue Farbcodes](https://github.com/ironjan/klausurtool-ror/issues/217)
