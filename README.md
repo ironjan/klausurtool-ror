@@ -44,6 +44,11 @@ Wirf einen Blick in den [Issue Tracker](https://github.com/ironjan/klausurtool-r
  * Uses http://stackoverflow.com/questions/9073446/where-do-you-store-your-rails-applications-version-number to update version
   * ```git tag $version``` & restart server
 
+# Incompatible updates
+
+ * In 0.7.0 the archive was changed to be independent of old_folder_instances
+  * The sql-script `data_conversion_0.6.6_to_0.7.0.sql` has to be 
+    executed after updating to 0.7.0 (Don't forget to backup!) 
 
 ## Links that helped to get started
 
