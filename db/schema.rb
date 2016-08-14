@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160813184926) do
+ActiveRecord::Schema.define(version: 20160814121214) do
 
   create_table "archived_old_lend_outs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "deposit"
@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(version: 20160813184926) do
     t.datetime "lendingTime"
     t.datetime "receivingTime"
     t.integer  "weigth"
-    t.string   "old_folder_instances"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.text     "old_folder_instances", limit: 4294967295
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   create_table "archived_old_lend_outs_old_folder_instances", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
@@ -43,6 +43,14 @@ ActiveRecord::Schema.define(version: 20160813184926) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+  end
+
+  create_table "folder_instance_archive_copies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "folder_title"
+    t.integer  "barcode_id"
+    t.integer  "archived_old_lend_out_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "old_exams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|

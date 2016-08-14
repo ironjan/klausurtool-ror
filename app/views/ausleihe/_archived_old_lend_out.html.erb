@@ -26,8 +26,8 @@
     <div class="half-width">
       <dl>
         <dt>Ordner</dt>
-        <% archived_old_lend_out.old_folder_instances.each do |i| %>
-        <dd><%= i.barcodeId %>, <%= i.old_folder.title %></dd>
+        <% archived_old_lend_out.folder_instance_archive_copies.each do |i| %>
+        <dd><%= i.barcode_id %>, <%= i.folder_title %></dd>
         <% end %>
       </dl>
     </div>
