@@ -118,7 +118,7 @@ class AusleiheController < ApplicationController
     end
 
     @old_lend_out = OldLendOut.new(old_lend_out_params)
-    
+
     instances = params[:old_folder_instances]
                     .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
@@ -180,7 +180,7 @@ class AusleiheController < ApplicationController
     @old_lend_out = old_lend_outs.first
   end
 
-    # Takes the given folders back and returns the user to the main screen.
+  # Takes the given folders back and returns the user to the main screen.
   def returning_action
     if params[:id].nil?
       render 'ausleihe/returning_form' and return
@@ -195,22 +195,25 @@ class AusleiheController < ApplicationController
     @old_lend_out.receivingTime = Time.new
 
     OldLendOut.transaction do
-    # First, we update old_lend_out for validation
-    # Then, we update all folder_instances so that they are not lent anymore
-    @old_lend_out.update!(old_lend_out_params)
-    @old_lend_out.old_folder_instances.each do |i|
-      i.old_lend_out = nil
-      i.save!
+      # First, we update old_lend_out for validation
+      # Then, we update all folder_instances so that they are not lent anymore
+      @old_lend_out.update!(old_lend_out_params)
+      folder_instance_archive_copies = @old_lend_out.old_folder_instances
+                                           .map { |i| FolderInstanceArchiveCopy.new(folder_title: i.old_folder.title, barcode_id: i.barcodeId) }
+
+      @old_lend_out.old_folder_instances.each do |i|
+        i.old_lend_out = nil
+        i.save!
+      end
+
+      # After updating everything in place, we archive the lend_out
+      archive(@old_lend_out, folder_instance_archive_copies)
+
+      flash[:notice] = "#{Time.new}: Ordner erfolgreich zurückgenommen"
+      redirect_to ausleihe_path and return
     end
 
-    # After updating everything in place, we archive the lend_out
-    archive(@old_lend_out)
-
-    flash[:notice] = "#{Time.new}: Ordner erfolgreich zurückgenommen"
-    redirect_to ausleihe_path and return
   end
-
-end
 
   private
   def old_lend_out_params
@@ -218,9 +221,13 @@ end
   end
 
 
-  def archive(old_lend_out)
+  def archive(old_lend_out, folder_instance_archive_copies)
+    folder_instance_archive_copies.each {|a|
+      a.save!
+    }
+
     archived = ArchivedOldLendOut.new
-    archived.old_folder_instances = old_lend_out.old_folder_instances
+    archived.old_folder_instances = folder_instance_archive_copies
     archived.imt = old_lend_out.imt
     archived.lender = old_lend_out.lender
     archived.lendingTime = old_lend_out.lendingTime
@@ -229,7 +236,16 @@ end
     archived.receiver = old_lend_out.receiver
     archived.receivingTime = old_lend_out.receivingTime
 
+    Rails.logger.debug("------------------------")
+    Rails.logger.debug(folder_instance_archive_copies.inspect)
+    Rails.logger.debug(old_lend_out.inspect)
+    Rails.logger.debug(archived.inspect)
+
     archived.save!
+    folder_instance_archive_copies.each {|a|
+      a.archived_old_lend_out_id = archived.id
+      a.save!
+    }
     old_lend_out.destroy!
   end
 
