@@ -1,4 +1,4 @@
-class CreateFolderInstanceArchiveCopies < ActiveRecord::Migration[5.0]
+class CreateFolderInstanceArchiveCopies < ActiveRecord::Migration[5.0] #:nodoc:
   def up
     create_table :folder_instance_archive_copies do |t|
       t.string :folder_title

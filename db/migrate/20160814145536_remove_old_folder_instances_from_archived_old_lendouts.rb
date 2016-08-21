@@ -1,4 +1,4 @@
-class RemoveOldFolderInstancesFromArchivedOldLendouts < ActiveRecord::Migration[5.0]
+class RemoveOldFolderInstancesFromArchivedOldLendouts < ActiveRecord::Migration[5.0] #:nodoc:
   def up
     remove_column :archived_old_lend_outs, :old_folder_instances
 
