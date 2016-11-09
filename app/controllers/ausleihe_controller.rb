@@ -227,7 +227,7 @@ class AusleiheController < ApplicationController
     }
 
     archived = ArchivedOldLendOut.new
-    archived.old_folder_instances = folder_instance_archive_copies
+    archived.folder_instance_archive_copies = folder_instance_archive_copies
     archived.imt = old_lend_out.imt
     archived.lender = old_lend_out.lender
     archived.lendingTime = old_lend_out.lendingTime
