@@ -1,0 +1,1 @@
+DELETE FROM old_lend_outs WHERE id = 6216;
