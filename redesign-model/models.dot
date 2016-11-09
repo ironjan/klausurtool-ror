@@ -1,0 +1,52 @@
+digraph g {
+  subgraph old_model {
+    "archived_old_lend_out"			[label="ArchivedOldLendOut"]
+    "folder_instance_archive_copy"	[label="FolderInstanceArchiveCopy"]
+    "lenders_and_receivers"			[label="LendersAndReceivers"]
+    "old_exam"   	 				[label="OldExam"]
+    "old_folder"					[label="OldFolder"]
+    "old_folder_instance"			[label="OldFolderInstance"]
+    "old_lend_out"					[label="OldLendOut"]
+
+    "lenders_and_receivers" <|--   "archived_old_lend_out"
+    "lenders_and_receivers" <|--   "old_lend_out"
+    
+    // bi directional
+    "archived_old_lend_out" <>-- n "folder_instance_archive_copy"
+
+    // bi directional
+    "old_folder" <>-- n "old_exam" 
+    
+    // bi directional
+	"old_folder" <>-- n "old_folder_instance"
+	// bi directional
+	"old_lend_out" <>-- n "old_folder_instance"
+
+	// bi directional
+	"old_lend_out" <>-- 1 "old_lend_out"
+
+	// bi directional - has_and_belongs_to_many
+	"archived_old_lend_out" <>-- n "old_lend_out"
+  }
+
+  subgraph new_model {
+	"archived_lend_out"				[label="ArchivedLendOut"]
+    "folder_instance_archive_copy2"	[label="FolderInstanceArchiveCopy"]
+    "lenders_and_receivers2"		[label="LendersAndReceivers"]
+    "exam"   	 					[label="Exam"]
+    "folder"						[label="Folder"]
+    "folder_instance"				[label="FolderInstance"]
+    "lend_out"						[label="LendOut"]
+
+    
+    "lenders_and_receivers2" <|--   "archivedlend_out"
+    "lenders_and_receivers2" <|--   "lend_out"
+
+    // one dir <-
+    "archived_lend_out" <>- n "folder_instance_archive_copy2"
+    
+    "folder" n -- n "exam"
+    "folder" <>-- n "folder_instance"
+    "lend_out" 1 -- 1 "folder_instance"
+  }
+}
