@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe Internal::Admin::PrintController, type: :controller do
   describe 'cover' do
     it 'shows an alert, if no barcode is given' do
-      get :cover, barcode: ''
+      get :cover, params: { barcode: '' }
       expect(response).to render_template("internal/admin/print/cover")
       expect(flash[:alert]).to be_present
       expect(flash[:alert]).to eq('Kein Ordner-Exemplar angegeben.')
     end
 
     it 'shows an alert, if no folder_instance with the given barcode exists' do
-      get :cover, barcode: -1
+      get :cover, params: { barcode: -1 }
       expect(response).to render_template("internal/admin/print/cover")
       expect(flash[:alert]).to be_present
       expect(flash[:alert]).to eq('Ordner-Exemplar mit Barcode `-1` nicht gefunden.')
@@ -20,7 +20,7 @@ RSpec.describe Internal::Admin::PrintController, type: :controller do
       folder = FactoryGirl.create(:old_folder)
       FactoryGirl.create(:old_folder_instance, old_folder: folder, barcodeId: 9999)
 
-      get :cover, barcode: 9999
+      get :cover, params: { barcode: 9999 }
       expect(response).to render_template("internal/admin/print/cover")
     end
   end
@@ -28,14 +28,14 @@ RSpec.describe Internal::Admin::PrintController, type: :controller do
   describe 'toc' do
 
     it 'shows an alert when no id is given' do
-      get :toc, old_folder_id: ''
+      get :toc, params: { old_folder_id: '' }
       expect(response).to render_template("internal/admin/print/toc")
       expect(flash[:alert]).to be_present
       expect(flash[:alert]).to eq('Kein Ordner angegeben.')
     end
 
     it 'shows an alert when requested for an invalid folder' do
-      get :toc, old_folder_id: -1
+      get :toc, params: { old_folder_id: -1 }
       expect(response).to render_template("internal/admin/print/toc")
       expect(flash[:alert]).to be_present
       expect(flash[:alert]).to eq('Ordner mit Id `-1` nicht gefunden.')
@@ -50,7 +50,7 @@ RSpec.describe Internal::Admin::PrintController, type: :controller do
         number_of_exams -= 1
       end
 
-      get :toc, old_folder_id: folder.id
+      get :toc, params: { old_folder_id: folder.id }
       expect(response).to render_template("internal/admin/print/toc")
       expect(flash[:warning]).to be_present
       expect(flash[:warning]).to eq('Es können nicht alle Prüfungen auf eine Seite gedruckt werden. Bitte einige Klausuren archivieren oder auslaugern.')
@@ -61,7 +61,7 @@ RSpec.describe Internal::Admin::PrintController, type: :controller do
       folder = FactoryGirl.create(:old_folder)
       exam_1 = FactoryGirl.create(:old_exam, old_folder_id: folder.id)
 
-      get :toc, old_folder_id: folder.id
+      get :toc, params: { old_folder_id: folder.id }
       expect(response).to render_template("internal/admin/print/toc")
 
       exam_1.destroy!

@@ -9,7 +9,7 @@ describe OldExamsController do
     end
 
     it "clears search when reset is sent" do
-      get :index, :search => "not empty", :reset => "reset"
+      get :index, params: { :search => "not empty", :reset => "reset" }
       expect(response).to render_template("old_exams/index")
       expect(controller.params[:sort]).to be(nil)
     end
@@ -23,7 +23,7 @@ describe OldExamsController do
     end
 
     it "shows 'Ordner nicht gefunden' for non-existing folders" do
-      post :create, old_folder_id: -1
+      post :create, params: { old_folder_id: -1 }
       expect(response).to render_template(:new)
       expect(flash[:alert]).to be_present
       expect(flash[:alert]).to eq('Ordner nicht gefunden.')
@@ -35,7 +35,7 @@ describe OldExamsController do
   describe "new" do
 
     it "shows error if it is tried to create an exam in a non-existing folder" do
-      get :new, old_folder_id: -1
+      get :new, params: { old_folder_id: -1 }
       expect(response).to render_template("old_exams/new")
       expect(flash[:alert]).to be_present
       expect(flash[:alert]).to eq('Ordner nicht gefunden.')
