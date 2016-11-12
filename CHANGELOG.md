@@ -1,6 +1,7 @@
 # 0.7.0
 
  * [Fixed: history is nicht mehr von Ordner-Instanzen abhängig](https://github.com/ironjan/klausurtool-ror/issues/214)
+ * Weitere Bug-Fixes
 
 # 0.6.6
 
