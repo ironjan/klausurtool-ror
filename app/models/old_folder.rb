@@ -28,6 +28,10 @@ class OldFolder < ActiveRecord::Base
     end
   end
 
+  def folder_information
+    "#{title} (#{contentType}, #{id})"
+  end
+
   def contains_written_exams?
     contentType.in? ['Klausurordner', 'Klausurmappe']
   end
