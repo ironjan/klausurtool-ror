@@ -6,6 +6,13 @@ class OldFolder < ActiveRecord::Base
 
   CONTENT_TYPES = ['Klausurordner', 'Klausurmappe', 'Prüfungsprotokollordner', 'Prüfungsprotokollmappe', 'Übungsblätter', 'Sonstiges']
   enum color: [:black, :red, :blue, :green, :white, :yellow]
+  COLOR_TO_RGB = {:black => '#000',
+                  :red => '#f00',
+                  :blue => '#00f',
+                  :green => '#0f0',
+                  :white => '#fff',
+                  :yellow => '#ff0'}
+
   AREAS = ['ESS', 'MMWW', 'SWT', 'MUA', 'Grundst. Info', 'Mathe', 'Sonstiges']
 
   validates :title, presence: true
@@ -43,22 +50,7 @@ class OldFolder < ActiveRecord::Base
 
   # todo: is this the correct place for this method?
   def css_color
-    case color.to_sym
-      when :black
-        '#000'
-      when :red
-        '#f00'
-      when :blue
-        '#00f'
-      when :green
-        '#0f0'
-      when :white 
-        '#fff'
-      when :yellow
-        '#ff0'
-      else
-        ''
-    end
+    COLOR_TO_RGB[color.to_sym] || ''
   end
 
   def to_s
