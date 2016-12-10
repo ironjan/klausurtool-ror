@@ -11,8 +11,14 @@
           <th>Veranstaltungen</th>
           <th>Prüfer</th>
           <th>Datum</th>
-          <th>Ordner</th>
-          <th><% unless controller_name == "old_exams" %>Verfügbar<% end %> </th>
+          <th>
+            <span title="Das Format der Ordnerinformationen ist: &quot;Name (Ordner-Typ, ID)&quot;. Hinter der `ID` ist auf den Ordnern eine zusätzliche Nummer abgedruckt, die zur eindeutigen Identifizierung der verschiedenen Ordner-Exemplare dient.">
+            Ordner<sup>?</sup>
+          </span>
+          </th>
+          <th>
+            <% unless controller_name == "old_exams" %>Verfügbar
+            <% end %> </th>
         </tr>
 
         <% @old_exams.each do |e| %>
@@ -20,14 +26,14 @@
               <td style="background-color: <%= e.old_folder.css_color %>"></td>
               <td><%= e.title %></td>
               <td><%= e.examiners %></td>
-              <td><%= e.date %></td>
+              <td style="min-width: 10em;"><%= e.date %></td>
               <td>
                 <% if controller_name == "ausleihe" %>
-                    <%= link_to e.old_folder.title, ausleihe_folder_path(e.old_folder) %>
+                    <%= link_to e.old_folder.folder_information, ausleihe_folder_path(e.old_folder) %>
                 <% elsif controller_name == "old_exams" %>
-                    <%= link_to e.old_folder.title, e.old_folder %>
+                    <%= link_to e.old_folder.folder_information, e.old_folder %>
                 <% else %>
-                    <%= e.old_folder.title %>
+                    <%= e.old_folder.folder_information %>
                 <% end %>
               </td>
               <td>
