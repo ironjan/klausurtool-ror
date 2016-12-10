@@ -23,27 +23,30 @@ Wirf einen Blick in den [Issue Tracker](https://github.com/ironjan/klausurtool-r
 
 ### Getting started
 
- * Install Ruby on Rails
+ * Install [RVM](rvm.io/rvm/install). You can use this to install rails and ruby.
   * Check that ruby and MySQL/MariaDB are installed
-   * ```ruby -v``` ruby 2.3.0p0 - must be at least 2.2.2+
+   * ```ruby -v``` 
    * ```mysql --version```
-  * Install Rails: ```gem install rails```
-   * Add the rails bin-directory to your path 
-   * Currently, rails 4.2.4 is used
   * Other requirements: ```git``` and ```sed```
  * Install dependencies via ```bundle install```
   * If you don't have sudo access, you can install the gems to a path of your choice via e.g. ```bundle install --path $HOME/bundle/```
  * Copy ```config/secrets.yml.template``` to ```config/secrets.yml``` and generate different values for secret_key_base (You can use ```bin/rake secret```)
  * Create the schemas klausurtool, klausurtool_development, and klausurtool_test in your database
- * Create the db:schema via ```bin/rake db:schema:load```
+ * Load the db:schema via ```bin/rake db:schema:load```
   * In development mode, RoR will tell you, when migrations need to be run via ```bin/rake db:migrate```
  * Start the server via ```bin/rails server```
   * The ```-e``` switch can be used to start a server in a different environment
   * Start with ```bin/rails server --binding 0.0.0.0``` to listen to external requests
    * This does not automatically mean "production mode"
-   * More information will be added later
  * Pre-Compile assets for production via ```RAILS_ENV=production bin/rake assets:precompile```
 
+## Deployment
+
+Das Deployment ist ähnlich aufgebaut wie auf [Ralf Ebert's Blog](https://www.ralfebert.de/tutorials/rails-deployment/) 
+beschrieben. Es gibt folgende Abweichungen: 
+
+ * MySQL statt Prostgres
+ * Deployment-Pfad und SSH-Settings
 
 ## Versioning
 
