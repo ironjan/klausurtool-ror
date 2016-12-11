@@ -121,8 +121,8 @@ class AusleiheController < ApplicationController
     @old_lend_out = OldLendOut.new(old_lend_out_params)
 
     old_folder_instances = params[:old_folder_instances]
-    valid_old_folder_instances = is_nil_or_empty?(old_folder_instances)
-    if valid_old_folder_instances
+    are_valid_old_folder_instances = is_nil_or_empty?(old_folder_instances)
+    if are_valid_old_folder_instances
       flash[:alert] = "#{Time.new}: Keine Ordner übergeben."
       redirect_to ausleihe_path and return
     end
