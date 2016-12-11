@@ -134,7 +134,7 @@ class AusleiheController < ApplicationController
       redirect_to ausleihe_path and return
     end
 
-    return process_lend_out(found_instances)
+    process_lend_out(found_instances)
   end
 
   def is_nil_or_empty?(old_folder_instances)
