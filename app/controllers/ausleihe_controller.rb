@@ -91,7 +91,7 @@ class AusleiheController < ApplicationController
   # Renders the form when lending folder_instances. The form calls lending_action on submit.
   def lending_form
     old_folder_instances = params[:old_folder_instances]
-    if old_folder_instances.nil? || old_folder_instances.empty?
+    if is_nil_or_empty?(old_folder_instances)
       flash[:alert] = "#{Time.new}: Verleih-Formular kann nicht ohne Ordner aufgerufen werden."
       redirect_to ausleihe_path and return
     end
@@ -121,7 +121,7 @@ class AusleiheController < ApplicationController
     @old_lend_out = OldLendOut.new(old_lend_out_params)
 
     old_folder_instances = params[:old_folder_instances]
-    valid_old_folder_instances = old_folder_instances.nil? || old_folder_instances.empty?
+    valid_old_folder_instances = is_nil_or_empty?(old_folder_instances)
     if valid_old_folder_instances
       flash[:alert] = "#{Time.new}: Keine Ordner übergeben."
       redirect_to ausleihe_path and return
@@ -135,6 +135,10 @@ class AusleiheController < ApplicationController
     end
 
     return process_lend_out(found_instances)
+  end
+
+  def is_nil_or_empty?(old_folder_instances)
+    old_folder_instances.nil? || old_folder_instances.empty?
   end
 
   def process_lend_out(found_instances)
@@ -261,7 +265,7 @@ class AusleiheController < ApplicationController
   end
 
   def returning_form_request_is_valid(requested_instances, old_lend_outs)
-    if requested_instances.nil? || requested_instances.empty?
+    if is_nil_or_empty?(requested_instances)
       flash[:alert] = "#{Time.new}: Rückgabe-Formular darf nicht ohne Ordner aufgerufen werden."
       return false
     end
