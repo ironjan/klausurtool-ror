@@ -1,5 +1,7 @@
 # Klausurtool RoR
 
+Superseded by https://git.cs.upb.de/fsmi/fsmi-klausurarchiv (FSMI internal).
+
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/dd4147004f17412f96893e99d90d1245)](https://www.codacy.com/app/lippertsjan/klausurtool-ror)[![Build Status](https://travis-ci.org/ironjan/klausurtool-ror.svg?branch=master)](https://travis-ci.org/ironjan/klausurtool-ror)
 
 
