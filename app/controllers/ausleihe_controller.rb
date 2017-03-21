@@ -91,7 +91,7 @@ class AusleiheController < ApplicationController
   # Renders the form when lending folder_instances. The form calls lending_action on submit.
   def lending_form
     old_folder_instances = params[:old_folder_instances]
-    if old_folder_instances.nil? || old_folder_instances.empty?
+    if is_nil_or_empty?(old_folder_instances)
       flash[:alert] = "#{Time.new}: Verleih-Formular kann nicht ohne Ordner aufgerufen werden."
       redirect_to ausleihe_path and return
     end
@@ -110,6 +110,7 @@ class AusleiheController < ApplicationController
     @old_lend_out.old_folder_instances = found_instances
   end
 
+
   # Lents the given folders and returns the user to the main screen.
   def lending_action
 
@@ -119,7 +120,13 @@ class AusleiheController < ApplicationController
 
     @old_lend_out = OldLendOut.new(old_lend_out_params)
 
-    instances = params[:old_folder_instances]
+    old_folder_instances = params[:old_folder_instances]
+    are_valid_old_folder_instances = is_nil_or_empty?(old_folder_instances)
+    if are_valid_old_folder_instances
+      flash[:alert] = "#{Time.new}: Keine Ordner übergeben."
+      redirect_to ausleihe_path and return
+    end
+    instances = old_folder_instances
                     .map { |id| OldFolderInstance.find_by_id(id) }
     found_instances = instances.compact
 
@@ -127,6 +134,14 @@ class AusleiheController < ApplicationController
       redirect_to ausleihe_path and return
     end
 
+    process_lend_out(found_instances)
+  end
+
+  def is_nil_or_empty?(old_folder_instances)
+    old_folder_instances.nil? || old_folder_instances.empty?
+  end
+
+  def process_lend_out(found_instances)
     @old_lend_out.old_folder_instances = found_instances
 
     @old_lend_out.lendingTime = Time.new
@@ -222,7 +237,7 @@ class AusleiheController < ApplicationController
 
 
   def archive(old_lend_out, folder_instance_archive_copies)
-    folder_instance_archive_copies.each {|a|
+    folder_instance_archive_copies.each { |a|
       a.save!
     }
 
@@ -242,7 +257,7 @@ class AusleiheController < ApplicationController
     Rails.logger.debug(archived.inspect)
 
     archived.save!
-    folder_instance_archive_copies.each {|a|
+    folder_instance_archive_copies.each { |a|
       a.archived_old_lend_out_id = archived.id
       a.save!
     }
@@ -250,7 +265,7 @@ class AusleiheController < ApplicationController
   end
 
   def returning_form_request_is_valid(requested_instances, old_lend_outs)
-    if requested_instances.nil? || requested_instances.empty?
+    if is_nil_or_empty?(requested_instances)
       flash[:alert] = "#{Time.new}: Rückgabe-Formular darf nicht ohne Ordner aufgerufen werden."
       return false
     end

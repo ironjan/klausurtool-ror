@@ -17,6 +17,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 
 gem 'barby'
+gem 'immutable-struct'
 
 # Used to extend the forms with delete actions
 gem 'vanilla-ujs'
